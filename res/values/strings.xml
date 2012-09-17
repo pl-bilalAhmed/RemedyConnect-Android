@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">Greenwood Pediatrics</string>
+    <string name="hello_world">Hello Greenwood! I hope you will like this application as much as we do :)</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Main Menu</string>
+
+</resources>
