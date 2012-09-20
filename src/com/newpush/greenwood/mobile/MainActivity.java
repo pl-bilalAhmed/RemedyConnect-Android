@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
-        new ParseBasicHTMLTask().execute("http://index.hu");
+        new ParseBasicHTMLTask().execute("http://greenwoodpedstest.pediatricweb.com/feed/1B8EC3EB-3101-4C5D-9746-7E877F4A5DF7/location");
         return true;
     }
     
@@ -34,13 +34,13 @@ public class MainActivity extends Activity {
             			.userAgent("Mozilla")
             			.timeout(3000)
             			.get();
-        		lead = doc.select("h1.vezeto a").first().text();
+        		lead = doc.select("pw_Office_Location").first().text();
         		
         	}
         	catch (IOException e) {
         		
         	}	
-			return urls[0] + " processed :] The actual main title is: " + lead;
+			return lead;
     	}
     	
     	protected void onPostExecute(String result) {
