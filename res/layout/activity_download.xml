@@ -11,6 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/download_information"
+        style="@android:style/TextAppearance.Medium"
         tools:context=".DownloadActivity" />
 
     <Button
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/downloadTextView"
         android:layout_centerHorizontal="true"
+        style="@android:style/TextAppearance.Large"
         android:text="@string/download_button" />
 
 </RelativeLayout>

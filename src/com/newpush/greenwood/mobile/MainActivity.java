@@ -12,9 +12,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.newpush.greenwood.mobile.DownloadActivity;
 
@@ -25,13 +29,14 @@ import org.jsoup.nodes.Element;
 
 public class MainActivity extends Activity {
 	protected ArrayAdapter<String> menuadapter;
+	protected ListView menu;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        ListView menu = (ListView) findViewById(R.id.mainMenu);
+        menu = (ListView) findViewById(R.id.mainMenu);
         
     	menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
     	menu.setAdapter(menuadapter);
@@ -46,40 +51,37 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	super.onActivityResult(requestCode, resultCode, data);
-    	if (resultCode == Activity.RESULT_OK) {
-    		new ParseOffices().execute();
+    protected void setupMenu() {
+    	String[] menuItemLabels = {
+    			"Office Info",
+    			"-not implemented yet-",
+    			"-not implemented yet-"
+    	};
+    	for (String s : menuItemLabels) {
+    		menuadapter.add(s);
+    	}
+    	
+    	menu.setOnItemClickListener(new OnItemClickListener() {
+		  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		    jumpToActivity(position);
+		  }
+		}); 
+    }
+    
+    protected void jumpToActivity(int position) {
+    	switch (position) {
+    		case 0:
+    				Intent officeInfoIntent = new Intent(this, OfficeInfoActivity.class);
+    				startActivity(officeInfoIntent);
+    			break;
+    		
     	}
     }
     
-    private class ParseOffices extends AsyncTask<Void, Void, String[]> {
-    	protected String[] doInBackground(Void... params) {
-    		ArrayList<String> titles = new ArrayList<String>();
-    		String filename = getApplicationContext().getFilesDir().getAbsolutePath() + "/office.xml";
-    		File officeXML = new File(filename);
-			Document doc;
-			try {
-				doc = Jsoup.parse(officeXML, "UTF-8", "");
-				Log.d("ParseOffices", "Parser opened");
-				for (Element titleelement : doc.select("messagetitle")) {
-					titles.add(titleelement.text());
-				}
-				Log.d("ParseOffices", "Parse complete");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		String[] result = new String[titles.size()];
-			titles.toArray(result);
-			return result;
-    	}
-    	
-    	protected void onPostExecute(String[] result) {
-    		Log.d("ParseOffices", "onPostExecute");
-    		for (String s : result) {
-    			menuadapter.add(s);
-    		}
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+    	if (resultCode == Activity.RESULT_OK) {
+    		setupMenu();
     	}
     }
 }
