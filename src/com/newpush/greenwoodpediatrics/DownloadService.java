@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -45,8 +47,6 @@ public class DownloadService extends IntentService {
 	
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		String urlToDownload = intent.getStringExtra("url");
-		String filenameToSave = intent.getStringExtra("filename");
         ResultReceiver receiver = (ResultReceiver) intent.getParcelableExtra("receiver");
         if (!this.isOnline()) {
     		Bundle resultData = new Bundle();
@@ -56,33 +56,40 @@ public class DownloadService extends IntentService {
         else {
         	receiver.send(NETWORK_AVAILABLE, null);
             try {
-                URL url = new URL(urlToDownload);
-                URLConnection connection = url.openConnection();
-                connection.connect();
-                // this will be useful so that you can show a typical 0-100% progress bar
-                int fileLength = connection.getContentLength();
+            	String dir = this.prepareDirectory();
+            	int totalLength = 0;
+            	
+            	for (Map.Entry<String, String> fileData : Data.dataFiles.entrySet()) {
+            		URL url = new URL(fileData.getValue());
+            		URLConnection connection = url.openConnection();
+            		connection.connect();
+            		totalLength += connection.getContentLength();
+            	}
+            	
+            	long total = 0;
+            	for (Map.Entry<String, String> fileData : Data.dataFiles.entrySet()) {
+            		URL url = new URL(fileData.getValue());
+            		URLConnection connection = url.openConnection();
+            		connection.connect();
+                    // download the file
+                    InputStream input = new BufferedInputStream(url.openStream());
+                    OutputStream output = new FileOutputStream(dir + fileData.getKey());
+                    byte data[] = new byte[1024];                    
+                    int count;
+                    while ((count = input.read(data)) != -1) {
+                        total += count;
+                        // publishing the progress....
+                        Bundle resultData = new Bundle();
+                        resultData.putInt("progress" ,(int) (total * 100 / totalLength));
+                        receiver.send(UPDATE_PROGRESS, resultData);
+                        output.write(data, 0, count);
+                    }
+                    output.flush();
+                    output.close();
+                    input.close();            		
+            	}
 
-                String dir = this.prepareDirectory();
-                
-                // download the file
-                InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(dir + filenameToSave);
 
-                byte data[] = new byte[1024];
-                long total = 0;
-                int count;
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-                    // publishing the progress....
-                    Bundle resultData = new Bundle();
-                    resultData.putInt("progress" ,(int) (total * 100 / fileLength));
-                    receiver.send(UPDATE_PROGRESS, resultData);
-                    output.write(data, 0, count);
-                }
-
-                output.flush();
-                output.close();
-                input.close();
             } catch (IOException e) {
                 Bundle resultData = new Bundle();
                 resultData.putInt("progress", 0);

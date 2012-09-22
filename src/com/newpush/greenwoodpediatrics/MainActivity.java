@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.newpush.greenwoodpediatrics.DownloadActivity;
+import com.newpush.greenwoodpediatrics.DataChecker;
 
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
@@ -41,8 +42,13 @@ public class MainActivity extends Activity {
     	menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
     	menu.setAdapter(menuadapter);
         
-        Intent downloadActivity = new Intent(this, DownloadActivity.class);
-        startActivityForResult(downloadActivity, 0);
+    	if (DataChecker.isDataAvailable(getApplicationContext())) {
+    		setupMenu();
+    	}
+    	else {
+    		Intent downloadActivity = new Intent(this, DownloadActivity.class);
+            startActivityForResult(downloadActivity, 0);	
+    	}
     }
 
     @Override
@@ -54,8 +60,7 @@ public class MainActivity extends Activity {
     protected void setupMenu() {
     	String[] menuItemLabels = {
     			"Office Info",
-    			"-not implemented yet-",
-    			"-not implemented yet-"
+    			"Practive News"
     	};
     	for (String s : menuItemLabels) {
     		menuadapter.add(s);
@@ -71,10 +76,13 @@ public class MainActivity extends Activity {
     protected void jumpToActivity(int position) {
     	switch (position) {
     		case 0:
-    				Intent officeInfoIntent = new Intent(this, OfficeInfoActivity.class);
-    				startActivity(officeInfoIntent);
+				Intent officeInfoIntent = new Intent(this, OfficeInfoActivity.class);
+				startActivity(officeInfoIntent);
     			break;
-    		
+    		case 1:
+				//Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class),
+				//startActivity(practiceNewsIntent);
+    			break;
     	}
     }
     

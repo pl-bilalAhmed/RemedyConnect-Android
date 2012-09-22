@@ -19,8 +19,6 @@ import android.widget.Toast;
 public class DownloadActivity extends Activity implements OnClickListener {
 	ProgressDialog progress;
 	
-	public static final String LINK_OFFICE_MESSAGE = "http://greenwoodpedstest.pediatricweb.com/feed/1B8EC3EB-3101-4C5D-9746-7E877F4A5DF7/office";
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +41,6 @@ public class DownloadActivity extends Activity implements OnClickListener {
 	
 	public void startDownload() {
     	Intent intent = new Intent(this, DownloadService.class);
-    	intent.putExtra("url", LINK_OFFICE_MESSAGE);
-    	intent.putExtra("filename", "office.xml");
     	intent.putExtra("receiver", new DownloadReceiver(new Handler()));
 		startService(intent);	
 	}
