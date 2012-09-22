@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -58,11 +59,8 @@ public class MainActivity extends Activity {
     }
     
     protected void setupMenu() {
-    	String[] menuItemLabels = {
-    			"Office Info",
-    			"Practive News"
-    	};
-    	for (String s : menuItemLabels) {
+    	Resources res = getResources();
+    	for (String s : res.getStringArray(R.array.MainMenuItems)) {
     		menuadapter.add(s);
     	}
     	
@@ -80,8 +78,8 @@ public class MainActivity extends Activity {
 				startActivity(officeInfoIntent);
     			break;
     		case 1:
-				//Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class),
-				//startActivity(practiceNewsIntent);
+				Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class);
+				startActivity(practiceNewsIntent);
     			break;
     	}
     }

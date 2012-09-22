@@ -1,7 +1,6 @@
 <resources>
 
     <string name="app_name">Greenwood Pediatrics</string>
-    <string name="hello_world">Hello Greenwood! I hope you will like this test application as much as I do :)</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Greenwood Pediatrics</string>
     <string name="title_activity_download">Download database</string>
@@ -15,5 +14,10 @@
 
     <string name="title_activity_office_info">Office Info</string>
     <string name="title_activity_office_info_item">Office Info item</string>
+    <string name="title_activity_practice_news">Practice News</string>
+    <string-array name="MainMenuItems">
+        <item >Office Info</item>
+        <item >Practice News</item>
+    </string-array>
 
 </resources>
