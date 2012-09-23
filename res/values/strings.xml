@@ -15,9 +15,13 @@
     <string name="title_activity_office_info">Office Info</string>
     <string name="title_activity_office_info_item">Office Info item</string>
     <string name="title_activity_practice_news">Practice News</string>
+
     <string-array name="MainMenuItems">
-        <item >Office Info</item>
-        <item >Practice News</item>
+        <item>Office Info</item>
+        <item>Practice News</item>
     </string-array>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_practice_news_item">Practice News Item</string>
 
 </resources>

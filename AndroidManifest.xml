@@ -55,6 +55,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />
         </activity>
+        <activity
+            android:name=".PracticeNewsItemActivity"
+            android:label="@string/title_activity_practice_news_item" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -11,11 +11,15 @@ import org.jsoup.nodes.Element;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.support.v4.app.NavUtils;
 
 public class PracticeNewsActivity extends Activity {
@@ -31,6 +35,16 @@ public class PracticeNewsActivity extends Activity {
         newsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         newsList.setAdapter(newsAdapter);
         new ParseNews().execute();
+    }
+    
+    protected void attachNewsItemLinks() {
+    	newsList.setOnItemClickListener(new OnItemClickListener() {
+    		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    			Intent newsItemIntent = new Intent(getBaseContext(), PracticeNewsItemActivity.class);
+    			newsItemIntent.putExtra("which", position);
+    			startActivity(newsItemIntent);
+    		}
+    	});
     }
 
     private class ParseNews extends AsyncTask<Void, Void, String[]> {
@@ -57,7 +71,7 @@ public class PracticeNewsActivity extends Activity {
     		for (String s : result) {
     			newsAdapter.add(s);
     		}
-    		//attachInfoItemLinks();
+    		attachNewsItemLinks();
     	} 	
     }
 }

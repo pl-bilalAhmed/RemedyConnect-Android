@@ -2,7 +2,6 @@ package com.newpush.greenwoodpediatrics;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,38 +11,37 @@ import org.jsoup.select.Elements;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.support.v4.app.NavUtils;
 
-public class OfficeInfoItemActivity extends Activity {
+public class PracticeNewsItemActivity extends Activity {
 	Bundle extras;
 	WebView display;
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_office_info_item);
-        display = (WebView) findViewById(R.id.contentWebView);
+        setContentView(R.layout.activity_practice_news_item);
+        display = (WebView) findViewById(R.id.newsWebView);
         
         extras = getIntent().getExtras();
-        new ParseOfficeInfoItem().execute(extras.getInt("which"));
+        new ParseNewsItem().execute(extras.getInt("which"));
     }
-
-    private class ParseOfficeInfoItem extends AsyncTask<Integer, Void, String[]> {
+    
+    private class ParseNewsItem extends AsyncTask<Integer, Void, String[]> {
 		protected String[] doInBackground(Integer... params) {
     		String resultTitle = "";
     		String resultHTML = "";
-    		String filename = getApplicationContext().getFilesDir().getAbsolutePath() + "/office.xml";
-    		File officeXML = new File(filename);
+    		String filename = getApplicationContext().getFilesDir().getAbsolutePath() + "/news.xml";
+    		File newsXML = new File(filename);
 			Document doc;
 			try {
-				doc = Jsoup.parse(officeXML, "UTF-8", "");
-				Element infoElement = doc.select("pw_Message:eq(" + params[0].toString() + ")").first();
-				resultTitle = infoElement.select("messageTitle").first().text();
-				Elements resultHTMLElements = infoElement.select("StandardMessage");
+				doc = Jsoup.parse(newsXML, "UTF-8", "");
+				Element infoElement = doc.select("CMS_News:eq(" + params[0].toString() + ")").first();
+				resultTitle = infoElement.select("NewsTitle").first().text();
+				Elements resultHTMLElements = infoElement.select("NewsText");
 				if (!resultHTMLElements.isEmpty()) {
 					resultHTML = resultHTMLElements.first().text();
 				}
@@ -62,4 +60,5 @@ public class OfficeInfoItemActivity extends Activity {
     	}
     	
     }
+
 }
