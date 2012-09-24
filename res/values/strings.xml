@@ -23,5 +23,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_practice_news_item">Practice News Item</string>
+    <string name="update">Update informations</string>
 
 </resources>
