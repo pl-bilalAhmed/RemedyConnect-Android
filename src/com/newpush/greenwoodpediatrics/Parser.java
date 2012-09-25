@@ -28,4 +28,8 @@ public class Parser {
 		}
 		return result;
 	}
+
+	public String ParseSingle(String query) {
+		return doc.select(query).first().text();
+	}
 }
