@@ -28,9 +28,4 @@ public class OfficeInfoParser extends DefaultParser {
 
 		return result;
 	}
-
-	public static String formatTitle(String title) {
-		return "<h1>" + title + "</h1>";
-	}
-
 }

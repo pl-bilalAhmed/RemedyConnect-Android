@@ -1,5 +1,7 @@
 package com.newpush.greenwoodpediatrics;
 
+import java.util.Hashtable;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -8,7 +10,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.support.v4.app.NavUtils;
 
-import com.newpush.greenwoodpediatrics.parser.DefaultParser;
+import com.newpush.greenwoodpediatrics.parser.PracticeNewsParser;
 
 public class PracticeNewsItemActivity extends Activity {
 	Bundle extras;
@@ -24,19 +26,18 @@ public class PracticeNewsItemActivity extends Activity {
 		new ParseNewsItem().execute(extras.getInt("which"));
 	}
 
-	private class ParseNewsItem extends AsyncTask<Integer, Void, String[]> {
-		protected String[] doInBackground(Integer... params) {
-			String index = params[0].toString();
-			DefaultParser parser = new DefaultParser(getApplicationContext().getFilesDir().getAbsolutePath() + "/news.xml");
-			String resultTitle = parser.ParseSingle("CMS_News:eq(" + index + ") NewsTitle");
-			String resultHTML = parser.ParseSingle("CMS_News:eq(" + index + ") NewsText");
-			String[] result = {resultTitle, resultHTML};
+	private class ParseNewsItem extends AsyncTask<Integer, Void, Hashtable<String, String>> {
+		protected Hashtable<String, String> doInBackground(Integer... params) {
+			PracticeNewsParser parser = new PracticeNewsParser(getApplicationContext());
+			Hashtable<String, String> result = parser.getFullInfo(params[0]);
 			return result;
 		}
 
-		protected void onPostExecute(String[] result) {
-			setTitle(result[0]);
-			display.loadData(result[1], "text/html", "utf-8");
+		protected void onPostExecute(Hashtable<String, String> result) {
+			String title = (String)result.get("title");
+			String text = PracticeNewsParser.formatTitle(title) + (String)result.get("text");
+			setTitle(title);
+			display.loadData(text, "text/html", "utf-8");
 		}
 
 	}

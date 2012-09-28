@@ -32,4 +32,8 @@ public class DefaultParser {
 	public String ParseSingle(String query) {
 		return doc.select(query).first().text();
 	}
+	
+	public static String formatTitle(String title) {
+		return "<h1>" + title + "</h1>";
+	}
 }
