@@ -99,6 +99,10 @@ public class MainActivity extends Activity {
 				Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class);
 				startActivity(practiceNewsIntent);
     			break;
+    		case 2:
+    			Intent locationIntent = new Intent(this, OfficeLocationActivity.class);
+    			startActivity(locationIntent);
+    			break;
     	}
     }
     
