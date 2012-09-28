@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.support.v4.app.NavUtils;
 
-import com.newpush.greenwoodpediatrics.Parser;
+import com.newpush.greenwoodpediatrics.parser.DefaultParser;
 
 public class PracticeNewsItemActivity extends Activity {
 	Bundle extras;
@@ -27,7 +27,7 @@ public class PracticeNewsItemActivity extends Activity {
 	private class ParseNewsItem extends AsyncTask<Integer, Void, String[]> {
 		protected String[] doInBackground(Integer... params) {
 			String index = params[0].toString();
-			Parser parser = new Parser(getApplicationContext().getFilesDir().getAbsolutePath() + "/news.xml");
+			DefaultParser parser = new DefaultParser(getApplicationContext().getFilesDir().getAbsolutePath() + "/news.xml");
 			String resultTitle = parser.ParseSingle("CMS_News:eq(" + index + ") NewsTitle");
 			String resultHTML = parser.ParseSingle("CMS_News:eq(" + index + ") NewsText");
 			String[] result = {resultTitle, resultHTML};

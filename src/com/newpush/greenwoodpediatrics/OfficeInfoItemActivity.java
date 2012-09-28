@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.support.v4.app.NavUtils;
 
-import com.newpush.greenwoodpediatrics.Parser;
+import com.newpush.greenwoodpediatrics.parser.DefaultParser;
 
 public class OfficeInfoItemActivity extends Activity {
 	Bundle extras;
@@ -30,7 +30,7 @@ public class OfficeInfoItemActivity extends Activity {
 		private class ParseOfficeInfoItem extends AsyncTask<Integer, Void, String[]> {
 			protected String[] doInBackground(Integer... params) {
 				String index = params[0].toString();
-				Parser parser = new Parser(getApplicationContext().getFilesDir().getAbsolutePath() + "/office.xml");
+				DefaultParser parser = new DefaultParser(getApplicationContext().getFilesDir().getAbsolutePath() + "/office.xml");
 				String resultTitle = parser.ParseSingle("pw_Message:eq(" + index + ") messageTitle");
 				String resultHTML = parser.ParseSingle("pw_Message:eq(" + index + ") StandardMessage");
 				String[] result = {resultTitle, resultHTML};
