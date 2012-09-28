@@ -29,13 +29,16 @@ public class PracticeNewsItemActivity extends Activity {
 	private class ParseNewsItem extends AsyncTask<Integer, Void, Hashtable<String, String>> {
 		protected Hashtable<String, String> doInBackground(Integer... params) {
 			PracticeNewsParser parser = new PracticeNewsParser(getApplicationContext());
-			Hashtable<String, String> result = parser.getFullInfo(params[0]);
+			Hashtable<String, String> result = parser.getFullInfo(params[0], getApplicationContext());
 			return result;
 		}
 
 		protected void onPostExecute(Hashtable<String, String> result) {
 			String title = (String)result.get("title");
-			String text = PracticeNewsParser.formatTitle(title) + (String)result.get("text");
+			String releasedate = (String)result.get("releasedate");
+			String text = MarkupGenerator.formatTitle(title) +
+					releasedate +
+					(String)result.get("text");
 			setTitle(title);
 			display.loadData(text, "text/html", "utf-8");
 		}

@@ -37,7 +37,7 @@ public class OfficeInfoItemActivity extends Activity {
 
 		protected void onPostExecute(Hashtable<String, String> result) {
 			String title = (String)result.get("title");
-			String message = OfficeInfoParser.formatTitle(title) + (String)result.get("message");
+			String message = MarkupGenerator.formatTitle(title) + (String)result.get("message");
 			setTitle(title);
 			display.loadData(message, "text/html", "utf-8");
 		}

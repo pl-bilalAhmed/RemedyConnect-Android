@@ -3,10 +3,14 @@ package com.newpush.greenwoodpediatrics.parser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
+import android.content.Context;
+import java.text.DateFormat;
 
 public class DefaultParser {
 	File XMLToParse;
@@ -33,7 +37,4 @@ public class DefaultParser {
 		return doc.select(query).first().text();
 	}
 	
-	public static String formatTitle(String title) {
-		return "<h1>" + title + "</h1>";
-	}
 }
