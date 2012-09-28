@@ -70,16 +70,18 @@ public class MainActivity extends Activity {
     }
     
     protected void setupMenu() {
-    	Resources res = getResources();
-    	for (String s : res.getStringArray(R.array.MainMenuItems)) {
-    		menuadapter.add(s);
-    	}
-    	
-    	menu.setOnItemClickListener(new OnItemClickListener() {
-		  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		    jumpToActivity(position);
-		  }
-		}); 
+    	if (menuadapter.getCount() == 0) {
+    		Resources res = getResources();
+        	for (String s : res.getStringArray(R.array.MainMenuItems)) {
+        		menuadapter.add(s);
+        	}
+        	
+        	menu.setOnItemClickListener(new OnItemClickListener() {
+    		  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    		    jumpToActivity(position);
+    		  }
+    		});	
+    	}	 
     }
     
     protected void jumpToDownloadActivity() {
