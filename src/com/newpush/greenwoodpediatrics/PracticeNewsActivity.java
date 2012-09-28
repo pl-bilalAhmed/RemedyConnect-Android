@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.support.v4.app.NavUtils;
 
-import com.newpush.greenwoodpediatrics.parser.DefaultParser;
 import com.newpush.greenwoodpediatrics.parser.PracticeNewsParser;
 
 public class PracticeNewsActivity extends Activity {
