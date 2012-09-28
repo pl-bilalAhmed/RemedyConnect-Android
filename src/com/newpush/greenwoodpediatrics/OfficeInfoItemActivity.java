@@ -20,12 +20,12 @@ public class OfficeInfoItemActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			setContentView(R.layout.activity_office_info_item);
-			display = (WebView) findViewById(R.id.contentWebView);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_office_info_item);
+		display = (WebView) findViewById(R.id.contentWebView);
 
-			extras = getIntent().getExtras();
-			new ParseOfficeInfoItem().execute(extras.getInt("which"));
+		extras = getIntent().getExtras();
+		new ParseOfficeInfoItem().execute(extras.getInt("which"));
 	}
 
 	private class ParseOfficeInfoItem extends AsyncTask<Integer, Void, Hashtable<String, String>> {
