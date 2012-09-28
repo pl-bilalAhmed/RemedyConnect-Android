@@ -1,15 +1,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:gravity="bottom" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentTop="false"
-        android:layout_margin="30dp"
-        android:text="@string/hello_world"
-        tools:context=".MainActivity" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/greenwood_logo"
+        android:background="@color/logo_background"
+        android:padding="20dp"
+        android:src="@drawable/greenwoodlogo" />
+
+    <ListView
+        android:id="@+id/mainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/logo" >
+
+    </ListView>
 
 </RelativeLayout>
