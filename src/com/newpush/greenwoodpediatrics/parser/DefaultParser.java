@@ -1,4 +1,4 @@
-package com.newpush.greenwoodpediatrics;
+package com.newpush.greenwoodpediatrics.parser;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,11 +8,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-public class Parser {
+public class DefaultParser {
 	File XMLToParse;
 	Document doc;
 
-	public Parser(String XMLpath) {
+	public DefaultParser(String XMLpath) {
 		XMLToParse = new File(XMLpath);
 		try {
 			doc = Jsoup.parse(XMLToParse, "UTF-8", "");
@@ -31,5 +31,9 @@ public class Parser {
 
 	public String ParseSingle(String query) {
 		return doc.select(query).first().text();
+	}
+	
+	public static String formatTitle(String title) {
+		return "<h1>" + title + "</h1>";
 	}
 }

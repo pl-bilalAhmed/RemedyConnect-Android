@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.support.v4.app.NavUtils;
 
-import com.newpush.greenwoodpediatrics.Parser;
+import com.newpush.greenwoodpediatrics.parser.PracticeNewsParser;
 
 public class PracticeNewsActivity extends Activity {
 	protected ArrayAdapter<String> newsAdapter;
@@ -43,16 +43,14 @@ public class PracticeNewsActivity extends Activity {
     	});
     }
 
-    private class ParseNews extends AsyncTask<Void, Void, String[]> {
-    	protected String[] doInBackground(Void... params) {
-            Parser parser = new Parser(getApplicationContext().getFilesDir().getAbsolutePath() + "/news.xml");
-            ArrayList<String> titles = parser.Parse("NewsTitle");
-    		String[] result = new String[titles.size()];
-			titles.toArray(result);
-			return result;
+    private class ParseNews extends AsyncTask<Void, Void, ArrayList<String>> {
+    	protected ArrayList<String> doInBackground(Void... params) {
+            PracticeNewsParser parser = new PracticeNewsParser(getApplicationContext());
+            ArrayList<String> titles = parser.getTitles();
+    		return titles;
     	}
 
-    	protected void onPostExecute(String[] result) {
+    	protected void onPostExecute(ArrayList<String> result) {
     		for (String s : result) {
     			newsAdapter.add(s);
     		}

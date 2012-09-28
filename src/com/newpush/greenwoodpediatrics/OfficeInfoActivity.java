@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.support.v4.app.NavUtils;
 
-import com.newpush.greenwoodpediatrics.Parser;
+import com.newpush.greenwoodpediatrics.parser.OfficeInfoParser;
 
 public class OfficeInfoActivity extends Activity {
 	protected ArrayAdapter<String> officeInfoAdapter;
@@ -43,16 +43,14 @@ public class OfficeInfoActivity extends Activity {
     	});
     }
 
-    private class ParseOffices extends AsyncTask<Void, Void, String[]> {
-    	protected String[] doInBackground(Void... params) {
-            Parser parser = new Parser(getApplicationContext().getFilesDir().getAbsolutePath() + "/office.xml");
-            ArrayList<String> titles = parser.Parse("messagetitle");
-    		String[] result = new String[titles.size()];
-			titles.toArray(result);
-			return result;
+    private class ParseOffices extends AsyncTask<Void, Void, ArrayList<String>> {
+    	protected ArrayList<String> doInBackground(Void... params) {
+            OfficeInfoParser parser = new OfficeInfoParser(getApplicationContext());
+            ArrayList<String> titles = parser.getTitles();
+			return titles;
     	}
 
-    	protected void onPostExecute(String[] result) {
+    	protected void onPostExecute(ArrayList<String> result) {
     		for (String s : result) {
     			officeInfoAdapter.add(s);
     		}
