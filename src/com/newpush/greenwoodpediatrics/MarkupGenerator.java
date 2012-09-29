@@ -15,4 +15,18 @@ public class MarkupGenerator {
 		DateFormat timeformat = android.text.format.DateFormat.getTimeFormat(context);
 		return "<p class=\"releasedate\">" + label + " " + dateformat.format(date) + " - " + timeformat.format(date) + "</p>";
 	}
+	
+	public static String formatAddress(String address1, String address2, String city, String state,	String zipcode) {
+		return "<p class=\"address\">" + address1 + " " + address2 + "<br/>" + city + ", " + state + " " + zipcode;
+	}
+	
+	public static String officeLocation(String full_address, String contactnumbers, String dailyhours, String custommessage) {
+		return "<h2>Address</h2>" +
+				full_address + 
+				"<h2>Contact numbers</h2>" +
+				contactnumbers +
+				"<h2>Daily hours</h2>" +
+				dailyhours +
+				custommessage;
+	}
 }

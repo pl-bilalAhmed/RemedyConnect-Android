@@ -1,6 +1,7 @@
 package com.newpush.greenwoodpediatrics;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -48,21 +49,25 @@ public class OfficeLocationActivity extends Activity {
     }
 
 
-    private class ParseLocations extends AsyncTask<Void, Void, ArrayList<String>> {
-    	protected ArrayList<String> doInBackground(Void... params) {
+    private class ParseLocations extends AsyncTask<Void, Void, ArrayList<Hashtable<String, String>>> {
+    	protected ArrayList<Hashtable<String, String>> doInBackground(Void... params) {
             OfficeLocationParser parser = new OfficeLocationParser(getApplicationContext());
-            ArrayList<String> titles = parser.getTitles();
-			return titles;
+            ArrayList<Hashtable<String, String>> locations = parser.getFullInfo(getApplicationContext());
+			return locations;
     	}
 
-    	protected void onPostExecute(ArrayList<String> result) {
+    	protected void onPostExecute(ArrayList<Hashtable<String, String>> result) {
     		Integer i = 0;
-    		for (String s : result) {
-    			
-    			listAdapter.groups.add(s);
+    		for (Hashtable<String, String> location : result) {
+    			String info = MarkupGenerator.officeLocation(
+    					location.get("address"), 
+    					location.get("contactnumbers"), 
+    					location.get("dailyhours"), 
+    					location.get("custommessage"));
+    			listAdapter.groups.add(location.get("name"));
     			listAdapter.childs.add(new ArrayList<ArrayList<String>>());
     			listAdapter.childs.get(i).add(new ArrayList<String>());
-    			listAdapter.childs.get(i).get(0).add("Teszt" + i.toString());
+    			listAdapter.childs.get(i).get(0).add(info);
     			i++;
     		}
     		listAdapter.notifyDataSetChanged();
