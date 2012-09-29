@@ -25,7 +25,7 @@ public class OfficeLocationActivity extends Activity {
 	protected CustomExpandableListAdapter listAdapter;
 	protected ExpandableListView officeLocationList;
 	protected ArrayList<String> groups;
-	protected ArrayList<ArrayList<ArrayList<String>>> childs;
+	protected ArrayList<ArrayList<String>> childs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class OfficeLocationActivity extends Activity {
         });
         
         groups = new ArrayList<String>();
-        childs = new ArrayList<ArrayList<ArrayList<String>>>();
+        childs = new ArrayList<ArrayList<String>>();
 
         listAdapter = new CustomExpandableListAdapter(this, groups, childs);
         officeLocationList.setAdapter(listAdapter);
@@ -65,9 +65,8 @@ public class OfficeLocationActivity extends Activity {
     					location.get("dailyhours"), 
     					location.get("custommessage"));
     			listAdapter.groups.add(location.get("name"));
-    			listAdapter.childs.add(new ArrayList<ArrayList<String>>());
-    			listAdapter.childs.get(i).add(new ArrayList<String>());
-    			listAdapter.childs.get(i).get(0).add(info);
+    			listAdapter.childs.add(new ArrayList<String>());
+    			listAdapter.childs.get(i).add(info);
     			i++;
     		}
     		listAdapter.notifyDataSetChanged();

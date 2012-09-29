@@ -12,10 +12,10 @@ import android.widget.TextView;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 	public ArrayList<String> groups;
-	public ArrayList<ArrayList<ArrayList<String>>> childs;
+	public ArrayList<ArrayList<String>> childs;
 	private Context context;
 
-	public CustomExpandableListAdapter(Context context, ArrayList<String> groups, ArrayList<ArrayList<ArrayList<String>>> childs) {
+	public CustomExpandableListAdapter(Context context, ArrayList<String> groups, ArrayList<ArrayList<String>> childs) {
 		this.context = context;
 		this.groups = groups;
 		this.childs = childs;
@@ -39,7 +39,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 	}
 
 	public ArrayList<String> getChild(int groupPosition, int childPosition) {
-		return childs.get(groupPosition).get(childPosition);
+		return childs.get(groupPosition);
 	}
 
 	public long getGroupId(int groupPosition) {
