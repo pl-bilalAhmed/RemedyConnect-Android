@@ -11,6 +11,8 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.newpush.greenwoodpediatrics.parser.IsYourChildSickParser;
+
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
@@ -58,16 +60,54 @@ public class DownloadService extends IntentService {
             try {
             	String dir = this.prepareDirectory();
             	int totalLength = 0;
+            	long total = 0;
+            	HashMap<String, String> files = new HashMap<String, String>(Data.dataFiles);
             	
-            	for (Map.Entry<String, String> fileData : Data.dataFiles.entrySet()) {
+            	for (Map.Entry<String, String> fileData : Data.preloadDataFiles.entrySet()) {
+            		URL url = new URL(fileData.getValue());
+            		URLConnection connection = url.openConnection();
+            		connection.connect();
+            		totalLength += connection.getContentLength();
+            		
+            		/*
+            		 * We have to handle a quite special case here.
+            		 * In the IYCS feed there're sub-feeds to download. Of course
+            		 * we don't know their number so we have to download and parse 
+            		 * that feed first. 
+            		 */
+            		if (fileData.getKey() == "iycs.xml") {
+                        // download the file
+                        InputStream input = new BufferedInputStream(url.openStream());
+                        OutputStream output = new FileOutputStream(dir + fileData.getKey());
+                        byte data[] = new byte[1024];                    
+                        int count;
+                        while ((count = input.read(data)) != -1) {
+                            total += count;
+                            // publishing the progress....
+                            Bundle resultData = new Bundle();
+                            resultData.putInt("progress" ,(int) (total * 100 / totalLength));
+                            receiver.send(UPDATE_PROGRESS, resultData);
+                            output.write(data, 0, count);
+                        }
+                        output.flush();
+                        output.close();
+                        input.close();
+                        
+                        IsYourChildSickParser parser = new IsYourChildSickParser(this);
+                        HashMap<String, String> iycs_extra_files = parser.getSubFeeds();
+                        files.putAll(iycs_extra_files);
+            		}           		
+            	}
+            	files.putAll(Data.dataFiles);
+            	
+            	for (Map.Entry<String, String> fileData : files.entrySet()) {
             		URL url = new URL(fileData.getValue());
             		URLConnection connection = url.openConnection();
             		connection.connect();
             		totalLength += connection.getContentLength();
             	}
             	
-            	long total = 0;
-            	for (Map.Entry<String, String> fileData : Data.dataFiles.entrySet()) {
+            	for (Map.Entry<String, String> fileData : files.entrySet()) {
             		URL url = new URL(fileData.getValue());
             		URLConnection connection = url.openConnection();
             		connection.connect();
