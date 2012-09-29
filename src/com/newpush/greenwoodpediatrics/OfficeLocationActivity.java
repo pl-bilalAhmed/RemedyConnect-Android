@@ -10,38 +10,43 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 import android.support.v4.app.NavUtils;
+import android.view.ViewTreeObserver;
 
 import com.newpush.greenwoodpediatrics.parser.OfficeLocationParser;
 
 public class OfficeLocationActivity extends Activity {
-	protected ArrayAdapter<String> officeLocationAdapter;
-	protected ListView officeLocationList;
+	protected CustomExpandableListAdapter listAdapter;
+	protected ExpandableListView officeLocationList;
+	protected ArrayList<String> groups;
+	protected ArrayList<ArrayList<ArrayList<String>>> childs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_office_location);
+        
+        officeLocationList = (ExpandableListView) findViewById(R.id.officeLocationExpandableListView);
+        ViewTreeObserver observer = officeLocationList.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+        	public void onGlobalLayout() {
+        		officeLocationList.setIndicatorBounds(officeLocationList.getRight() - 40, officeLocationList.getWidth());
+        	}
+        });
+        
+        groups = new ArrayList<String>();
+        childs = new ArrayList<ArrayList<ArrayList<String>>>();
 
-        officeLocationList = (ListView) findViewById(R.id.officeLocationListView);
-        officeLocationAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
-        officeLocationList.setAdapter(officeLocationAdapter);
+        listAdapter = new CustomExpandableListAdapter(this, groups, childs);
+        officeLocationList.setAdapter(listAdapter);
         new ParseLocations().execute();
     }
 
-    protected void attachLocationLinks() {
-    	/*officeLocationList.setOnItemClickListener(new OnItemClickListener() {
-    		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    			Intent infoItemIntent = new Intent(getBaseContext(), OfficeInfoItemActivity.class);
-    			infoItemIntent.putExtra("which", position);
-    			startActivity(infoItemIntent);
-    		}
-    	});*/
-    }
 
     private class ParseLocations extends AsyncTask<Void, Void, ArrayList<String>> {
     	protected ArrayList<String> doInBackground(Void... params) {
@@ -51,10 +56,16 @@ public class OfficeLocationActivity extends Activity {
     	}
 
     	protected void onPostExecute(ArrayList<String> result) {
+    		Integer i = 0;
     		for (String s : result) {
-    			officeLocationAdapter.add(s);
+    			
+    			listAdapter.groups.add(s);
+    			listAdapter.childs.add(new ArrayList<ArrayList<String>>());
+    			listAdapter.childs.get(i).add(new ArrayList<String>());
+    			listAdapter.childs.get(i).get(0).add("Teszt" + i.toString());
+    			i++;
     		}
-    		attachLocationLinks();
+    		listAdapter.notifyDataSetChanged();
     	}
     }
 }

@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <ListView
-        android:id="@+id/officeLocationListView"
+    <ExpandableListView
+        android:id="@+id/officeLocationExpandableListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" >
 
-    </ListView>
+    </ExpandableListView>
 
 </RelativeLayout>
