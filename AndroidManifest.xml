@@ -76,6 +76,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />
         </activity>
+        <activity
+            android:name=".IsYourChildSickItemActivity"
+            android:label="@string/title_activity_is_your_child_sick_item" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -29,5 +29,6 @@
     <string name="news_item_release_date_label">Released on:</string>
     <string name="title_activity_location">Office Location</string>
     <string name="title_activity_is_your_child_sick">Is Your Child Sick?</string>
+    <string name="title_activity_is_your_child_sick_item">IsYourChildSickItemActivity</string>
 
 </resources>
