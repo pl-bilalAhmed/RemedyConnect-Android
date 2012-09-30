@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.Locale;
 
 import org.jsoup.nodes.Element;
 
@@ -31,21 +32,19 @@ public class PracticeNewsParser extends DefaultParser {
 	public Hashtable<String, String> getFullInfo(int index, Context context) {
 		Element newsitem = doc.select("CMS_News:eq(" + index + ")").first();
 		String title = newsitem.select("NewsTitle").text();
-		String releasedate = newsitem.select("NewsReleaseDate").text();
+		String releasedate = newsitem.select("NewsReleaseDate").text().trim();
 		String summary = newsitem.select("NewsSummary").text();
 		String text = newsitem.select("NewsText").text();
 		
 		Hashtable<String, String> result = new Hashtable<String, String>();
 		
-		SimpleDateFormat dateformatter = new SimpleDateFormat();
-		dateformatter.applyPattern("MM/dd/yyyy KK:mm:ss aa");
-		
+		SimpleDateFormat dateformatter = new SimpleDateFormat("M/d/yyyy h:mm:ss a", Locale.ENGLISH);
+	
 		result.put("title", title);
 		
 		// @TODO: This will use the locale time zone. That should be OK, but I'll keep this notice here.
 		Date releasedate_processed;
 		try {
-			
 			releasedate_processed = dateformatter.parse(releasedate);
 			result.put("releasedate", MarkupGenerator.formatDate(releasedate_processed, context, context.getString(R.string.news_item_release_date_label)));
 		} catch (ParseException e) {
