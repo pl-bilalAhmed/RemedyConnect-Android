@@ -17,6 +17,7 @@
     <string name="title_activity_practice_news">Practice News</string>
 
     <string-array name="MainMenuItems">
+        <item>Is Your Child Sick?</item>
         <item>Office Info</item>
         <item>Practice News</item>
         <item>Office Location</item>
@@ -26,5 +27,7 @@
     <string name="title_activity_practice_news_item">Practice News Item</string>
     <string name="update">Update informations</string>
     <string name="news_item_release_date_label">Released on:</string>
-	<string name="title_activity_location">Office Location</string>
+    <string name="title_activity_location">Office Location</string>
+    <string name="title_activity_is_your_child_sick">Is Your Child Sick?</string>
+
 </resources>

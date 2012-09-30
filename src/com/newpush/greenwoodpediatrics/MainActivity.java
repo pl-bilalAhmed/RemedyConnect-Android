@@ -92,14 +92,18 @@ public class MainActivity extends Activity {
     protected void jumpToActivity(int position) {
     	switch (position) {
     		case 0:
+    			Intent isYourChildSickIntent = new Intent(this, IsYourChildSickActivity.class);
+    			startActivity(isYourChildSickIntent);
+    			break;
+    		case 1:
 				Intent officeInfoIntent = new Intent(this, OfficeInfoActivity.class);
 				startActivity(officeInfoIntent);
     			break;
-    		case 1:
+    		case 2:
 				Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class);
 				startActivity(practiceNewsIntent);
     			break;
-    		case 2:
+    		case 3:
     			Intent locationIntent = new Intent(this, OfficeLocationActivity.class);
     			startActivity(locationIntent);
     			break;

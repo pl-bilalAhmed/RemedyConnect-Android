@@ -62,9 +62,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />
         </activity>
-                <activity
+        <activity
             android:name=".OfficeLocationActivity"
             android:label="@string/title_activity_location" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+        </activity>
+        <activity
+            android:name=".IsYourChildSickActivity"
+            android:label="@string/title_activity_is_your_child_sick" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />

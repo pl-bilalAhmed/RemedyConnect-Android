@@ -19,6 +19,10 @@ public class IsYourChildSickParser extends DefaultParser {
 	public IsYourChildSickParser(Context appContext) {
 		super(appContext.getFilesDir().getAbsolutePath() + "/iycs.xml");
 	}
+	
+	public ArrayList<String> getCategories() {
+		return Parse("categoryname");
+	}
 
 	public HashMap<String, String> getSubFeeds() {
 		HashMap<String, String> subfeed_urls = new HashMap<String, String>();
