@@ -30,5 +30,6 @@
     <string name="title_activity_location">Office Location</string>
     <string name="title_activity_is_your_child_sick">Is Your Child Sick?</string>
     <string name="title_activity_is_your_child_sick_item">IsYourChildSickItemActivity</string>
+    <string name="title_activity_is_your_child_sick_article">IsYourChildSickArticleActivity</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.newpush.greenwoodpediatrics;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Hashtable;
 
 import android.content.Context;
 
@@ -28,5 +29,20 @@ public class MarkupGenerator {
 				"<h2>Daily hours</h2>" +
 				dailyhours +
 				custommessage;
+	}
+	
+	public static String formatIYCSArticle(Hashtable<String, String> article) {
+		return formatTitle((String)article.get("title")) +
+				(String)article.get("datereviewed") + 
+				(String)article.get("dateupdated") +
+				(String)article.get("author") +
+				(String)article.get("topportion") +
+				(String)article.get("call911") +
+				(String)article.get("callnow") +
+				(String)article.get("call24") +
+				(String)article.get("callweekday") +
+				(String)article.get("parentcare") +
+				(String)article.get("bottomportion") +
+				(String)article.get("copyright");
 	}
 }
