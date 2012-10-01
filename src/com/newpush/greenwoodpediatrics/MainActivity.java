@@ -64,6 +64,9 @@ public class MainActivity extends Activity {
             case R.id.menu_item_update:
                 jumpToDownloadActivity();
                 return true;
+            case R.id.menu_item_about:
+            	jumpToAboutActivity();
+            	return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -89,6 +92,11 @@ public class MainActivity extends Activity {
         startActivityForResult(downloadActivity, 0);
     }
     
+    protected void jumpToAboutActivity() {
+    	Intent about = new Intent(this, AboutActivity.class);
+        startActivity(about);
+    }
+    
     protected void jumpToActivity(int position) {
     	switch (position) {
     		case 0:
@@ -100,12 +108,19 @@ public class MainActivity extends Activity {
 				startActivity(officeInfoIntent);
     			break;
     		case 2:
-				Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class);
-				startActivity(practiceNewsIntent);
-    			break;
-    		case 3:
     			Intent locationIntent = new Intent(this, OfficeLocationActivity.class);
     			startActivity(locationIntent);
+    			break;
+    		case 3:
+    			Intent whatsGoingAroundIntent = new Intent(this, IsYourChildSickItemActivity.class);
+    			// TODO There's a better solution for this one...
+    			whatsGoingAroundIntent.putExtra("category_id", "7");
+    			whatsGoingAroundIntent.putExtra("category_name", "What's Going Around?");
+    			startActivity(whatsGoingAroundIntent);
+    			break;
+    		case 4:
+				Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class);
+				startActivity(practiceNewsIntent);
     			break;
     	}
     }
