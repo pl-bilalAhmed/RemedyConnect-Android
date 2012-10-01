@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+	<!-- Header is inflated in the activity constructor, no ScrollView needed -->
     <ListView
         android:id="@+id/iycsItemListView"
         android:layout_width="match_parent"

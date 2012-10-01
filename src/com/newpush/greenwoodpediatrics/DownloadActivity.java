@@ -16,7 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class DownloadActivity extends Activity implements OnClickListener {
+public class DownloadActivity extends DefaultActivity implements OnClickListener {
 	ProgressDialog progress;
 	
     @Override
@@ -26,7 +26,7 @@ public class DownloadActivity extends Activity implements OnClickListener {
         
         progress = new ProgressDialog(this);
         progress.setMessage(getString(R.string.downloading));
-        progress.setIndeterminate(false);
+        progress.setIndeterminate(true);
         progress.setProgress(0);
         progress.setMax(100);
         progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -68,6 +68,10 @@ public class DownloadActivity extends Activity implements OnClickListener {
             if (resultCode == DownloadService.DOWNLOAD_FAILED) {
             	progress.dismiss();
             	Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
+            }
+            
+            if (resultCode == DownloadService.SWITCH_TO_DETERMINATE) {
+            	progress.setIndeterminate(false);
             }
         }
     }

@@ -6,14 +6,9 @@ import com.newpush.greenwoodpediatrics.parser.IsYourChildSickSubParser;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.webkit.WebView;
-import android.support.v4.app.NavUtils;
 
-public class IsYourChildSickArticleActivity extends Activity {
-	protected Bundle extras;
+public class IsYourChildSickArticleActivity extends DefaultActivity {
 	protected WebView display;
 
     @Override
@@ -21,28 +16,29 @@ public class IsYourChildSickArticleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_is_your_child_sick_article);
         display = (WebView) findViewById(R.id.iycsArticleWebView);
-        
-		extras = getIntent().getExtras();
+
 		new ParseArticle().execute(extras.getInt("category_id"), extras.getInt("which"));
     }
-    
+
     private class ParseArticle extends AsyncTask<Integer, Void, Hashtable<String, String>> {
+		@Override
 		protected Hashtable<String, String> doInBackground(Integer... params) {
 			IsYourChildSickSubParser parser = new IsYourChildSickSubParser(getApplicationContext(), params[0]);
 			Hashtable<String, String> result = parser.getFullInfo(params[1]);
 			return result;
 		}
 
+		@Override
 		protected void onPostExecute(Hashtable<String, String> article) {
-			String title = (String)article.get("title");
-			String offsitelink = (String)article.get("offsitelink").trim(); 
+			String title = article.get("title");
+			String offsitelink = article.get("offsitelink").trim();
 			if (offsitelink != "") {
 				display.loadUrl(offsitelink);
 			}
 			else {
 				String contents = MarkupGenerator.formatIYCSArticle(article);
 				setTitle(title);
-				display.loadData(contents, "text/html", "utf-8");	
+				display.loadData(contents, "text/html", "utf-8");
 			}
 		}
     }

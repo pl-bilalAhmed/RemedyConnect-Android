@@ -1,131 +1,97 @@
 package com.newpush.greenwoodpediatrics;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.newpush.greenwoodpediatrics.DownloadActivity;
 import com.newpush.greenwoodpediatrics.DataChecker;
 
-import org.jsoup.Jsoup;
-import org.jsoup.helper.StringUtil;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-
-public class MainActivity extends Activity {
+public class MainActivity extends DefaultActivity {
 	protected ArrayAdapter<String> menuadapter;
 	protected ListView menu;
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         menu = (ListView) findViewById(R.id.mainMenu);
-        
+
+        LayoutInflater inflater = getLayoutInflater();
+        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.default_header, menu, false);
+        menu.addHeaderView(header, null, false);
+
     	menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
     	menu.setAdapter(menuadapter);
-        
+
+    	setTitle(res.getString(R.string.welcome));
+
     	if (DataChecker.isDataAvailable(getApplicationContext())) {
     		setupMenu();
     	}
     	else {
-			jumpToDownloadActivity();
+			startDownload();
     	}
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_update:
-                jumpToDownloadActivity();
-                return true;
-            case R.id.menu_item_about:
-            	jumpToAboutActivity();
-            	return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-    
     protected void setupMenu() {
-    	if (menuadapter.getCount() == 0) {
-    		Resources res = getResources();
+    	if (menuadapter.getCount() < 2) {
         	for (String s : res.getStringArray(R.array.MainMenuItems)) {
         		menuadapter.add(s);
         	}
-        	
+
         	menu.setOnItemClickListener(new OnItemClickListener() {
     		  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    		    jumpToActivity(position);
+    		    jumpToActivity(position-1); // -1 because of the header element
     		  }
-    		});	
-    	}	 
+    		});
+    	}
     }
-    
-    protected void jumpToDownloadActivity() {
-		Intent downloadActivity = new Intent(this, DownloadActivity.class);
-        startActivityForResult(downloadActivity, 0);
-    }
-    
-    protected void jumpToAboutActivity() {
-    	Intent about = new Intent(this, AboutActivity.class);
-        startActivity(about);
-    }
-    
+
     protected void jumpToActivity(int position) {
+    	ArrayList<String> menuitem_titles = new ArrayList<String>(Arrays.asList(res.getStringArray(R.array.MainMenuItems)));
     	switch (position) {
     		case 0:
     			Intent isYourChildSickIntent = new Intent(this, IsYourChildSickActivity.class);
+    			isYourChildSickIntent.putExtra("title", menuitem_titles.get(position));
     			startActivity(isYourChildSickIntent);
     			break;
     		case 1:
 				Intent officeInfoIntent = new Intent(this, OfficeInfoActivity.class);
+				officeInfoIntent.putExtra("title", menuitem_titles.get(position));
 				startActivity(officeInfoIntent);
     			break;
     		case 2:
     			Intent locationIntent = new Intent(this, OfficeLocationActivity.class);
+    			locationIntent.putExtra("title", menuitem_titles.get(position));
     			startActivity(locationIntent);
     			break;
     		case 3:
     			Intent whatsGoingAroundIntent = new Intent(this, IsYourChildSickItemActivity.class);
+    			whatsGoingAroundIntent.putExtra("title", menuitem_titles.get(position));
     			// TODO There's a better solution for this one...
     			whatsGoingAroundIntent.putExtra("category_id", "7");
-    			whatsGoingAroundIntent.putExtra("category_name", "What's Going Around?");
     			startActivity(whatsGoingAroundIntent);
     			break;
     		case 4:
 				Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class);
+				practiceNewsIntent.putExtra("title", menuitem_titles.get(position));
 				startActivity(practiceNewsIntent);
     			break;
     	}
     }
-    
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	super.onActivityResult(requestCode, resultCode, data);
     	if (resultCode == Activity.RESULT_OK) {
     		setupMenu();
