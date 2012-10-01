@@ -16,6 +16,8 @@ public class OfficeInfoItemActivity extends DefaultActivity {
 		setContentView(R.layout.activity_office_info_item);
 		display = (WebView) findViewById(R.id.contentWebView);
 
+		makeTextViewLinksClickable(R.id.footerTextView);
+		suppressTitle();
 		new ParseOfficeInfoItem().execute(extras.getInt("which"));
 	}
 

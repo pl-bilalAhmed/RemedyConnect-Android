@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -56,12 +57,26 @@ public class DefaultActivity extends Activity {
         }
     }
 
+    // Call this with the resource IDs of the TextViews to make links respond.
+    public void makeTextViewLinksClickable(Integer... textViewResourceIds) {
+    	for (Integer id : textViewResourceIds) {
+		   TextView text = (TextView) findViewById(id);
+		   text.setMovementMethod(LinkMovementMethod.getInstance());
+    	}
+    }
+
     @Override
 	public void setTitle(CharSequence title) {
 		super.setTitle(title);
 		TextView titleview = (TextView) findViewById(R.id.titleTextView);
 		titleview.setText(title);
 	}
+
+    public void suppressTitle() {
+    	TextView titleview = (TextView) findViewById(R.id.titleTextView);
+    	titleview.setVisibility(TextView.INVISIBLE);
+    	titleview.setHeight(0);
+    }
 
 	public void startDownload() {
     	Intent downloadActivity = new Intent(this, DownloadActivity.class);

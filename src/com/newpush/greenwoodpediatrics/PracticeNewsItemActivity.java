@@ -15,6 +15,7 @@ public class PracticeNewsItemActivity extends DefaultActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_practice_news_item);
 		display = (WebView) findViewById(R.id.newsWebView);
+		suppressTitle();
 
 		new ParseNewsItem().execute(extras.getInt("which"));
 	}

@@ -17,6 +17,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/header" />
+        <include
+	        android:id="@+id/footer"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/newsWebView"
+	      	layout="@layout/default_footer" />
     </RelativeLayout>
 
 </ScrollView>

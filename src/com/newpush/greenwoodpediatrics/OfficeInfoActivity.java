@@ -27,12 +27,16 @@ public class OfficeInfoActivity extends DefaultActivity {
 
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.default_header, officeInfoList, false);
+        ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.default_footer, officeInfoList, false);
         officeInfoList.addHeaderView(header, null, false);
+        officeInfoList.addFooterView(footer, null, false);
 
         officeInfoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         officeInfoList.setAdapter(officeInfoAdapter);
 
         setTitleFromIntentBundle();
+        makeTextViewLinksClickable(R.id.footerTextView);
+
         new ParseOffices().execute();
     }
 

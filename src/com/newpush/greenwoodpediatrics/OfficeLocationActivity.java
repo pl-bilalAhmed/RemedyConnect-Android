@@ -37,12 +37,16 @@ public class OfficeLocationActivity extends DefaultActivity {
 
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.default_header, officeLocationList, false);
+        ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.default_footer, officeLocationList, false);
         officeLocationList.addHeaderView(header, null, false);
+        officeLocationList.addFooterView(footer, null, false);
 
         listAdapter = new CustomExpandableListAdapter(this, groups, childs);
         officeLocationList.setAdapter(listAdapter);
 
         setTitleFromIntentBundle();
+        makeTextViewLinksClickable(R.id.footerTextView);
+
         new ParseLocations().execute();
     }
 

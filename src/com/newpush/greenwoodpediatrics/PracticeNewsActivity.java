@@ -28,9 +28,12 @@ public class PracticeNewsActivity extends DefaultActivity {
 
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.default_header, newsList, false);
+        ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.default_footer, newsList, false);
         newsList.addHeaderView(header, null, false);
+        newsList.addFooterView(footer, null, false);
 
         setTitleFromIntentBundle();
+        makeTextViewLinksClickable(R.id.footerTextView);
 
         newsList.setAdapter(newsAdapter);
         new ParseNews().execute();

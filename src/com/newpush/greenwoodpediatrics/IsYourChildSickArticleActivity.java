@@ -17,6 +17,9 @@ public class IsYourChildSickArticleActivity extends DefaultActivity {
         setContentView(R.layout.activity_is_your_child_sick_article);
         display = (WebView) findViewById(R.id.iycsArticleWebView);
 
+        makeTextViewLinksClickable(R.id.footerTextView);
+        suppressTitle();
+
 		new ParseArticle().execute(extras.getInt("category_id"), extras.getInt("which"));
     }
 

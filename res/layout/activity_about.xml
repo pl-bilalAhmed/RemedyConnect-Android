@@ -26,6 +26,7 @@
             tools:context=".AboutActivity" />
 
         <TextView
+            android:id="@+id/about_jsoup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -36,6 +37,13 @@
             android:text="@string/about_jsoup"
             android:textSize="13dp"
             tools:context=".AboutActivity" />
+        
+        <include
+	        android:id="@+id/footer"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/about_jsoup"
+	      	layout="@layout/default_footer" />
     </RelativeLayout>
 
 </ScrollView>

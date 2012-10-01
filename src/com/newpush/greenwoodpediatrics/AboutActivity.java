@@ -1,10 +1,7 @@
 package com.newpush.greenwoodpediatrics;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 
 public class AboutActivity extends DefaultActivity {
 
@@ -12,6 +9,10 @@ public class AboutActivity extends DefaultActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        makeTextViewLinksClickable(
+        		R.id.footerTextView,
+        		R.id.about_developers,
+        		R.id.about_jsoup);
     }
 
     @Override

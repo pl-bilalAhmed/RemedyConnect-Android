@@ -28,12 +28,24 @@ public class IsYourChildSickItemActivity extends DefaultActivity {
 
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.default_header, list, false);
+        ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.default_footer, list, false);
         list.addHeaderView(header, null, false);
+        list.addFooterView(footer, null, false);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         list.setAdapter(adapter);
         String id_from_extras = extras.getString("category_id");
         category_id = Integer.valueOf(id_from_extras);
+
+        if (extras.containsKey("title")) {
+        	setTitleFromIntentBundle();
+        }
+        else {
+        	setTitle(extras.getString("category_name"));
+        }
+
+        makeTextViewLinksClickable(R.id.footerTextView);
+
         new ParseIYCSItem().execute(category_id);
     }
 
@@ -58,7 +70,6 @@ public class IsYourChildSickItemActivity extends DefaultActivity {
 
 		@Override
 		protected void onPostExecute(ArrayList<String> titles) {
-			setTitle(extras.getString("category_name"));
 			for (String title : titles) {
 				adapter.add(title);
 			}

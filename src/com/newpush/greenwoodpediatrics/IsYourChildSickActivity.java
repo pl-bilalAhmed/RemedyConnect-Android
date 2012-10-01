@@ -30,13 +30,16 @@ public class IsYourChildSickActivity extends DefaultActivity {
 
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.default_header, list, false);
+        ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.default_footer, list, false);
         list.addHeaderView(header, null, false);
+        list.addFooterView(footer, null, false);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         category_position_to_ids = new ArrayList<String>();
         list.setAdapter(adapter);
 
         setTitleFromIntentBundle();
+        makeTextViewLinksClickable(R.id.footerTextView);
 
         new ParseIYCSCategories().execute();
     }

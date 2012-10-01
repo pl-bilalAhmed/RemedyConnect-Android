@@ -28,12 +28,15 @@ public class MainActivity extends DefaultActivity {
 
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.default_header, menu, false);
+        ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.default_footer, menu, false);
         menu.addHeaderView(header, null, false);
+        menu.addFooterView(footer, null, false);
 
     	menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
     	menu.setAdapter(menuadapter);
 
     	setTitle(res.getString(R.string.welcome));
+    	makeTextViewLinksClickable(R.id.footerTextView);
 
     	if (DataChecker.isDataAvailable(getApplicationContext())) {
     		setupMenu();
