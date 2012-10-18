@@ -90,6 +90,11 @@ public class MainActivity extends DefaultActivity {
 				practiceNewsIntent.putExtra("title", menuitem_titles.get(position));
 				startActivity(practiceNewsIntent);
     			break;
+    		case 5:
+    			Intent pageMyDoctorIntent = new Intent(this, PageMyDoctorActivity.class);
+    			pageMyDoctorIntent.putExtra("title", menuitem_titles.get(position));
+    			startActivity(pageMyDoctorIntent);
+    			break;
     	}
     }
 
