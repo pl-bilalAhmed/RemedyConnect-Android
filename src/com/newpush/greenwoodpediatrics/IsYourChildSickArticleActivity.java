@@ -20,6 +20,7 @@ public class IsYourChildSickArticleActivity extends DefaultActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_is_your_child_sick_article);
         display = (WebView) findViewById(R.id.iycsArticleWebView);
+        setWebViewTransparent(display);
 
         makeTextViewLinksClickable(R.id.footerTextView);
         suppressTitle();
@@ -63,6 +64,7 @@ public class IsYourChildSickArticleActivity extends DefaultActivity {
 				display.getSettings().setUserAgentString("Android Mozilla/5.0 AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30");
 
 				display.loadData(contents, "text/html", "utf-8");
+				setWebViewTransparentAfterLoad(display);
 			}
 		}
     }

@@ -1,13 +1,16 @@
 package com.newpush.greenwoodpediatrics;
 
 import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 public class DefaultActivity extends Activity {
@@ -82,4 +85,16 @@ public class DefaultActivity extends Activity {
     	Intent downloadActivity = new Intent(this, DownloadActivity.class);
         startActivityForResult(downloadActivity, 0);
     }
+
+	public void setWebViewTransparent(WebView webview) {
+		webview.setBackgroundColor(Color.TRANSPARENT);
+	}
+
+	@TargetApi(11)
+	public void setWebViewTransparentAfterLoad(WebView webview) {
+		webview.setBackgroundColor(Color.TRANSPARENT);
+		if (android.os.Build.VERSION.SDK_INT >= 11) {
+			webview.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+		}
+	}
 }

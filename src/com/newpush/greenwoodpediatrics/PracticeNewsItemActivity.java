@@ -2,6 +2,7 @@ package com.newpush.greenwoodpediatrics;
 
 import java.util.Hashtable;
 
+import android.annotation.TargetApi;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -15,6 +16,8 @@ public class PracticeNewsItemActivity extends DefaultActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_practice_news_item);
 		display = (WebView) findViewById(R.id.newsWebView);
+		setWebViewTransparent(display);
+
 		suppressTitle();
 
 		new ParseNewsItem().execute(extras.getInt("which"));
@@ -28,6 +31,7 @@ public class PracticeNewsItemActivity extends DefaultActivity {
 			return result;
 		}
 
+		@TargetApi(11)
 		@Override
 		protected void onPostExecute(Hashtable<String, String> result) {
 			String title = result.get("title");
@@ -37,6 +41,7 @@ public class PracticeNewsItemActivity extends DefaultActivity {
 					result.get("text");
 			setTitle(title);
 			display.loadData(text, "text/html", "utf-8");
+			setWebViewTransparentAfterLoad(display);
 		}
 
 	}

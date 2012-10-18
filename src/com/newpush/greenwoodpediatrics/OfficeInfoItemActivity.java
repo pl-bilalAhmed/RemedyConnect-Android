@@ -15,6 +15,7 @@ public class OfficeInfoItemActivity extends DefaultActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_office_info_item);
 		display = (WebView) findViewById(R.id.contentWebView);
+		setWebViewTransparent(display);
 
 		makeTextViewLinksClickable(R.id.footerTextView);
 		suppressTitle();
@@ -35,6 +36,7 @@ public class OfficeInfoItemActivity extends DefaultActivity {
 			String message = MarkupGenerator.formatTitle(title) + result.get("message");
 			setTitle(title);
 			display.loadData(message, "text/html", "utf-8");
+			setWebViewTransparentAfterLoad(display);
 		}
 
 	}

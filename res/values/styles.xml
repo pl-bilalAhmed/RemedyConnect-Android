@@ -1,7 +1,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="appTheme" parent="android:Theme.Light">
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:colorBackground">@color/white</item>
+        <item name="android:windowBackground">@drawable/background_texture</item>
+        <!--<item name="android:colorBackground">@color/white</item>  -->
         <item name="android:typeface">serif</item>
+        <item name="android:textColor">@color/textDark</item>
     </style>
 </resources>
