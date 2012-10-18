@@ -78,19 +78,19 @@ public class MainActivity extends DefaultActivity {
     			locationIntent.putExtra("title", menuitem_titles.get(position));
     			startActivity(locationIntent);
     			break;
-    		case 3:
+    		/*case 3:
     			Intent whatsGoingAroundIntent = new Intent(this, IsYourChildSickItemActivity.class);
     			whatsGoingAroundIntent.putExtra("title", menuitem_titles.get(position));
     			// TODO There's a better solution for this one...
     			whatsGoingAroundIntent.putExtra("category_id", "7");
     			startActivity(whatsGoingAroundIntent);
-    			break;
-    		case 4:
+    			break;*/
+    		case 3:
 				Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class);
 				practiceNewsIntent.putExtra("title", menuitem_titles.get(position));
 				startActivity(practiceNewsIntent);
     			break;
-    		case 5:
+    		case 4:
     			Intent pageMyDoctorIntent = new Intent(this, PageMyDoctorActivity.class);
     			pageMyDoctorIntent.putExtra("title", menuitem_titles.get(position));
     			startActivity(pageMyDoctorIntent);
