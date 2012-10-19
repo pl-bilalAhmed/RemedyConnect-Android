@@ -2,5 +2,7 @@
 <resources>
 	<color name="white">#ffffff</color>
 	<color name="textDark">#005710</color>
+	<color name="textHeader">#56004e</color>
+	<color name="textLink">#56004e</color>
 	<color name="transparent">#00000000</color>
 </resources>

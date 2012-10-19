@@ -6,10 +6,7 @@ import com.newpush.greenwoodpediatrics.parser.IsYourChildSickSubParser;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
 
 public class IsYourChildSickArticleActivity extends DefaultActivity {
@@ -48,7 +45,7 @@ public class IsYourChildSickArticleActivity extends DefaultActivity {
 				String contents = MarkupGenerator.formatIYCSArticle(article);
 				setTitle(title);
 
-				display.setWebChromeClient(new WebChromeClient());
+				/*display.setWebChromeClient(new WebChromeClient());
 
 				display.getSettings().setJavaScriptEnabled(true);
 				if (Build.VERSION.SDK_INT >= 7) {
@@ -61,9 +58,10 @@ public class IsYourChildSickArticleActivity extends DefaultActivity {
 				} else {
 				  display.getSettings().setPluginState(PluginState.ON);
 				}
-				display.getSettings().setUserAgentString("Android Mozilla/5.0 AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30");
+				display.getSettings().setUserAgentString("Android Mozilla/5.0 AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30");*/
 
-				display.loadData(contents, "text/html", "utf-8");
+				String html = MarkupGenerator.wrapHTMLWithStyle(contents);
+				display.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "utf-8", null);
 				setWebViewTransparentAfterLoad(display);
 			}
 		}

@@ -27,6 +27,7 @@
         android:paddingBottom="0dp"
         android:fontFamily="serif"
         android:textStyle="bold"
+        android:textColor="@color/textHeader"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25dp" />

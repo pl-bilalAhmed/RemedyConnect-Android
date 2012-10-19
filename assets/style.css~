@@ -1,0 +1,5 @@
+html {
+  font-family: serif;
+  background-color: transparent;
+  color: #005710;
+}

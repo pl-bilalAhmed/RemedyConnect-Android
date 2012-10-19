@@ -34,8 +34,9 @@ public class OfficeInfoItemActivity extends DefaultActivity {
 		protected void onPostExecute(Hashtable<String, String> result) {
 			String title = result.get("title");
 			String message = MarkupGenerator.formatTitle(title) + result.get("message");
+			String text = MarkupGenerator.wrapHTMLWithStyle(message);
 			setTitle(title);
-			display.loadData(message, "text/html", "utf-8");
+			display.loadDataWithBaseURL("file:///android_asset/", text, "text/html", "utf-8", null);
 			setWebViewTransparentAfterLoad(display);
 		}
 

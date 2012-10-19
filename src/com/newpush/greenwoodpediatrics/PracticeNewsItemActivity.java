@@ -34,13 +34,15 @@ public class PracticeNewsItemActivity extends DefaultActivity {
 		@TargetApi(11)
 		@Override
 		protected void onPostExecute(Hashtable<String, String> result) {
+			setWebViewTransparent(display);
 			String title = result.get("title");
 			String releasedate = result.get("releasedate");
-			String text = MarkupGenerator.formatTitle(title) +
+			String html = MarkupGenerator.formatTitle(title) +
 					releasedate +
 					result.get("text");
+			String text = MarkupGenerator.wrapHTMLWithStyle(html);
 			setTitle(title);
-			display.loadData(text, "text/html", "utf-8");
+			display.loadDataWithBaseURL("file:///android_asset/", text, "text/html", "utf-8", null);
 			setWebViewTransparentAfterLoad(display);
 		}
 
