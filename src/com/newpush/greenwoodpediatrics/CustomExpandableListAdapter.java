@@ -3,6 +3,7 @@ package com.newpush.greenwoodpediatrics;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +77,9 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 			convertView = inflater.inflate(R.layout.custom_expandable_list_view_child, null);
 		}
 		WebView content = (WebView)convertView.findViewById(R.id.listChildContentWebView);
-		content.loadData(child, "text/html", "utf-8");
+		child = MarkupGenerator.wrapHTMLWithStyle(child);
+		content.loadDataWithBaseURL("file:///android_asset/", child, "text/html", "utf-8", null);
+		content.setBackgroundColor(Color.TRANSPARENT);
 		return convertView;
 	}
 

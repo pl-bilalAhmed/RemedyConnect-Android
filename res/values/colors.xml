@@ -5,4 +5,5 @@
 	<color name="textHeader">#56004e</color>
 	<color name="textLink">#56004e</color>
 	<color name="transparent">#00000000</color>
+	<color name="divider">#12005710</color>
 </resources>
