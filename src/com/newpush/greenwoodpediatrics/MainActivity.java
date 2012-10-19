@@ -6,6 +6,7 @@ import java.util.Arrays;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.newpush.greenwoodpediatrics.DataChecker;
 public class MainActivity extends DefaultActivity {
 	protected ArrayAdapter<String> menuadapter;
 	protected ListView menu;
+	public static final String PREFS_NAME = "prefs";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,9 +93,20 @@ public class MainActivity extends DefaultActivity {
 				startActivity(practiceNewsIntent);
     			break;
     		case 4:
-    			Intent pageMyDoctorIntent = new Intent(this, PageMyDoctorActivity.class);
-    			pageMyDoctorIntent.putExtra("title", menuitem_titles.get(position));
-    			startActivity(pageMyDoctorIntent);
+    	        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+    	        boolean firstTime = settings.getBoolean("firstPageMyDoctor", true);
+
+    	        if (firstTime) {
+    	        	Intent pageMyDoctorIntent = new Intent(this, PageMyDoctorActivity.class);
+        			pageMyDoctorIntent.putExtra("title", menuitem_titles.get(position));
+        			startActivity(pageMyDoctorIntent);
+    	        }
+    	        else {
+    	        	Intent pageMyDoctorIntent = PageMyDoctorActivity.getPageMyDoctorIntent();
+    	        	startActivity(pageMyDoctorIntent);
+    	        }
+
+
     			break;
     	}
     }
