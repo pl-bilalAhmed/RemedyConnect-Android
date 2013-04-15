@@ -3,6 +3,7 @@ package com.newpush.greenwoodpediatrics;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 	public ArrayList<String> groups;
 	public ArrayList<ArrayList<String>> childs;
-	private Context context;
+	private final Context context;
 
 	public CustomExpandableListAdapter(Context context, ArrayList<String> groups, ArrayList<ArrayList<String>> childs) {
 		this.context = context;
@@ -25,7 +26,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 	public boolean areAllItemsEnabled() {
 		return true;
 	}
-	
+
 	public int getGroupCount() {
 		return groups.size();
 	}
@@ -56,7 +57,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
 	public View getGroupView(int groupPosition, boolean isExpanded,
 			View convertView, ViewGroup parent) {
-		String group = (String)getGroup(groupPosition);
+		String group = getGroup(groupPosition);
 		// @TODO What does LayoutInflater do here?
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -69,14 +70,16 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-		String child = (String)((ArrayList<String>)getChild(groupPosition, childPosition)).get(0);
-		// @TODO What does LayoutInflater do here?
+		String child = getChild(groupPosition, childPosition).get(0);
+		// TODO What does LayoutInflater do here?
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.custom_expandable_list_view_child, null);
 		}
 		WebView content = (WebView)convertView.findViewById(R.id.listChildContentWebView);
-		content.loadData(child, "text/html", "utf-8");
+		child = MarkupGenerator.wrapHTMLWithStyle(child);
+		content.loadDataWithBaseURL("file:///android_asset/", child, "text/html", "utf-8", null);
+		content.setBackgroundColor(Color.TRANSPARENT);
 		return convertView;
 	}
 

@@ -1,7 +1,6 @@
 package com.newpush.greenwoodpediatrics.parser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 
 import org.jsoup.nodes.Element;

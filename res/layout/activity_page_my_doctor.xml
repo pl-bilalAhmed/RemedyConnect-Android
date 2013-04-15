@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
+    
 	<RelativeLayout 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" >
@@ -12,25 +12,32 @@
 	      	layout="@layout/default_header" />
 	    
 	    <TextView
-	        android:id="@+id/downloadTextView"
-	        android:padding="10dp"
+	        android:id="@+id/pageMyDoctorTextView"
+	        android:padding="5dp"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentLeft="true"
 	        android:layout_below="@+id/header"
-	        android:text="@string/download_information"
+	        android:text="@string/page_my_doctor_intro"
 	        style="@android:style/TextAppearance.Medium"
-	        tools:context=".DownloadActivity" />
+	        tools:context=".PageMyDoctorActivity" />
 	
 	    <Button
-	        android:id="@+id/downloadButton"
+	        android:id="@+id/openButton"
 	        android:padding="10dp"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_below="@id/downloadTextView"
+	        android:layout_below="@id/pageMyDoctorTextView"
 	        android:layout_centerHorizontal="true"
 	        style="@android:style/TextAppearance.Large"
-	        android:text="@string/download_button" />
+	        android:text="@string/page_my_doctor_open" />
+	    
+	    <include
+	        android:id="@+id/footer"
+	      	layout="@layout/default_footer"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	      	android:layout_below="@id/openButton" />
 	
 	</RelativeLayout>
 </ScrollView>

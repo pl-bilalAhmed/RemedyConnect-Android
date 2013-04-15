@@ -1,19 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.newpush.greenwoodpediatrics"
-    android:versionCode="1"
+    android:versionCode="7"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="5"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:hardwareAccelerated="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/appTheme" >
         <activity
             android:name="com.newpush.greenwoodpediatrics.MainActivity"
             android:label="@string/title_activity_main" >
@@ -93,6 +94,20 @@
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+        </activity>
+        <activity
+            android:name=".DefaultActivity"
+            android:label="@string/title_activity_default" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PageMyDoctorActivity"
+            android:label="@string/title_activity_page_my_doctor" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />

@@ -1,10 +1,6 @@
 package com.newpush.greenwoodpediatrics.parser;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Hashtable;
 
 import org.jsoup.nodes.Element;
@@ -12,7 +8,6 @@ import org.jsoup.nodes.Element;
 import android.content.Context;
 
 import com.newpush.greenwoodpediatrics.MarkupGenerator;
-import com.newpush.greenwoodpediatrics.R;
 
 
 public class OfficeLocationParser extends DefaultParser {
