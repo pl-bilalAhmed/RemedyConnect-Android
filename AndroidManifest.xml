@@ -34,13 +34,20 @@
         </activity>
 
         <service android:name="com.newpush.greenwoodpediatrics.DownloadService" />
-
+        
+		<activity
+            android:name="com.newpush.greenwoodpediatrics.OfficeActivity"
+            android:label="@string/title_activity_office_info_hours_location" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+        </activity>
         <activity
             android:name="com.newpush.greenwoodpediatrics.OfficeInfoActivity"
             android:label="@string/title_activity_office_info" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+                android:value="com.newpush.greenwoodpediatrics.OfficeActivity" />
         </activity>
         <activity
             android:name="com.newpush.greenwoodpediatrics.OfficeInfoItemActivity"
@@ -68,7 +75,7 @@
             android:label="@string/title_activity_location" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+                android:value="com.newpush.greenwoodpediatrics.OfficeActivity" />
         </activity>
         <activity
             android:name=".IsYourChildSickActivity"

@@ -1,5 +1,6 @@
 package com.newpush.greenwoodpediatrics.parser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -20,13 +21,32 @@ public class IsYourChildSickParser extends DefaultParser {
 		super(appContext.getFilesDir().getAbsolutePath() + "/iycs.xml");
 	}
 	
+	private String renameItem(String original) {
+		if (original.equals("Health Nuts Media Videos")) {
+			return "Videos For Kids";
+		}
+		if (original.equals("Pediatric Illness/Symptoms")) {
+			return "Is Your Child Sick?";
+		}
+		return original;
+	}
+	
+	private Boolean itemShouldBeFilteredOut(String item) {
+		ArrayList<String> itemsToFilter = new ArrayList<String>();
+		itemsToFilter.add("Special Needs");
+		itemsToFilter.add("Family Illness/Symptoms");
+		return itemsToFilter.contains(item);
+	} 
+	
 	public LinkedHashMap<String, String> getCategories() {
 		LinkedHashMap<String, String> categories_with_ids = new LinkedHashMap<String, String>();
 		Elements categories = doc.select("pw_medical_category");
 		for (Element category : categories) {
 			String id = category.select("categoryid").text();
 			String name = category.select("categoryname").text();
-			categories_with_ids.put(id, name);
+			if (!itemShouldBeFilteredOut(name)) {		
+				categories_with_ids.put(id, renameItem(name));
+			}
 		}
 		
 		return categories_with_ids;

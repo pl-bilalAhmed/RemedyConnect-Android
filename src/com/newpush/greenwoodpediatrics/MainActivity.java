@@ -71,28 +71,16 @@ public class MainActivity extends DefaultActivity {
     			startActivity(isYourChildSickIntent);
     			break;
     		case 1:
-				Intent officeInfoIntent = new Intent(this, OfficeInfoActivity.class);
-				officeInfoIntent.putExtra("title", menuitem_titles.get(position));
-				startActivity(officeInfoIntent);
+    			Intent officeIntent = new Intent(this, OfficeActivity.class);
+    			officeIntent.putExtra("title", menuitem_titles.get(position));
+    			startActivity(officeIntent);
     			break;
     		case 2:
-    			Intent locationIntent = new Intent(this, OfficeLocationActivity.class);
-    			locationIntent.putExtra("title", menuitem_titles.get(position));
-    			startActivity(locationIntent);
-    			break;
-    		/*case 3:
-    			Intent whatsGoingAroundIntent = new Intent(this, IsYourChildSickItemActivity.class);
-    			whatsGoingAroundIntent.putExtra("title", menuitem_titles.get(position));
-    			// TODO There's a better solution for this one...
-    			whatsGoingAroundIntent.putExtra("category_id", "7");
-    			startActivity(whatsGoingAroundIntent);
-    			break;*/
-    		case 3:
 				Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class);
 				practiceNewsIntent.putExtra("title", menuitem_titles.get(position));
 				startActivity(practiceNewsIntent);
     			break;
-    		case 4:
+    		case 3:
     	        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
     	        boolean firstTime = settings.getBoolean("firstPageMyDoctor", true);
 
