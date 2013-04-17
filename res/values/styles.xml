@@ -1,5 +1,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="appTheme" parent="android:Theme.Light">
+    <style name="appTheme" parent="Theme.Sherlock">
         <item name="android:windowBackground">@drawable/background_texture</item>
         <item name="android:colorBackground">@color/transparent</item>
         <item name="android:typeface">serif</item>

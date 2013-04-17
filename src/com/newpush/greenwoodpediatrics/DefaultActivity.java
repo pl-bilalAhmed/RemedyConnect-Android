@@ -1,19 +1,18 @@
 package com.newpush.greenwoodpediatrics;
 
+import com.actionbarsherlock.app.SherlockActivity;
+
 import android.os.Bundle;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.method.LinkMovementMethod;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Window;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-public class DefaultActivity extends Activity {
+public class DefaultActivity extends SherlockActivity {
 	protected Bundle extras;
 	protected Resources res;
 
@@ -25,27 +24,6 @@ public class DefaultActivity extends Activity {
         res = getResources();
 
         extras = getIntent().getExtras();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_default, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_update:
-                startDownload();
-                return true;
-            case R.id.menu_item_about:
-            	Intent about = new Intent(this, AboutActivity.class);
-                startActivity(about);
-            	return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     // This sets the title with the informations stored in the Bundle.

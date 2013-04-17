@@ -1,7 +1,6 @@
 package com.newpush.greenwoodpediatrics;
 
 import android.os.Bundle;
-import android.view.Menu;
 
 public class AboutActivity extends DefaultActivity {
 
@@ -15,8 +14,4 @@ public class AboutActivity extends DefaultActivity {
         		R.id.about_jsoup);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return false;
-    }
 }
