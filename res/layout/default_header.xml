@@ -30,6 +30,6 @@
         android:textColor="@color/textHeader"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25dp" />
+        android:textSize="25sp" />
     
 </RelativeLayout>

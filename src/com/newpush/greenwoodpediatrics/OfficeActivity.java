@@ -60,11 +60,13 @@ public class OfficeActivity extends DefaultActivity {
     			Intent officeInfoIntent = new Intent(this, OfficeInfoActivity.class);
 				officeInfoIntent.putExtra("title", menuitem_titles.get(position));
 				startActivity(officeInfoIntent);
+				overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     			break;
     		case 1:
     			Intent locationIntent = new Intent(this, OfficeLocationActivity.class);
     			locationIntent.putExtra("title", menuitem_titles.get(position));
     			startActivity(locationIntent);
+    			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     			break;
     	}
     }

@@ -46,6 +46,7 @@ public class OfficeInfoActivity extends DefaultActivity {
     			Intent infoItemIntent = new Intent(getBaseContext(), OfficeInfoItemActivity.class);
     			infoItemIntent.putExtra("which", mapping.get(position-1).index); // -1 because of the header
     			startActivity(infoItemIntent);
+    			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     		}
     	});
     }

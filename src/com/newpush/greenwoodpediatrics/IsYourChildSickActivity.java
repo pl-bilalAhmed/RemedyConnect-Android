@@ -52,6 +52,7 @@ public class IsYourChildSickActivity extends DefaultActivity {
     			intent.putExtra("category_id", category_position_to_ids.get(position-1));
     			intent.putExtra("category_name", adapter.getItem(position-1));
     			startActivity(intent);
+    			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     		}
     	});
     }

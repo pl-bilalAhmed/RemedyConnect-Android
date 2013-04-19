@@ -40,11 +40,15 @@ public class MainActivity extends DefaultActivity {
     	setTitle(res.getString(R.string.welcome));
     	makeTextViewLinksClickable(R.id.footerTextView);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    	getSupportActionBar().setHomeButtonEnabled(false);
+    		
     	if (DataChecker.isDataAvailable(getApplicationContext())) {
     		setupMenu();
     	}
     	else {
-			startDownload();
+        	Intent downloadActivity = new Intent(this, DownloadActivity.class);
+            startActivityForResult(downloadActivity, 0);
     	}
     }
 
@@ -69,16 +73,19 @@ public class MainActivity extends DefaultActivity {
     			Intent isYourChildSickIntent = new Intent(this, IsYourChildSickActivity.class);
     			isYourChildSickIntent.putExtra("title", menuitem_titles.get(position));
     			startActivity(isYourChildSickIntent);
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     			break;
     		case 1:
     			Intent officeIntent = new Intent(this, OfficeActivity.class);
     			officeIntent.putExtra("title", menuitem_titles.get(position));
     			startActivity(officeIntent);
+    			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     			break;
     		case 2:
 				Intent practiceNewsIntent = new Intent(this, PracticeNewsActivity.class);
 				practiceNewsIntent.putExtra("title", menuitem_titles.get(position));
 				startActivity(practiceNewsIntent);
+				overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     			break;
     		case 3:
     	        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -88,12 +95,13 @@ public class MainActivity extends DefaultActivity {
     	        	Intent pageMyDoctorIntent = new Intent(this, PageMyDoctorActivity.class);
         			pageMyDoctorIntent.putExtra("title", menuitem_titles.get(position));
         			startActivity(pageMyDoctorIntent);
+        			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     	        }
     	        else {
     	        	Intent pageMyDoctorIntent = PageMyDoctorActivity.getPageMyDoctorIntent();
     	        	startActivity(pageMyDoctorIntent);
+    	        	overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     	        }
-
 
     			break;
     	}

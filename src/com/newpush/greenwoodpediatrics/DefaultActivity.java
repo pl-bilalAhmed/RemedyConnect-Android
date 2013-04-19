@@ -1,14 +1,17 @@
 package com.newpush.greenwoodpediatrics;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 
 import android.os.Bundle;
 import android.annotation.TargetApi;
-import android.content.Intent;
+//import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.method.LinkMovementMethod;
-import android.view.Window;
+//import android.view.Window;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -19,11 +22,35 @@ public class DefaultActivity extends SherlockActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         res = getResources();
-
         extras = getIntent().getExtras();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+    
+    @Override
+    public void onBackPressed() {
+    	super.onBackPressed();
+    	overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // This is called when the Home (Up) button is pressed
+                // in the Action Bar.
+                //Intent parentActivityIntent = new Intent(this, MainActivity.class);
+                //parentActivityIntent.addFlags(
+                //        Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                //        Intent.FLAG_ACTIVITY_NEW_TASK);
+                //startActivity(parentActivityIntent);
+                finish();
+                overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     // This sets the title with the informations stored in the Bundle.
@@ -57,11 +84,6 @@ public class DefaultActivity extends SherlockActivity {
     	TextView titleview = (TextView) findViewById(R.id.titleTextView);
     	titleview.setVisibility(TextView.INVISIBLE);
     	titleview.setHeight(0);
-    }
-
-	public void startDownload() {
-    	Intent downloadActivity = new Intent(this, DownloadActivity.class);
-        startActivityForResult(downloadActivity, 0);
     }
 
 	public void setWebViewTransparent(WebView webview) {

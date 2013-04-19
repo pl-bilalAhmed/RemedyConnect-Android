@@ -37,7 +37,6 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
 		this.startDownload();
 	}
 
-	@Override
 	public void startDownload() {
     	Intent intent = new Intent(this, DownloadService.class);
     	intent.putExtra("receiver", new DownloadReceiver(new Handler()));
