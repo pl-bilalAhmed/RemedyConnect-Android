@@ -9,9 +9,11 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.newpush.greenwoodpediatrics.parser.IsYourChildSickParser;
+import com.newpush.greenwoodpediatrics.parser.MainParser;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -58,78 +60,61 @@ public class DownloadService extends IntentService {
         }
         else {
         	receiver.send(NETWORK_AVAILABLE, null);
+        	HashMap<String, String> files = new HashMap<String, String>();
+        	HashMap<String, String> newFiles = new HashMap<String, String>();
+        	files.put("index.xml", Data.FEED_ROOT);
             try {
             	String dir = this.prepareDirectory();
-            	int totalLength = 0;
-            	long total = 0;
-            	HashMap<String, String> files = new HashMap<String, String>(Data.dataFiles);
-
-            	for (Map.Entry<String, String> fileData : Data.preloadDataFiles.entrySet()) {
-            		URL url = new URL(fileData.getValue());
-            		URLConnection connection = url.openConnection();
-            		connection.connect();
-            		totalLength += connection.getContentLength();
-
-            		/*
-            		 * We have to handle a quite special case here.
-            		 * In the IYCS feed there're sub-feeds to download. Of course
-            		 * we don't know their number so we have to download and parse
-            		 * that feed first.
-            		 */
-            		if (fileData.getKey() == "iycs.xml") {
-                        // download the file
-                        InputStream input = new BufferedInputStream(url.openStream());
-                        OutputStream output = new FileOutputStream(dir + fileData.getKey());
-                        byte data[] = new byte[1024];
-                        int count;
-                        while ((count = input.read(data)) != -1) {
-                            total += count;
-                            // publishing the progress....
-                            resultData.putInt("progress" ,(int) (total * 100 / totalLength));
-                            receiver.send(UPDATE_PROGRESS, resultData);
-                            output.write(data, 0, count);
-                        }
-                        output.flush();
-                        output.close();
-                        input.close();
-
-                        IsYourChildSickParser parser = new IsYourChildSickParser(this);
-                        HashMap<String, String> iycs_extra_files = parser.getSubFeeds();
-                        files.putAll(iycs_extra_files);
-            		}
-            	}
-            	files.putAll(Data.dataFiles);
-
-            	for (Map.Entry<String, String> fileData : files.entrySet()) {
-            		URL url = new URL(fileData.getValue());
-            		URLConnection connection = url.openConnection();
-            		connection.connect();
-            		totalLength += connection.getContentLength();
-            	}
-
-            	resultData.putInt("progress" ,(int) (total * 100 / totalLength));
-            	receiver.send(SWITCH_TO_DETERMINATE, resultData);
-
-            	for (Map.Entry<String, String> fileData : files.entrySet()) {
-            		URL url = new URL(fileData.getValue());
-            		URLConnection connection = url.openConnection();
-            		connection.connect();
-                    // download the file
-                    InputStream input = new BufferedInputStream(url.openStream());
-                    OutputStream output = new FileOutputStream(dir + fileData.getKey());
-                    byte data[] = new byte[1024];
-                    int count;
-                    while ((count = input.read(data)) != -1) {
-                        total += count;
-                        // publishing the progress....
-                        resultData.putInt("progress" ,(int) (total * 100 / totalLength));
-                        receiver.send(UPDATE_PROGRESS, resultData);
-                        output.write(data, 0, count);
-                    }
-                    output.flush();
-                    output.close();
-                    input.close();
-            	}
+            	int startSize = 0;
+            	int endSize = 0;
+            	do {
+            		startSize = files.size();
+	            	int totalLength = 0;
+	            	long total = 0;            	
+	            	
+	            	for (Map.Entry<String, String> fileData : files.entrySet()) {
+	            		URL url = new URL(fileData.getValue());
+	            		URLConnection connection = url.openConnection();
+	            		connection.connect();
+	            		totalLength += connection.getContentLength();
+	            	}
+	
+	            	resultData.putInt("progress" ,(int) (total * 100 / totalLength));
+	            	receiver.send(SWITCH_TO_DETERMINATE, resultData);
+	            	
+	            	for (Map.Entry<String, String> fileData : files.entrySet()) {
+	            		URL url = new URL(fileData.getValue());
+	            		URLConnection connection = url.openConnection();
+	            		connection.connect();
+	                    // download the file
+	                    InputStream input = new BufferedInputStream(url.openStream());
+	                    OutputStream output = new FileOutputStream(dir + fileData.getKey());
+	                    byte data[] = new byte[1024];
+	                    int count;
+	                    while ((count = input.read(data)) != -1) {
+	                        total += count;
+	                        // publishing the progress....
+	                        resultData.putInt("progress" ,(int) (total * 100 / totalLength));
+	                        receiver.send(UPDATE_PROGRESS, resultData);
+	                        output.write(data, 0, count);
+	                    }
+	                    output.flush();
+	                    output.close();
+	                    input.close();
+	                    
+	                    MainParser parser = new MainParser(dir + fileData.getKey());
+	                    String filename;
+	                    if (parser.isMenu()) {
+		                    for (String subFeedURL : parser.getSubfeedURLs()) {
+		                    	filename = subFeedURL.replace(Data.FEED_ROOT, "");
+		                    	newFiles.put(filename, subFeedURL);
+		                    }
+	                    }
+	            	}
+	            	files.putAll(newFiles);
+	            	endSize = files.size();
+	            	newFiles.clear();
+            	} while (startSize != endSize);
 
 
             } catch (IOException e) {

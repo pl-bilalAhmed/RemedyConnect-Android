@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Data {
 	public static final String LINK_BASE = "http://greenwoodpedstest.pediatricweb.com/feed/1B8EC3EB-3101-4C5D-9746-7E877F4A5DF7/";
+	public static final String FEED_ROOT = "http://cms.pediatricweb.com/GreenwoodPediatrics/39/e475e7ac72454096888a2244a299d7df";
 	
 	// List the files which should be downloaded first here. (Only for those which should be parsed on download for further downloads.)
 	public static final Map<String, String> preloadDataFiles = new HashMap<String, String>();

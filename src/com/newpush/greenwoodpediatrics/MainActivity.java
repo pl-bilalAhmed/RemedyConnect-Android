@@ -43,13 +43,13 @@ public class MainActivity extends DefaultActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     	getSupportActionBar().setHomeButtonEnabled(false);
     		
-    	if (DataChecker.isDataAvailable(getApplicationContext())) {
-    		setupMenu();
-    	}
-    	else {
+    	//if (DataChecker.isDataAvailable(getApplicationContext())) {
+    	//	setupMenu();
+    	//}
+    	//else {
         	Intent downloadActivity = new Intent(this, DownloadActivity.class);
             startActivityForResult(downloadActivity, 0);
-    	}
+    	//}
     }
 
     protected void setupMenu() {
