@@ -14,6 +14,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.newpush.greenwoodpediatrics.Data;
+
 public class MainParser {
 	File XMLToParse;
 	Document doc;
@@ -109,5 +111,9 @@ public class MainParser {
 			subfeedURLs.add(menuItem.get("feed"));
 		}
 		return subfeedURLs;
+	}
+	
+	public static String subFeedURLToLocal(String subFeedURL) {
+		return subFeedURL.replace(Data.FEED_ROOT, "");
 	}
 }

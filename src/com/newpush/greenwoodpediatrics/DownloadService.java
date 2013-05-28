@@ -9,11 +9,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-
-import com.newpush.greenwoodpediatrics.parser.IsYourChildSickParser;
-import com.newpush.greenwoodpediatrics.parser.MainParser;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -22,6 +18,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+
+import com.newpush.greenwoodpediatrics.parser.MainParser;
 
 public class DownloadService extends IntentService {
 	public static final int UPDATE_PROGRESS = 1;
@@ -32,7 +30,7 @@ public class DownloadService extends IntentService {
 	public DownloadService() {
 		super("DownloadService");
 	}
-
+	
 	protected String prepareDirectory() {
 		String testdir = this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";
 		File testfolder = new File(testdir);

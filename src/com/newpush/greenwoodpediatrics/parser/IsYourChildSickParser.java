@@ -57,8 +57,8 @@ public class IsYourChildSickParser extends DefaultParser {
 		Elements subfeeds = doc.select("nextfeed");
 		for (Element subfeed : subfeeds) {
 			String feed_id = subfeed.text();
-			String iycs_root = Data.preloadDataFiles.get("iycs.xml");
-			subfeed_urls.put("iycs-" + feed_id + ".xml", iycs_root + "/" + feed_id);
+			//String iycs_root = Data.preloadDataFiles.get("iycs.xml");
+			//subfeed_urls.put("iycs-" + feed_id + ".xml", iycs_root + "/" + feed_id);
 		}
 		return subfeed_urls;
 	}

@@ -96,4 +96,9 @@ public class DefaultActivity extends SherlockActivity {
 			webview.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
 		}
 	}
+	
+	public String getDataDirectory() {
+		return this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";	
+	}
 }
+	
