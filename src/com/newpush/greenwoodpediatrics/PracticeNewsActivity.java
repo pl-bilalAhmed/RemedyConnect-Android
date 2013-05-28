@@ -45,6 +45,7 @@ public class PracticeNewsActivity extends DefaultActivity {
     			Intent newsItemIntent = new Intent(getBaseContext(), PracticeNewsItemActivity.class);
     			newsItemIntent.putExtra("which", position-1); // -1 because of the header
     			startActivity(newsItemIntent);
+    			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     		}
     	});
     }

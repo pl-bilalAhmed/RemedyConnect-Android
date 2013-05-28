@@ -15,16 +15,19 @@
     <string name="title_activity_office_info">Office Info</string>
     <string name="title_activity_office_info_item">Office Info item</string>
     <string name="title_activity_practice_news">Practice News</string>
+    <string name="title_activity_office_info_hours_location">Office Info, Hours &amp; Location</string>
 
     <string-array name="MainMenuItems">
-        <item>Is Your Child Sick?</item>
-        <item>Office Info</item>
-        <item>Office Location / Hours</item>
+        <item>Illness &amp; Symptoms</item>
+        <item>Office Info, Hours, Location</item>
         <item>Practice News</item>
         <item>Page My Doctor</item>
     </string-array>
+    <string-array name="OfficeInfoLocationHoursMenuItems">
+        <item>Office Info</item>
+        <item>Office Hours &amp; Location</item>
+    </string-array>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_practice_news_item">Practice News Item</string>
     <string name="update">Update database</string>
     <string name="news_item_release_date_label">Released on:</string>

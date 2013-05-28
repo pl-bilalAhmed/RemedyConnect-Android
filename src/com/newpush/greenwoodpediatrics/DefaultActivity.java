@@ -1,51 +1,55 @@
 package com.newpush.greenwoodpediatrics;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.os.Bundle;
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Intent;
+//import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.method.LinkMovementMethod;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
+//import android.view.Window;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-public class DefaultActivity extends Activity {
+public class DefaultActivity extends SherlockActivity {
 	protected Bundle extras;
 	protected Resources res;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         res = getResources();
-
         extras = getIntent().getExtras();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
-
+    
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_default, menu);
-        return true;
+    public void onBackPressed() {
+    	super.onBackPressed();
+    	overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_update:
-                startDownload();
+            case android.R.id.home:
+                // This is called when the Home (Up) button is pressed
+                // in the Action Bar.
+                //Intent parentActivityIntent = new Intent(this, MainActivity.class);
+                //parentActivityIntent.addFlags(
+                //        Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                //        Intent.FLAG_ACTIVITY_NEW_TASK);
+                //startActivity(parentActivityIntent);
+                finish();
+                overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
                 return true;
-            case R.id.menu_item_about:
-            	Intent about = new Intent(this, AboutActivity.class);
-                startActivity(about);
-            	return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 
     // This sets the title with the informations stored in the Bundle.
@@ -81,11 +85,6 @@ public class DefaultActivity extends Activity {
     	titleview.setHeight(0);
     }
 
-	public void startDownload() {
-    	Intent downloadActivity = new Intent(this, DownloadActivity.class);
-        startActivityForResult(downloadActivity, 0);
-    }
-
 	public void setWebViewTransparent(WebView webview) {
 		webview.setBackgroundColor(Color.TRANSPARENT);
 	}
@@ -97,4 +96,9 @@ public class DefaultActivity extends Activity {
 			webview.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
 		}
 	}
+	
+	public String getDataDirectory() {
+		return this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";	
+	}
 }
+	

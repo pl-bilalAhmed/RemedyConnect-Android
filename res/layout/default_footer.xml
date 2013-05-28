@@ -7,18 +7,18 @@
         android:id="@+id/footerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:linksClickable="true"
         android:fontFamily="serif"
+        android:linksClickable="true"
+        android:paddingBottom="20dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:paddingBottom="20dp"
         android:text="@string/footer"
-        android:textColorLink="@color/textLink"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="12dp"
+        android:textColorLink="@color/textLink"
+        android:textSize="12sp"
         android:textStyle="bold" />
 
 </RelativeLayout>

@@ -1,10 +1,10 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="appTheme" parent="android:Theme.Light">
-        <item name="android:windowBackground">@drawable/background_texture</item>
+    <style name="appTheme" parent="Theme.Sherlock.Light.DarkActionBar">
+        <!--  <item name="android:windowBackground">@drawable/background_texture</item>
         <item name="android:colorBackground">@color/transparent</item>
         <item name="android:typeface">serif</item>
         <item name="android:textColor">@color/textDark</item>
-        <item name="android:listViewStyle">@style/ListView</item>
+        <item name="android:listViewStyle">@style/ListView</item> -->
     </style>
     
     <style name="ListView" parent="@android:style/Widget.ListView">

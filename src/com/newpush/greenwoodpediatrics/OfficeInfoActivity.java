@@ -40,30 +40,31 @@ public class OfficeInfoActivity extends DefaultActivity {
         new ParseOffices().execute();
     }
 
-    protected void attachInfoItemLinks() {
+    protected void attachInfoItemLinks(final ArrayList<StringItemWithIndex> mapping) {
     	officeInfoList.setOnItemClickListener(new OnItemClickListener() {
     		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     			Intent infoItemIntent = new Intent(getBaseContext(), OfficeInfoItemActivity.class);
-    			infoItemIntent.putExtra("which", position-1); // -1 because of the header
+    			infoItemIntent.putExtra("which", mapping.get(position-1).index); // -1 because of the header
     			startActivity(infoItemIntent);
+    			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     		}
     	});
     }
 
-    private class ParseOffices extends AsyncTask<Void, Void, ArrayList<String>> {
+    private class ParseOffices extends AsyncTask<Void, Void, ArrayList<StringItemWithIndex>> {
     	@Override
-		protected ArrayList<String> doInBackground(Void... params) {
+		protected ArrayList<StringItemWithIndex> doInBackground(Void... params) {
             OfficeInfoParser parser = new OfficeInfoParser(getApplicationContext());
-            ArrayList<String> titles = parser.getTitles();
+            ArrayList<StringItemWithIndex> titles = parser.getTitles();
 			return titles;
     	}
 
     	@Override
-		protected void onPostExecute(ArrayList<String> result) {
-    		for (String s : result) {
-    			officeInfoAdapter.add(s);
+		protected void onPostExecute(ArrayList<StringItemWithIndex> result) {
+    		for (StringItemWithIndex s : result) {
+    			officeInfoAdapter.add(s.value);
     		}
-    		attachInfoItemLinks();
+    		attachInfoItemLinks(result);
     	}
     }
 }
