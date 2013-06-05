@@ -48,80 +48,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />
         </activity>
-        
         <activity
             android:name="com.newpush.greenwoodpediatrics.ArticleSetActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
-        </activity>
-        
-        <!--  <activity
-            android:name="com.newpush.greenwoodpediatrics.ArticleSetItemActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.ArticleSetActivity" />
-        </activity> -->
-        
-        <activity
-            android:name="com.newpush.greenwoodpediatrics.OfficeActivity"
-            android:label="@string/title_activity_office_info_hours_location" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
-        </activity>
-        <activity
-            android:name="com.newpush.greenwoodpediatrics.OfficeInfoActivity"
-            android:label="@string/title_activity_office_info" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.OfficeActivity" />
-        </activity>
-        <activity
-            android:name="com.newpush.greenwoodpediatrics.OfficeInfoItemActivity"
-            android:label="@string/title_activity_office_info_item" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.OfficeInfoActivity" />
-        </activity>
-        <activity
-            android:name=".PracticeNewsActivity"
-            android:label="@string/title_activity_practice_news" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
-        </activity>
-        <activity
-            android:name=".PracticeNewsItemActivity"
-            android:label="@string/title_activity_practice_news_item" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
-        </activity>
-        <activity
-            android:name=".OfficeLocationActivity"
-            android:label="@string/title_activity_location" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.OfficeActivity" />
-        </activity>
-        <activity
-            android:name=".IsYourChildSickActivity"
-            android:label="@string/title_activity_is_your_child_sick" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
-        </activity>
-        <activity
-            android:name=".IsYourChildSickItemActivity"
-            android:label="@string/title_activity_is_your_child_sick_item" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
-        </activity>
-        <activity
-            android:name=".IsYourChildSickArticleActivity"
-            android:label="@string/title_activity_is_your_child_sick_article" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />
@@ -129,13 +57,6 @@
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
-        </activity>
-        <activity
-            android:name=".DefaultActivity"
-            android:label="@string/title_activity_default" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />
