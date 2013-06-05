@@ -25,7 +25,7 @@ public class MainParser {
 		try {
 			doc = Jsoup.parse(XMLToParse, "UTF-8", "");
 		} catch (IOException e) {
-	
+			throw new ParserException("Parsing error!");
 		}
 	}
 	
@@ -55,15 +55,18 @@ public class MainParser {
 	// Format checkers
 	
 	public Boolean isPage() {
-		return doc.select("mobilefeed PageText").size() > 0;
+		Elements items = doc.select("mobilefeed PageText"); 
+		return items != null && items.size() > 0;
 	}
 	
 	public Boolean isMenu() {
-		return doc.select("mobilefeed buttons Button").size() > 0;
+		Elements items = doc.select("mobilefeed buttons Button");
+		return items != null && items.size() > 0;
 	}
 	
 	public Boolean isArticleSet() {
-		return doc.select("mobilefeed articles article").size() > 0;
+		Elements items = doc.select("mobilefeed articles article");
+		return items != null && items.size() > 0;
 	}
 	
 	// Getters
@@ -102,6 +105,20 @@ public class MainParser {
 			articleSet.add(article);
 		}
 		return articleSet;
+	}
+	
+	public ArrayList<String> getArticleSetTitles() {
+		ArrayList<String> titles = new ArrayList<String>();
+		Elements mobileFeed = doc.select("mobilefeed articles");
+		for (Element articleElement : mobileFeed.select("Article")) {
+			titles.add(articleElement.select("articleTitle").text());
+		}
+		return titles;
+	}
+	
+	public String getArticleFromSet(Integer index) {
+		Elements article = doc.select("mobilefeed articles Article:eq(" + index.toString() + ") articleText");
+		return article.text();
 	}
 	
 	public ArrayList<String> getSubfeedURLs() {

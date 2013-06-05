@@ -42,7 +42,28 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />
         </activity>
-		<activity
+        <activity
+            android:name="com.newpush.greenwoodpediatrics.PageActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+        </activity>
+        
+        <activity
+            android:name="com.newpush.greenwoodpediatrics.ArticleSetActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+        </activity>
+        
+        <!--  <activity
+            android:name="com.newpush.greenwoodpediatrics.ArticleSetItemActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.ArticleSetActivity" />
+        </activity> -->
+        
+        <activity
             android:name="com.newpush.greenwoodpediatrics.OfficeActivity"
             android:label="@string/title_activity_office_info_hours_location" >
             <meta-data
