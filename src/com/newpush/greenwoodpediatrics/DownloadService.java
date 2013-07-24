@@ -61,7 +61,7 @@ public class DownloadService extends IntentService {
         	ArrayList<String> files = new ArrayList<String>();
         	ArrayList<String> feeds = new ArrayList<String>();
         	files.add("index.xml");
-        	feeds.add(Data.FEED_ROOT);
+        	feeds.add(Data.GetFeedRoot());
             try {
             	String dir = this.prepareDirectory();
             	int totalLength = 0;
@@ -97,7 +97,7 @@ public class DownloadService extends IntentService {
                     String filename;
                     if (parser.isMenu()) {
 	                    for (String subFeedURL : parser.getSubfeedURLs()) {
-	                    	filename = subFeedURL.replace(Data.FEED_ROOT, "");
+	                    	filename = MainParser.subFeedURLToLocal(subFeedURL);
 	                    	files.add(filename);
 	                    	feeds.add(subFeedURL);
 	                    }

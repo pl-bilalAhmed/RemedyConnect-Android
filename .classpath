@@ -9,6 +9,5 @@
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/Authorized User/Documents/NewPush/Greenwood Pediatrics/Android/Libraries/jsoup/jsoup-1.7.2-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/actionbarsherlock"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

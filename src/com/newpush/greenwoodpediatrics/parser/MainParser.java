@@ -131,6 +131,6 @@ public class MainParser {
 	}
 	
 	public static String subFeedURLToLocal(String subFeedURL) {
-		return subFeedURL.replace(Data.FEED_ROOT, "");
+		return subFeedURL.replaceAll("(?i)" + Data.GetFeedRoot() + "/", "");
 	}
 }

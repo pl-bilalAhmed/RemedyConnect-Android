@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Greenwood Pediatrics</string>
@@ -44,5 +45,8 @@
     <string name="title_activity_page_my_doctor">Page My Doctor</string>
     <string name="page_my_doctor_intro">We use a third-party service, Page My Doctor, so you can page the on-call provider with an urgent question after hours. First time users will register first. It’s simple! Please be brief and specific. Pagers and cell phones won’t take long messages easily.</string>
     <string name="page_my_doctor_open">Open Page My Doctor</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="logo_description">Logo</string>
 
 </resources>

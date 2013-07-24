@@ -66,6 +66,7 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
             if (resultCode == DownloadService.DOWNLOAD_FAILED) {
             	progress.dismiss();
             	Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
+            	setResult(Activity.RESULT_FIRST_USER);
             }
 
             if (resultCode == DownloadService.SWITCH_TO_DETERMINATE) {

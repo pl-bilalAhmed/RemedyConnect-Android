@@ -56,4 +56,8 @@ public class MainViewController {
 	public static void FireActivity(DefaultActivity activity, String parsePoint) {
 		FireActivity(activity, parsePoint, activity.getString(R.string.welcome));
 	}
+	
+	public static void FireRootActivity(DefaultActivity activity) {
+		FireActivity(activity, "index.xml");
+	}
 }
