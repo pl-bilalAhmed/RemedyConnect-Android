@@ -17,6 +17,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.newpush.greenwoodpediatrics.downloader.DownloadStatus;
 import com.newpush.greenwoodpediatrics.downloader.RootDownloadService;
+import com.newpush.greenwoodpediatrics.parser.MainParser;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PracticeSearchActivity extends DefaultActivity implements OnClickListener {
     ProgressDialog progress;
@@ -31,7 +35,6 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
         progress.setProgress(0);
         progress.setMax(100);
         progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-
 
         Button startSearchByName = (Button)this.findViewById(R.id.practiceSearchStartByName);
         Button startSearchByLocation = (Button)this.findViewById(R.id.practiceSearchStartByLocation);
@@ -54,12 +57,9 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     public void startFetchingByName() {
         EditText practiceNameView = (EditText)this.findViewById(R.id.practiceSearchEdit);
         String practiceName = practiceNameView.getText().toString();
-        Toast.makeText(getApplicationContext(),
-                "Starting to look for \"" + practiceName + "\"",
-                Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(this, RootDownloadService.class);
         intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+        intent.putExtra("practiceName", practiceName);
         startService(intent);
     }
 
@@ -111,12 +111,11 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
             if (resultCode == DownloadStatus.UPDATE_PROGRESS) {
                 int status = resultData.getInt("progress");
                 progress.setProgress(status);
-                if (status == 100) {
-                    progress.dismiss();
-                    setResult(Activity.RESULT_OK);
-                    Intent intent = new Intent(PracticeSearchActivity.this, SelectPracticeActivity.class);
-                    startActivity(intent);
-                }
+            }
+            if (resultCode == DownloadStatus.DOWNLOAD_FINISHED) {
+                progress.dismiss();
+                setResult(Activity.RESULT_OK);
+                startParsingPractices();
             }
             if (resultCode == DownloadStatus.DOWNLOAD_FAILED) {
                 progress.dismiss();
@@ -128,5 +127,16 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                 progress.setIndeterminate(false);
             }
         }
+    }
+
+    protected void startParsingPractices() {
+        // @TODO Should figure out something better instead of this, huh?
+        MainParser parser = new MainParser(this.getFilesDir().getAbsolutePath() + "/root.xml");
+        Intent intent = new Intent(PracticeSearchActivity.this, SelectPracticeActivity.class);
+        if (parser.isRoot()) {
+            ArrayList<HashMap<String, String>> practices = parser.getRootPractices();
+            intent.putExtra("practices", practices);
+        }
+        startActivity(intent);
     }
 }

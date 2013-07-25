@@ -28,7 +28,7 @@ public class RootDownloadService extends AbstractDownloadService {
             ArrayList<String> files = new ArrayList<String>();
             ArrayList<String> feeds = new ArrayList<String>();
             files.add("root.xml");
-            feeds.add(Data.ROOT);
+            feeds.add(Data.searchRootForPracticeName(intent.getStringExtra("practiceName")));
             try {
                 String dir = this.prepareDirectory();
                 int totalLength = 0;
@@ -63,14 +63,13 @@ public class RootDownloadService extends AbstractDownloadService {
                     files.remove(0);
                     feeds.remove(0);
                 }
+                resultData.putInt("progress", 100);
+                receiver.send(DownloadStatus.DOWNLOAD_FINISHED, resultData);
             } catch (IOException e) {
                 resultData.putInt("progress", 0);
                 receiver.send(DownloadStatus.DOWNLOAD_FAILED, resultData);
             }
         }
-
-        resultData.putInt("progress", 100);
-        receiver.send(DownloadStatus.UPDATE_PROGRESS, resultData);
+        this.stopSelf();
     }
-
 }

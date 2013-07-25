@@ -9,4 +9,8 @@ public class Data {
     public static final String GetFeedRoot() {
         return FEED_ROOT;
     }
+
+    public static final String searchRootForPracticeName(String practiceName) {
+        return ROOT + "?search=" + practiceName;
+    }
 }

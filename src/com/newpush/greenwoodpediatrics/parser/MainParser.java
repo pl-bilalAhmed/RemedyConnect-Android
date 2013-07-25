@@ -136,4 +136,16 @@ public class MainParser {
     public static String subFeedURLToLocal(String subFeedURL) {
         return subFeedURL.replaceAll("(?i)" + Data.GetFeedRoot() + "/", "");
     }
+
+    public ArrayList<HashMap<String, String>> getRootPractices() {
+        ArrayList<HashMap<String, String>> rootPractices = new ArrayList<HashMap<String, String>>();
+        Elements mobileFeed = doc.select("mobilefeed practices");
+        for (Element practiceElement : mobileFeed.select("Practice")) {
+            HashMap<String, String> practice = new HashMap<String, String>();
+            practice.put("name", practiceElement.select("PracticeName").text());
+            practice.put("feed", practiceElement.select("PracticeFeed").text());
+            rootPractices.add(practice);
+        }
+        return rootPractices;
+    }
 }
