@@ -1,4 +1,4 @@
-package com.newpush.greenwoodpediatrics;
+package com.newpush.greenwoodpediatrics.downloader;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -19,33 +19,13 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
 
+import com.newpush.greenwoodpediatrics.Data;
 import com.newpush.greenwoodpediatrics.parser.MainParser;
 
-public class DownloadService extends IntentService {
-    public static final int UPDATE_PROGRESS = 1;
-    public static final int DOWNLOAD_FAILED = 2;
-    public static final int NETWORK_AVAILABLE = 3;
-    public static final int SWITCH_TO_DETERMINATE = 4;
+public class ContentDownloadService extends AbstractDownloadService {
 
-    public DownloadService() {
-        super("DownloadService");
-    }
-
-    protected String prepareDirectory() {
-        String testdir = this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";
-        File testfolder = new File(testdir);
-        testfolder.mkdir();
-        return testdir;
-    }
-
-    public boolean isOnline() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-        return false;
+    public ContentDownloadService() {
+        super("ContentDownloadService");
     }
 
     @Override
@@ -54,9 +34,9 @@ public class DownloadService extends IntentService {
         Bundle resultData = new Bundle();
         if (!this.isOnline()) {
             resultData.putInt("progress", 0);
-            receiver.send(DOWNLOAD_FAILED, resultData);
+            receiver.send(DownloadStatus.DOWNLOAD_FAILED, resultData);
         } else {
-            receiver.send(NETWORK_AVAILABLE, null);
+            receiver.send(DownloadStatus.NETWORK_AVAILABLE, null);
             ArrayList<String> files = new ArrayList<String>();
             ArrayList<String> feeds = new ArrayList<String>();
             files.add("index.xml");
@@ -67,7 +47,7 @@ public class DownloadService extends IntentService {
                 long total = 0;
 
                 resultData.putInt("progress", 0);
-                receiver.send(SWITCH_TO_DETERMINATE, resultData);
+                receiver.send(DownloadStatus.SWITCH_TO_DETERMINATE, resultData);
 
                 while (!files.isEmpty()) {
                     URL url = new URL(feeds.get(0));
@@ -85,7 +65,7 @@ public class DownloadService extends IntentService {
                         total += count;
                         // publishing the progress....
                         resultData.putInt("progress", (int) (total * 100 / totalLength));
-                        receiver.send(UPDATE_PROGRESS, resultData);
+                        receiver.send(DownloadStatus.UPDATE_PROGRESS, resultData);
                         output.write(data, 0, count);
                     }
                     output.flush();
@@ -101,18 +81,17 @@ public class DownloadService extends IntentService {
                             feeds.add(subFeedURL);
                         }
                     }
-                    Log.i("testing", files.get(0));
                     files.remove(0);
                     feeds.remove(0);
                 }
             } catch (IOException e) {
                 resultData.putInt("progress", 0);
-                receiver.send(DOWNLOAD_FAILED, resultData);
+                receiver.send(DownloadStatus.DOWNLOAD_FAILED, resultData);
             }
         }
 
         resultData.putInt("progress", 100);
-        receiver.send(UPDATE_PROGRESS, resultData);
+        receiver.send(DownloadStatus.UPDATE_PROGRESS, resultData);
     }
 
 }
