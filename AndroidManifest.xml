@@ -1,76 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.newpush.greenwoodpediatrics"
-    android:versionCode="8"
-    android:versionName="1.0" >
+          package="com.newpush.greenwoodpediatrics"
+          android:versionCode="8"
+          android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="17"/>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/appTheme" >
+        android:theme="@style/appTheme">
         <activity
             android:name="com.newpush.greenwoodpediatrics.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main">
         </activity>
         <activity
             android:name="com.newpush.greenwoodpediatrics.SplashActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Splash"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        
+
         <activity
             android:name="com.newpush.greenwoodpediatrics.DownloadActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_download" >
+            android:label="@string/title_activity_download"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
         </activity>
 
-        <service android:name=".downloader.ContentDownloadService" />
+        <service android:name=".downloader.ContentDownloadService"/>
         <service android:name=".downloader.RootDownloadService"/>
-        <service android:name=".downloader.AbstractDownloadService"/>
 
-        <activity android:name="com.newpush.greenwoodpediatrics.MenuActivity" >
+        <activity android:name="com.newpush.greenwoodpediatrics.MenuActivity"
+                  android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
         </activity>
-        <activity android:name="com.newpush.greenwoodpediatrics.PageActivity" >
+        <activity android:name="com.newpush.greenwoodpediatrics.PageActivity"
+                  android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
         </activity>
-        <activity android:name="com.newpush.greenwoodpediatrics.ArticleSetActivity" >
+        <activity android:name="com.newpush.greenwoodpediatrics.ArticleSetActivity"
+                  android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
         </activity>
         <activity
             android:name="com.newpush.greenwoodpediatrics.PageMyDoctorActivity"
-            android:label="@string/title_activity_page_my_doctor" >
+            android:label="@string/title_activity_page_my_doctor"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
+                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
         </activity>
         <activity
             android:name=".PracticeSearchActivity"
-            android:label="Search your practice"/>
+            android:label="Search your practice"
+            android:parentActivityName=".MainActivity"
+            android:noHistory="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
+        </activity>
+        <activity android:name=".SelectPracticeActivity"
+                  android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.newpush.greenwoodpediatrics.PracticeSearchActivity"/>
+        </activity>
     </application>
 
 </manifest>

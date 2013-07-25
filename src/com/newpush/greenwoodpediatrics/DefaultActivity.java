@@ -27,7 +27,7 @@ public class DefaultActivity extends SherlockActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
-
+    /*
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -45,12 +45,12 @@ public class DefaultActivity extends SherlockActivity {
                 //        Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 //        Intent.FLAG_ACTIVITY_NEW_TASK);
                 //startActivity(parentActivityIntent);
-                finish();
+                //finish();
                 overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     // This sets the title with the informations stored in the Bundle.
     // WARNING! Fire this only after the header has been inflated or you will
@@ -76,7 +76,9 @@ public class DefaultActivity extends SherlockActivity {
     public void setTitle(CharSequence title) {
         super.setTitle(title);
         TextView titleview = (TextView) findViewById(R.id.titleTextView);
-        titleview.setText(title);
+        if (titleview != null) {
+            titleview.setText(title);
+        }
     }
 
     public void suppressTitle() {

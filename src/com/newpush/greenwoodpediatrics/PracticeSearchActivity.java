@@ -113,8 +113,9 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                 progress.setProgress(status);
                 if (status == 100) {
                     progress.dismiss();
-                    setResult(Activity.RESULT_OK);
-                    finish();
+                    //setResult(Activity.RESULT_OK);
+                    Intent intent = new Intent(PracticeSearchActivity.this, SelectPracticeActivity.class);
+                    startActivity(intent);
                 }
             }
             if (resultCode == DownloadStatus.DOWNLOAD_FAILED) {

@@ -48,5 +48,6 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="logo_description">Logo</string>
+    <string name="title_select_practice">Select your practice</string>
 
 </resources>
