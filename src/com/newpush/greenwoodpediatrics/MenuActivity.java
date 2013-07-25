@@ -40,16 +40,7 @@ public class MenuActivity extends DefaultActivity {
         menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         menu.setAdapter(menuadapter);
 
-    	/*
-        File file = new File("/storage/sdcard0/mountain.png");
-        if (file.exists()) {
-            Drawable bgDrawable = Drawable.createFromPath(file.getAbsolutePath());
-            ImageView image = (ImageView) findViewById(R.id.logo);
-            if (image != null) {
-            	image.setImageDrawable(bgDrawable);	
-            }  
-        }
-        */
+        Skin.applyThemeLogo(this);
 
         setTitle(extras.getString("title"));
         setupMenu();

@@ -34,4 +34,13 @@ public class Skin {
             splashView.setImageBitmap(splashBitmap);
         }
     }
+    
+    public static void applyThemeLogo(Activity activityWithLogo) {
+        File logoFile = new File(getSkinDirectoryPath() + "mountain.png");
+        if (logoFile.exists()) {
+            Bitmap logoBitmap = BitmapFactory.decodeFile(logoFile.getAbsolutePath());
+            ImageView logoView = (ImageView) activityWithLogo.findViewById(R.id.logo);
+            logoView.setImageBitmap(logoBitmap);
+        }
+    }
 }

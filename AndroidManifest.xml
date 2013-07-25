@@ -60,13 +60,6 @@
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />
         </activity>
         <activity
-            android:name="com.newpush.greenwoodpediatrics.AboutActivity"
-            android:label="@string/title_activity_about" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity" />
-        </activity>
-        <activity
             android:name="com.newpush.greenwoodpediatrics.PageMyDoctorActivity"
             android:label="@string/title_activity_page_my_doctor" >
             <meta-data
