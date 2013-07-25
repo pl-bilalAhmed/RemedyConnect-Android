@@ -1,14 +1,9 @@
 package com.newpush.greenwoodpediatrics.downloader;
 
-import android.app.IntentService;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.os.ResultReceiver;
-import android.util.Log;
 import com.newpush.greenwoodpediatrics.Data;
-import com.newpush.greenwoodpediatrics.parser.MainParser;
 
 import java.io.*;
 import java.net.URL;

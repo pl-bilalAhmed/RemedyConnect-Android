@@ -1,26 +1,15 @@
 package com.newpush.greenwoodpediatrics.downloader;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.ResultReceiver;
+import com.newpush.greenwoodpediatrics.Data;
+import com.newpush.greenwoodpediatrics.parser.MainParser;
+
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-
-import android.app.IntentService;
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Bundle;
-import android.os.ResultReceiver;
-import android.util.Log;
-
-import com.newpush.greenwoodpediatrics.Data;
-import com.newpush.greenwoodpediatrics.parser.MainParser;
 
 public class ContentDownloadService extends AbstractDownloadService {
 

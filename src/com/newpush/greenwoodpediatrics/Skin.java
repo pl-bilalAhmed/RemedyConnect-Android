@@ -1,12 +1,12 @@
 package com.newpush.greenwoodpediatrics;
 
-import java.io.File;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
+
+import java.io.File;
 
 public class Skin {
     public static String getSkinDirectoryPath() {

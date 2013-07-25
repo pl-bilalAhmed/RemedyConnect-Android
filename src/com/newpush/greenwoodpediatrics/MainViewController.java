@@ -1,11 +1,10 @@
 package com.newpush.greenwoodpediatrics;
 
+import android.content.Intent;
+import com.newpush.greenwoodpediatrics.parser.MainParser;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import android.content.Intent;
-
-import com.newpush.greenwoodpediatrics.parser.MainParser;
 
 public class MainViewController {
     public static void FireActivity(DefaultActivity activity, String parsePoint, String title) {

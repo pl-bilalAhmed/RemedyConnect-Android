@@ -1,10 +1,10 @@
 package com.newpush.greenwoodpediatrics;
 
+import android.content.Context;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Hashtable;
-
-import android.content.Context;
 
 public class MarkupGenerator {
     public static String formatTitle(String title) {

@@ -1,9 +1,5 @@
 package com.newpush.greenwoodpediatrics;
 
-import java.io.File;
-import java.util.ArrayList;
-
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +7,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.newpush.greenwoodpediatrics.R.id;
 import com.newpush.greenwoodpediatrics.parser.MainParser;
+
+import java.util.ArrayList;
 
 public class MenuActivity extends DefaultActivity {
     protected ArrayAdapter<String> menuadapter;

@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.newpush.greenwoodpediatrics.parser.MainParser;
 
 public class ArticleSetActivity extends DefaultActivity {

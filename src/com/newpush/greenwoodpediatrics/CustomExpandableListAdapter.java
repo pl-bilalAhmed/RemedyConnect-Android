@@ -1,7 +1,5 @@
 package com.newpush.greenwoodpediatrics;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,6 +8,8 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     public ArrayList<String> groups;

@@ -1,5 +1,11 @@
 package com.newpush.greenwoodpediatrics.parser;
 
+import com.newpush.greenwoodpediatrics.Data;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -8,13 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import com.newpush.greenwoodpediatrics.Data;
 
 public class MainParser {
     File XMLToParse;

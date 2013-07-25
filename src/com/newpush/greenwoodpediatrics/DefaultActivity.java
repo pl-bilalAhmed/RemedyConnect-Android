@@ -1,18 +1,18 @@
 package com.newpush.greenwoodpediatrics;
 
+import android.annotation.TargetApi;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.webkit.WebView;
+import android.widget.TextView;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 
-import android.os.Bundle;
-import android.annotation.TargetApi;
 //import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.text.method.LinkMovementMethod;
 //import android.view.Window;
-import android.webkit.WebView;
-import android.widget.TextView;
 
 public class DefaultActivity extends SherlockActivity {
     protected Bundle extras;

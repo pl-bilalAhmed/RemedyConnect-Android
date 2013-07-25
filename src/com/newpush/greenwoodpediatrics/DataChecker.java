@@ -1,8 +1,8 @@
 package com.newpush.greenwoodpediatrics;
 
-import java.io.File;
-
 import android.content.Context;
+
+import java.io.File;
 
 public class DataChecker {
     public static boolean isDataAvailable(Context applicationContext) {
