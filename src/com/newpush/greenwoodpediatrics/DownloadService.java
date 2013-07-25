@@ -22,60 +22,59 @@ import android.util.Log;
 import com.newpush.greenwoodpediatrics.parser.MainParser;
 
 public class DownloadService extends IntentService {
-	public static final int UPDATE_PROGRESS = 1;
-	public static final int DOWNLOAD_FAILED = 2;
-	public static final int NETWORK_AVAILABLE = 3;
-	public static final int SWITCH_TO_DETERMINATE = 4;
+    public static final int UPDATE_PROGRESS = 1;
+    public static final int DOWNLOAD_FAILED = 2;
+    public static final int NETWORK_AVAILABLE = 3;
+    public static final int SWITCH_TO_DETERMINATE = 4;
 
-	public DownloadService() {
-		super("DownloadService");
-	}
-	
-	protected String prepareDirectory() {
-		String testdir = this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";
-		File testfolder = new File(testdir);
-		testfolder.mkdir();
-		return testdir;
-	}
+    public DownloadService() {
+        super("DownloadService");
+    }
 
-	public boolean isOnline() {
-	    ConnectivityManager cm =
-	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-	        return true;
-	    }
-	    return false;
-	}
+    protected String prepareDirectory() {
+        String testdir = this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";
+        File testfolder = new File(testdir);
+        testfolder.mkdir();
+        return testdir;
+    }
 
-	@Override
-	protected void onHandleIntent(Intent intent) {
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
         ResultReceiver receiver = (ResultReceiver) intent.getParcelableExtra("receiver");
         Bundle resultData = new Bundle();
         if (!this.isOnline()) {
             resultData.putInt("progress", 0);
             receiver.send(DOWNLOAD_FAILED, resultData);
-        }
-        else {
-        	receiver.send(NETWORK_AVAILABLE, null);
-        	ArrayList<String> files = new ArrayList<String>();
-        	ArrayList<String> feeds = new ArrayList<String>();
-        	files.add("index.xml");
-        	feeds.add(Data.GetFeedRoot());
+        } else {
+            receiver.send(NETWORK_AVAILABLE, null);
+            ArrayList<String> files = new ArrayList<String>();
+            ArrayList<String> feeds = new ArrayList<String>();
+            files.add("index.xml");
+            feeds.add(Data.GetFeedRoot());
             try {
-            	String dir = this.prepareDirectory();
-            	int totalLength = 0;
-            	long total = 0;            	
-            	
-            	resultData.putInt("progress", 0);
-            	receiver.send(SWITCH_TO_DETERMINATE, resultData);
-            	
-            	while (!files.isEmpty()) {
-            		URL url = new URL(feeds.get(0));
-            		URLConnection connection = url.openConnection();
-            		connection.connect();
-            		connection.setConnectTimeout(250);
-            		totalLength += connection.getContentLength();
+                String dir = this.prepareDirectory();
+                int totalLength = 0;
+                long total = 0;
+
+                resultData.putInt("progress", 0);
+                receiver.send(SWITCH_TO_DETERMINATE, resultData);
+
+                while (!files.isEmpty()) {
+                    URL url = new URL(feeds.get(0));
+                    URLConnection connection = url.openConnection();
+                    connection.connect();
+                    connection.setConnectTimeout(250);
+                    totalLength += connection.getContentLength();
 
                     // download the file
                     InputStream input = new BufferedInputStream(url.openStream());
@@ -85,35 +84,35 @@ public class DownloadService extends IntentService {
                     while ((count = input.read(data)) != -1) {
                         total += count;
                         // publishing the progress....
-                        resultData.putInt("progress" ,(int) (total * 100 / totalLength));
+                        resultData.putInt("progress", (int) (total * 100 / totalLength));
                         receiver.send(UPDATE_PROGRESS, resultData);
                         output.write(data, 0, count);
                     }
                     output.flush();
                     output.close();
-                    input.close();                    
-                    
+                    input.close();
+
                     MainParser parser = new MainParser(dir + files.get(0));
                     String filename;
                     if (parser.isMenu()) {
-	                    for (String subFeedURL : parser.getSubfeedURLs()) {
-	                    	filename = MainParser.subFeedURLToLocal(subFeedURL);
-	                    	files.add(filename);
-	                    	feeds.add(subFeedURL);
-	                    }
+                        for (String subFeedURL : parser.getSubfeedURLs()) {
+                            filename = MainParser.subFeedURLToLocal(subFeedURL);
+                            files.add(filename);
+                            feeds.add(subFeedURL);
+                        }
                     }
                     Log.i("testing", files.get(0));
                     files.remove(0);
                     feeds.remove(0);
-            	}
+                }
             } catch (IOException e) {
                 resultData.putInt("progress", 0);
                 receiver.send(DOWNLOAD_FAILED, resultData);
             }
         }
 
-        resultData.putInt("progress" ,100);
+        resultData.putInt("progress", 100);
         receiver.send(UPDATE_PROGRESS, resultData);
-	}
+    }
 
 }

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 public class PageActivity extends DefaultActivity {
-	protected WebView display;
+    protected WebView display;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class PageActivity extends DefaultActivity {
 
         setTitle(extras.getString("title"));
         String html = MarkupGenerator.wrapHTMLWithStyle(extras.getString("text"));
-		display.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "utf-8", null);
-		setWebViewTransparentAfterLoad(display);
+        display.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "utf-8", null);
+        setWebViewTransparentAfterLoad(display);
     }
 }

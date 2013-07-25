@@ -20,8 +20,8 @@ import com.newpush.greenwoodpediatrics.R.id;
 import com.newpush.greenwoodpediatrics.parser.MainParser;
 
 public class MenuActivity extends DefaultActivity {
-	protected ArrayAdapter<String> menuadapter;
-	protected ListView menu;
+    protected ArrayAdapter<String> menuadapter;
+    protected ListView menu;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,15 +31,15 @@ public class MenuActivity extends DefaultActivity {
         menu = (ListView) findViewById(R.id.menu);
 
         LayoutInflater inflater = getLayoutInflater();
-        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.default_header, menu, false);
-        ViewGroup footer = (ViewGroup)inflater.inflate(R.layout.default_footer, menu, false);
-        
+        ViewGroup header = (ViewGroup) inflater.inflate(R.layout.default_header, menu, false);
+        ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.default_footer, menu, false);
+
         menu.addHeaderView(header, null, false);
         menu.addFooterView(footer, null, false);
 
-    	menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
-    	menu.setAdapter(menuadapter);
-    	
+        menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
+        menu.setAdapter(menuadapter);
+
     	/*
         File file = new File("/storage/sdcard0/mountain.png");
         if (file.exists()) {
@@ -51,35 +51,35 @@ public class MenuActivity extends DefaultActivity {
         }
         */
 
-    	setTitle(extras.getString("title"));
-    	setupMenu();
+        setTitle(extras.getString("title"));
+        setupMenu();
 
-    	
-    	makeTextViewLinksClickable(R.id.footerTextView);
 
-    	if (extras.getBoolean("isRoot")) {
-    		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-    		getSupportActionBar().setHomeButtonEnabled(false);
-    	}
-    		
+        makeTextViewLinksClickable(R.id.footerTextView);
+
+        if (extras.getBoolean("isRoot")) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setHomeButtonEnabled(false);
+        }
+
     }
-    
-    protected void setupMenu() {
-    	if (menuadapter.getCount() < 2) {
-        	for (String s : extras.getStringArrayList("menuitems")) {
-        		menuadapter.add(s);
-        	}
 
-        	menu.setOnItemClickListener(new OnItemClickListener() {
-    		  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    			  ArrayList<String> feeds = extras.getStringArrayList("feeds");
-    			  String localPath = MainParser.subFeedURLToLocal(feeds.get(position-1)); 
-    			  MainViewController.FireActivity(MenuActivity.this, 
-    					  localPath,
-    					  menuadapter.getItem(position-1)); // -1 everywhere because of the header element
-    		  }
-    		});
-    	}
+    protected void setupMenu() {
+        if (menuadapter.getCount() < 2) {
+            for (String s : extras.getStringArrayList("menuitems")) {
+                menuadapter.add(s);
+            }
+
+            menu.setOnItemClickListener(new OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ArrayList<String> feeds = extras.getStringArrayList("feeds");
+                    String localPath = MainParser.subFeedURLToLocal(feeds.get(position - 1));
+                    MainViewController.FireActivity(MenuActivity.this,
+                            localPath,
+                            menuadapter.getItem(position - 1)); // -1 everywhere because of the header element
+                }
+            });
+        }
     }
 
 }

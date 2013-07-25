@@ -15,8 +15,8 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 public class DefaultActivity extends SherlockActivity {
-	protected Bundle extras;
-	protected Resources res;
+    protected Bundle extras;
+    protected Resources res;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,13 +27,13 @@ public class DefaultActivity extends SherlockActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
-    
+
     @Override
     public void onBackPressed() {
-    	super.onBackPressed();
-    	overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+        super.onBackPressed();
+        overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -57,48 +57,48 @@ public class DefaultActivity extends SherlockActivity {
     // get a nice NullPointerException.
     public void setTitleFromIntentBundle() {
         if (extras != null && extras.containsKey("title")) {
-        	String title = extras.getString("title");
-        	if (title != null) {
-        		setTitle(title);
-        	}
+            String title = extras.getString("title");
+            if (title != null) {
+                setTitle(title);
+            }
         }
     }
 
     // Call this with the resource IDs of the TextViews to make links respond.
     public void makeTextViewLinksClickable(Integer... textViewResourceIds) {
-    	for (Integer id : textViewResourceIds) {
-		   TextView text = (TextView) findViewById(id);
-		   text.setMovementMethod(LinkMovementMethod.getInstance());
-    	}
+        for (Integer id : textViewResourceIds) {
+            TextView text = (TextView) findViewById(id);
+            text.setMovementMethod(LinkMovementMethod.getInstance());
+        }
     }
 
     @Override
-	public void setTitle(CharSequence title) {
-		super.setTitle(title);
-		TextView titleview = (TextView) findViewById(R.id.titleTextView);
-		titleview.setText(title);
-	}
-
-    public void suppressTitle() {
-    	TextView titleview = (TextView) findViewById(R.id.titleTextView);
-    	titleview.setVisibility(TextView.INVISIBLE);
-    	titleview.setHeight(0);
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        TextView titleview = (TextView) findViewById(R.id.titleTextView);
+        titleview.setText(title);
     }
 
-	public void setWebViewTransparent(WebView webview) {
-		webview.setBackgroundColor(Color.TRANSPARENT);
-	}
+    public void suppressTitle() {
+        TextView titleview = (TextView) findViewById(R.id.titleTextView);
+        titleview.setVisibility(TextView.INVISIBLE);
+        titleview.setHeight(0);
+    }
 
-	@TargetApi(11)
-	public void setWebViewTransparentAfterLoad(WebView webview) {
-		webview.setBackgroundColor(Color.TRANSPARENT);
-		if (android.os.Build.VERSION.SDK_INT >= 11) {
-			webview.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
-		}
-	}
-	
-	public String getDataDirectory() {
-		return this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";	
-	}
+    public void setWebViewTransparent(WebView webview) {
+        webview.setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    @TargetApi(11)
+    public void setWebViewTransparentAfterLoad(WebView webview) {
+        webview.setBackgroundColor(Color.TRANSPARENT);
+        if (android.os.Build.VERSION.SDK_INT >= 11) {
+            webview.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+        }
+    }
+
+    public String getDataDirectory() {
+        return this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";
+    }
 }
-	
+

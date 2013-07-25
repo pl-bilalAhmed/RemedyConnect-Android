@@ -10,8 +10,8 @@ import android.widget.Button;
 
 public class PageMyDoctorActivity extends DefaultActivity implements OnClickListener {
 
-	public static final String pageMyDoctorUrl = "http://greenwood.pagemydoctor.net";
-	public static final String PREFS_NAME = "prefs";
+    public static final String pageMyDoctorUrl = "http://greenwood.pagemydoctor.net";
+    public static final String PREFS_NAME = "prefs";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,33 +23,32 @@ public class PageMyDoctorActivity extends DefaultActivity implements OnClickList
         setContentView(R.layout.activity_page_my_doctor);
         makeTextViewLinksClickable(R.id.footerTextView);
         String title = extras.getString("title");
-    	setTitle(title);
-    	Button open = (Button) this.findViewById(R.id.openButton);
-    	open.setOnClickListener(this);
+        setTitle(title);
+        Button open = (Button) this.findViewById(R.id.openButton);
+        open.setOnClickListener(this);
 
-    	if (firstTime) {
-	    	SharedPreferences.Editor editor = settings.edit();
-	    	editor.putBoolean("firstPageMyDoctor", false);
-	    	editor.commit();
-    	}
-        else {
-        	openSite();
+        if (firstTime) {
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("firstPageMyDoctor", false);
+            editor.commit();
+        } else {
+            openSite();
         }
     }
 
     public void onClick(View v) {
-    	this.openSite();
+        this.openSite();
     }
 
     public void openSite() {
-    	Intent i = getPageMyDoctorIntent();
-    	startActivity(i);
+        Intent i = getPageMyDoctorIntent();
+        startActivity(i);
     }
 
     public static Intent getPageMyDoctorIntent() {
-    	Intent i = new Intent(Intent.ACTION_VIEW);
-    	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    	i.setData(Uri.parse(pageMyDoctorUrl));
-    	return i;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setData(Uri.parse(pageMyDoctorUrl));
+        return i;
     }
 }

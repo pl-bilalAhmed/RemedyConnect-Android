@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class DownloadActivity extends DefaultActivity implements OnClickListener {
-	ProgressDialog progress;
+    ProgressDialog progress;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,17 +33,17 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
         downloadstart.setOnClickListener(this);
     }
 
-	public void onClick(View v) {
-		this.startDownload();
-	}
+    public void onClick(View v) {
+        this.startDownload();
+    }
 
-	public void startDownload() {
-    	Intent intent = new Intent(this, DownloadService.class);
-    	intent.putExtra("receiver", new DownloadReceiver(new Handler()));
-		startService(intent);
-	}
+    public void startDownload() {
+        Intent intent = new Intent(this, DownloadService.class);
+        intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+        startService(intent);
+    }
 
-    private class DownloadReceiver extends ResultReceiver{
+    private class DownloadReceiver extends ResultReceiver {
         public DownloadReceiver(Handler handler) {
             super(handler);
         }
@@ -52,7 +52,7 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             super.onReceiveResult(resultCode, resultData);
             if (resultCode == DownloadService.NETWORK_AVAILABLE) {
-            	progress.show();
+                progress.show();
             }
             if (resultCode == DownloadService.UPDATE_PROGRESS) {
                 int status = resultData.getInt("progress");
@@ -64,13 +64,13 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
                 }
             }
             if (resultCode == DownloadService.DOWNLOAD_FAILED) {
-            	progress.dismiss();
-            	Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
-            	setResult(Activity.RESULT_FIRST_USER);
+                progress.dismiss();
+                Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
+                setResult(Activity.RESULT_FIRST_USER);
             }
 
             if (resultCode == DownloadService.SWITCH_TO_DETERMINATE) {
-            	progress.setIndeterminate(false);
+                progress.setIndeterminate(false);
             }
         }
     }
