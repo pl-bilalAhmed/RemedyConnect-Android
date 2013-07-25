@@ -27,7 +27,7 @@ public class DefaultActivity extends SherlockActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
-    /*
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -50,7 +50,7 @@ public class DefaultActivity extends SherlockActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
     // This sets the title with the informations stored in the Bundle.
     // WARNING! Fire this only after the header has been inflated or you will

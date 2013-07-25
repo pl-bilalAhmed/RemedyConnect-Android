@@ -33,6 +33,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
         progress.setMax(100);
         progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 
+
         Button startSearchByName = (Button)this.findViewById(R.id.practiceSearchStartByName);
         Button startSearchByLocation = (Button)this.findViewById(R.id.practiceSearchStartByLocation);
 
@@ -113,7 +114,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                 progress.setProgress(status);
                 if (status == 100) {
                     progress.dismiss();
-                    //setResult(Activity.RESULT_OK);
+                    setResult(Activity.RESULT_OK);
                     Intent intent = new Intent(PracticeSearchActivity.this, SelectPracticeActivity.class);
                     startActivity(intent);
                 }

@@ -35,7 +35,9 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
     }
 
     public void onClick(View v) {
-        this.startDownload();
+        if (v.getId() == R.id.downloadButton) {
+            this.startDownload();
+        }
     }
 
     public void startDownload() {
