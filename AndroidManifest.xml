@@ -10,6 +10,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -72,6 +73,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.MainActivity" />
         </activity>
+        <activity
+            android:name=".PracticeSearchActivity"
+            android:label="Search your practice"/>
     </application>
 
 </manifest>

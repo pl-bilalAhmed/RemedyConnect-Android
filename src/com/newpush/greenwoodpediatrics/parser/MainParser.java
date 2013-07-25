@@ -53,6 +53,10 @@ public class MainParser {
     }
 
     // Format checkers
+    public Boolean isRoot() {
+        Elements items = doc.select("mobilefeed practices Practice");
+        return items != null && items.size() > 0;
+    }
 
     public Boolean isPage() {
         Elements items = doc.select("mobilefeed PageText");

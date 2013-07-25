@@ -42,8 +42,9 @@ public class MainActivity extends DefaultActivity {
             MainViewController.FireActivity(this, "index.xml");
             finish();
         } else {
-            Intent downloadActivity = new Intent(this, DownloadActivity.class);
-            startActivityForResult(downloadActivity, RESULT_INDEX);
+            Intent practiceSearchActivity = new Intent(this, PracticeSearchActivity.class);
+            //Intent downloadActivity = new Intent(this, DownloadActivity.class);
+            startActivityForResult(practiceSearchActivity, RESULT_INDEX);
         }
     }
 
