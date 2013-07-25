@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="jsoup-1.6.3.jar" scope="COMPILE">
+		<srcroot url="jar://$MODULE_DIR$/../Libraries/jsoup/jsoup-1.7.2-sources.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/jsoup-1.6.3.jar!/"/>
+	</lib>
+</component>

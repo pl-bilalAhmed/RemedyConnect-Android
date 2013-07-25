@@ -1,4 +1,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
+
     <style name="appTheme" parent="Theme.Sherlock.Light.DarkActionBar">
         <!--  <item name="android:windowBackground">@drawable/background_texture</item>
         <item name="android:colorBackground">@color/transparent</item>
@@ -6,14 +7,14 @@
         <item name="android:textColor">@color/textDark</item>
         <item name="android:listViewStyle">@style/ListView</item> -->
     </style>
-    
+
     <style name="ListView" parent="@android:style/Widget.ListView">
         <item name="android:divider">@color/divider</item>
         <item name="android:dividerHeight">1dp</item>
-	</style>
-	
+    </style>
+
     <style name="Theme.Splash" parent="@android:Theme">
-		<item name="android:windowBackground">@null</item>
-	    <item name="android:windowNoTitle">true</item>
-	</style>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 </resources>
