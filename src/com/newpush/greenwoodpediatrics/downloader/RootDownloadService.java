@@ -1,6 +1,7 @@
 package com.newpush.greenwoodpediatrics.downloader;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import com.newpush.greenwoodpediatrics.Data;
@@ -28,7 +29,13 @@ public class RootDownloadService extends AbstractDownloadService {
             ArrayList<String> files = new ArrayList<String>();
             ArrayList<String> feeds = new ArrayList<String>();
             files.add("root.xml");
-            feeds.add(Data.SearchRootForPracticeName(intent.getStringExtra("practiceName")));
+
+            if (intent.getStringExtra("practiceName") != null) {
+                feeds.add(Data.SearchRootForPracticeName(intent.getStringExtra("practiceName")));
+            }
+            else if (intent.getParcelableExtra("location") != null) {
+                feeds.add(Data.SearchRootForPracticeLocation((Location) intent.getParcelableExtra("location")));
+            }
             try {
                 String dir = this.prepareDirectory();
                 int totalLength = 0;

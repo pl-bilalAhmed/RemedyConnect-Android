@@ -94,7 +94,10 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
         Toast.makeText(getApplicationContext(),
                 "Search by location succeed, location: " + location.toString(),
                 Toast.LENGTH_SHORT).show();
-        // @TODO Call a downloader which can use the location data
+        Intent intent = new Intent(this, RootDownloadService.class);
+        intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+        intent.putExtra("location", location);
+        startService(intent);
     }
 
     private class DownloadReceiver extends ResultReceiver {

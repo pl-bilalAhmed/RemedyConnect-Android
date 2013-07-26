@@ -3,6 +3,7 @@ package com.newpush.greenwoodpediatrics;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
 
 public class Data {
     public static final String ROOT = "https://cms.pediatricweb.com/mobile-app";
@@ -22,5 +23,9 @@ public class Data {
 
     public static final String SearchRootForPracticeName(String practiceName) {
         return ROOT + "?search=" + practiceName;
+    }
+
+    public static final String SearchRootForPracticeLocation(Location location) {
+        return ROOT + "?lon=" + location.getLongitude() + "&lat=" + location.getLatitude();
     }
 }
