@@ -60,14 +60,14 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
             if (resultCode == DownloadStatus.UPDATE_PROGRESS) {
                 int status = resultData.getInt("progress");
                 progress.setProgress(status);
-                if (status == 100) {
-                    progress.dismiss();
-                    setResult(Activity.RESULT_OK);
-                    Intent intent = new Intent(DownloadActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
+            }
+            if (resultCode == DownloadStatus.DOWNLOAD_FINISHED) {
+                progress.dismiss();
+                setResult(Activity.RESULT_OK);
+                Intent intent = new Intent(DownloadActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
             }
             if (resultCode == DownloadStatus.DOWNLOAD_FAILED) {
                 progress.dismiss();

@@ -77,14 +77,14 @@ public class ContentDownloadService extends AbstractDownloadService {
                     files.remove(0);
                     feeds.remove(0);
                 }
+                resultData.putInt("progress", 100);
+                receiver.send(DownloadStatus.DOWNLOAD_FINISHED, resultData);
             } catch (IOException e) {
                 resultData.putInt("progress", 0);
                 receiver.send(DownloadStatus.DOWNLOAD_FAILED, resultData);
             }
         }
-
-        resultData.putInt("progress", 100);
-        receiver.send(DownloadStatus.UPDATE_PROGRESS, resultData);
+        this.stopSelf();
     }
 
 }
