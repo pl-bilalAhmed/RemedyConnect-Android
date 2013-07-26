@@ -1,5 +1,6 @@
 package com.newpush.greenwoodpediatrics.parser;
 
+import android.text.TextUtils;
 import com.newpush.greenwoodpediatrics.Data;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,10 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
+import java.util.*;
 
 public class MainParser {
     File XMLToParse;
@@ -143,9 +141,20 @@ public class MainParser {
         for (Element practiceElement : mobileFeed.select("Practice")) {
             HashMap<String, String> practice = new HashMap<String, String>();
             practice.put("name", practiceElement.select("PracticeName").text());
+            practice.put("location", getRootPracticesLocationInfo(practiceElement));
             practice.put("feed", practiceElement.select("PracticeFeed").text());
             rootPractices.add(practice);
         }
         return rootPractices;
+    }
+
+    public String getRootPracticesLocationInfo(Element practiceElement) {
+        // A LinkedHashSet is used to keep order of insertion:
+        Set<String> locationSet = new LinkedHashSet<String>();
+        for (Element locationElement : practiceElement.select("practicelocation")) {
+            locationSet.add(locationElement.select("city").text() + ", " +
+                    locationElement.select("state").text());
+        }
+        return TextUtils.join(" | ", locationSet);
     }
 }

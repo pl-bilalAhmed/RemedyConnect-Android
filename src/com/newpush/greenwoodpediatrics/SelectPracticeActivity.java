@@ -40,7 +40,7 @@ public class SelectPracticeActivity extends DefaultActivity {
         for (HashMap<String, String> practice : practices) {
             Map<String, String> sampleData = new HashMap<String, String>(2);
             sampleData.put("Practice", practice.get("name"));
-            sampleData.put("Location", "Somewhere else...?");
+            sampleData.put("Location", practice.get("location"));
             menuContents.add(sampleData);
         }
 
