@@ -20,16 +20,12 @@ public class MenuActivity extends DefaultActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
         menu = (ListView) findViewById(R.id.menu);
-
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.default_header, menu, false);
         ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.default_footer, menu, false);
-
         menu.addHeaderView(header, null, false);
         menu.addFooterView(footer, null, false);
-
         menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
         menu.setAdapter(menuadapter);
 
@@ -37,15 +33,11 @@ public class MenuActivity extends DefaultActivity {
 
         setTitle(extras.getString("title"));
         setupMenu();
-
-
         makeTextViewLinksClickable(R.id.footerTextView);
-
         if (extras.getBoolean("isRoot")) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
         }
-
     }
 
     protected void setupMenu() {
@@ -53,11 +45,12 @@ public class MenuActivity extends DefaultActivity {
             for (String s : extras.getStringArrayList("menuitems")) {
                 menuadapter.add(s);
             }
-
             menu.setOnItemClickListener(new OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     ArrayList<String> feeds = extras.getStringArrayList("feeds");
-                    String localPath = MainParser.subFeedURLToLocal(feeds.get(position - 1));
+                    String localPath = MainParser.subFeedURLToLocal(
+                            feeds.get(position - 1),
+                            Data.GetFeedRoot(view.getContext()));
                     MainViewController.FireActivity(view.getContext(),
                             localPath,
                             menuadapter.getItem(position - 1)); // -1 everywhere because of the header element
@@ -65,5 +58,4 @@ public class MenuActivity extends DefaultActivity {
             });
         }
     }
-
 }

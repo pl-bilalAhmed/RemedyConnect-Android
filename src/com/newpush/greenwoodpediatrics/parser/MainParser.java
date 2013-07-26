@@ -131,8 +131,10 @@ public class MainParser {
         return subfeedURLs;
     }
 
-    public static String subFeedURLToLocal(String subFeedURL) {
-        return subFeedURL.replaceAll("(?i)" + Data.GetFeedRoot() + "/", "");
+    public static String subFeedURLToLocal(String subFeedURL, String feedRoot) {
+        subFeedURL = subFeedURL.replaceAll("^http(s)?", "");
+        feedRoot = feedRoot.replaceAll("^http(s)?", "");
+        return subFeedURL.replaceAll("(?i)" + feedRoot + "/", "");
     }
 
     public ArrayList<HashMap<String, String>> getRootPractices() {

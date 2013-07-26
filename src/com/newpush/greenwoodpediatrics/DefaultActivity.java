@@ -2,6 +2,7 @@ package com.newpush.greenwoodpediatrics;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ public class DefaultActivity extends SherlockActivity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         res = getResources();
         extras = getIntent().getExtras();
+
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }

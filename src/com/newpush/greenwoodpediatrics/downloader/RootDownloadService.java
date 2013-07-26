@@ -28,7 +28,7 @@ public class RootDownloadService extends AbstractDownloadService {
             ArrayList<String> files = new ArrayList<String>();
             ArrayList<String> feeds = new ArrayList<String>();
             files.add("root.xml");
-            feeds.add(Data.searchRootForPracticeName(intent.getStringExtra("practiceName")));
+            feeds.add(Data.SearchRootForPracticeName(intent.getStringExtra("practiceName")));
             try {
                 String dir = this.prepareDirectory();
                 int totalLength = 0;

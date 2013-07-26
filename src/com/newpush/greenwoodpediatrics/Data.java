@@ -1,16 +1,26 @@
 package com.newpush.greenwoodpediatrics;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 public class Data {
     public static final String ROOT = "https://cms.pediatricweb.com/mobile-app";
+    public static final String PREFS_NAME = "PWPrefs";
 
-    public static final String FEED_ROOT = "http://cms.pediatricweb.com/GreenwoodPediatrics/39/e475e7ac72454096888a2244a299d7df";
-
-    public static final String GetFeedRoot() {
-        return FEED_ROOT;
+    public static final String GetFeedRoot(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        return settings.getString("feedRoot", "");
     }
 
-    public static final String searchRootForPracticeName(String practiceName) {
+    public static final void SetFeedRoot(Context context, String feedRoot) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("feedRoot", feedRoot);
+        editor.commit();
+    }
+
+    public static final String SearchRootForPracticeName(String practiceName) {
         return ROOT + "?search=" + practiceName;
     }
 }

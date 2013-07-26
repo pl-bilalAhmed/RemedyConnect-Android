@@ -21,6 +21,8 @@ public class ContentDownloadService extends AbstractDownloadService {
     protected void onHandleIntent(Intent intent) {
         ResultReceiver receiver = (ResultReceiver) intent.getParcelableExtra("receiver");
         String feedRoot = intent.getStringExtra("feed");
+        Data.SetFeedRoot(this, feedRoot);
+
         Bundle resultData = new Bundle();
         if (!this.isOnline()) {
             resultData.putInt("progress", 0);
@@ -43,7 +45,7 @@ public class ContentDownloadService extends AbstractDownloadService {
                     URL url = new URL(feeds.get(0));
                     URLConnection connection = url.openConnection();
                     connection.connect();
-                    connection.setConnectTimeout(250);
+                    connection.setConnectTimeout(500);
                     totalLength += connection.getContentLength();
 
                     // download the file
@@ -66,7 +68,8 @@ public class ContentDownloadService extends AbstractDownloadService {
                     String filename;
                     if (parser.isMenu()) {
                         for (String subFeedURL : parser.getSubfeedURLs()) {
-                            filename = MainParser.subFeedURLToLocal(subFeedURL);
+                            filename = MainParser.subFeedURLToLocal(
+                                    subFeedURL, Data.GetFeedRoot(this));
                             files.add(filename);
                             feeds.add(subFeedURL);
                         }
