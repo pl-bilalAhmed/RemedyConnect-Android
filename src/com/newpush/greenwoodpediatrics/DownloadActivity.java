@@ -42,6 +42,7 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
     public void startDownload() {
         Intent intent = new Intent(this, ContentDownloadService.class);
         intent.putExtra("receiver", new DownloadReceiver(new Handler()));
+        intent.putExtra("feed", extras.getString("feed"));
         startService(intent);
     }
 

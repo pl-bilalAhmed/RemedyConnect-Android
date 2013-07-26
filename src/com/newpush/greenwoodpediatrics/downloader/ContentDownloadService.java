@@ -20,6 +20,7 @@ public class ContentDownloadService extends AbstractDownloadService {
     @Override
     protected void onHandleIntent(Intent intent) {
         ResultReceiver receiver = (ResultReceiver) intent.getParcelableExtra("receiver");
+        String feedRoot = intent.getStringExtra("feed");
         Bundle resultData = new Bundle();
         if (!this.isOnline()) {
             resultData.putInt("progress", 0);
@@ -29,7 +30,7 @@ public class ContentDownloadService extends AbstractDownloadService {
             ArrayList<String> files = new ArrayList<String>();
             ArrayList<String> feeds = new ArrayList<String>();
             files.add("index.xml");
-            feeds.add(Data.GetFeedRoot());
+            feeds.add(feedRoot);
             try {
                 String dir = this.prepareDirectory();
                 int totalLength = 0;

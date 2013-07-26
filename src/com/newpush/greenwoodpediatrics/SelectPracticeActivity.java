@@ -1,5 +1,6 @@
 package com.newpush.greenwoodpediatrics;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -35,23 +36,19 @@ public class SelectPracticeActivity extends DefaultActivity {
         @SuppressWarnings("unchecked")
         ArrayList<HashMap<String, String>> practices = (ArrayList<HashMap<String, String>>)extras.getSerializable("practices");
         for (HashMap<String, String> practice : practices) {
-            Map<String, String> sampleData = new HashMap<String, String>(2);
-            sampleData.put("Practice", practice.get("name"));
-            sampleData.put("Location", practice.get("location"));
-            menuContents.add(sampleData);
+            Map<String, String> practiceMenuItem = new HashMap<String, String>(3);
+            practiceMenuItem.put("Practice", practice.get("name"));
+            practiceMenuItem.put("Location", practice.get("location"));
+            practiceMenuItem.put("Feed", practice.get("feed"));
+            menuContents.add(practiceMenuItem);
         }
         menuAdapter.notifyDataSetChanged();
 
         menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        "position: " + position, Toast.LENGTH_SHORT).show();
-                //ArrayList<String> feeds = extras.getStringArrayList("feeds");
-                //String localPath = MainParser.subFeedURLToLocal(feeds.get(position));
-                /*MainViewController.FireActivity(SelectPracticeActivity.this,
-                        localPath,
-                        menuAdapter.getItem(position - 1)); // -1 everywhere because of the header element     */
-
+                Intent intent = new Intent(SelectPracticeActivity.this, DownloadActivity.class);
+                intent.putExtra("feed", menuContents.get(position).get("Feed"));
+                startActivity(intent);
             }
         });
     }
