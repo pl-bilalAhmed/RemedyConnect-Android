@@ -49,5 +49,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="logo_description">Logo</string>
     <string name="title_select_practice">Select your practice</string>
+    <string name="practice_search_description">To select your practice, type and search. If you would like to search for
+        the nearest practice, start a location-based search below.
+        Please ensure that you have a working Internet connection before starting the search.
+    </string>
+    <string name="practiceSearchEditHint">My Practice</string>
+    <string name="practiceSearchStartByNameText">Search by name</string>
+    <string name="practiceSearchStartByLocationText">Search by location</string>
 
 </resources>
