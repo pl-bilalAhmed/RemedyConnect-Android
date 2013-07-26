@@ -2,10 +2,7 @@ package com.newpush.greenwoodpediatrics;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.*;
 import com.newpush.greenwoodpediatrics.parser.MainParser;
 
 import java.util.ArrayList;
@@ -35,7 +32,7 @@ public class SelectPracticeActivity extends DefaultActivity {
     }
 
     protected void setupMenu() {
-        // Some sample data
+        @SuppressWarnings("unchecked")
         ArrayList<HashMap<String, String>> practices = (ArrayList<HashMap<String, String>>)extras.getSerializable("practices");
         for (HashMap<String, String> practice : practices) {
             Map<String, String> sampleData = new HashMap<String, String>(2);
@@ -43,19 +40,19 @@ public class SelectPracticeActivity extends DefaultActivity {
             sampleData.put("Location", practice.get("location"));
             menuContents.add(sampleData);
         }
-
         menuAdapter.notifyDataSetChanged();
-
-        /*
 
         menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ArrayList<String> feeds = extras.getStringArrayList("feeds");
-                String localPath = MainParser.subFeedURLToLocal(feeds.get(position));
-                MainViewController.FireActivity(SelectPracticeActivity.this,
+                Toast.makeText(getApplicationContext(),
+                        "position: " + position, Toast.LENGTH_SHORT).show();
+                //ArrayList<String> feeds = extras.getStringArrayList("feeds");
+                //String localPath = MainParser.subFeedURLToLocal(feeds.get(position));
+                /*MainViewController.FireActivity(SelectPracticeActivity.this,
                         localPath,
-                        menuAdapter.getItem(position - 1)); // -1 everywhere because of the header element
+                        menuAdapter.getItem(position - 1)); // -1 everywhere because of the header element     */
+
             }
-        });*/
+        });
     }
 }
