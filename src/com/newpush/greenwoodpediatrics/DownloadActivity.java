@@ -63,6 +63,9 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
                 if (status == 100) {
                     progress.dismiss();
                     setResult(Activity.RESULT_OK);
+                    Intent intent = new Intent(DownloadActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                     finish();
                 }
             }

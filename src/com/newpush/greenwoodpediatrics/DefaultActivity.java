@@ -1,12 +1,14 @@
 package com.newpush.greenwoodpediatrics;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.support.v4.app.NavUtils;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -40,12 +42,7 @@ public class DefaultActivity extends SherlockActivity {
             case android.R.id.home:
                 // This is called when the Home (Up) button is pressed
                 // in the Action Bar.
-                //Intent parentActivityIntent = new Intent(this, MainActivity.class);
-                //parentActivityIntent.addFlags(
-                //        Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                //        Intent.FLAG_ACTIVITY_NEW_TASK);
-                //startActivity(parentActivityIntent);
-                //finish();
+                NavUtils.navigateUpFromSameTask(this);
                 overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
                 return true;
         }
@@ -101,6 +98,15 @@ public class DefaultActivity extends SherlockActivity {
 
     public String getDataDirectory() {
         return this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        Bundle intentExtras = intent.getExtras();
+        if (intentExtras != null && intentExtras.containsKey("isRoot") && !intentExtras.getBoolean("isRoot")) {
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        }
     }
 }
 

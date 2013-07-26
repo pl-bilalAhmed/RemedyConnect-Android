@@ -58,7 +58,7 @@ public class MenuActivity extends DefaultActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     ArrayList<String> feeds = extras.getStringArrayList("feeds");
                     String localPath = MainParser.subFeedURLToLocal(feeds.get(position - 1));
-                    MainViewController.FireActivity(MenuActivity.this,
+                    MainViewController.FireActivity(view.getContext(),
                             localPath,
                             menuadapter.getItem(position - 1)); // -1 everywhere because of the header element
                 }

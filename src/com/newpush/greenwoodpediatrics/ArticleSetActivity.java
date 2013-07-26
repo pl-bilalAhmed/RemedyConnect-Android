@@ -46,12 +46,11 @@ public class ArticleSetActivity extends DefaultActivity {
     protected void attachLinks() {
         list.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getBaseContext(), PageActivity.class);
+                Intent intent = new Intent(view.getContext(), PageActivity.class);
                 // position-1 because of the header element
                 intent.putExtra("text", parser.getArticleFromSet(position - 1));
                 intent.putExtra("title", adapter.getItem(position - 1));
                 startActivity(intent);
-                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
     }
