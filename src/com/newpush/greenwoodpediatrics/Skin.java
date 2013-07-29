@@ -18,7 +18,7 @@ public class Skin {
 
          String skinDir = context.getFilesDir().getAbsolutePath() + "/skin/";
          */
-        return "/storage/sdcard0/pediatricweb/skin/";
+        return "/storage/sdcard0/"; //pediatricweb/skin/";
     }
 
     public static void prepareSkinDirectory(Context context) {

@@ -10,6 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:contentDescription=""
+        android:src="@drawable/logo"
         android:padding="5dp"
         android:scaleType="fitCenter" />
 
