@@ -8,12 +8,15 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.view.MenuInflater;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+
 
 //import android.content.Intent;
 //import android.view.Window;
@@ -28,10 +31,16 @@ public class DefaultActivity extends SherlockActivity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         res = getResources();
         extras = getIntent().getExtras();
-
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        com.actionbarsherlock.view.MenuInflater menuInflater = getSupportMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -42,10 +51,23 @@ public class DefaultActivity extends SherlockActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
                 // In this app, we can just simple force the Up button to behave the same way as the Back.
                 this.onBackPressed();
+                return true;
+            case R.id.menu_about:
+                intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_update:
+                String feedRoot = Data.GetFeedRoot(this);
+                if (!feedRoot.isEmpty()) {
+                    intent = new Intent(this, DownloadActivity.class);
+                    intent.putExtra("feed", feedRoot);
+                    startActivity(intent);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

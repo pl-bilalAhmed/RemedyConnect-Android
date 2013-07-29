@@ -84,6 +84,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newpush.greenwoodpediatrics.PracticeSearchActivity"/>
         </activity>
+        <activity android:name=".AboutActivity"/>
     </application>
 
 </manifest>

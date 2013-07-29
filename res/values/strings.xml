@@ -56,5 +56,6 @@
     <string name="practiceSearchEditHint">My Practice</string>
     <string name="practiceSearchStartByNameText">Search by name</string>
     <string name="practiceSearchStartByLocationText">Search by location</string>
+    <string name="about">About</string>
 
 </resources>
