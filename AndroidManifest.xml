@@ -77,9 +77,6 @@
             android:label="Search your practice"
             android:parentActivityName=".MainActivity"
             android:noHistory="true">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
         </activity>
         <activity android:name=".SelectPracticeActivity"
                   android:parentActivityName=".MainActivity">

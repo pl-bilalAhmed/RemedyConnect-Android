@@ -33,8 +33,6 @@ public class MainActivity extends DefaultActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
-
-        checkDownloadedData();
     }
 
     public void checkDownloadedData() {
@@ -43,14 +41,13 @@ public class MainActivity extends DefaultActivity {
             finish();
         } else {
             Intent practiceSearchActivity = new Intent(this, PracticeSearchActivity.class);
-            //Intent downloadActivity = new Intent(this, DownloadActivity.class);
-            startActivityForResult(practiceSearchActivity, RESULT_INDEX);
+            startActivity(practiceSearchActivity);
         }
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RESULT_INDEX) {
-            checkDownloadedData();
-        }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        checkDownloadedData();
     }
 }

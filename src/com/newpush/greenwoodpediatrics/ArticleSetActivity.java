@@ -50,6 +50,7 @@ public class ArticleSetActivity extends DefaultActivity {
                 // position-1 because of the header element
                 intent.putExtra("text", parser.getArticleFromSet(position - 1));
                 intent.putExtra("title", adapter.getItem(position - 1));
+                intent.putExtra("isRoot", false);
                 startActivity(intent);
             }
         });

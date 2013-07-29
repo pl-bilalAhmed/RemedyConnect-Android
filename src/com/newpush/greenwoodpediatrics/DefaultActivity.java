@@ -1,6 +1,7 @@
 package com.newpush.greenwoodpediatrics;
 
 import android.annotation.TargetApi;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -43,10 +44,8 @@ public class DefaultActivity extends SherlockActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // This is called when the Home (Up) button is pressed
-                // in the Action Bar.
-                NavUtils.navigateUpFromSameTask(this);
-                overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+                // In this app, we can just simple force the Up button to behave the same way as the Back.
+                this.onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
