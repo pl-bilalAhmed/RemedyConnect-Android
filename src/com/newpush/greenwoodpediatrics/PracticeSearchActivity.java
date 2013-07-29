@@ -31,6 +31,8 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
         progress = new ProgressDialog(this);
         progress.setMessage(getString(R.string.downloading));
+        progress.setCancelable(false);
+        progress.setCanceledOnTouchOutside(false);
         progress.setIndeterminate(true);
         progress.setProgress(0);
         progress.setMax(100);
