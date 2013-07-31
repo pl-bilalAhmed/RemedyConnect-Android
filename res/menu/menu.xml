@@ -4,6 +4,10 @@
         android:title="@string/update"
         android:showAsAction="never"/>
     <item
+        android:id="@+id/menu_terms_and_conditions"
+        android:title="@string/terms_and_conditions"
+        android:showAsAction="never"/>
+    <item
         android:id="@+id/menu_about"
         android:title="@string/about"
         android:showAsAction="never"/>

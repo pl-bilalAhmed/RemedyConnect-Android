@@ -57,5 +57,6 @@
     <string name="practiceSearchStartByNameText">Search by name</string>
     <string name="practiceSearchStartByLocationText">Search by location</string>
     <string name="about">About</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
 
 </resources>

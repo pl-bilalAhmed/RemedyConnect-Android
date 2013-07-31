@@ -61,6 +61,10 @@ public class DefaultActivity extends SherlockActivity {
                 intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.menu_terms_and_conditions:
+                intent = new Intent(this, TermsActivity.class);
+                startActivity(intent);
+                return true;
             case R.id.menu_update:
                 String feedRoot = Data.GetFeedRoot(this);
                 if (!feedRoot.isEmpty()) {
