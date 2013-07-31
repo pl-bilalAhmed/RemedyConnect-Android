@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.newpush.greenwoodpediatrics"
+          package="com.newpush.mypractice"
           android:versionCode="8"
           android:versionName="1.0">
 
@@ -19,11 +19,11 @@
         android:label="@string/app_name"
         android:theme="@style/appTheme">
         <activity
-            android:name="com.newpush.greenwoodpediatrics.MainActivity"
+            android:name="com.newpush.mypractice.MainActivity"
             android:label="@string/title_activity_main">
         </activity>
         <activity
-            android:name="com.newpush.greenwoodpediatrics.SplashActivity"
+            android:name="com.newpush.mypractice.SplashActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Splash"
             android:noHistory="true">
@@ -34,43 +34,43 @@
         </activity>
 
         <activity
-            android:name="com.newpush.greenwoodpediatrics.DownloadActivity"
+            android:name="com.newpush.mypractice.DownloadActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_download"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
+                android:value="com.newpush.mypractice.MainActivity"/>
         </activity>
 
         <service android:name=".downloader.ContentDownloadService"/>
         <service android:name=".downloader.RootDownloadService"/>
 
-        <activity android:name="com.newpush.greenwoodpediatrics.MenuActivity"
+        <activity android:name="com.newpush.mypractice.MenuActivity"
                   android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
+                android:value="com.newpush.mypractice.MainActivity"/>
         </activity>
-        <activity android:name="com.newpush.greenwoodpediatrics.PageActivity"
+        <activity android:name="com.newpush.mypractice.PageActivity"
                   android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
+                android:value="com.newpush.mypractice.MainActivity"/>
         </activity>
-        <activity android:name="com.newpush.greenwoodpediatrics.ArticleSetActivity"
+        <activity android:name="com.newpush.mypractice.ArticleSetActivity"
                   android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
+                android:value="com.newpush.mypractice.MainActivity"/>
         </activity>
         <activity
-            android:name="com.newpush.greenwoodpediatrics.PageMyDoctorActivity"
+            android:name="com.newpush.mypractice.PageMyDoctorActivity"
             android:label="@string/title_activity_page_my_doctor"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.MainActivity"/>
+                android:value="com.newpush.mypractice.MainActivity"/>
         </activity>
         <activity
             android:name=".PracticeSearchActivity"
@@ -82,7 +82,7 @@
                   android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.greenwoodpediatrics.PracticeSearchActivity"/>
+                android:value="com.newpush.mypractice.PracticeSearchActivity"/>
         </activity>
         <activity android:name=".AboutActivity"/>
         <activity android:name=".TermsActivity"/>
