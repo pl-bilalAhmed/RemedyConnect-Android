@@ -144,6 +144,7 @@ public class MainParser {
             practice.put("name", practiceElement.select("PracticeName").text());
             practice.put("location", getRootPracticesLocationInfo(practiceElement));
             practice.put("feed", practiceElement.select("PracticeFeed").text());
+            practice.put("designPack", practiceElement.select("PracticeDesignPack").text());
             rootPractices.add(practice);
         }
         return rootPractices;

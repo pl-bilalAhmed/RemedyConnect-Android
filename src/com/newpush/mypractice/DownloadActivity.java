@@ -45,6 +45,7 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
         Intent intent = new Intent(this, ContentDownloadService.class);
         intent.putExtra("receiver", new DownloadReceiver(new Handler()));
         intent.putExtra("feed", extras.getString("feed"));
+        intent.putExtra("designPack", extras.getString("designPack"));
         startService(intent);
     }
 
@@ -79,6 +80,10 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
 
             if (resultCode == DownloadStatus.SWITCH_TO_DETERMINATE) {
                 progress.setIndeterminate(false);
+            }
+
+            if (resultCode == DownloadStatus.SWITCH_TO_NON_DETERMINATE) {
+                progress.setIndeterminate(true);
             }
         }
     }

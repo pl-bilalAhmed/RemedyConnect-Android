@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import com.newpush.mypractice.Data;
+import com.newpush.mypractice.Skin;
 import com.newpush.mypractice.parser.MainParser;
 
 import java.io.*;
@@ -22,7 +23,7 @@ public class ContentDownloadService extends AbstractDownloadService {
         ResultReceiver receiver = (ResultReceiver) intent.getParcelableExtra("receiver");
         String feedRoot = intent.getStringExtra("feed");
         Data.SetFeedRoot(this, feedRoot);
-
+        Skin.prepareSkinDirectory(this);
         Bundle resultData = new Bundle();
         if (!this.isOnline()) {
             resultData.putInt("progress", 0);
@@ -31,6 +32,8 @@ public class ContentDownloadService extends AbstractDownloadService {
             receiver.send(DownloadStatus.NETWORK_AVAILABLE, null);
             ArrayList<String> files = new ArrayList<String>();
             ArrayList<String> feeds = new ArrayList<String>();
+            files.add("skin/DesignPack.zip");
+            feeds.add(intent.getStringExtra("designPack"));
             files.add("index.xml");
             feeds.add(feedRoot);
             try {
@@ -64,20 +67,24 @@ public class ContentDownloadService extends AbstractDownloadService {
                     output.close();
                     input.close();
 
-                    MainParser parser = new MainParser(dir + files.get(0));
-                    String filename;
-                    if (parser.isMenu()) {
-                        for (String subFeedURL : parser.getSubfeedURLs()) {
-                            filename = MainParser.subFeedURLToLocal(
-                                    subFeedURL, Data.GetFeedRoot(this));
-                            files.add(filename);
-                            feeds.add(subFeedURL);
+                    if (!files.get(0).equals("DesignPack.zip")) {
+                        MainParser parser = new MainParser(dir + files.get(0));
+                        String filename;
+                        if (parser.isMenu()) {
+                            for (String subFeedURL : parser.getSubfeedURLs()) {
+                                filename = MainParser.subFeedURLToLocal(
+                                        subFeedURL, Data.GetFeedRoot(this));
+                                files.add(filename);
+                                feeds.add(subFeedURL);
+                            }
                         }
                     }
                     files.remove(0);
                     feeds.remove(0);
                 }
                 resultData.putInt("progress", 100);
+                receiver.send(DownloadStatus.SWITCH_TO_NON_DETERMINATE, resultData);
+                Skin.extractDesignPack(this);
                 receiver.send(DownloadStatus.DOWNLOAD_FINISHED, resultData);
             } catch (IOException e) {
                 resultData.putInt("progress", 0);

@@ -38,6 +38,7 @@ public class SelectPracticeActivity extends DefaultActivity {
             practiceMenuItem.put("Practice", practice.get("name"));
             practiceMenuItem.put("Location", practice.get("location"));
             practiceMenuItem.put("Feed", practice.get("feed"));
+            practiceMenuItem.put("designPack", practice.get("designPack"));
             menuContents.add(practiceMenuItem);
         }
         menuAdapter.notifyDataSetChanged();
@@ -46,6 +47,7 @@ public class SelectPracticeActivity extends DefaultActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(SelectPracticeActivity.this, DownloadActivity.class);
                 intent.putExtra("feed", menuContents.get(position).get("Feed"));
+                intent.putExtra("designPack", menuContents.get(position).get("designPack"));
                 startActivity(intent);
             }
         });

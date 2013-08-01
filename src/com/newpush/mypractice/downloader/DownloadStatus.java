@@ -6,5 +6,6 @@ public class DownloadStatus {
     public static final int NETWORK_AVAILABLE = 3;
     public static final int SWITCH_TO_DETERMINATE = 4;
     public static final int DOWNLOAD_FINISHED = 5;
+    public static final int SWITCH_TO_NON_DETERMINATE = 6;
 
 }
