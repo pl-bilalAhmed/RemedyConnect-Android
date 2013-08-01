@@ -11,5 +11,6 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/actionbarsherlock"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.google.android:support-v4:r7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/zip4j_1.3.1"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
