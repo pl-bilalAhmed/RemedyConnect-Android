@@ -33,6 +33,7 @@ public class DefaultActivity extends SherlockActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        // This forces items to appear in the overflow.
         try {
             ViewConfiguration config = ViewConfiguration.get(DefaultActivity.this);
             Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");

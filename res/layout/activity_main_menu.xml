@@ -19,7 +19,6 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
-            android:text="About Greenwood Pediatrics"
             android:id="@+id/menuButton1"
             android:layout_margin="10dp"
             />
@@ -29,7 +28,6 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
-            android:text="Is Your Child Sick?"
             android:id="@+id/menuButton2"
             android:layout_margin="10dp"
             />
@@ -48,7 +46,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Office Info"
             android:id="@+id/menuButton3"
             android:layout_margin="10dp"/>
 
@@ -57,7 +54,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Practice News"
             android:id="@+id/menuButton4"
             android:layout_margin="10dp"/>
     </LinearLayout>
