@@ -10,6 +10,7 @@ public class PageActivity extends DefaultActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page);
+        Skin.applyThemeLogo(this);
         display = (WebView) findViewById(R.id.pageWebView);
         setWebViewTransparent(display);
 

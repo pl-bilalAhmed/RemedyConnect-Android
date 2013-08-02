@@ -20,6 +20,9 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        Skin.applyMainMenuBackground(this);
+        Skin.applyMainMenuButtons(this);
+        Skin.applyThemeLogo(this);
         if (extras.getBoolean("isRoot")) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);

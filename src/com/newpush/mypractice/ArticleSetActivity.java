@@ -29,6 +29,8 @@ public class ArticleSetActivity extends DefaultActivity {
         list.addHeaderView(header, null, false);
         list.addFooterView(footer, null, false);
 
+        Skin.applyThemeLogo(this);
+
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         list.setAdapter(adapter);
 

@@ -8,5 +8,6 @@ public class AboutActivity extends DefaultActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         setTitle(R.string.title_activity_about);
+        Skin.applyThemeLogo(this);
     }
 }
