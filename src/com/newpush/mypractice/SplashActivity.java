@@ -12,6 +12,7 @@ public class SplashActivity extends SherlockActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
 
+        Skin.prepareSkinDirectory(this); // This will resolve first start issues.
         Skin.applyThemeSplash(this);
 
         Thread splashThread = new Thread() {

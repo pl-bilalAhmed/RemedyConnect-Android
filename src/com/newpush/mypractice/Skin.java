@@ -23,9 +23,21 @@ public class Skin {
                 return file.isDirectory();
             }
         };
+        // If the skin directory doesn't exists yet, pass it back
+        // (we're called from prepareSkinDirectory most likely)
         File skinRootDirectory = new File(context.getFilesDir() + "/skin/");
-        File[] files = skinRootDirectory.listFiles(fileFilter);
-        return files[0].getAbsolutePath();
+        if (!skinRootDirectory.exists()) {
+            return skinRootDirectory.getAbsolutePath();
+        }
+        else {
+            File[] files = skinRootDirectory.listFiles(fileFilter);
+            if (files.length > 0) {
+                return files[0].getAbsolutePath();
+            }
+            else {
+                return skinRootDirectory.getAbsolutePath();
+            }
+        }
     }
 
     public static void extractDesignPack(Context context) {
