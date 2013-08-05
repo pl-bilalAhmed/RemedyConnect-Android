@@ -6,6 +6,7 @@ import android.os.ResultReceiver;
 import com.newpush.mypractice.Data;
 import com.newpush.mypractice.Skin;
 import com.newpush.mypractice.parser.MainParser;
+import net.lingala.zip4j.exception.ZipException;
 
 import java.io.*;
 import java.net.URL;
@@ -22,7 +23,9 @@ public class ContentDownloadService extends AbstractDownloadService {
     protected void onHandleIntent(Intent intent) {
         ResultReceiver receiver = (ResultReceiver) intent.getParcelableExtra("receiver");
         String feedRoot = intent.getStringExtra("feed");
+        String designPack = intent.getStringExtra("designPack");
         Data.SetFeedRoot(this, feedRoot);
+        Data.SetDesignPack(this, designPack);
         Skin.prepareSkinDirectory(this);
         Bundle resultData = new Bundle();
         if (!this.isOnline()) {
@@ -33,7 +36,7 @@ public class ContentDownloadService extends AbstractDownloadService {
             ArrayList<String> files = new ArrayList<String>();
             ArrayList<String> feeds = new ArrayList<String>();
             files.add("skin/DesignPack.zip");
-            feeds.add(intent.getStringExtra("designPack"));
+            feeds.add(designPack);
             files.add("index.xml");
             feeds.add(feedRoot);
             try {
@@ -54,7 +57,7 @@ public class ContentDownloadService extends AbstractDownloadService {
                     // download the file
                     InputStream input = new BufferedInputStream(url.openStream());
                     OutputStream output = new FileOutputStream(dir + files.get(0));
-                    byte data[] = new byte[1024];
+                    byte data[] = new byte[8192];
                     int count;
                     while ((count = input.read(data)) != -1) {
                         total += count;
@@ -82,10 +85,15 @@ public class ContentDownloadService extends AbstractDownloadService {
                     files.remove(0);
                     feeds.remove(0);
                 }
-                resultData.putInt("progress", 100);
-                receiver.send(DownloadStatus.SWITCH_TO_NON_DETERMINATE, resultData);
-                Skin.extractDesignPack(this);
-                receiver.send(DownloadStatus.DOWNLOAD_FINISHED, resultData);
+                try {
+                    resultData.putInt("progress", 100);
+                    receiver.send(DownloadStatus.EXTRACTING, resultData);
+                    Skin.extractDesignPack(this);
+                    receiver.send(DownloadStatus.DOWNLOAD_FINISHED, resultData);
+                } catch (ZipException e) {
+                    resultData.putInt("progress", 0);
+                    receiver.send(DownloadStatus.DOWNLOAD_FAILED, resultData);
+                }
             } catch (IOException e) {
                 resultData.putInt("progress", 0);
                 receiver.send(DownloadStatus.DOWNLOAD_FAILED, resultData);

@@ -46,5 +46,7 @@
     <string name="practiceSearchStartByLocationText">Search by location</string>
     <string name="about">About</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="extracting_design">Extracting design...</string>
+    <string name="network_ready_starting_download">Network ready. Starting download...</string>
 
 </resources>

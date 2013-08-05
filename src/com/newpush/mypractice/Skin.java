@@ -40,13 +40,9 @@ public class Skin {
         }
     }
 
-    public static void extractDesignPack(Context context) {
-        try {
-            ZipFile designPack = new ZipFile(getSkinDirectoryPath(context) + "DesignPack.zip");
-            designPack.extractAll(getSkinDirectoryPath(context));
-        } catch (ZipException e) {
-            e.printStackTrace();
-        }
+    public static void extractDesignPack(Context context) throws ZipException{
+        ZipFile designPack = new ZipFile(getSkinDirectoryPath(context) + "/DesignPack.zip");
+        designPack.extractAll(getSkinDirectoryPath(context));
    }
 
     public static void prepareSkinDirectory(Context context) {

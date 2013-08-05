@@ -78,9 +78,11 @@ public class DefaultActivity extends SherlockActivity {
                 return true;
             case R.id.menu_update:
                 String feedRoot = Data.GetFeedRoot(this);
-                if (!feedRoot.isEmpty()) {
+                String designPack = Data.GetDesignPack(this);
+                if (!feedRoot.isEmpty() && !designPack.isEmpty()) {
                     intent = new Intent(this, DownloadActivity.class);
                     intent.putExtra("feed", feedRoot);
+                    intent.putExtra("designPack", designPack);
                     startActivity(intent);
                 }
                 return true;

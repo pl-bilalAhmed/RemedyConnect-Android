@@ -14,10 +14,22 @@ public class Data {
         return settings.getString("feedRoot", "");
     }
 
+    public static final String GetDesignPack(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        return settings.getString("designPack", "");
+    }
+
     public static final void SetFeedRoot(Context context, String feedRoot) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("feedRoot", feedRoot);
+        editor.commit();
+    }
+
+    public static final void SetDesignPack(Context context, String designPack) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("designPack", designPack);
         editor.commit();
     }
 

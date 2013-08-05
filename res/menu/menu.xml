@@ -2,8 +2,7 @@
     <item android:id="@+id/pick_action_provider"
           android:showAsAction="always"
           android:title="More"
-          android:icon="@drawable/abs__ic_menu_moreoverflow_holo_light"
-          android:actionProviderClass="com.newpush.mypractice.AppPickActionProvider" />
+          android:icon="@drawable/abs__ic_menu_moreoverflow_holo_light" />
     <item
         android:id="@+id/menu_update"
         android:title="@string/update"

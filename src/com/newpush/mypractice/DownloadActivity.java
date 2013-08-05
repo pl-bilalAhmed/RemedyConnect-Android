@@ -59,14 +59,17 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
             super.onReceiveResult(resultCode, resultData);
             if (resultCode == DownloadStatus.NETWORK_AVAILABLE) {
                 progress.show();
+                progress.setMessage(getString(R.string.network_ready_starting_download));
             }
             if (resultCode == DownloadStatus.UPDATE_PROGRESS) {
                 int status = resultData.getInt("progress");
                 progress.setProgress(status);
+                progress.setMessage(getString(R.string.downloading));
             }
             if (resultCode == DownloadStatus.DOWNLOAD_FINISHED) {
                 progress.dismiss();
                 setResult(Activity.RESULT_OK);
+                progress.setMessage("Download finished.");
                 Intent intent = new Intent(DownloadActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -84,6 +87,11 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
 
             if (resultCode == DownloadStatus.SWITCH_TO_NON_DETERMINATE) {
                 progress.setIndeterminate(true);
+            }
+
+            if (resultCode == DownloadStatus.EXTRACTING) {
+                progress.setIndeterminate(true);
+                progress.setMessage(getString(R.string.extracting_design));
             }
         }
     }
