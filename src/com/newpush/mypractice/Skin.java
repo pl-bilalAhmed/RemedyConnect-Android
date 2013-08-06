@@ -6,10 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
@@ -17,6 +16,17 @@ import java.io.File;
 import java.io.FileFilter;
 
 public class Skin {
+    @SuppressWarnings("deprecation")
+    public static void setBackgroundOf(View view, Drawable bg) {
+        int sdk = android.os.Build.VERSION.SDK_INT;
+        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            //noinspection deprecation
+            view.setBackgroundDrawable(bg);
+        } else {
+            view.setBackground(bg);
+        }
+    }
+
     public static String getSkinDirectoryPath(Context context) {
         FileFilter fileFilter = new FileFilter() {
             public boolean accept(File file) {
@@ -74,11 +84,9 @@ public class Skin {
         String filePath = getSkinDirectoryPath(mainMenuActivity) + "/background.png";
         File bgFile = new File(filePath);
         if (bgFile.exists()) {
-            RelativeLayout mainMenuLayout = (RelativeLayout) mainMenuActivity.findViewById(R.id.mainMenuLayout);
-            Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
-            BitmapDrawable drawableBg = new BitmapDrawable(mainMenuActivity.getResources(), bitmapBg);
-            drawableBg.setGravity(Gravity.TOP);
-            mainMenuLayout.setBackground(drawableBg);
+            Bitmap bgBitmap = BitmapFactory.decodeFile(bgFile.getAbsolutePath());
+            ImageView mainMenuBackgroundView = (ImageView) mainMenuActivity.findViewById(R.id.mainMenuBackground);
+            mainMenuBackgroundView.setImageBitmap(bgBitmap);
         }
     }
 
@@ -89,13 +97,13 @@ public class Skin {
             Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
             Drawable drawableBg = new BitmapDrawable(mainMenuActivity.getResources(), bitmapBg);
             Button button = (Button) mainMenuActivity.findViewById(R.id.menuButton1);
-            button.setBackground(drawableBg);
+            Skin.setBackgroundOf(button, drawableBg);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton2);
-            button.setBackground(drawableBg);
+            Skin.setBackgroundOf(button, drawableBg);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton3);
-            button.setBackground(drawableBg);
+            Skin.setBackgroundOf(button, drawableBg);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton4);
-            button.setBackground(drawableBg);
+            Skin.setBackgroundOf(button, drawableBg);
         }
     }
 }

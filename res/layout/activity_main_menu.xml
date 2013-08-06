@@ -5,8 +5,16 @@
                 android:layout_height="match_parent"
                 android:id="@+id/mainMenuLayout"
                 android:columnCount="4"
-                android:background="@drawable/background_texture"
                 android:layout_gravity="right">
+
+    <ImageView
+        android:id="@+id/mainMenuBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/background_texture"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/logo"
