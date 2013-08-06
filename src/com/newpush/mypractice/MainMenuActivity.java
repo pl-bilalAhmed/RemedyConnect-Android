@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.SubMenu;
 import com.newpush.mypractice.DefaultActivity;
 import com.newpush.mypractice.parser.MainParser;
 
@@ -46,13 +47,19 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (menuButtonTexts.size() > NUMBER_OF_BUTTONS) {
-            for (Integer index = NUMBER_OF_BUTTONS; index < menuButtonTexts.size(); ++index) {
-                menu.add(Menu.NONE, index, Menu.NONE, menuButtonTexts.get(index))
-                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        // We have to do this first, because the DefaultActivity will inflate the menu in:
+        boolean result = super.onCreateOptionsMenu(menu);
+        MenuItem more  = menu.findItem(R.id.more);
+        if (more != null) {
+            SubMenu subMenu = more.getSubMenu();
+            if (menuButtonTexts.size() > NUMBER_OF_BUTTONS) {
+                for (Integer index = NUMBER_OF_BUTTONS; index < menuButtonTexts.size(); ++index) {
+                    subMenu.add(Menu.NONE, index, Menu.FIRST + index, menuButtonTexts.get(index))
+                            .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                }
             }
         }
-        return super.onCreateOptionsMenu(menu);
+        return result;
     }
 
     @Override

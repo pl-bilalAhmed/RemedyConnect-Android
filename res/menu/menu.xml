@@ -1,18 +1,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/pick_action_provider"
-          android:showAsAction="always"
-          android:title="More"
-          android:icon="@drawable/abs__ic_menu_moreoverflow_holo_light" />
     <item
-        android:id="@+id/menu_update"
-        android:title="@string/update"
-        android:showAsAction="never"/>
-    <item
-        android:id="@+id/menu_terms_and_conditions"
-        android:title="@string/terms_and_conditions"
-        android:showAsAction="never"/>
-    <item
-        android:id="@+id/menu_about"
-        android:title="@string/about"
-        android:showAsAction="never"/>
+        android:id="@+id/more"
+        android:showAsAction="always"
+        android:icon="@drawable/abs__ic_menu_moreoverflow_holo_dark">
+        <menu android:id="@+id/more_submenu">
+            <item
+                android:id="@+id/menu_update"
+                android:title="@string/update"
+                android:showAsAction="never"
+                android:orderInCategory="1000"/>
+            <item
+                android:id="@+id/menu_terms_and_conditions"
+                android:title="@string/terms_and_conditions"
+                android:showAsAction="never"
+                android:orderInCategory="1001"/>
+            <item
+                android:id="@+id/menu_about"
+                android:title="@string/about"
+                android:showAsAction="never"
+                android:orderInCategory="1002"/>
+        </menu>
+    </item>
 </menu>
