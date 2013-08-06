@@ -10,7 +10,7 @@
         <item name="android:dividerHeight">1dp</item>
     </style>
 
-    <style name="Theme.Splash" parent="@android:Theme">
+    <style name="Theme.Splash" parent="Theme.Sherlock.NoActionBar">
         <item name="android:windowBackground">@null</item>
         <item name="android:windowNoTitle">true</item>
     </style>
