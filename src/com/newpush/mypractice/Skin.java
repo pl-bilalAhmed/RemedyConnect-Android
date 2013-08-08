@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -93,16 +94,21 @@ public class Skin {
     public static void applyMainMenuButtons(Activity mainMenuActivity) {
         String filePath = getSkinDirectoryPath(mainMenuActivity) + "/button.9.png";
         File buttonFile = new File(filePath);
+        Typeface typeface = Typeface.createFromAsset(mainMenuActivity.getAssets(), "fonts/OpenSans-Regular.ttf");
         if (buttonFile.exists()) {
             Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
             Drawable drawableBg = new BitmapDrawable(mainMenuActivity.getResources(), bitmapBg);
             Button button = (Button) mainMenuActivity.findViewById(R.id.menuButton1);
+            button.setTypeface(typeface);
             Skin.setBackgroundOf(button, drawableBg);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton2);
+            button.setTypeface(typeface);
             Skin.setBackgroundOf(button, drawableBg);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton3);
+            button.setTypeface(typeface);
             Skin.setBackgroundOf(button, drawableBg);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton4);
+            button.setTypeface(typeface);
             Skin.setBackgroundOf(button, drawableBg);
         }
     }
