@@ -89,6 +89,7 @@ public class MainParser {
             HashMap<String, String> button = new HashMap<String, String>();
             button.put("name", buttonElement.select("ButtonName").text());
             button.put("feed", buttonElement.select("NextFeed").text());
+            button.put("externalLink", buttonElement.select("ExternalLink").text());
             menu.add(button);
         }
         return menu;
@@ -125,7 +126,9 @@ public class MainParser {
         ArrayList<String> subfeedURLs = new ArrayList<String>();
         ArrayList<HashMap<String, String>> menu = getMenu();
         for (HashMap<String, String> menuItem : menu) {
-            subfeedURLs.add(menuItem.get("feed"));
+            if (!menuItem.get("feed").isEmpty()) {
+                subfeedURLs.add(menuItem.get("feed"));
+            }
         }
         return subfeedURLs;
     }

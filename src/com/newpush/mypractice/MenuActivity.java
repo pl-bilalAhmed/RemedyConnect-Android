@@ -48,12 +48,21 @@ public class MenuActivity extends DefaultActivity {
             menu.setOnItemClickListener(new OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     ArrayList<String> feeds = extras.getStringArrayList("feeds");
-                    String localPath = MainParser.subFeedURLToLocal(
-                            feeds.get(position - 1),
-                            Data.GetFeedRoot(view.getContext()));
-                    MainViewController.FireActivity(view.getContext(),
-                            localPath,
-                            menuadapter.getItem(position - 1)); // -1 everywhere because of the header element
+                    ArrayList<String> externalLinks = extras.getStringArrayList("externalLinks");
+                    if (feeds.get(position - 1) != null) {
+                        String localPath = MainParser.subFeedURLToLocal(
+                                feeds.get(position - 1),
+                                Data.GetFeedRoot(view.getContext()));
+                        MainViewController.FireActivity(view.getContext(),
+                                localPath,
+                                menuadapter.getItem(position - 1)); // -1 everywhere because of the header element
+                    }
+                    else {
+                        if (externalLinks.get(position - 1) != null) {
+                            MainViewController.FireBrowser(view.getContext(),
+                                    externalLinks.get(position - 1));
+                        }
+                    }
                 }
             });
         }

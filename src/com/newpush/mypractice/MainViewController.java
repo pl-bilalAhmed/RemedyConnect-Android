@@ -2,6 +2,7 @@ package com.newpush.mypractice;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import com.newpush.mypractice.parser.MainParser;
 
 import java.util.ArrayList;
@@ -23,12 +24,15 @@ public class MainViewController {
             ArrayList<HashMap<String, String>> menuItems = parser.getMenu();
             ArrayList<String> items = new ArrayList<String>();
             ArrayList<String> feeds = new ArrayList<String>();
+            ArrayList<String> externalLinks = new ArrayList<String>();
             for (HashMap<String, String> menuItem : menuItems) {
                 items.add(menuItem.get("name"));
                 feeds.add(menuItem.get("feed"));
+                externalLinks.add(menuItem.get("externalLink"));
             }
             intent.putExtra("menuitems", items);
             intent.putExtra("feeds", feeds);
+            intent.putExtra("externalLinks", externalLinks);
             intent.putExtra("title", title);
             intent.putExtra("isRoot", isRoot);
 
@@ -62,5 +66,10 @@ public class MainViewController {
 
     public static void FireRootActivity(DefaultActivity activity) {
         FireActivity(activity, "index.xml");
+    }
+
+    public static void FireBrowser(Context context, String link) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        context.startActivity(browserIntent);
     }
 }

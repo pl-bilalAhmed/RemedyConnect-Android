@@ -110,6 +110,12 @@ public class Skin {
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton4);
             button.setTypeface(typeface);
             Skin.setBackgroundOf(button, drawableBg);
+            button = (Button) mainMenuActivity.findViewById(R.id.menuButton5);
+            button.setTypeface(typeface);
+            Skin.setBackgroundOf(button, drawableBg);
+            button = (Button) mainMenuActivity.findViewById(R.id.menuButton6);
+            button.setTypeface(typeface);
+            Skin.setBackgroundOf(button, drawableBg);
         }
     }
 }

@@ -91,10 +91,12 @@ public class ContentDownloadService extends AbstractDownloadService {
                     Skin.extractDesignPack(this);
                     receiver.send(DownloadStatus.DOWNLOAD_FINISHED, resultData);
                 } catch (ZipException e) {
+                    e.printStackTrace();
                     resultData.putInt("progress", 0);
                     receiver.send(DownloadStatus.DOWNLOAD_FAILED, resultData);
                 }
             } catch (IOException e) {
+                e.printStackTrace();
                 resultData.putInt("progress", 0);
                 receiver.send(DownloadStatus.DOWNLOAD_FAILED, resultData);
             }

@@ -16,7 +16,8 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
     ArrayList<Button> menuButtons;
     ArrayList<String> menuButtonTexts;
     ArrayList<String> feeds;
-    Integer NUMBER_OF_BUTTONS = 4;
+    ArrayList<String> externalLinks;
+    Integer NUMBER_OF_BUTTONS = 6;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +34,14 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
         menuButtons.add((Button) this.findViewById(R.id.menuButton2));
         menuButtons.add((Button) this.findViewById(R.id.menuButton3));
         menuButtons.add((Button) this.findViewById(R.id.menuButton4));
+        menuButtons.add((Button) this.findViewById(R.id.menuButton5));
+        menuButtons.add((Button) this.findViewById(R.id.menuButton6));
         for (Button button : menuButtons) {
             button.setOnClickListener(this);
         }
         menuButtonTexts = extras.getStringArrayList("menuitems");
         feeds = extras.getStringArrayList("feeds");
+        externalLinks = extras.getStringArrayList("externalLinks");
         Integer index = 0;
         for (Button button : menuButtons) {
             button.setText(menuButtonTexts.get(index));
@@ -73,12 +77,19 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
     }
 
     void onClickFireActivity(Integer index) {
-        String localPath = MainParser.subFeedURLToLocal(
-                feeds.get(index),
-                Data.GetFeedRoot(this));
-        MainViewController.FireActivity(this,
-                localPath,
-                menuButtonTexts.get(index));
+        if (!feeds.get(index).isEmpty()) {
+            String localPath = MainParser.subFeedURLToLocal(
+                    feeds.get(index),
+                    Data.GetFeedRoot(this));
+            MainViewController.FireActivity(this,
+                    localPath,
+                    menuButtonTexts.get(index));
+        }
+        else {
+            if (!externalLinks.get(index).isEmpty()) {
+                MainViewController.FireBrowser(this, externalLinks.get(index));
+            }
+        }
     }
 
     public void onClick(View v) {
@@ -94,6 +105,12 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
                 break;
             case R.id.menuButton4:
                 onClickFireActivity(3);
+                break;
+            case R.id.menuButton5:
+                onClickFireActivity(4);
+                break;
+            case R.id.menuButton6:
+                onClickFireActivity(5);
                 break;
         }
     }

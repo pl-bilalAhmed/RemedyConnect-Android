@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_above="@+id/bottomButtonRow"
+        android:layout_above="@+id/midButtonRow"
         android:id="@+id/topButtonRow">
 
         <Button
@@ -53,6 +53,31 @@
             />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomButtonRow"
+        android:id="@+id/midButtonRow">
+
+        <Button
+            style="@style/MainMenuButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:id="@+id/menuButton3"
+            android:layout_margin="10dp"
+            />
+
+        <Button
+            style="@style/MainMenuButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:id="@+id/menuButton4"
+            android:layout_margin="10dp"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,7 +91,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:id="@+id/menuButton3"
+            android:id="@+id/menuButton5"
             android:layout_margin="10dp"/>
 
         <Button
@@ -74,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:id="@+id/menuButton4"
+            android:id="@+id/menuButton6"
             android:layout_margin="10dp"/>
     </LinearLayout>
 </RelativeLayout>
