@@ -52,8 +52,12 @@ public class Skin {
     }
 
     public static void extractDesignPack(Context context) throws ZipException{
-        ZipFile designPack = new ZipFile(getSkinDirectoryPath(context) + "/DesignPack.zip");
-        designPack.extractAll(getSkinDirectoryPath(context));
+        ZipFile designPack = new ZipFile(context.getFilesDir() + "/skin/DesignPack.zip");
+        if (designPack.isValidZipFile()) {
+            designPack.extractAll(getSkinDirectoryPath(context));
+        }
+        File designPackFile = new File(context.getFilesDir() + "/skin/DesignPack.zip");
+        designPackFile.delete();
    }
 
     public static void prepareSkinDirectory(Context context) {
@@ -72,13 +76,25 @@ public class Skin {
         }
     }
     
-    public static void applyThemeLogo(Activity activityWithLogo) {
-        File logoFile = new File(getSkinDirectoryPath(activityWithLogo) + "/logo.png");
+    public static void applyThemeLogo(Activity activityWithLogo, Boolean forMainMenu) {
+        String filename;
+
+        if (forMainMenu) {
+            filename = "/menulogo.png";
+        }
+        else {
+            filename = "/logo.png";
+        }
+        File logoFile = new File(getSkinDirectoryPath(activityWithLogo) + filename);
         if (logoFile.exists()) {
             Bitmap logoBitmap = BitmapFactory.decodeFile(logoFile.getAbsolutePath());
             ImageView logoView = (ImageView) activityWithLogo.findViewById(R.id.logo);
             logoView.setImageBitmap(logoBitmap);
         }
+    }
+
+    public static void applyThemeLogo(Activity activityWithLogo) {
+        applyThemeLogo(activityWithLogo, false);
     }
 
     public static void applyMainMenuBackground(Activity mainMenuActivity) {

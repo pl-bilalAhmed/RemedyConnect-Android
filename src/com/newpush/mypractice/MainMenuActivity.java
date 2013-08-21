@@ -24,7 +24,7 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
         setContentView(R.layout.activity_main_menu);
         Skin.applyMainMenuBackground(this);
         Skin.applyMainMenuButtons(this);
-        Skin.applyThemeLogo(this);
+        Skin.applyThemeLogo(this, true);
         if (extras.getBoolean("isRoot")) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
