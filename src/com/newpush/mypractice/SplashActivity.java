@@ -3,6 +3,7 @@ package com.newpush.mypractice;
 import android.content.Intent;
 import android.os.Bundle;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.testflightapp.lib.TestFlight;
 
 public class SplashActivity extends SherlockActivity {
     static final int SPLASH_SLEEP = 500;
@@ -25,10 +26,12 @@ public class SplashActivity extends SherlockActivity {
                 } finally {
                     finish();
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    TestFlight.passCheckpoint("Firing main activity after splash screen");
                     startActivity(intent);
                 }
             }
         };
+        TestFlight.passCheckpoint("Starting splash screen");
         splashThread.start();
     }
 }
