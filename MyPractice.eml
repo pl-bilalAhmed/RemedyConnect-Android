@@ -9,5 +9,6 @@
 	<levels>
 		<level name="Maven: com.google.android:support-v4:r7" value="project"/>
 		<level name="zip4j_1.3.1" value="project"/>
+		<level name="TestFlightLib" value="project"/>
 	</levels>
 </component>

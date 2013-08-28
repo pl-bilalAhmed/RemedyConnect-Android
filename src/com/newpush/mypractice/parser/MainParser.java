@@ -13,11 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MainParser {
-    File XMLToParse;
-    Document doc;
+    private Document doc;
 
     public MainParser(String XMLpath) {
-        XMLToParse = new File(XMLpath);
+        File XMLToParse = new File(XMLpath);
         try {
             doc = Jsoup.parse(XMLToParse, "UTF-8", "");
         } catch (IOException e) {

@@ -38,7 +38,7 @@ public class MainViewController {
 
             context.startActivity(intent);
         }
-        if (parser.isPage()) {
+        else if (parser.isPage()) {
             Intent intent = new Intent(context, PageActivity.class);
 
             HashMap<String, String> page = parser.getPage();
@@ -49,7 +49,7 @@ public class MainViewController {
 
             context.startActivity(intent);
         }
-        if (parser.isArticleSet()) {
+        else if (parser.isArticleSet()) {
             Intent intent = new Intent(context, ArticleSetActivity.class);
             intent.putExtra("articleTitles", parser.getArticleSetTitles());
             intent.putExtra("title", title);

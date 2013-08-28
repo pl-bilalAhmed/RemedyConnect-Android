@@ -89,7 +89,9 @@ public class Skin {
         if (logoFile.exists()) {
             Bitmap logoBitmap = BitmapFactory.decodeFile(logoFile.getAbsolutePath());
             ImageView logoView = (ImageView) activityWithLogo.findViewById(R.id.logo);
-            logoView.setImageBitmap(logoBitmap);
+            if (logoView != null) {
+                logoView.setImageBitmap(logoBitmap);
+            }
         }
     }
 
