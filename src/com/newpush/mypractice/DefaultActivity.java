@@ -96,7 +96,9 @@ public class DefaultActivity extends SherlockActivity {
     public void makeTextViewLinksClickable(Integer... textViewResourceIds) {
         for (Integer id : textViewResourceIds) {
             TextView text = (TextView) findViewById(id);
-            text.setMovementMethod(LinkMovementMethod.getInstance());
+            if (text != null) {
+                text.setMovementMethod(LinkMovementMethod.getInstance());
+            }
         }
     }
 

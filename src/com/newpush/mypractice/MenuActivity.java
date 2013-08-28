@@ -22,8 +22,8 @@ public class MenuActivity extends DefaultActivity {
         setContentView(R.layout.activity_menu);
         menu = (ListView) findViewById(R.id.menu);
         LayoutInflater inflater = getLayoutInflater();
-        ViewGroup header = (ViewGroup) inflater.inflate(R.layout.default_header, menu, false);
-        ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.default_footer, menu, false);
+        ViewGroup header = (ViewGroup) inflater.inflate(R.layout.default_header_listitem, menu, false);
+        ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.default_footer_listitem, menu, false);
         menu.addHeaderView(header, null, false);
         menu.addFooterView(footer, null, false);
         menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
@@ -47,20 +47,22 @@ public class MenuActivity extends DefaultActivity {
             }
             menu.setOnItemClickListener(new OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    int MENU_ITEMS_SHIFT = -1;
+
                     ArrayList<String> feeds = extras.getStringArrayList("feeds");
                     ArrayList<String> externalLinks = extras.getStringArrayList("externalLinks");
-                    if (feeds.get(position - 1) != null) {
+                    if (feeds.get(position + MENU_ITEMS_SHIFT) != null) {
                         String localPath = MainParser.subFeedURLToLocal(
-                                feeds.get(position - 1),
+                                feeds.get(position + MENU_ITEMS_SHIFT),
                                 Data.GetFeedRoot(view.getContext()));
                         MainViewController.FireActivity(view.getContext(),
                                 localPath,
-                                menuadapter.getItem(position - 1)); // -1 everywhere because of the header element
+                                menuadapter.getItem(position + MENU_ITEMS_SHIFT)); // -1 everywhere because of the header element
                     }
                     else {
-                        if (externalLinks.get(position - 1) != null) {
+                        if (externalLinks.get(position + MENU_ITEMS_SHIFT) != null) {
                             MainViewController.FireBrowser(view.getContext(),
-                                    externalLinks.get(position - 1));
+                                    externalLinks.get(position + MENU_ITEMS_SHIFT));
                         }
                     }
                 }
