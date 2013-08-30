@@ -63,6 +63,7 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
                 }
             }
         }
+        setHomeVisibility(false);
         return result;
     }
 

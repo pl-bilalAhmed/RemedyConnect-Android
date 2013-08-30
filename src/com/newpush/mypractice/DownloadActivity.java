@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+import com.actionbarsherlock.view.Menu;
 import com.newpush.mypractice.downloader.DownloadStatus;
 import com.newpush.mypractice.parser.MainParser;
 import net.lingala.zip4j.exception.ZipException;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class DownloadActivity extends DefaultActivity implements OnClickListener {
@@ -58,12 +60,20 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
         downloadSummary = new DownloadStatusSummary();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        boolean result =  super.onCreateOptionsMenu(menu);
+        setHomeVisibility(false);
+        return result;
+    }
+
     public void onClick(View v) {
         if (v.getId() == R.id.downloadButton) {
             this.startDownload();
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void startDownload() {
         String feedRoot = extras.getString("feed");
         String designPack = extras.getString("designPack");
@@ -74,17 +84,21 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
         // Start up the Executor which will handle the multiple threads
         threadPoolExecutor = Executors.newFixedThreadPool(SIZE_OF_THREAD_POOL);
 
-        // Fire up the initial batch
-        HashMap<String, String> whatToDownload = new HashMap<String, String>(2);
-        whatToDownload.put("from", designPack);
-        whatToDownload.put("to", "skin/DesignPack.zip");
-        DownloadTask download = new DownloadTask();
-        download.executeOnExecutor(threadPoolExecutor, whatToDownload);
-        whatToDownload = new HashMap<String, String>(2);
-        whatToDownload.put("from", feedRoot);
-        whatToDownload.put("to", "index.xml");
-        download = new DownloadTask();
-        download.executeOnExecutor(threadPoolExecutor, whatToDownload);
+        try {
+            // Fire up the initial batch
+            HashMap<String, String> whatToDownload = new HashMap<String, String>(2);
+            whatToDownload.put("from", designPack);
+            whatToDownload.put("to", "skin/DesignPack.zip");
+            DownloadTask download = new DownloadTask();
+            download.executeOnExecutor(threadPoolExecutor, whatToDownload);
+            whatToDownload = new HashMap<String, String>(2);
+            whatToDownload.put("from", feedRoot);
+            whatToDownload.put("to", "index.xml");
+            download = new DownloadTask();
+            download.executeOnExecutor(threadPoolExecutor, whatToDownload);
+        } catch (RejectedExecutionException e) {
+            Log.w("MyPractice Downloader", "Thread pool executor rejected the download task", e);
+        }
     }
 
     // A class to store and pass the status of a download task around.
@@ -274,6 +288,7 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         protected void onProgressUpdate(DownloadTaskStatus... status) {
             super.onProgressUpdate(status);
             // Notify the summary about the update
@@ -284,7 +299,11 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
                     break;
                 case DownloadStatus.NEW_DOWNLOAD:
                     DownloadTask download = new DownloadTask();
-                    download.executeOnExecutor(threadPoolExecutor, status[0].getNewDownload());
+                    try {
+                        download.executeOnExecutor(threadPoolExecutor, status[0].getNewDownload());
+                    } catch (RejectedExecutionException e) {
+                        Log.w("MyPractice Downloader", "Thread pool executor rejected the download task", e);
+                    }
                     break;
                 case DownloadStatus.UPDATE_PROGRESS:
                     Integer currentPercentage = downloadSummary.currentProgressPercentage();

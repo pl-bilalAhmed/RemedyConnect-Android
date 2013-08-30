@@ -23,6 +23,7 @@ import java.lang.reflect.Field;
 //import android.view.Window;
 
 public class DefaultActivity extends SherlockActivity {
+    Menu abMenu;
     protected Bundle extras;
     protected Resources res;
 
@@ -36,11 +37,17 @@ public class DefaultActivity extends SherlockActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
+    public void setHomeVisibility(boolean visible) {
+        MenuItem item = abMenu.findItem(R.id.home);
+        item.setVisible(visible);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         com.actionbarsherlock.view.MenuInflater menuInflater = getSupportMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
+        abMenu = menu;
         return super.onCreateOptionsMenu(menu);
     }
 

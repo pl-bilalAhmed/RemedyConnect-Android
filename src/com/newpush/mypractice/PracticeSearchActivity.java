@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.actionbarsherlock.view.Menu;
 import com.newpush.mypractice.downloader.DownloadStatus;
 import com.newpush.mypractice.downloader.RootDownloadService;
 import com.newpush.mypractice.parser.MainParser;
@@ -43,6 +44,13 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
         startSearchByName.setOnClickListener(this);
         startSearchByLocation.setOnClickListener(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        boolean result =  super.onCreateOptionsMenu(menu);
+        setHomeVisibility(false);
+        return result;
     }
 
     public void onClick(View v) {

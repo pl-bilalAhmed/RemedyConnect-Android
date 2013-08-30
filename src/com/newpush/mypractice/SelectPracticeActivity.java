@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import com.actionbarsherlock.view.Menu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,13 @@ public class SelectPracticeActivity extends DefaultActivity {
 
         menu.setAdapter(menuAdapter);
         setupMenu();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        boolean result =  super.onCreateOptionsMenu(menu);
+        setHomeVisibility(false);
+        return result;
     }
 
     protected void setupMenu() {
