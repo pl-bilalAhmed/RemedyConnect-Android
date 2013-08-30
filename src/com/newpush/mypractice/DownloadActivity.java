@@ -181,8 +181,9 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
                 }
             }
             if (!hadFail) {
-                Double percentage = sumOfDownloadedSize / (double)sumOfExpectedSize * 100;
-                Log.d("MyPractice", percentage.toString());
+                Double percentage = 100 * sumOfDownloadedSize / (double)sumOfExpectedSize;
+                Log.d("MyPractice", percentage.toString() +
+                        ": downloaded " + sumOfDownloadedSize + ", expected " + sumOfExpectedSize);
                 return percentage.intValue();
             }
             else {
@@ -216,9 +217,11 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
                     InputStream urlStream = new BufferedInputStream(url.openStream());
                     OutputStream fileOutputStream = new FileOutputStream(dir + to);
                     byte downloadBuffer[] = new byte[DOWNLOAD_BUFFER_SIZE];
+                    int downloadedSizeSum = 0;
                     while ((downloadedSize = urlStream.read(downloadBuffer)) != -1) {
+                        downloadedSizeSum += downloadedSize;
                         publishProgress(new DownloadTaskStatus(DownloadStatus.UPDATE_PROGRESS,
-                                downloadedSize, fileSize));
+                                downloadedSizeSum, fileSize));
                         fileOutputStream.write(downloadBuffer, 0, downloadedSize);
                     }
                     urlStream.close();
