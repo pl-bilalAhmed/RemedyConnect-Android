@@ -8,5 +8,7 @@ public class DownloadStatus {
     public static final int DOWNLOAD_FINISHED = 5;
     public static final int SWITCH_TO_NON_DETERMINATE = 6;
     public static final int EXTRACTING = 7;
-
+    public static final int EXTRACTING_FAILED = 8;
+    public static final int EXTRACTING_FINISHED = 9;
+    public static final int NEW_DOWNLOAD = 10;
 }

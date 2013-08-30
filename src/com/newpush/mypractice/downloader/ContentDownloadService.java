@@ -21,6 +21,7 @@ public class ContentDownloadService extends AbstractDownloadService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        // @TODO: this is way too slow. On Greenwood Pediatrics, the download takes 2.5 mins. Let's improve that.
         ResultReceiver receiver = (ResultReceiver) intent.getParcelableExtra("receiver");
         String feedRoot = intent.getStringExtra("feed");
         String designPack = intent.getStringExtra("designPack");
