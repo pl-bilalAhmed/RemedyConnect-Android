@@ -4,6 +4,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/pageWebView"
-    android:background="@color/transparent"
-    android:layout_alignParentLeft="true"
-    android:layout_below="@+id/header" />
+    android:background="@color/transparent" />

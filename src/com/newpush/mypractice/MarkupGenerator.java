@@ -46,6 +46,11 @@ public class MarkupGenerator {
                 article.get("copyright");
     }
 
+    public static String preImage(Context context, String html) {
+        String logoPath = Skin.webViewThemeLogoURL(context);
+        return "<img src='" + logoPath + "' / class='headerLogo' />" + html;
+    }
+
     public static String wrapHTMLWithStyle(String html) {
         String style = "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />";
         return "<html><head>" + style + "</head><body>" + html + "</body>";

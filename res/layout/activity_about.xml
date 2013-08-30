@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         
         <include
 	        android:id="@+id/header"
@@ -16,9 +17,6 @@
             android:id="@+id/about_developers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/header"
             android:linksClickable="true"
             android:padding="5dp"
             android:text="@string/about_developers"
@@ -29,9 +27,6 @@
             android:id="@+id/about_jsoup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/about_developers"
             android:linksClickable="true"
             android:padding="5dp"
             android:text="@string/about_jsoup"
@@ -42,8 +37,7 @@
 	        android:id="@+id/footer"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_below="@id/about_jsoup"
 	      	layout="@layout/default_footer" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>

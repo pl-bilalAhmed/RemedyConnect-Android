@@ -75,17 +75,18 @@ public class Skin {
             splashView.setImageBitmap(splashBitmap);
         }
     }
-    
-    public static void applyThemeLogo(Activity activityWithLogo, Boolean forMainMenu) {
-        String filename;
 
+    public static String themeLogoFilename(Boolean forMainMenu) {
         if (forMainMenu) {
-            filename = "/menulogo.png";
+            return "/menulogo.png";
         }
         else {
-            filename = "/logo.png";
+            return "/logo.png";
         }
-        File logoFile = new File(getSkinDirectoryPath(activityWithLogo) + filename);
+    }
+
+    public static void applyThemeLogo(Activity activityWithLogo, Boolean forMainMenu) {
+        File logoFile = new File(getSkinDirectoryPath(activityWithLogo) + themeLogoFilename(forMainMenu));
         if (logoFile.exists()) {
             Bitmap logoBitmap = BitmapFactory.decodeFile(logoFile.getAbsolutePath());
             ImageView logoView = (ImageView) activityWithLogo.findViewById(R.id.logo);
@@ -93,6 +94,10 @@ public class Skin {
                 logoView.setImageBitmap(logoBitmap);
             }
         }
+    }
+
+    public static String webViewThemeLogoURL(Context context) {
+        return "file://" + getSkinDirectoryPath(context) + themeLogoFilename(false);
     }
 
     public static void applyThemeLogo(Activity activityWithLogo) {

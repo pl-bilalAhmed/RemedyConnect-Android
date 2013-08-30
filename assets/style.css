@@ -1,9 +1,13 @@
 html {
-  font-family: serif;
-  background-color: transparent;
-  color: #000000;
+    font-family: serif;
+    background-color: transparent;
+    color: #000000;
 }
 
 html, body {
-  background-color: transparent;
+    background-color: transparent;
+}
+
+.headerLogo {
+    width: 100%;
 }

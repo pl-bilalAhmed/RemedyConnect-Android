@@ -58,6 +58,9 @@ public class DefaultActivity extends SherlockActivity {
                 // In this app, we can just simple force the Up button to behave the same way as the Back.
                 this.onBackPressed();
                 return true;
+            case R.id.home:
+                MainViewController.FireRootActivity(this);
+                return true;
             case R.id.menu_about:
                 intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
@@ -113,8 +116,10 @@ public class DefaultActivity extends SherlockActivity {
 
     public void suppressTitle() {
         TextView titleview = (TextView) findViewById(R.id.titleTextView);
-        titleview.setVisibility(TextView.INVISIBLE);
-        titleview.setHeight(0);
+        if (titleview != null) {
+            titleview.setVisibility(TextView.INVISIBLE);
+            titleview.setHeight(0);
+        }
     }
 
     public void setWebViewTransparent(WebView webview) {
