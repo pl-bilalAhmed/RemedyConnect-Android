@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.newpush.mypractice.downloader.DownloadStatus;
 import com.newpush.mypractice.parser.MainParser;
+import com.testflightapp.lib.TestFlight;
 import net.lingala.zip4j.exception.ZipException;
 
 import java.io.*;
@@ -215,6 +216,7 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
         protected Void doInBackground(HashMap<String, String>... whatToDownload) {
             taskStatusIndex = downloadSummary.reservePlace();
             if (isOnline()) {
+                TestFlight.passCheckpoint("Downloading started, device is online");
                 publishProgress(new DownloadTaskStatus(DownloadStatus.NETWORK_AVAILABLE));
                 String from = whatToDownload[0].get("from");
                 String to = whatToDownload[0].get("to");
@@ -241,8 +243,10 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
                     urlStream.close();
                     fileOutputStream.flush();
                     fileOutputStream.close();
+                    TestFlight.log("Downloaded " + to);
 
                     if (!to.equals("skin/DesignPack.zip")) {
+                        TestFlight.log("Parsing " + to + " for additional downloads...");
                         // We have a feed, have to parse it to decide whether there's
                         // anything left to download...
                         MainParser parser = new MainParser(dir + to);
@@ -251,6 +255,7 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
                             for (String subFeedURL : parser.getSubfeedURLs()) {
                                 filename = MainParser.subFeedURLToLocal(
                                         subFeedURL, Data.GetFeedRoot(getApplicationContext()));
+                                TestFlight.log("Found new file to download: " + from);
                                 HashMap<String, String> additionalDownload = new HashMap<String, String>(2);
                                 additionalDownload.put("from", subFeedURL);
                                 additionalDownload.put("to", filename);
@@ -260,6 +265,7 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
                         publishProgress(new DownloadTaskStatus(DownloadStatus.DOWNLOAD_FINISHED, downloadedSize, fileSize));
                     }
                     else {
+                        TestFlight.log("Extracting design pack...");
                         // We have a design pack, extract it
                         publishProgress(new DownloadTaskStatus(DownloadStatus.EXTRACTING));
                         try {
