@@ -200,8 +200,6 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
             }
             if (!hadFail) {
                 Double percentage = 100 * sumOfDownloadedSize / (double)sumOfExpectedSize;
-                Log.d("MyPractice", percentage.toString() +
-                        ": downloaded " + sumOfDownloadedSize + ", expected " + sumOfExpectedSize);
                 return percentage.intValue();
             }
             else {

@@ -129,18 +129,6 @@ public class DefaultActivity extends SherlockActivity {
         }
     }
 
-    public void setWebViewTransparent(WebView webview) {
-        webview.setBackgroundColor(Color.TRANSPARENT);
-    }
-
-    @TargetApi(11)
-    public void setWebViewTransparentAfterLoad(WebView webview) {
-        webview.setBackgroundColor(Color.TRANSPARENT);
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
-            webview.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
-        }
-    }
-
     public String getDataDirectory() {
         return this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";
     }
