@@ -6,10 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.ResultReceiver;
+import android.os.*;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,10 +23,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class DownloadActivity extends DefaultActivity implements OnClickListener {
     ProgressDialog progress;
@@ -91,12 +85,22 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
             whatToDownload.put("from", designPack);
             whatToDownload.put("to", "skin/DesignPack.zip");
             DownloadTask download = new DownloadTask();
-            download.executeOnExecutor(threadPoolExecutor, whatToDownload);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                download.executeOnExecutor(threadPoolExecutor, whatToDownload);
+            }
+            else {
+                download.execute(whatToDownload);
+            }
             whatToDownload = new HashMap<String, String>(2);
             whatToDownload.put("from", feedRoot);
             whatToDownload.put("to", "index.xml");
             download = new DownloadTask();
-            download.executeOnExecutor(threadPoolExecutor, whatToDownload);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                download.executeOnExecutor(threadPoolExecutor, whatToDownload);
+            }
+            else {
+                download.execute(whatToDownload);
+            }
         } catch (RejectedExecutionException e) {
             Log.w("MyPractice Downloader", "Thread pool executor rejected the download task", e);
         }
@@ -146,12 +150,11 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
 
     }
 
-    // @TODO check what's happening with finished files, failed files... something is still buggy here
     private class DownloadStatusSummary {
-        ArrayList<DownloadTaskStatus> statuses;
+        CopyOnWriteArrayList<DownloadTaskStatus> statuses;
 
         private DownloadStatusSummary() {
-            statuses = new ArrayList<DownloadTaskStatus>(20);
+            statuses = new CopyOnWriteArrayList<DownloadTaskStatus>();
         }
 
         public Integer reservePlace() {
@@ -306,7 +309,12 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
                 case DownloadStatus.NEW_DOWNLOAD:
                     DownloadTask download = new DownloadTask();
                     try {
-                        download.executeOnExecutor(threadPoolExecutor, status[0].getNewDownload());
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                            download.executeOnExecutor(threadPoolExecutor, status[0].getNewDownload());
+                        }
+                        else {
+                            download.execute(status[0].getNewDownload());
+                        }
                     } catch (RejectedExecutionException e) {
                         Log.w("MyPractice Downloader", "Thread pool executor rejected the download task", e);
                     }
