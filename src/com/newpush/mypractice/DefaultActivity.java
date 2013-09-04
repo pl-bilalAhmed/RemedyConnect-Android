@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -35,6 +36,8 @@ public class DefaultActivity extends SherlockActivity {
         extras = getIntent().getExtras();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        //int colors[] = { 0xff255779 , 0xff3e7492, 0xffa6c0cd };
+        //actionBar.setBackgroundDrawable(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors));
     }
 
     public void setHomeVisibility(boolean visible) {

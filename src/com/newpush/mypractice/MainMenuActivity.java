@@ -2,8 +2,10 @@ package com.newpush.mypractice;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.SubMenu;
@@ -44,8 +46,33 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
         externalLinks = extras.getStringArrayList("externalLinks");
         Integer index = 0;
         for (Button button : menuButtons) {
-            button.setText(menuButtonTexts.get(index));
+            if (menuButtonTexts.size() > index) {
+                button.setText(menuButtonTexts.get(index));
+            }
+            else {
+                button.setVisibility(View.INVISIBLE);
+            }
             ++index;
+        }
+        LinearLayout l = (LinearLayout) this.findViewById(R.id.bottomButtonRow);
+        hideWrapperLayoutIfNecessary(l);
+        l = (LinearLayout) this.findViewById(R.id.midButtonRow);
+        hideWrapperLayoutIfNecessary(l);
+        l = (LinearLayout) this.findViewById(R.id.topButtonRow);
+        hideWrapperLayoutIfNecessary(l);
+    }
+
+    public void hideWrapperLayoutIfNecessary(LinearLayout linearLayout) {
+        int childCount = linearLayout.getChildCount();
+        int noOfInvisibleChilds = 0;
+        for (int i = 0; i < childCount; i++) {
+            View v = linearLayout.getChildAt(i);
+            if (v.getVisibility() == View.INVISIBLE) {
+                ++noOfInvisibleChilds;
+            }
+        }
+        if (noOfInvisibleChilds == childCount) {
+            linearLayout.getLayoutParams().height = 0;
         }
     }
 
