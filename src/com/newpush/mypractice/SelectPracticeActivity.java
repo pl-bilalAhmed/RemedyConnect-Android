@@ -56,6 +56,7 @@ public class SelectPracticeActivity extends DefaultActivity {
                 Intent intent = new Intent(SelectPracticeActivity.this, DownloadActivity.class);
                 intent.putExtra("feed", menuContents.get(position).get("Feed"));
                 intent.putExtra("designPack", menuContents.get(position).get("designPack"));
+                intent.putExtra("startDownload", true);
                 startActivity(intent);
             }
         });

@@ -53,6 +53,10 @@ public class DownloadActivity extends DefaultActivity implements OnClickListener
         downloadstart.setOnClickListener(this);
 
         downloadSummary = new DownloadStatusSummary();
+
+        if (extras.getBoolean("startDownload", false)) {
+            startDownload();
+        }
     }
 
     @Override
