@@ -7,8 +7,6 @@
     <string name="title_activity_download">Download Your Practice Info</string>
     <string name="download_information">To let you use the application offline, we will now download the actual information. Please ensure that you have Internet connection available and press Download to begin.</string>
     <string name="download_button">Download</string>
-    <string name="downloading">Downloading data, please wait&#8230;</string>
-    <string name="download_failed">Failed to download data. Please ensure that your Internet connection is OK and try again.</string>
     <string name="greenwood_logo">Greenwood Pediatrics logo</string>
 
     <color name="logo_background">#FFFFFF</color>
@@ -43,8 +41,13 @@
     <string name="practiceSearchStartByLocationText">Search by location</string>
     <string name="about">About</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
-    <string name="extracting_design">Extracting design...</string>
-    <string name="network_ready_starting_download">Network ready. Starting download...</string>
+
+    <string name="downloading">Downloading practice information, please wait&#8230;</string>
+    <string name="download_failed">Failed to download data. Please ensure that your Internet connection is OK and try again.</string>
+    <string name="extracting_design">Extracting design, please wait&#8230;</string>
+    <string name="network_ready_starting_download">Network ready. Starting download&#8230;</string>
+    <string name="parsing_for_more">Discovering additional content, please wait&#8230;</string>
+    <string name="starting_additional_download">Found new content, please wait&#8230;</string>
     <string name="menu_background">Menu background</string>
     <string name="logo">Logo</string>
     <string name="splashscreen">Splashscreen</string>
