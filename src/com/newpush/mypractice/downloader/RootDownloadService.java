@@ -24,9 +24,9 @@ public class RootDownloadService extends AbstractDownloadService {
         Bundle resultData = new Bundle();
         if (!this.isOnline()) {
             resultData.putInt("progress", 0);
-            receiver.send(DownloadStatus.DOWNLOAD_FAILED, resultData);
+            receiver.send(DownloadStatusCodes.DOWNLOAD_FAILED, resultData);
         } else {
-            receiver.send(DownloadStatus.NETWORK_AVAILABLE, null);
+            receiver.send(DownloadStatusCodes.NETWORK_AVAILABLE, null);
             ArrayList<String> files = new ArrayList<String>();
             ArrayList<String> feeds = new ArrayList<String>();
             files.add("root.xml");
@@ -43,7 +43,7 @@ public class RootDownloadService extends AbstractDownloadService {
                 long total = 0;
 
                 resultData.putInt("progress", 0);
-                receiver.send(DownloadStatus.SWITCH_TO_DETERMINATE, resultData);
+                receiver.send(DownloadStatusCodes.SWITCH_TO_DETERMINATE, resultData);
 
                 while (!files.isEmpty()) {
                     URL url = new URL(feeds.get(0));
@@ -61,7 +61,7 @@ public class RootDownloadService extends AbstractDownloadService {
                         total += count;
                         // publishing the progress....
                         resultData.putInt("progress", (int) (total * 100 / totalLength));
-                        receiver.send(DownloadStatus.UPDATE_PROGRESS, resultData);
+                        receiver.send(DownloadStatusCodes.UPDATE_PROGRESS, resultData);
                         output.write(data, 0, count);
                     }
                     output.flush();
@@ -72,10 +72,10 @@ public class RootDownloadService extends AbstractDownloadService {
                     feeds.remove(0);
                 }
                 resultData.putInt("progress", 100);
-                receiver.send(DownloadStatus.DOWNLOAD_FINISHED, resultData);
+                receiver.send(DownloadStatusCodes.DOWNLOAD_FINISHED, resultData);
             } catch (IOException e) {
                 resultData.putInt("progress", 0);
-                receiver.send(DownloadStatus.DOWNLOAD_FAILED, resultData);
+                receiver.send(DownloadStatusCodes.DOWNLOAD_FAILED, resultData);
             }
         }
         this.stopSelf();

@@ -53,11 +53,9 @@ public class SelectPracticeActivity extends DefaultActivity {
 
         menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(SelectPracticeActivity.this, DownloadActivity.class);
-                intent.putExtra("feed", menuContents.get(position).get("Feed"));
-                intent.putExtra("designPack", menuContents.get(position).get("designPack"));
-                intent.putExtra("startDownload", true);
-                startActivity(intent);
+                String feedRoot = menuContents.get(position).get("Feed");
+                String designPack = menuContents.get(position).get("designPack");
+                startDownload(feedRoot, designPack);
             }
         });
     }

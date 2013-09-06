@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
-import com.newpush.mypractice.downloader.DownloadStatus;
+import com.newpush.mypractice.downloader.DownloadStatusCodes;
 import com.newpush.mypractice.downloader.RootDownloadService;
 import com.newpush.mypractice.parser.MainParser;
 
@@ -118,25 +118,25 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             super.onReceiveResult(resultCode, resultData);
-            if (resultCode == DownloadStatus.NETWORK_AVAILABLE) {
+            if (resultCode == DownloadStatusCodes.NETWORK_AVAILABLE) {
                 progress.show();
             }
-            if (resultCode == DownloadStatus.UPDATE_PROGRESS) {
+            if (resultCode == DownloadStatusCodes.UPDATE_PROGRESS) {
                 int status = resultData.getInt("progress");
                 progress.setProgress(status);
             }
-            if (resultCode == DownloadStatus.DOWNLOAD_FINISHED) {
+            if (resultCode == DownloadStatusCodes.DOWNLOAD_FINISHED) {
                 progress.dismiss();
                 setResult(Activity.RESULT_OK);
                 startParsingPractices();
             }
-            if (resultCode == DownloadStatus.DOWNLOAD_FAILED) {
+            if (resultCode == DownloadStatusCodes.DOWNLOAD_FAILED) {
                 progress.dismiss();
                 Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
                 setResult(Activity.RESULT_FIRST_USER);
             }
 
-            if (resultCode == DownloadStatus.SWITCH_TO_DETERMINATE) {
+            if (resultCode == DownloadStatusCodes.SWITCH_TO_DETERMINATE) {
                 progress.setIndeterminate(false);
             }
         }
