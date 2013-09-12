@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.newpush.mypractice"
-          android:versionCode="12"
-          android:versionName="1.0">
+          android:versionCode="13"
+          android:versionName="1.1">
 
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="17"/>
 
+    <uses-permission android:name="com.newpush.mypractice.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <permission android:name="com.newpush.mypractice.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 
     <application
         android:allowBackup="true"
@@ -18,9 +22,27 @@
         android:label="@string/app_name"
         android:theme="@style/appTheme"
         android:name=".MyPracticeApplication">
+
+        <receiver android:name="com.pushio.manager.PushIOBroadcastReceiver"
+                  android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.newpush.mypractice" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="com.pushio.manager.PushIOActivityLauncher" />
+        <service android:name="com.pushio.manager.PushIOGCMIntentService" />
+        <service android:name="com.pushio.manager.PushIOEngagementService" />
+
         <activity
             android:name="com.newpush.mypractice.MainActivity"
             android:label="@string/title_activity_main">
+            <intent-filter>
+                <action android:name="com.newpush.mypractice.NOTIFICATIONPRESSED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
         <activity
             android:name="com.newpush.mypractice.SplashActivity"
@@ -33,17 +55,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.newpush.mypractice.DownloadActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_download"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.newpush.mypractice.MainActivity"/>
-        </activity>
-
-        <service android:name=".downloader.ContentDownloadService"/>
         <service android:name=".downloader.RootDownloadService"/>
 
         <activity android:name="com.newpush.mypractice.MenuActivity"
@@ -86,7 +97,8 @@
         </activity>
         <activity android:name=".AboutActivity"/>
         <activity android:name=".TermsActivity"/>
-        <activity android:name=".MainMenuActivity"/>
+        <activity android:name=".MainMenuActivity"></activity>
+
     </application>
 
 </manifest>

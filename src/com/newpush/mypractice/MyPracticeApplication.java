@@ -1,6 +1,7 @@
 package com.newpush.mypractice;
 
 import android.app.Application;
+import com.pushio.manager.PushIOManager;
 import com.testflightapp.lib.TestFlight;
 
 public class MyPracticeApplication extends Application {
