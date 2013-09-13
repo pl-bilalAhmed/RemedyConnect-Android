@@ -64,7 +64,7 @@ public class DefaultActivity extends SherlockActivity {
         progress.setIndeterminate(true);
         progress.setProgress(0);
         progress.setMax(100);
-        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         downloadSummary = new DownloadTaskStatusSummary();
     }
@@ -296,11 +296,9 @@ public class DefaultActivity extends SherlockActivity {
             downloadSummary.updateStatus(taskStatusIndex, status[0]);
             switch (status[0].getStatusCode()) {
                 case DownloadStatusCodes.NETWORK_AVAILABLE:
-                    progress.setIndeterminate(false);
                     break;
                 case DownloadStatusCodes.NEW_DOWNLOAD:
                     progress.setMessage(getString(R.string.starting_additional_download));
-                    progress.setIndeterminate(false);
                     DownloadTask download = new DownloadTask();
                     try {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -314,21 +312,16 @@ public class DefaultActivity extends SherlockActivity {
                     }
                     break;
                 case DownloadStatusCodes.UPDATE_PROGRESS:
-                    Integer currentPercentage = downloadSummary.currentProgressPercentage();
-                    progress.setProgress(currentPercentage);
                     progress.setMessage(getString(R.string.downloading));
                     break;
                 case DownloadStatusCodes.PARSING_FOR_MORE:
-                    progress.setIndeterminate(true);
                     progress.setMessage(getString(R.string.parsing_for_more));
                     break;
                 case DownloadStatusCodes.EXTRACTING:
-                    progress.setIndeterminate(false);
                     progress.setMessage(getString(R.string.extracting_design));
                     break;
                 case DownloadStatusCodes.DOWNLOAD_FINISHED:
                 case DownloadStatusCodes.EXTRACTING_FINISHED:
-                    progress.setIndeterminate(false);
                     if (downloadSummary.isCompleted()) {
                         threadPoolExecutor.shutdown();
                         progress.dismiss();
