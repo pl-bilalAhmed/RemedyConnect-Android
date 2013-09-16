@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -84,16 +85,9 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                 gotLocation(location);
                 locationManager.removeUpdates(this);
             }
-
             public void onStatusChanged(String provider, int status, Bundle extras) {}
-
             public void onProviderEnabled(String provider) {}
-
-            public void onProviderDisabled(String provider) {
-                Toast.makeText(getApplicationContext(),
-                        "Provider disabled: " + provider,
-                        Toast.LENGTH_SHORT).show();
-            }
+            public void onProviderDisabled(String provider) {}
         };
 
         // Register the listener with the Location Manager to receive location updates
@@ -101,9 +95,6 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     }
 
     public void gotLocation(Location location) {
-        Toast.makeText(getApplicationContext(),
-                "Search by location succeed, location: " + location.toString(),
-                Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, RootDownloadService.class);
         intent.putExtra("receiver", new DownloadReceiver(new Handler()));
         intent.putExtra("location", location);
@@ -127,8 +118,8 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
             }
             if (resultCode == DownloadStatusCodes.DOWNLOAD_FINISHED) {
                 progress.dismiss();
-                setResult(Activity.RESULT_OK);
                 startParsingPractices();
+                setResult(Activity.RESULT_OK);
             }
             if (resultCode == DownloadStatusCodes.DOWNLOAD_FAILED) {
                 progress.dismiss();
@@ -143,13 +134,22 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     }
 
     protected void startParsingPractices() {
-        // @TODO Should figure out something better instead of this, huh?
         MainParser parser = new MainParser(this.getFilesDir().getAbsolutePath() + "/root.xml");
-        Intent intent = new Intent(PracticeSearchActivity.this, SelectPracticeActivity.class);
         if (parser.isRoot()) {
             ArrayList<HashMap<String, String>> practices = parser.getRootPractices();
-            intent.putExtra("practices", practices);
+            if (!practices.isEmpty()) {
+                Intent intent = new Intent(PracticeSearchActivity.this, SelectPracticeActivity.class);
+                intent.putExtra("practices", practices);
+                startActivity(intent);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), getString(R.string.couldnt_find_practice_near_location),
+                        Toast.LENGTH_LONG).show();
+            }
         }
-        startActivity(intent);
+        else {
+            Toast.makeText(getApplicationContext(), getString(R.string.couldnt_find_practice_near_location),
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }

@@ -51,5 +51,8 @@
     <string name="menu_background">Menu background</string>
     <string name="logo">Logo</string>
     <string name="splashscreen">Splashscreen</string>
+    <string name="couldnt_find_practice_near_location">We couldn\'t find a practice near to your location, please start
+        a search by practice name.
+    </string>
 
 </resources>
