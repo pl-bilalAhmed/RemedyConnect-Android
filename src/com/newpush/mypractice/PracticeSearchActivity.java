@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +24,7 @@ import com.newpush.mypractice.parser.MainParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class PracticeSearchActivity extends DefaultActivity implements OnClickListener {
     ProgressDialog progress;
@@ -92,6 +94,15 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
         // Register the listener with the Location Manager to receive location updates
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+
+        Location lastLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if (lastLoc != null) {
+            if (lastLoc.getTime() >= System.currentTimeMillis() - 60 * 1000) {
+                Log.d("MyPractice", "Using last known location...");
+                gotLocation(lastLoc);
+                locationManager.removeUpdates(locationListener);
+            }
+        }
     }
 
     public void gotLocation(Location location) {
