@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -73,6 +74,26 @@ public class Skin {
             Bitmap splashBitmap = BitmapFactory.decodeFile(splashFile.getAbsolutePath());
             ImageView splashView = (ImageView) splashActivity.findViewById(R.id.splash_image);
             splashView.setImageBitmap(splashBitmap);
+        }
+    }
+
+    public static void applyActivityBackground(Activity activity) {
+        File bgFile = new File(getSkinDirectoryPath(activity) + "/background_main.png");
+        if (bgFile.exists()) {
+            Bitmap bitmapBg = BitmapFactory.decodeFile(bgFile.getAbsolutePath());
+            BitmapDrawable drawableBg = new BitmapDrawable(activity.getResources(), bitmapBg);
+            drawableBg.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+            activity.getWindow().setBackgroundDrawable(drawableBg);
+        }
+    }
+
+    public static void applyViewBackground(Activity activity, View view) {
+        File bgFile = new File(getSkinDirectoryPath(activity) + "/background_main.png");
+        if (bgFile.exists()) {
+            Bitmap bitmapBg = BitmapFactory.decodeFile(bgFile.getAbsolutePath());
+            BitmapDrawable drawableBg = new BitmapDrawable(activity.getResources(), bitmapBg);
+            drawableBg.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+            setBackgroundOf(view, drawableBg);
         }
     }
 

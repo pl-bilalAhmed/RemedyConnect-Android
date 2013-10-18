@@ -32,6 +32,8 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_search);
+        Skin.applyActivityBackground(this);
+
 
         progress = new ProgressDialog(this);
         progress.setMessage(getString(R.string.downloading));

@@ -11,6 +11,9 @@ public class PageActivity extends DefaultActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page);
         display = (WebView) findViewById(R.id.pageWebView);
+        Skin.applyViewBackground(this, display);
+        display.setBackgroundColor(0);
+        display.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
         setTitle(extras.getString("title"));
         String html = extras.getString("text");
         html = MarkupGenerator.preImage(this, html);

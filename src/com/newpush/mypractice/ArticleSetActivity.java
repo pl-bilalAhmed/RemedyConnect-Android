@@ -32,6 +32,7 @@ public class ArticleSetActivity extends DefaultActivity {
         list.addFooterView(footer, null, false);
 
         Skin.applyThemeLogo(this);
+        Skin.applyActivityBackground(this);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         list.setAdapter(adapter);

@@ -30,6 +30,7 @@ public class MenuActivity extends DefaultActivity {
         menu.setAdapter(menuadapter);
 
         Skin.applyThemeLogo(this);
+        Skin.applyActivityBackground(this);
 
         setTitle(extras.getString("title"));
         setupMenu();

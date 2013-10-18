@@ -17,6 +17,7 @@ public class SelectPracticeActivity extends DefaultActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        Skin.applyActivityBackground(this);
         setTitle(R.string.title_select_practice);
         menu = (ListView) findViewById(R.id.menu);
 
