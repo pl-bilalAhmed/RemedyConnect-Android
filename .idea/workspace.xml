@@ -53,22 +53,21 @@
     <list id="4f6642e5-3c3d-406a-a2e0-d4c3a43f0fed" name="Subclassing downloader" comment="Moving downloader code&#10;&#10;Nim has requested to modify the download UX: we should fire up the download from the practice selection screen or from the update practice info menu item directly without any unnecessary screen." />
     <list id="f10cf8e6-4f14-49e1-8631-b5acf07fc7c9" name="Integrating Push.io" comment="" />
     <list id="51660b46-0f62-4f44-94d7-e39fa6485ddb" name="Switching to indeterminate download progress" comment="Switching to indeterminate download progress" />
-    <list default="true" id="5be22bf0-642f-4e6a-9cae-082ce871395f" name="MedSecure Web API implementation for registering the device" comment="MedSecure Web API implementation for registering the device">
+    <list default="true" id="5be22bf0-642f-4e6a-9cae-082ce871395f" name="MedSecure Web API implementation for registering the device" comment="Set new API key for the MedSecure Push.IO account">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newpush/mypractice/DefaultActivity.java" afterPath="$PROJECT_DIR$/src/com/newpush/mypractice/DefaultActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newpush/mypractice/PracticeSearchActivity.java" afterPath="$PROJECT_DIR$/src/com/newpush/mypractice/PracticeSearchActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newpush/mypractice/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/newpush/mypractice/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Project.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="5be22bf0-642f-4e6a-9cae-082ce871395f" time="1379685724243" ignored="false" />
+    <file path="/Dummy.txt" changelist="5be22bf0-642f-4e6a-9cae-082ce871395f" time="1382108339225" ignored="false" />
     <file path="$PROJECT_DIR$/../../Eclipse workspace/actionbarsherlock/project.properties" changelist="f5030165-16fd-42ea-b0c5-2fceda2ead9e" time="1374736777553" ignored="false" />
     <file path="/a.xml" changelist="f5030165-16fd-42ea-b0c5-2fceda2ead9e" time="1374740161443" ignored="false" />
     <file path="/fragment.java" changelist="9ff95892-1573-40b5-ae0d-fedf3df3830b" time="1379343661724" ignored="false" />
     <file path="/SplashActivity.java" changelist="158258d4-f93d-460d-8b72-c4b384c0515d" time="1377264470796" ignored="false" />
     <file path="/Skin.java" changelist="9e6287b4-3337-485c-a799-9de6054e738b" time="1377865293702" ignored="false" />
     <file path="/MainParser.java" changelist="158258d4-f93d-460d-8b72-c4b384c0515d" time="1377539842455" ignored="false" />
-    <file path="/MainActivity.java" changelist="f10cf8e6-4f14-49e1-8631-b5acf07fc7c9" time="1379009296089" ignored="false" />
+    <file path="/MainActivity.java" changelist="5be22bf0-642f-4e6a-9cae-082ce871395f" time="1381311898346" ignored="false" />
     <file path="/PracticeSearchActivity.java" changelist="9ff95892-1573-40b5-ae0d-fedf3df3830b" time="1379679958588" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="f10cf8e6-4f14-49e1-8631-b5acf07fc7c9" time="1379004391521" ignored="false" />
     <file path="/Data.java" changelist="fd42e8d5-cbe3-4a76-bb8d-e23a00ae3baf" time="1375718346717" ignored="false" />
@@ -116,6 +115,7 @@
     <file path="/DownloadTaskStatusSummary.java" changelist="4f6642e5-3c3d-406a-a2e0-d4c3a43f0fed" time="1378483089119" ignored="false" />
     <file path="/DownloadStatusSummary.java" changelist="4f6642e5-3c3d-406a-a2e0-d4c3a43f0fed" time="1378484442713" ignored="false" />
     <file path="/DownloadStatusCodes.java" changelist="4f6642e5-3c3d-406a-a2e0-d4c3a43f0fed" time="1378485597791" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="5be22bf0-642f-4e6a-9cae-082ce871395f" time="1381761283991" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +135,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
@@ -173,6 +172,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -182,31 +182,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainMenuActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/MainMenuActivity.java">
+      <file leaf-file-name="Skin.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/Skin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="67" selection-start="1083" selection-end="1138" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_main_menu.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/activity_main_menu.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="0" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.0">
+            <state line="30" column="42" selection-start="950" selection-end="950" vertical-scroll-proportion="0.10471204">
               <folding />
             </state>
           </provider>
@@ -240,7 +219,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/assets/style.css" />
         <option value="$PROJECT_DIR$/src/com/newpush/mypractice/DownloaderActivity.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/mypractice/downloader/DownloadTask.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/mypractice/downloader/DownloaderActivity.java" />
@@ -251,10 +229,11 @@
         <option value="$PROJECT_DIR$/src/com/newpush/mypractice/downloader/DownloadStatusCodes.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/src/com/newpush/mypractice/MyPracticeApplication.java" />
-        <option value="$PROJECT_DIR$/src/com/newpush/mypractice/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/mypractice/DefaultActivity.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/mypractice/PracticeSearchActivity.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/mypractice/MainMenuActivity.java" />
+        <option value="$PROJECT_DIR$/assets/pushio_config.json" />
+        <option value="$PROJECT_DIR$/src/com/newpush/mypractice/MainActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
       </list>
     </option>
@@ -361,6 +340,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyPractice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mypractice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -430,7 +431,7 @@
       <recent name="com.newpush.greenwoodpediatrics" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Android Application.MyPractice eszközön">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -861,7 +862,6 @@
     </task>
     <task id="LOCAL-00073" summary="Subclassing downloader">
       <changelist id="4f6642e5-3c3d-406a-a2e0-d4c3a43f0fed" name="Subclassing downloader" comment="" />
-      <changelist id="" name="Removing debug text from location-based search" comment="" />
       <created>1378477442914</created>
       <updated>1379680735663</updated>
     </task>
@@ -908,7 +908,11 @@
       <created>1379680732476</created>
       <updated>1379680737975</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="Set new API key for the MedSecure Push.IO account">
+      <created>1381311499751</created>
+      <updated>1381311499752</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <option name="searchClosedTasks" value="true" />
     <servers />
   </component>
@@ -936,7 +940,6 @@
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="554" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554257" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -945,22 +948,23 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7278798" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554257" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554257" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.60601" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TF Uploader" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.37562606" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24924242" sideWeight="0.67445743" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24924242" sideWeight="0.39899832" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554257" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="23" y="270" width="1320" height="197" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19545455" sideWeight="0.67445743" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="554" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19848485" sideWeight="0.67445743" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554257" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39899832" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1006,7 +1010,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adds last known location pullling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set new API key for the MedSecure Push.IO account" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1020,7 +1024,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Modify main menu; add a hack for forcing actionbar overflow" />
     <MESSAGE value="Changes from branding change... damn" />
     <MESSAGE value="Modifies main menu to use buttons, etc." />
     <MESSAGE value="Adds zip extraction for design packs" />
@@ -1045,6 +1048,7 @@
     <MESSAGE value="Removing debug text from location-based search" />
     <MESSAGE value="Removing debug text from location-based search; fixing location-based search when there're no practices near" />
     <MESSAGE value="Adds last known location pullling" />
+    <MESSAGE value="Set new API key for the MedSecure Push.IO account" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1084,57 +1088,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_practice_search.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/MyPracticeApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="407" selection-end="407" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="35" selection-start="125" selection-end="125" vertical-scroll-proportion="0.02617801" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/downloader/DownloadStatusCodes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="44" selection-start="378" selection-end="378" vertical-scroll-proportion="0.20942408">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/DefaultActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="322" column="33" selection-start="14307" selection-end="14307" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="78" selection-start="5481" selection-end="5481" vertical-scroll-proportion="0.67713785">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/SelectPracticeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="94" selection-start="2137" selection-end="2137" vertical-scroll-proportion="0.45724258">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/downloader/AbstractDownloadService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="22" selection-start="227" selection-end="227" vertical-scroll-proportion="0.10869565" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/Data.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="17" selection-start="156" selection-end="160" vertical-scroll-proportion="0.02617801">
@@ -1144,16 +1097,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../../Toolkit/adt-bundle-windows-x86_64-20130219/sdk/sources/android-17/android/content/ContextWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="0" selection-start="5155" selection-end="5155" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="198" column="0" selection-start="5155" selection-end="5155" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/downloader/RootDownloadService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="135" selection-start="956" selection-end="956" vertical-scroll-proportion="0.07853403">
-          <folding />
-        </state>
+        <state line="29" column="135" selection-start="956" selection-end="956" vertical-scroll-proportion="0.07853403" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/PracticeSearchActivity.java">
@@ -1168,26 +1117,85 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/pushio_config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="41" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/MyPracticeApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="10" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_main_menu.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="0" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="28" column="0" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.027372263" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/MainMenuActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="67" selection-start="1083" selection-end="1138" vertical-scroll-proportion="0.0">
+        <state line="26" column="209" selection-start="995" selection-end="995" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="52" column="67" selection-start="2511" selection-end="2511" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/MainViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="13" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/parser/MainParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="164" column="0" selection-start="6210" selection-end="6210" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/PageActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="104" selection-end="104" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/DefaultActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="0" selection-start="2848" selection-end="2848" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/MainMenuActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="18" selection-start="2183" selection-end="2183" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/MenuActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="92" selection-start="678" selection-end="678" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/mypractice/Skin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="42" selection-start="950" selection-end="950" vertical-scroll-proportion="0.10471204">
           <folding />
         </state>
       </provider>

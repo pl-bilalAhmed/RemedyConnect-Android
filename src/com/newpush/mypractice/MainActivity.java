@@ -25,7 +25,7 @@ public class MainActivity extends DefaultActivity {
         //Checking to see if this activity was created by a user engaging with a notification
         if (getIntent().hasExtra(PUSH_KEY_ALERT)) {
             //Since they did engage with a notification we can grab anything from the payload, for this simple case, let's display the text from the last alert.
-            Toast.makeText(this, "Last Push: " + getIntent().getStringExtra(PUSH_KEY_ALERT), Toast.LENGTH_LONG);
+            Toast.makeText(this, "Last Push: " + getIntent().getStringExtra(PUSH_KEY_ALERT), Toast.LENGTH_LONG).show();
         }
     }
 
