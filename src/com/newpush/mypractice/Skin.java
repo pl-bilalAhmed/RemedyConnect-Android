@@ -11,6 +11,8 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
@@ -138,7 +140,7 @@ public class Skin {
     public static void applyMainMenuButtons(Activity mainMenuActivity) {
         String filePath = getSkinDirectoryPath(mainMenuActivity) + "/button.9.png";
         File buttonFile = new File(filePath);
-        Typeface typeface = Typeface.createFromAsset(mainMenuActivity.getAssets(), "fonts/OpenSans-Regular.ttf");
+        Typeface typeface = Typeface.createFromAsset(mainMenuActivity.getAssets(), "fonts/OpenSans-CondLight.ttf");
         if (buttonFile.exists()) {
             Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
             Drawable drawableBg = new BitmapDrawable(mainMenuActivity.getResources(), bitmapBg);
@@ -161,5 +163,15 @@ public class Skin {
             button.setTypeface(typeface);
             Skin.setBackgroundOf(button, drawableBg);
         }
+    }
+
+    public static Typeface menuFont(Context context) {
+        Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Light.ttf");
+        return tf;
+    }
+
+    public static Typeface menuHeaderFont(Context context) {
+        Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Semibold.ttf");
+        return tf;
     }
 }

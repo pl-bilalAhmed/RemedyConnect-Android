@@ -18,11 +18,11 @@
                 android:title="@string/terms_and_conditions"
                 android:showAsAction="never"
                 android:orderInCategory="1001"/>
-            <item
+            <!--<item
                 android:id="@+id/menu_about"
                 android:title="@string/about"
                 android:showAsAction="never"
-                android:orderInCategory="1002"/>
+                android:orderInCategory="1002"/>-->
         </menu>
     </item>
 </menu>

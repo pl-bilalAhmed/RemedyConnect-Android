@@ -1,16 +1,14 @@
 package com.newpush.mypractice;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.ScrollView;
 import com.newpush.mypractice.parser.MainParser;
 
 public class ArticleSetActivity extends DefaultActivity {
@@ -28,13 +26,33 @@ public class ArticleSetActivity extends DefaultActivity {
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.default_header_listitem, list, false);
         ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.default_footer_listitem, list, false);
+
+        for (int i = 0; i < header.getChildCount(); ++i) {
+            View v = header.getChildAt(i);
+            if (v.getId() == R.id.titleTextView) {
+                ((TextView)v).setTypeface(Skin.menuHeaderFont(this));
+            }
+        }
+
         list.addHeaderView(header, null, false);
         list.addFooterView(footer, null, false);
 
         Skin.applyThemeLogo(this);
         Skin.applyActivityBackground(this);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)  {
+            public View getView(int pos, View convertView, android.view.ViewGroup parent) {
+                View v = convertView;
+                if (v == null) {
+                    LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    v = vi.inflate(android.R.layout.simple_list_item_1, null);
+                }
+                TextView tv = (TextView)v.findViewById(android.R.id.text1);
+                tv.setText(this.getItem(pos));
+                tv.setTypeface(Skin.menuFont(getApplicationContext()));
+                return v;
+            };
+        };;
         list.setAdapter(adapter);
 
         for (String listItem : extras.getStringArrayList("articleTitles")) {

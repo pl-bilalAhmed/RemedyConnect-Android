@@ -1,5 +1,6 @@
 package com.newpush.mypractice;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import com.newpush.mypractice.parser.MainParser;
 
 import java.util.ArrayList;
@@ -24,9 +26,31 @@ public class MenuActivity extends DefaultActivity {
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.default_header_listitem, menu, false);
         ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.default_footer_listitem, menu, false);
+
+        for (int i = 0; i < header.getChildCount(); ++i) {
+            View v = header.getChildAt(i);
+            if (v.getId() == R.id.titleTextView) {
+                ((TextView)v).setTypeface(Skin.menuHeaderFont(this));
+            }
+        }
+
         menu.addHeaderView(header, null, false);
         menu.addFooterView(footer, null, false);
-        menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>());
+
+        // Let's use a modified ArrayAdapter so we can use a custom font on the list
+        menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>()) {
+            public View getView(int pos, View convertView, android.view.ViewGroup parent) {
+                View v = convertView;
+                if (v == null) {
+                    LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    v = vi.inflate(android.R.layout.simple_list_item_1, null);
+                }
+                TextView tv = (TextView)v.findViewById(android.R.id.text1);
+                tv.setText(this.getItem(pos));
+                tv.setTypeface(Skin.menuFont(getApplicationContext()));
+                return v;
+            };
+        };
         menu.setAdapter(menuadapter);
 
         Skin.applyThemeLogo(this);
