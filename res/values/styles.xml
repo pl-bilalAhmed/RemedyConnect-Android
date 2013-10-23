@@ -17,6 +17,7 @@
     <style name="MainMenuButton" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button</item>
         <item name="android:textSize">18dp</item>
+        <item name="android:textColor">#ffffff</item>
     </style>
     <style name="MyPractice.ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
         <item name="titleTextStyle">@style/MyPractice.ActionBar.TitleTextStyle</item>
