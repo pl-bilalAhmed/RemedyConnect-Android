@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MyPractice</string>
+    <string name="app_name">Your Practice</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MyPractice</string>
+    <string name="title_activity_main">Your Practice</string>
     <string name="title_activity_download">Download Your Practice Info</string>
     <string name="download_information">To let you use the application offline, we will now download the actual information. Please ensure that you have Internet connection available and press Download to begin.</string>
     <string name="download_button">Download</string>
