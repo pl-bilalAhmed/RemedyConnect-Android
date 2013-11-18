@@ -115,6 +115,10 @@ public class DefaultActivity extends SherlockActivity {
                 String designPack = Data.GetDesignPack(this);
                 startDownload(feedRoot, designPack);
                 return true;
+            case R.id.menu_rest_testing:
+                intent = new Intent(this, RestTesting.class);
+                startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
