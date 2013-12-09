@@ -23,6 +23,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="actionbarsherlock" />
+        <module name="actionbarsherlock (1)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

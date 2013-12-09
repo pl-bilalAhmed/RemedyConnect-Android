@@ -4,13 +4,20 @@
     <entry_points version="2.0" />
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="android" url="file://$PROJECT_DIR$/../Libraries/ActionBarSherlock/actionbarsherlock" />
     <file type="android" url="file://$PROJECT_DIR$/../Libraries/JakeWharton-ActionBarSherlock-c47975f/actionbarsherlock" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/../Libraries/JakeWharton-ActionBarSherlock-c47975f/actionbarsherlock/pom.xml" />
+        <option value="$PROJECT_DIR$/../Libraries/ActionBarSherlock/actionbarsherlock/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/../Libraries/JakeWharton-ActionBarSherlock-c47975f/actionbarsherlock/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="Android 4.2.2 Platform" project-jdk-type="Android SDK">
