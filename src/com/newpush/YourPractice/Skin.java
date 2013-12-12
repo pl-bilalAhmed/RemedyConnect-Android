@@ -2,12 +2,10 @@ package com.newpush.YourPractice;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Shader;
-import android.graphics.Typeface;
+import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.NinePatchDrawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -136,30 +134,31 @@ public class Skin {
     }
 
     public static void applyMainMenuButtons(Activity mainMenuActivity) {
-        String filePath = getSkinDirectoryPath(mainMenuActivity) + "/button.9.png";
+        String filePath = getSkinDirectoryPath(mainMenuActivity) + "/testbutton.png"; // "/button.9.png";
         File buttonFile = new File(filePath);
         Typeface typeface = Typeface.createFromAsset(mainMenuActivity.getAssets(), "fonts/OpenSans-CondLight.ttf");
         if (buttonFile.exists()) {
             Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
-            Drawable drawableBg = new BitmapDrawable(mainMenuActivity.getResources(), bitmapBg);
+            // Drawable drawableBg = new BitmapDrawable(mainMenuActivity.getResources(), bitmapBg);
+            NinePatchDrawable np = NinePatchBitmapFactory.createNinePatchWithCapInsets(mainMenuActivity.getResources(), bitmapBg, 16, 16, 95-16, 168-16, null);
             Button button = (Button) mainMenuActivity.findViewById(R.id.menuButton1);
             button.setTypeface(typeface);
-            Skin.setBackgroundOf(button, drawableBg);
+            Skin.setBackgroundOf(button, np);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton2);
             button.setTypeface(typeface);
-            Skin.setBackgroundOf(button, drawableBg);
+            Skin.setBackgroundOf(button, np);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton3);
             button.setTypeface(typeface);
-            Skin.setBackgroundOf(button, drawableBg);
+            Skin.setBackgroundOf(button, np);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton4);
             button.setTypeface(typeface);
-            Skin.setBackgroundOf(button, drawableBg);
+            Skin.setBackgroundOf(button, np);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton5);
             button.setTypeface(typeface);
-            Skin.setBackgroundOf(button, drawableBg);
+            Skin.setBackgroundOf(button, np);
             button = (Button) mainMenuActivity.findViewById(R.id.menuButton6);
             button.setTypeface(typeface);
-            Skin.setBackgroundOf(button, drawableBg);
+            Skin.setBackgroundOf(button, np);
         }
     }
 
