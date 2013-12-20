@@ -7,7 +7,7 @@ public class YourPracticeApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        TestFlight.takeOff(this, "7fb42f49-fa8f-4974-9920-d6e26b6dd8f7");
+        TestFlight.takeOff(this, "1e7151d2-5174-4e92-830f-56d6f3b8b9b3");
         TestFlight.passCheckpoint("Application launched");
     }
 }
