@@ -31,5 +31,6 @@
     <string name="couldnt_find_practice_near_location">We couldn\'t find a practice near to your location, please start
         a search by practice name.
     </string>
+    <string name="choose_your_practice">Choose Your Practice</string>
 
 </resources>

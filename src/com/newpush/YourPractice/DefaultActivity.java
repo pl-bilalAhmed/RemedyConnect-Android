@@ -117,6 +117,10 @@ public class DefaultActivity extends SherlockActivity {
                 String designPack = Data.GetDesignPack(this);
                 startDownload(feedRoot, designPack);
                 return true;
+            case R.id.menu_choose_practice:
+                intent = new Intent(this, PracticeSearchActivity.class);
+                startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
