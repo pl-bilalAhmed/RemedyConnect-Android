@@ -220,8 +220,8 @@ public class DefaultActivity extends SherlockActivity {
                     URLConnection connection = url.openConnection();
                     connection.setConnectTimeout(CONNECTION_TIMEOUT);
                     connection.connect();
-                    int fileSize = 0;
-                    int downloadedSize = 0;
+                    int fileSize;
+                    int downloadedSize;
                     fileSize = connection.getContentLength();
                     InputStream urlStream = new BufferedInputStream(url.openStream());
                     OutputStream fileOutputStream = new FileOutputStream(dir + to);
@@ -266,12 +266,10 @@ public class DefaultActivity extends SherlockActivity {
                             Skin.extractDesignPack(getApplicationContext());
                             publishProgress(new DownloadTaskStatus(DownloadStatusCodes.EXTRACTING_FINISHED, downloadedSize, fileSize));
                         } catch (ZipException e) {
-                            e.printStackTrace();
                             publishProgress(new DownloadTaskStatus(DownloadStatusCodes.EXTRACTING_FAILED));
                         }
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
                     publishProgress(new DownloadTaskStatus(DownloadStatusCodes.DOWNLOAD_FAILED));
                 }
             }
@@ -345,6 +343,7 @@ public class DefaultActivity extends SherlockActivity {
         protected String prepareDirectory() {
             String directoryPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/";
             File directory = new File(directoryPath);
+            //noinspection ResultOfMethodCallIgnored
             directory.mkdir();
             return directoryPath;
         }

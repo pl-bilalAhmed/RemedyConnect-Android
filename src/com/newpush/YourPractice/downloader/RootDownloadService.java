@@ -20,7 +20,7 @@ public class RootDownloadService extends AbstractDownloadService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        ResultReceiver receiver = (ResultReceiver) intent.getParcelableExtra("receiver");
+        ResultReceiver receiver = intent.getParcelableExtra("receiver");
         Bundle resultData = new Bundle();
         if (!this.isOnline()) {
             resultData.putInt("progress", 0);

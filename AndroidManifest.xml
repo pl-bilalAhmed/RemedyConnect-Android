@@ -97,7 +97,7 @@
         </activity>
         <activity android:name=".AboutActivity"/>
         <activity android:name=".TermsActivity"/>
-        <activity android:name=".MainMenuActivity"></activity>
+        <activity android:name=".MainMenuActivity"/>
 
     </application>
 

@@ -49,8 +49,8 @@ public class ArticleSetActivity extends DefaultActivity {
                 tv.setText(this.getItem(pos));
                 tv.setTypeface(Skin.menuFont(getApplicationContext()));
                 return v;
-            };
-        };;
+            }
+        };
         list.setAdapter(adapter);
 
         for (String listItem : extras.getStringArrayList("articleTitles")) {

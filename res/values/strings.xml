@@ -2,37 +2,15 @@
 <resources>
 
     <string name="app_name">Your Practice</string>
-    <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Your Practice</string>
-    <string name="title_activity_download">Download Your Practice Info</string>
-    <string name="download_information">To let you use the application offline, we will now download the actual information. Please ensure that you have Internet connection available and press Download to begin.</string>
-    <string name="download_button">Download</string>
-    <string name="greenwood_logo">Greenwood Pediatrics logo</string>
-
-    <color name="logo_background">#FFFFFF</color>
-
-    <string name="title_activity_office_info">Office Info</string>
-    <string name="title_activity_office_info_item">Office Info item</string>
-    <string name="title_activity_practice_news">Practice News</string>
-    <string name="title_activity_office_info_hours_location">Office Info, Hours &amp; Location</string>
-    <string name="title_activity_practice_news_item">Practice News Item</string>
     <string name="update">Update Your Practice Info</string>
-    <string name="news_item_release_date_label">Released on:</string>
-    <string name="title_activity_location">Office Location</string>
-    <string name="title_activity_is_your_child_sick">Is Your Child Sick?</string>
-    <string name="title_activity_is_your_child_sick_item">IsYourChildSickItemActivity</string>
-    <string name="title_activity_is_your_child_sick_article">IsYourChildSickArticleActivity</string>
     <string name="title_activity_about">About</string>
     <string name="about_developers">This application was developed by <a href="http://newpush.com">TheNewPush, LLC</a>. \nLead developer: Zoltán Adamek\n\n</string>
     <string name="about_jsoup">This application uses the <a href="http://jsoup.org">jsoup</a> open source software library under the MIT license.\n\nCopyright © 2009 &#8211; 2012 Jonathan Hedley (jonathan@hedley.net)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
-    <string name="title_activity_default">Greenwood Pediatrics</string>
     <string name="welcome">Welcome!</string>
-    <string name="footer">Please see our <a href="http://www.pediatricweb.com/privacypolicy.asp">Privacy Statement</a> and <a href="http://www.pediatricweb.com/disclaimer.asp">Disclaimer</a>.</string>
     <string name="title_activity_page_my_doctor">Page My Doctor</string>
     <string name="page_my_doctor_intro">We use a third-party service, Page My Doctor, so you can page the on-call provider with an urgent question after hours. First time users will register first. It’s simple! Please be brief and specific. Pagers and cell phones won’t take long messages easily.</string>
     <string name="page_my_doctor_open">Open Page My Doctor</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="logo_description">Logo</string>
     <string name="title_select_practice">Select your practice</string>
     <string name="practice_search_description">Welcome! Your are about to download information that your primary care provider has approved. Please ensure that you have a working Internet connection before starting the search. \nThis information is only intended for registered patients of this organization. Please choose the practice where you, or your family member, is a registered patient.\nTo select your practice, type and search. If you would like to search for the nearest practice, start a location-based search below.</string>
@@ -45,7 +23,6 @@
     <string name="downloading">Downloading practice information, please wait&#8230;</string>
     <string name="download_failed">Failed to download data. Please ensure that your Internet connection is OK and try again.</string>
     <string name="extracting_design">Extracting design, please wait&#8230;</string>
-    <string name="network_ready_starting_download">Network ready. Starting download&#8230;</string>
     <string name="parsing_for_more">Discovering additional content, please wait&#8230;</string>
     <string name="starting_additional_download">Found new content, please wait&#8230;</string>
     <string name="menu_background">Menu background</string>

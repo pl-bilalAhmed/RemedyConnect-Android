@@ -13,7 +13,7 @@ public class MainViewController {
         String startPath = context.getFilesDir().getAbsolutePath() + "/";
         MainParser parser = new MainParser(startPath + parsePoint);
         if (parser.isMenu()) {
-            Boolean isRoot = (parsePoint == "index.xml");
+            Boolean isRoot = (parsePoint.equals("index.xml"));
             Intent intent;
             if (isRoot) {
                 intent = new Intent(context, MainMenuActivity.class);
@@ -45,7 +45,7 @@ public class MainViewController {
 
             intent.putExtra("text", page.get("text"));
             intent.putExtra("title", page.get("title"));
-            intent.putExtra("isRoot", parsePoint == "index.xml");
+            intent.putExtra("isRoot", parsePoint.equals("index.xml"));
 
             context.startActivity(intent);
         }
@@ -53,7 +53,7 @@ public class MainViewController {
             Intent intent = new Intent(context, ArticleSetActivity.class);
             intent.putExtra("articleTitles", parser.getArticleSetTitles());
             intent.putExtra("title", title);
-            intent.putExtra("isRoot", parsePoint == "index.xml");
+            intent.putExtra("isRoot", parsePoint.equals("index.xml"));
             intent.putExtra("xml", startPath + parsePoint);
 
             context.startActivity(intent);

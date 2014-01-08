@@ -56,12 +56,14 @@ public class Skin {
             designPack.extractAll(getSkinDirectoryPath(context));
         }
         File designPackFile = new File(context.getFilesDir() + "/skin/DesignPack.zip");
+        //noinspection ResultOfMethodCallIgnored
         designPackFile.delete();
    }
 
     public static void prepareSkinDirectory(Context context) {
         File skinFolder = new File(getSkinDirectoryPath(context));
         if (!skinFolder.exists()) {
+            //noinspection ResultOfMethodCallIgnored
             skinFolder.mkdir();
         }
     }
@@ -163,12 +165,10 @@ public class Skin {
     }
 
     public static Typeface menuFont(Context context) {
-        Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Light.ttf");
-        return tf;
+        return Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Light.ttf");
     }
 
     public static Typeface menuHeaderFont(Context context) {
-        Typeface tf = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Semibold.ttf");
-        return tf;
+        return Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Semibold.ttf");
     }
 }

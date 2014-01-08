@@ -49,7 +49,7 @@ public class MenuActivity extends DefaultActivity {
                 tv.setText(this.getItem(pos));
                 tv.setTypeface(Skin.menuFont(getApplicationContext()));
                 return v;
-            };
+            }
         };
         menu.setAdapter(menuadapter);
 

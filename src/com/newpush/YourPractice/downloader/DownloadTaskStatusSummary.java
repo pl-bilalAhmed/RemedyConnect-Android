@@ -41,10 +41,8 @@ public class DownloadTaskStatusSummary {
         Integer sumOfDownloadedSize = 0;
 
         for (DownloadTaskStatus status : statuses) {
-            if (status.getStatusCode() == DownloadStatusCodes.EXTRACTING_FAILED ||
-                    status.getStatusCode() == DownloadStatusCodes.DOWNLOAD_FAILED) {
-            }
-            else {
+            if (status.getStatusCode() != DownloadStatusCodes.EXTRACTING_FAILED &&
+                    status.getStatusCode() != DownloadStatusCodes.DOWNLOAD_FAILED) {
                 sumOfDownloadedSize += status.getDownloadedSize();
                 sumOfExpectedSize += status.getExpectedSize();
             }

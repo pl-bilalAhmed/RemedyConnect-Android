@@ -23,14 +23,12 @@ public class NinePatchBitmapFactory {
 
     public static NinePatchDrawable createNinePatchWithCapInsets(Resources res, Bitmap bitmap, int top, int left, int bottom, int right, String srcName) {
         ByteBuffer buffer = getByteBuffer(top, left, bottom, right);
-        NinePatchDrawable drawable = new NinePatchDrawable(res, bitmap, buffer.array(), new Rect(), srcName);
-        return drawable;
+        return new NinePatchDrawable(res, bitmap, buffer.array(), new Rect(), srcName);
     }
 
     public static NinePatch createNinePatch(Resources res, Bitmap bitmap, int top, int left, int bottom, int right, String srcName) {
         ByteBuffer buffer = getByteBuffer(top, left, bottom, right);
-        NinePatch patch = new NinePatch(bitmap, buffer.array(), srcName);
-        return patch;
+        return new NinePatch(bitmap, buffer.array(), srcName);
     }
 
     private static ByteBuffer getByteBuffer(int top, int left, int bottom, int right) {

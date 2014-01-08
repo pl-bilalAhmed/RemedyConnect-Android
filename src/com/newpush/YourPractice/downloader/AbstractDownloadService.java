@@ -19,18 +19,17 @@ public abstract class AbstractDownloadService extends IntentService {
     protected String prepareDirectory() {
         String directoryPath = this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";
         File directory = new File(directoryPath);
+        //noinspection ResultOfMethodCallIgnored
         directory.mkdir();
         return directoryPath;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-        return false;
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
 }

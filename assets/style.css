@@ -42,6 +42,15 @@ html, body {
     width: 100%;
 }
 
+@media screen and (orientation:landscape) {
+    .headerLogo {
+        width: 66%;
+        padding-left: 16%;
+        padding-right: 16%;
+        margin: 0;
+    }
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'OpenSansCondensedBold';
 }
