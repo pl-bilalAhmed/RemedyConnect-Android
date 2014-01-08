@@ -21,7 +21,7 @@
     <string name="terms_and_conditions">Terms and Conditions</string>
 
     <string name="downloading">Downloading practice information, please wait&#8230;</string>
-    <string name="download_failed">Failed to download data. Please ensure that your Internet connection is OK and try again.</string>
+    <string name="download_failed">Failed to download data. Please ensure that your Internet connection is working and try again.</string>
     <string name="extracting_design">Extracting design, please wait&#8230;</string>
     <string name="parsing_for_more">Discovering additional content, please wait&#8230;</string>
     <string name="starting_additional_download">Found new content, please wait&#8230;</string>
