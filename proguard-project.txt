@@ -18,3 +18,4 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-libraryjars "libs/android-support-v4.jar", "libs/jsoup-1.6.3.jar", "libs/TestFlightLib.jar"
