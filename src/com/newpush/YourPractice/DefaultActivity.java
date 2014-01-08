@@ -99,10 +99,10 @@ public class DefaultActivity extends SherlockActivity {
             case R.id.home:
                 MainViewController.FireRootActivity(this);
                 return true;
-            /*case R.id.menu_about:
+            case R.id.menu_about:
                 intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
-                return true;*/
+                return true;
             case R.id.menu_terms_and_conditions:
                 intent = new Intent(this, TermsActivity.class);
                 startActivity(intent);
