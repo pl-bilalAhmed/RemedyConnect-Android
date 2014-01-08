@@ -5,9 +5,21 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
 
+import java.io.File;
+
 public class Data {
     public static final String ROOT = "https://cms.pediatricweb.com/mobile-app";
     public static final String PREFS_NAME = "PWPrefs";
+
+    public static boolean isDataAvailable(Context context) {
+        boolean data_available = true;
+        File file = context.getFileStreamPath("index.xml");
+        if (!file.exists()) {
+            data_available = false;
+        }
+
+        return data_available;
+    }
 
     public static final String GetFeedRoot(Context context) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);

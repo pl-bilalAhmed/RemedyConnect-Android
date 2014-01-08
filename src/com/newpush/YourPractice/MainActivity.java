@@ -24,7 +24,7 @@ public class MainActivity extends DefaultActivity {
     }
 
     public void checkDownloadedData() {
-        if (DataChecker.isDataAvailable(getApplicationContext())) {
+        if (Data.isDataAvailable(getApplicationContext())) {
             MainViewController.FireActivity(this, "index.xml");
             finish();
         } else {
