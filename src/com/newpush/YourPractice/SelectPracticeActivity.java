@@ -35,6 +35,7 @@ public class SelectPracticeActivity extends DefaultActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         boolean result =  super.onCreateOptionsMenu(menu);
         setHomeVisibility(false);
+        disableOptionsMenu();
         return result;
     }
 

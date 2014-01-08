@@ -53,6 +53,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     public boolean onCreateOptionsMenu(Menu menu) {
         boolean result =  super.onCreateOptionsMenu(menu);
         setHomeVisibility(false);
+        disableOptionsMenu();
         return result;
     }
 

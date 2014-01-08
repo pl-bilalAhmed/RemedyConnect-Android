@@ -73,6 +73,11 @@ public class DefaultActivity extends SherlockActivity {
         item.setVisible(visible);
     }
 
+    public void disableOptionsMenu() {
+        MenuItem item = abMenu.findItem(R.id.more);
+        item.setVisible(false);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
