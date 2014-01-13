@@ -136,7 +136,7 @@ public class Skin {
     }
 
     public static void applyMainMenuButtons(Activity mainMenuActivity) {
-        String filePath = getSkinDirectoryPath(mainMenuActivity) + "/testbutton.png"; // "/button.9.png";
+        String filePath = getSkinDirectoryPath(mainMenuActivity) + "/button.9.png";
         File buttonFile = new File(filePath);
         Typeface typeface = Typeface.createFromAsset(mainMenuActivity.getAssets(), "fonts/OpenSans-CondLight.ttf");
         if (buttonFile.exists()) {
