@@ -173,8 +173,61 @@ public class DefaultActivity extends SherlockActivity {
         }
     }
 
+    // Simple solution taken from: http://stackoverflow.com/a/5322390/238845
+    protected void deleteFiles() {
+        String directoryPath = getApplicationContext().getFilesDir().getAbsolutePath();
+        File file = new File(directoryPath);
+        if (file.exists()) {
+            String deleteCmd = "rm -rf " + directoryPath;
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                Process p = runtime.exec(deleteCmd);
+                p.waitFor();
+            } catch (IOException e) {
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+
+    protected void saveIndex() {
+        String tempDirPath = getApplicationContext().getCacheDir().getAbsolutePath();
+        String indexPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/index.xml";
+        File file = new File(indexPath);
+        if (file.exists()) {
+            String cpCmd = "cp " + indexPath + " " + tempDirPath;
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                Process p = runtime.exec(cpCmd);
+                p.waitFor();
+            } catch (IOException e) {
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+
+    protected void restoreIndex() {
+        String tempFilePath = getApplicationContext().getCacheDir().getAbsolutePath() + "/index.xml";
+        String indexPath = getApplicationContext().getFilesDir().getAbsolutePath();
+        File file = new File(tempFilePath);
+        if (file.exists()) {
+            String cpCmd = "cp " + tempFilePath + " " + indexPath;
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                Process p = runtime.exec(cpCmd);
+                p.waitFor();
+            } catch (IOException e) {
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public void startDownload(String feedRoot, String designPack) {
+        // Reset data storage.
+        saveIndex();
+        deleteFiles();
+        restoreIndex();
+
         // Store the selected feed endpoint's information.
         Data.SetFeedRoot(this, feedRoot);
         Data.SetDesignPack(this, designPack);
@@ -314,7 +367,7 @@ public class DefaultActivity extends SherlockActivity {
                             download.execute(status[0].getNewDownload());
                         }
                     } catch (RejectedExecutionException e) {
-                        Log.w("MyPractice Downloader", "Thread pool executor rejected the download task", e);
+                        Log.w("YourPractice downloader", "Thread pool executor rejected the download task", e);
                     }
                     break;
                 case DownloadStatusCodes.UPDATE_PROGRESS:
@@ -352,8 +405,12 @@ public class DefaultActivity extends SherlockActivity {
         protected String prepareDirectory() {
             String directoryPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/";
             File directory = new File(directoryPath);
-            //noinspection ResultOfMethodCallIgnored
-            directory.mkdir();
+            if (directory.mkdir() || directory.isDirectory()) {
+                String skinPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/skin/";
+                File skinDir = new File(skinPath);
+                //noinspection ResultOfMethodCallIgnored
+                skinDir.mkdir();
+            }
             return directoryPath;
         }
 
