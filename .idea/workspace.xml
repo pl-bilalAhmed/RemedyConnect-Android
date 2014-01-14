@@ -56,7 +56,7 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="YourPractice downloader" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Fatal exception" />
   </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/assets/style.css" line="46" />
@@ -68,14 +68,12 @@
     <list id="f10cf8e6-4f14-49e1-8631-b5acf07fc7c9" name="Integrating Push.io" comment="" />
     <list id="51660b46-0f62-4f44-94d7-e39fa6485ddb" name="Switching to indeterminate download progress" comment="Switching to indeterminate download progress" />
     <list id="5be22bf0-642f-4e6a-9cae-082ce871395f" name="MedSecure Web API implementation for registering the device" comment="Removes unused classes: CustomExpandableListAdapter and DataChecker." />
-    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Fixes main menu buttons for the button graphic standard.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newpush/YourPractice/downloader/AbstractDownloadService.java" afterPath="$PROJECT_DIR$/src/com/newpush/YourPractice/downloader/AbstractDownloadService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newpush/YourPractice/PracticeSearchActivity.java" afterPath="$PROJECT_DIR$/src/com/newpush/YourPractice/PracticeSearchActivity.java" />
+    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Removes unused stuff, adds working ProGuard configuration.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Project.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" time="1389701585222" ignored="false" />
+    <file path="/Dummy.txt" changelist="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" time="1389705576774" ignored="false" />
     <file path="$PROJECT_DIR$/../../Eclipse workspace/actionbarsherlock/project.properties" changelist="f5030165-16fd-42ea-b0c5-2fceda2ead9e" time="1374736777553" ignored="false" />
     <file path="/a.xml" changelist="f5030165-16fd-42ea-b0c5-2fceda2ead9e" time="1374740161443" ignored="false" />
     <file path="/fragment.java" changelist="5be22bf0-642f-4e6a-9cae-082ce871395f" time="1386864924015" ignored="false" />
@@ -292,7 +290,7 @@
     <file path="$PROJECT_DIR$/gen/com/newpush/YourPractice/Manifest.java" changelist="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" time="1389180083876" ignored="false" />
     <file path="$PROJECT_DIR$/../Libraries/ActionBarSherlock/actionbarsherlock/target/generated-sources/r/com/actionbarsherlock/BuildConfig.java" changelist="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" time="1389180251718" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/newpush/YourPractice/BuildConfig.java" changelist="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" time="1389180251718" ignored="false" />
-    <file path="/proguard-project.txt" changelist="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" time="1389181145855" ignored="false" />
+    <file path="/proguard-project.txt" changelist="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" time="1389705199459" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -363,19 +361,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PracticeSearchActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/PracticeSearchActivity.java">
+      <file leaf-file-name="proguard-project.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proguard-project.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="78" selection-start="4028" selection-end="4028" vertical-scroll-proportion="0.0">
+            <state line="61" column="0" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AbstractDownloadService.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/downloader/AbstractDownloadService.java">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="104" selection-start="951" selection-end="951" vertical-scroll-proportion="0.5794066">
+            <state line="11" column="50" selection-start="450" selection-end="450" vertical-scroll-proportion="0.28795812">
               <folding />
             </state>
           </provider>
@@ -410,10 +408,8 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/bin/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/assets/style.css" />
         <option value="$PROJECT_DIR$/project.properties" />
-        <option value="$PROJECT_DIR$/proguard-project.txt" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/SelectPracticeActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/activity_splashscreen.xml" />
         <option value="$PROJECT_DIR$/res/layout-land/activity_main_menu.xml" />
@@ -426,6 +422,8 @@
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/PracticeSearchActivity.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/downloader/AbstractDownloadService.java" />
+        <option value="$PROJECT_DIR$/proguard-project.txt" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -490,6 +488,7 @@
   </component>
   <component name="ProjectStructureProblems">
     <ignored-problems>
+      <problem id="unused-library(library:project:com.fasterxml.jackson.core:jackson-databind:2.2.3)" />
       <problem id="unused-library(library:project:org.antlr:stringtemplate:4.0.2)" />
     </ignored-problems>
   </component>
@@ -524,46 +523,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Your Practice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="YourPractice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Your Practice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="YourPractice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="downloader" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -584,18 +543,18 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Facets" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="135" />
-    <property name="OverrideImplement.combined" value="true" />
-    <property name="project.structure.proportion" value="0.15" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="152" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="ExportedApkPath" value="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\Your Practice.apk" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="156" />
     <property name="recentsLimit" value="5" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="156" />
+    <property name="ExportedApkPath" value="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\Your Practice.apk" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="ExportedModule" value="Your Practice" />
@@ -610,24 +569,24 @@
     <property name="DEBUGGABLE_PROCESS" value="com.newpush.YourPractice" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="NexusSGB" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="AndroidTargetDevices" value="192.168.0.102:5555" />
-    <property name="Repository.Attach.Sources" value="true" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="Repository.Attach.Sources" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="Downloaded.Files.Path" value="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\lib" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="options.lastSelected" value="android.dex.compiler" />
     <property name="AndroidLayoutSelectedEditor" value="text-editor" />
-    <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="project.structure.side.proportion" value="0.37512338" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="36304CA7557B00EC" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
@@ -688,19 +647,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -726,6 +672,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1300,7 +1259,23 @@
       <created>1389608873175</created>
       <updated>1389608873175</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="Cleans up code for release, removing logging">
+      <created>1389701764389</created>
+      <updated>1389701764390</updated>
+    </task>
+    <task id="LOCAL-00122" summary="Adds missing libraries to project.">
+      <created>1389703068132</created>
+      <updated>1389703068132</updated>
+    </task>
+    <task id="LOCAL-00123" summary="Cleans up manifest file.">
+      <created>1389703089155</created>
+      <updated>1389703089155</updated>
+    </task>
+    <task id="LOCAL-00124" summary="Removes unused stuff, adds working ProGuard configuration.">
+      <created>1389705579165</created>
+      <updated>1389705579165</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <option name="searchClosedTasks" value="true" />
     <servers />
   </component>
@@ -1331,19 +1306,19 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32387313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49582636" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.27378964" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32387313" sideWeight="0.70681816" order="3" side_tool="true" content_ui="tabs" x="26" y="124" width="1314" height="490" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.72621036" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554257" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39565945" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.9081803" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" x="26" y="191" width="1314" height="355" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TF Uploader" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.37562606" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2090909" sideWeight="0.50417364" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2090909" sideWeight="0.27378964" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.72621036" sideWeight="0.2931818" order="2" side_tool="false" content_ui="tabs" x="23" y="270" width="1320" height="197" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="554" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19545455" sideWeight="0.6761269" order="3" side_tool="false" content_ui="tabs" />
@@ -1352,7 +1327,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19848485" sideWeight="0.6761269" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39565945" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49582636" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39899832" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1360,7 +1335,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
@@ -1398,7 +1373,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes main menu buttons for the button graphic standard." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removes unused stuff, adds working ProGuard configuration." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1412,10 +1387,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Changes main menu button size." />
-    <MESSAGE value="Renamed the application to Your Practice.&#10;&#10;We still need to change things like namespace etc." />
-    <MESSAGE value="Added comment" />
-    <MESSAGE value="Added Jackson to the project." />
     <MESSAGE value="Added basic testing code." />
     <MESSAGE value="First testing code version which actually works for pulling a sample practice and displaying it as a toast." />
     <MESSAGE value="Fully renamed app to Your Practice." />
@@ -1437,6 +1408,10 @@
     <MESSAGE value="Modifies workspace settings." />
     <MESSAGE value="Fixes clearing downloaded data for updates." />
     <MESSAGE value="Fixes main menu buttons for the button graphic standard." />
+    <MESSAGE value="Cleans up code for release, removing logging" />
+    <MESSAGE value="Adds missing libraries to project." />
+    <MESSAGE value="Cleans up manifest file." />
+    <MESSAGE value="Removes unused stuff, adds working ProGuard configuration." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1476,39 +1451,19 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/MainViewController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="351" selection-end="351" vertical-scroll-proportion="0.02617801">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="767" selection-end="767" vertical-scroll-proportion="0.6404887">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/downloader/DownloadTaskStatusSummary.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="19" selection-start="605" selection-end="605" vertical-scroll-proportion="0.02617801">
-          <folding />
-        </state>
+        <state line="20" column="19" selection-start="605" selection-end="605" vertical-scroll-proportion="0.02617801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/Data.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="313" selection-end="313" vertical-scroll-proportion="0.02617801">
-          <folding />
-        </state>
+        <state line="12" column="0" selection-start="313" selection-end="313" vertical-scroll-proportion="0.02617801" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/SplashActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="464" selection-end="464" vertical-scroll-proportion="0.06457242">
-          <folding />
-        </state>
+        <state line="15" column="13" selection-start="464" selection-end="464" vertical-scroll-proportion="0.06457242" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/background_texture.png">
@@ -1555,9 +1510,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/DefaultActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="44" selection-start="5494" selection-end="5494" vertical-scroll-proportion="1.8115183">
-          <folding />
-        </state>
+        <state line="147" column="44" selection-start="5494" selection-end="5494" vertical-scroll-proportion="1.8115183" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/PracticeSearchActivity.java">
@@ -1569,7 +1522,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/downloader/AbstractDownloadService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="104" selection-start="951" selection-end="951" vertical-scroll-proportion="0.5794066">
+        <state line="34" column="22" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.7364747" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proguard-project.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="0" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="50" selection-start="450" selection-end="450" vertical-scroll-proportion="0.28795812">
           <folding />
         </state>
       </provider>
@@ -1637,7 +1602,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Android|Your Practice</last-edited>
+          <last-edited>Your Practice</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1661,7 +1626,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: backport-util-concurrent:backport-util-concurrent:3.1</last-edited>
+          <last-edited>com.fasterxml.jackson.core:jackson-databind:2.2.3</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

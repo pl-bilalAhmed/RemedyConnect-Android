@@ -2,7 +2,9 @@ package com.newpush.YourPractice;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import com.actionbarsherlock.view.Menu;
 
 import java.util.ArrayList;
