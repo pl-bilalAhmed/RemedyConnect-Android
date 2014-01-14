@@ -23,19 +23,6 @@
         android:theme="@style/appTheme"
         android:name=".YourPracticeApplication">
 
-        <receiver android:name="com.pushio.manager.PushIOBroadcastReceiver"
-                  android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <category android:name="com.newpush.mypractice" />
-            </intent-filter>
-        </receiver>
-
-        <activity android:name="com.pushio.manager.PushIOActivityLauncher" />
-        <service android:name="com.pushio.manager.PushIOGCMIntentService" />
-        <service android:name="com.pushio.manager.PushIOEngagementService" />
-
         <activity
             android:name="com.newpush.YourPractice.MainActivity"
             android:label="@string/title_activity_main">
