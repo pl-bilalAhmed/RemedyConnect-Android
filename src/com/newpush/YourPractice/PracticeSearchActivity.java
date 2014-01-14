@@ -99,7 +99,6 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
         Location lastLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         if (lastLoc != null) {
             if (lastLoc.getTime() >= System.currentTimeMillis() - 60 * 1000) {
-                Log.d("MyPractice", "Using last known location...");
                 gotLocation(lastLoc);
                 locationManager.removeUpdates(locationListener);
             }

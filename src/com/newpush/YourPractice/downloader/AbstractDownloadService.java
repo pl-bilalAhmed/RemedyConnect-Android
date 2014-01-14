@@ -10,7 +10,6 @@ import java.io.File;
 public abstract class AbstractDownloadService extends IntentService {
     public AbstractDownloadService() {
         super("AbstractDownloadService");
-        // Of course, you should never see this in a log...
     }
     public AbstractDownloadService(String name) {
         super(name);
