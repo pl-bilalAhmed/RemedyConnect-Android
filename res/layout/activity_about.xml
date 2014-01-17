@@ -24,12 +24,12 @@
             tools:context=".AboutActivity" />
 
         <TextView
-            android:id="@+id/about_jsoup"
+            android:id="@+id/about_libs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:linksClickable="true"
             android:padding="5dp"
-            android:text="@string/about_jsoup"
+            android:text="@string/about_libs"
             android:textSize="13dp"
             tools:context=".AboutActivity" />
         
