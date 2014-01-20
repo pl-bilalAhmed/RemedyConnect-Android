@@ -36,6 +36,8 @@
         android:text="@string/practiceSearchStartByLocationText"
         android:id="@+id/practiceSearchStartByLocation"
         android:layout_alignLeft="@+id/practiceSearchText"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/practiceSearchText"/>
+        android:layout_below="@id/practiceSearchStartByName"
+        android:layout_alignRight="@+id/practiceSearchText"
+        android:layout_marginTop="23dp"
+        />
 </RelativeLayout>
