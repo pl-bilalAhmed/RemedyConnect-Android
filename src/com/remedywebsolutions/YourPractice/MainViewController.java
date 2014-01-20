@@ -1,9 +1,9 @@
-package com.newpush.YourPractice;
+package com.remedywebsolutions.YourPractice;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import com.newpush.YourPractice.parser.MainParser;
+import com.remedywebsolutions.YourPractice.parser.MainParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,11 +1,12 @@
-package com.newpush.YourPractice;
+package com.remedywebsolutions.YourPractice;
 
 import android.os.Bundle;
 import android.webkit.WebView;
 
-public class TermsActivity extends DefaultActivity {
+public class PageActivity extends DefaultActivity {
     protected WebView display;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page);
@@ -13,9 +14,11 @@ public class TermsActivity extends DefaultActivity {
         Skin.applyViewBackground(this, display);
         display.setBackgroundColor(0);
         display.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
-        suppressTitle();
-        setTitle(R.string.terms_and_conditions);
-        display.loadUrl("file:///android_asset/terms_and_conditions.html");
-
+        setTitle(extras.getString("title"));
+        String html = extras.getString("text");
+        html = MarkupGenerator.preImage(this, html);
+        html = MarkupGenerator.wrapHTMLWithStyle(html);
+        display.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "utf-8", null);
     }
+
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Your Practice.iml" filepath="$PROJECT_DIR$/Your Practice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YourPractice.iml" filepath="$PROJECT_DIR$/YourPractice.iml" />
       <module fileurl="file://$PROJECT_DIR$/../Libraries/ActionBarSherlock/actionbarsherlock/actionbarsherlock.iml" filepath="$PROJECT_DIR$/../Libraries/ActionBarSherlock/actionbarsherlock/actionbarsherlock.iml" />
     </modules>
   </component>

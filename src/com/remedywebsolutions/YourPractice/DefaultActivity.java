@@ -1,4 +1,4 @@
-package com.newpush.YourPractice;
+package com.remedywebsolutions.YourPractice;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -18,10 +18,10 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.newpush.YourPractice.downloader.DownloadStatusCodes;
-import com.newpush.YourPractice.downloader.DownloadTaskStatus;
-import com.newpush.YourPractice.downloader.DownloadTaskStatusSummary;
-import com.newpush.YourPractice.parser.MainParser;
+import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
+import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatus;
+import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatusSummary;
+import com.remedywebsolutions.YourPractice.parser.MainParser;
 import com.testflightapp.lib.TestFlight;
 import net.lingala.zip4j.exception.ZipException;
 

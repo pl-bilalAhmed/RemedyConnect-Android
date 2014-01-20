@@ -1,4 +1,4 @@
-package com.newpush.YourPractice;
+package com.remedywebsolutions.YourPractice;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -16,9 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
-import com.newpush.YourPractice.downloader.DownloadStatusCodes;
-import com.newpush.YourPractice.downloader.RootDownloadService;
-import com.newpush.YourPractice.parser.MainParser;
+import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
+import com.remedywebsolutions.YourPractice.downloader.RootDownloadService;
+import com.remedywebsolutions.YourPractice.parser.MainParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;

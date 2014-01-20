@@ -1,4 +1,4 @@
-package com.newpush.YourPractice;
+package com.remedywebsolutions.YourPractice;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.newpush.YourPractice.parser.MainParser;
+import com.remedywebsolutions.YourPractice.parser.MainParser;
 
 public class ArticleSetActivity extends DefaultActivity {
     protected ArrayAdapter<String> adapter;

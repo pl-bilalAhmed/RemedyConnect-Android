@@ -1,4 +1,4 @@
-package com.newpush.YourPractice.downloader;
+package com.remedywebsolutions.YourPractice.downloader;
 
 public class DownloadStatusCodes {
     public static final int UPDATE_PROGRESS = 1;

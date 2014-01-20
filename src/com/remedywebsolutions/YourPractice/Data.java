@@ -1,4 +1,4 @@
-package com.newpush.YourPractice;
+package com.remedywebsolutions.YourPractice;
 
 
 import android.content.Context;

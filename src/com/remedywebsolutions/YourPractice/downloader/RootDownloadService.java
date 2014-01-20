@@ -1,10 +1,10 @@
-package com.newpush.YourPractice.downloader;
+package com.remedywebsolutions.YourPractice.downloader;
 
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import com.newpush.YourPractice.Data;
+import com.remedywebsolutions.YourPractice.Data;
 
 import java.io.*;
 import java.net.URL;

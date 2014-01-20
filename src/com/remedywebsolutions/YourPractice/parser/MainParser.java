@@ -1,4 +1,4 @@
-package com.newpush.YourPractice.parser;
+package com.remedywebsolutions.YourPractice.parser;
 
 import android.text.TextUtils;
 import org.jsoup.Jsoup;

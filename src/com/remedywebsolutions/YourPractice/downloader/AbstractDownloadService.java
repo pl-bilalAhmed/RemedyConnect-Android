@@ -1,4 +1,4 @@
-package com.newpush.YourPractice.downloader;
+package com.remedywebsolutions.YourPractice.downloader;
 
 import android.app.IntentService;
 import android.content.Context;
