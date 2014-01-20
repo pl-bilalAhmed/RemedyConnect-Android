@@ -31,9 +31,10 @@ public class NinePatchBitmapFactory {
         return new NinePatch(bitmap, buffer.array(), srcName);
     }
 
+    // Fixed Brian's original code with this: http://stackoverflow.com/a/16676419/238845
     private static ByteBuffer getByteBuffer(int top, int left, int bottom, int right) {
         //Docs check the NinePatchChunkFile
-        ByteBuffer buffer = ByteBuffer.allocate(56).order(ByteOrder.nativeOrder());
+        ByteBuffer buffer = ByteBuffer.allocate(84).order(ByteOrder.nativeOrder());
         //was translated
         buffer.put((byte)0x01);
         //divx size
@@ -41,7 +42,7 @@ public class NinePatchBitmapFactory {
         //divy size
         buffer.put((byte)0x02);
         //color size
-        buffer.put(( byte)0x02);
+        buffer.put(( byte)0x09);
 
         //skip
         buffer.putInt(0);
@@ -60,6 +61,13 @@ public class NinePatchBitmapFactory {
         buffer.putInt(right);
         buffer.putInt(top);
         buffer.putInt(bottom);
+        buffer.putInt(NO_COLOR);
+        buffer.putInt(NO_COLOR);
+        buffer.putInt(NO_COLOR);
+        buffer.putInt(NO_COLOR);
+        buffer.putInt(NO_COLOR);
+        buffer.putInt(NO_COLOR);
+        buffer.putInt(NO_COLOR);
         buffer.putInt(NO_COLOR);
         buffer.putInt(NO_COLOR);
 

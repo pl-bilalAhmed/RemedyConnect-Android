@@ -144,8 +144,8 @@ public class Skin {
         Typeface typeface = Typeface.createFromAsset(mainMenuActivity.getAssets(), "fonts/OpenSans-CondLight.ttf");
         if (buttonFile.exists()) {
             Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
-            // Drawable drawableBg = new BitmapDrawable(mainMenuActivity.getResources(), bitmapBg);
-            NinePatchDrawable np = NinePatchBitmapFactory.createNinePatchWithCapInsets(mainMenuActivity.getResources(), bitmapBg, 16, 16, 95-16, 168-16, null);
+            NinePatchDrawable np = NinePatchBitmapFactory.createNinePatchWithCapInsets(mainMenuActivity.getResources(),
+                    bitmapBg, 16, 16, bitmapBg.getHeight()-16, bitmapBg.getWidth()-16, null);
             Button button = (Button) mainMenuActivity.findViewById(R.id.menuButton1);
             button.setTypeface(typeface);
             Skin.setBackgroundOf(button, np);

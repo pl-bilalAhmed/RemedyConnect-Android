@@ -51,10 +51,6 @@
       <config />
     </shared>
   </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Fatal exception" />
-  </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/assets/style.css" line="46" />
   </component>
@@ -65,12 +61,9 @@
     <list id="f10cf8e6-4f14-49e1-8631-b5acf07fc7c9" name="Integrating Push.io" comment="" />
     <list id="51660b46-0f62-4f44-94d7-e39fa6485ddb" name="Switching to indeterminate download progress" comment="Switching to indeterminate download progress" />
     <list id="5be22bf0-642f-4e6a-9cae-082ce871395f" name="MedSecure Web API implementation for registering the device" comment="Removes unused classes: CustomExpandableListAdapter and DataChecker." />
-    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Fixes About text; slightly modifies search practice layout.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newpush/YourPractice/MenuActivity.java" afterPath="$PROJECT_DIR$/src/com/newpush/YourPractice/MenuActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Your Practice.iml" afterPath="$PROJECT_DIR$/Your Practice.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Removes footer, as it is now empty.&#10;&#10;Avoids empty rows in menu lists.">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java" afterPath="$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java" afterPath="$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Project.iws" />
@@ -148,74 +141,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <file leaf-file-name="NinePatchBitmapFactory.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="83" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1957">
-              <folding />
+            <state line="46" column="102" selection-start="1788" selection-end="1788" vertical-scroll-proportion="0.6239601" vertical-offset="315" max-vertical-offset="1726">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/MenuActivity.java">
+      <file leaf-file-name="Skin.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="10" selection-start="1410" selection-end="1410" vertical-scroll-proportion="0.48231512" vertical-offset="90" max-vertical-offset="1867">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="default_footer_listitem.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/default_footer_listitem.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="51" selection-start="259" selection-end="259" vertical-scroll-proportion="-3.0" vertical-offset="0" max-vertical-offset="717">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="terms_and_conditions.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/terms_and_conditions.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="22" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="405">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="1042" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="570">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_about.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/activity_about.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="40" selection-start="926" selection-end="926" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="660">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_practice_search.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/activity_practice_search.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state line="39" column="65" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="675">
-              <folding />
+            <state line="148" column="93" selection-start="6249" selection-end="6249" vertical-scroll-proportion="0.0" vertical-offset="1715" max-vertical-offset="2941">
+              <folding>
+                <element signature="e#653#685#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -256,7 +199,6 @@
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/MainViewController.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/DefaultActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/PracticeSearchActivity.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/downloader/AbstractDownloadService.java" />
         <option value="$PROJECT_DIR$/proguard-project.txt" />
@@ -266,6 +208,10 @@
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_practice_search.xml" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/MenuActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/utils/BitmapFactory.java" />
+        <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/utils/CompatBitmapFactory.java" />
+        <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java" />
+        <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java" />
       </list>
     </option>
   </component>
@@ -335,7 +281,7 @@
     </ignored-problems>
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -346,7 +292,48 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Your Practice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Your Practice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Your Practice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="YourPractice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHOW_ALL_PROCESSES" value="false" />
@@ -369,13 +356,13 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="834" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="842" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="164" />
-    <property name="DEBUGGABLE_DEVICE" value="36304CA7557B00EC" />
+    <property name="DEBUGGABLE_DEVICE" value="emulator-5554 (TesztGB)" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="157" />
     <property name="DEBUGGABLE_PROCESS" value="com.newpush.YourPractice" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="NexusSGB" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Tablet" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="AndroidTargetDevices" value="192.168.0.102:5555" />
     <property name="FullScreen" value="false" />
@@ -395,34 +382,35 @@
     <property name="AndroidLayoutSelectedEditor" value="text-editor" />
     <property name="project.structure.side.proportion" value="0.37512338" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="36304CA7557B00EC" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="4790055875aa307e" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="AndroidRunProguardForReleaseBuild" value="true" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="options.searchVisible" value="true" />
+    <property name="SearchEverywhereHistory" value="rap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.newpush.mypractice" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\src\com\newpush\YourPractice\utils" />
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\res\layout-land" />
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\res\drawable-hdpi" />
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\res\values-sw600dp" />
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\assets\fonts" />
-      <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\res\layout" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.newpush.mypractice" />
+      <recent name="com.newpush.greenwoodpediatrics" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\res\drawable-hdpi" />
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\assets" />
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.newpush.mypractice" />
-      <recent name="com.newpush.greenwoodpediatrics" />
-    </key>
   </component>
-  <component name="RunManager" selected="Android Application.MyPractice eszközön">
+  <component name="RunManager" selected="Android Application.MyPractice - kérdezz">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -457,19 +445,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -495,6 +470,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -634,11 +622,33 @@
       <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
       <method />
     </configuration>
-    <list size="4">
+    <configuration default="false" name="MyPractice - kérdezz" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="Your Practice" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <RunnerSettings RunnerId="AndroidDebugRunner" />
+      <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
+      <method />
+    </configuration>
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Android Application.MyPractice eszközön" />
       <item index="1" class="java.lang.String" itemvalue="Android Application.MyPractice virtuális Gingerbread-en" />
       <item index="2" class="java.lang.String" itemvalue="Android Application.MyPractice virtuális Eclair-en" />
       <item index="3" class="java.lang.String" itemvalue="Android Application.MyPractice virtuális tableten" />
+      <item index="4" class="java.lang.String" itemvalue="Android Application.MyPractice - kérdezz" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -1116,7 +1126,11 @@
       <created>1390209281887</created>
       <updated>1390209281887</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="Removes footer, as it is now empty.&#10;&#10;Avoids empty rows in menu lists.">
+      <created>1390212618574</created>
+      <updated>1390212618574</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <option name="searchClosedTasks" value="true" />
     <servers />
   </component>
@@ -1147,30 +1161,30 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19545455" sideWeight="0.6761269" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32387313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19848485" sideWeight="0.6761269" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.27378964" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32387313" sideWeight="0.70681816" order="3" side_tool="true" content_ui="tabs" x="26" y="124" width="1314" height="490" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.70694864" order="3" side_tool="true" content_ui="tabs" x="26" y="124" width="1314" height="490" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.72530866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32407406" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39506173" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.9081803" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" x="26" y="191" width="1314" height="355" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3939394" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.90749604" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" x="26" y="191" width="1314" height="355" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TF Uploader" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.37562606" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2090909" sideWeight="0.6761269" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.72621036" sideWeight="0.2931818" order="2" side_tool="false" content_ui="tabs" x="23" y="270" width="1320" height="197" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20845921" sideWeight="0.6761269" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7496013" sideWeight="0.29305136" order="2" side_tool="false" content_ui="tabs" x="23" y="270" width="1320" height="197" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="554" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49582636" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39899832" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1191,7 +1205,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="Added NinePatchBitmapFactory with example usage so we can use cross-platform scalable button graphics." />
     <MESSAGE value="Modifies project settings for clean compile." />
     <MESSAGE value="New Push.IO key" />
     <MESSAGE value="Removes unused classes: CustomExpandableListAdapter and DataChecker." />
@@ -1216,7 +1229,8 @@
     <MESSAGE value="Modifies Terms and Conditions a bit." />
     <MESSAGE value="Adds the missing licenses to the About text." />
     <MESSAGE value="Fixes About text; slightly modifies search practice layout." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes About text; slightly modifies search practice layout." />
+    <MESSAGE value="Removes footer, as it is now empty.&#10;&#10;Avoids empty rows in menu lists." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removes footer, as it is now empty.&#10;&#10;Avoids empty rows in menu lists." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1259,6 +1273,64 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="83" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1380">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/MenuActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="10" selection-start="1410" selection-end="1410" vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="1320">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/default_footer_listitem.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="51" selection-start="259" selection-end="259" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/terms_and_conditions.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="22" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="405">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="1042" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="570">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_about.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="40" selection-start="926" selection-end="926" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="660">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_practice_search.xml">
+      <provider editor-type-id="text-editor">
+        <state line="39" column="65" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="675">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="98" selection-start="1723" selection-end="1723" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="1380">
           <folding />
         </state>
@@ -1279,23 +1351,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_about.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="40" selection-start="926" selection-end="926" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="660">
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_practice_search.xml">
-      <provider selected="true" editor-type-id="android-designer">
+      <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_practice_search.xml">
       <provider editor-type-id="text-editor">
         <state line="39" column="65" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="675">
           <folding />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proguard-project.txt">
@@ -1325,23 +1397,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_about.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="40" selection-start="926" selection-end="926" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="660">
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_practice_search.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_practice_search.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="82" selection-start="479" selection-end="479" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="675">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/ic_action_search.png">
@@ -1364,19 +1436,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/button.9.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="32" selection-start="6701" selection-end="6701" vertical-scroll-proportion="0.02617801" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/DefaultActivity.java">
@@ -1395,35 +1457,35 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_practice_search.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state line="39" column="65" selection-start="1721" selection-end="1721" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="1227">
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_about.xml">
-      <provider editor-type-id="android-designer">
+      <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_about.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="40" selection-start="926" selection-end="926" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="660">
+        <state line="26" column="40" selection-start="926" selection-end="926" vertical-scroll-proportion="0.22395833" vertical-offset="261" max-vertical-offset="1191">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="1042" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
+        <state line="8" column="1042" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.15306123" vertical-offset="120" max-vertical-offset="1113">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/terms_and_conditions.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="22" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="405">
+        <state line="9" column="22" selection-start="265" selection-end="265" vertical-scroll-proportion="0.2141593" vertical-offset="14" max-vertical-offset="1120">
           <folding />
         </state>
       </provider>
@@ -1433,27 +1495,81 @@
         <state line="61" column="0" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.61736333" vertical-offset="531" max-vertical-offset="1537" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/res/layout/default_footer_listitem.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="83" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1957">
+        <state line="5" column="51" selection-start="259" selection-end="259" vertical-scroll-proportion="0.13020833" vertical-offset="0" max-vertical-offset="696">
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/default_footer_listitem.xml">
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="51" selection-start="259" selection-end="259" vertical-scroll-proportion="-3.0" vertical-offset="0" max-vertical-offset="717">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/MenuActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="10" selection-start="1410" selection-end="1410" vertical-scroll-proportion="0.48231512" vertical-offset="90" max-vertical-offset="1867">
+        <state line="98" column="36" selection-start="4209" selection-end="4209" vertical-scroll-proportion="0.9484193" vertical-offset="690" max-vertical-offset="1846">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/MainMenuActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="31" selection-start="1657" selection-end="1657" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="2566">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/button.9.png">
+      <provider editor-type-id="ninepatcheditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Toolkit/adt-bundle-windows-x86_64-20130219/sdk/sources/android-17/android/graphics/NinePatch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="32" selection-start="1603" selection-end="1603" vertical-scroll-proportion="0.074875206" vertical-offset="315" max-vertical-offset="2791">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="53" selection-start="313" selection-end="313" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="1733">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Toolkit/adt-bundle-windows-x86_64-20130219/sdk/sources/android-17/android/graphics/BitmapFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="61" selection-start="0" selection-end="28254" vertical-scroll-proportion="0.19966722" vertical-offset="0" max-vertical-offset="10366">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Toolkit/adt-bundle-windows-x86_64-20130219/sdk/sources/android-17/android/graphics/Bitmap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="821" column="49" selection-start="31577" selection-end="31577" vertical-scroll-proportion="0.4076539" vertical-offset="11530" max-vertical-offset="21676">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="148" column="93" selection-start="6249" selection-end="6249" vertical-scroll-proportion="0.0" vertical-offset="1715" max-vertical-offset="2941">
+          <folding>
+            <element signature="e#653#685#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="102" selection-start="1788" selection-end="1788" vertical-scroll-proportion="0.6239601" vertical-offset="315" max-vertical-offset="1726">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
