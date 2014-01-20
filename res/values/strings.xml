@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Your Practice</string>
-    <string name="title_activity_main">Your Practice</string>
+    <string name="app_name">YourPractice</string>
+    <string name="title_activity_main">YourPractice</string>
     <string name="update">Update Your Practice Info</string>
     <string name="title_activity_about">About</string>
     <string name="about_developers">This application was developed by RemedyWebSolutions. <a href="http://newpush.com">Remedy Web Solutions</a> offers a host of services including web design, peer-reviewed pediatric/adult content, hosting, mobile solutions and other online tools for medical professionals.\n\n</string>

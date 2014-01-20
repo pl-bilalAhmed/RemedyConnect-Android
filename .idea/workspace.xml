@@ -61,9 +61,9 @@
     <list id="f10cf8e6-4f14-49e1-8631-b5acf07fc7c9" name="Integrating Push.io" comment="" />
     <list id="51660b46-0f62-4f44-94d7-e39fa6485ddb" name="Switching to indeterminate download progress" comment="Switching to indeterminate download progress" />
     <list id="5be22bf0-642f-4e6a-9cae-082ce871395f" name="MedSecure Web API implementation for registering the device" comment="Removes unused classes: CustomExpandableListAdapter and DataChecker." />
-    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Removes footer, as it is now empty.&#10;&#10;Avoids empty rows in menu lists.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java" afterPath="$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java" afterPath="$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java" />
+    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Fixes main menu button graphics on Android 2.x">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/terms_and_conditions.html" afterPath="$PROJECT_DIR$/assets/terms_and_conditions.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Project.iws" />
@@ -141,24 +141,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NinePatchBitmapFactory.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java">
+      <file leaf-file-name="Skin.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="102" selection-start="1788" selection-end="1788" vertical-scroll-proportion="0.6239601" vertical-offset="315" max-vertical-offset="1726">
+            <state line="147" column="93" selection-start="6224" selection-end="6224" vertical-scroll-proportion="0.0" vertical-offset="1715" max-vertical-offset="2941">
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#628#660#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Skin.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java">
+      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="148" column="93" selection-start="6249" selection-end="6249" vertical-scroll-proportion="0.0" vertical-offset="1715" max-vertical-offset="2941">
-              <folding>
-                <element signature="e#653#685#0" expanded="true" />
-              </folding>
+            <state line="15" column="571" selection-start="4065" selection-end="4065" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1411">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="terms_and_conditions.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/terms_and_conditions.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="444" selection-start="897" selection-end="897" vertical-scroll-proportion="0.3633218" vertical-offset="0" max-vertical-offset="1253">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -203,15 +210,15 @@
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/downloader/AbstractDownloadService.java" />
         <option value="$PROJECT_DIR$/proguard-project.txt" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/assets/terms_and_conditions.html" />
         <option value="$PROJECT_DIR$/res/layout/activity_about.xml" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_practice_search.xml" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/MenuActivity.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/utils/BitmapFactory.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/utils/CompatBitmapFactory.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java" />
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/assets/terms_and_conditions.html" />
       </list>
     </option>
   </component>
@@ -322,11 +329,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="YourPractice" />
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -382,12 +385,13 @@
     <property name="AndroidLayoutSelectedEditor" value="text-editor" />
     <property name="project.structure.side.proportion" value="0.37512338" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="4790055875aa307e" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="192.168.0.100:5555" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="AndroidRunProguardForReleaseBuild" value="true" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="options.searchVisible" value="true" />
     <property name="SearchEverywhereHistory" value="rap" />
+    <property name="AndroidProguardConfigPaths" value="C:\Users\Authorized User\Documents\Toolkit\adt-bundle-windows-x86_64-20130219\sdk\tools\proguard\proguard-android.txt;C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\proguard-project.txt" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -410,7 +414,7 @@
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Application.MyPractice - kérdezz">
+  <component name="RunManager" selected="Android Application.MyPractice eszközön">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -1130,7 +1134,11 @@
       <created>1390212618574</created>
       <updated>1390212618574</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="Fixes main menu button graphics on Android 2.x">
+      <created>1390223629142</created>
+      <updated>1390223629142</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <option name="searchClosedTasks" value="true" />
     <servers />
   </component>
@@ -1163,9 +1171,10 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19848485" sideWeight="0.6761269" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49582636" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.27378964" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.70694864" order="3" side_tool="true" content_ui="tabs" x="26" y="124" width="1314" height="490" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.72530866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.72408295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32407406" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -1185,7 +1194,6 @@
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49582636" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39899832" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1205,7 +1213,6 @@
       <TodoPanelSettings />
     </option>
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="Modifies project settings for clean compile." />
     <MESSAGE value="New Push.IO key" />
     <MESSAGE value="Removes unused classes: CustomExpandableListAdapter and DataChecker." />
     <MESSAGE value="Removes MedSecure API related features." />
@@ -1230,7 +1237,8 @@
     <MESSAGE value="Adds the missing licenses to the About text." />
     <MESSAGE value="Fixes About text; slightly modifies search practice layout." />
     <MESSAGE value="Removes footer, as it is now empty.&#10;&#10;Avoids empty rows in menu lists." />
-    <option name="LAST_COMMIT_MESSAGE" value="Removes footer, as it is now empty.&#10;&#10;Avoids empty rows in menu lists." />
+    <MESSAGE value="Fixes main menu button graphics on Android 2.x" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixes main menu button graphics on Android 2.x" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1476,20 +1484,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="1042" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.15306123" vertical-offset="120" max-vertical-offset="1113">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/terms_and_conditions.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="22" selection-start="265" selection-end="265" vertical-scroll-proportion="0.2141593" vertical-offset="14" max-vertical-offset="1120">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proguard-project.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="61" column="0" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.61736333" vertical-offset="531" max-vertical-offset="1537" />
@@ -1555,21 +1549,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java">
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="93" selection-start="6249" selection-end="6249" vertical-scroll-proportion="0.0" vertical-offset="1715" max-vertical-offset="2941">
+        <state line="49" column="46" selection-start="1841" selection-end="1841" vertical-scroll-proportion="0.69883525" vertical-offset="315" max-vertical-offset="1726">
           <folding>
-            <element signature="e#653#685#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/NinePatchBitmapFactory.java">
+    <entry file="file://$PROJECT_DIR$/src/com/newpush/YourPractice/Skin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="102" selection-start="1788" selection-end="1788" vertical-scroll-proportion="0.6239601" vertical-offset="315" max-vertical-offset="1726">
+        <state line="147" column="93" selection-start="6224" selection-end="6224" vertical-scroll-proportion="0.0" vertical-offset="1715" max-vertical-offset="2941">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#628#660#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="571" selection-start="4065" selection-end="4065" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1411">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/terms_and_conditions.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="444" selection-start="897" selection-end="897" vertical-scroll-proportion="0.3633218" vertical-offset="0" max-vertical-offset="1253">
+          <folding />
         </state>
       </provider>
     </entry>
