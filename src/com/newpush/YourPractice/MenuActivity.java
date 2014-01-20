@@ -35,7 +35,7 @@ public class MenuActivity extends DefaultActivity {
         }
 
         menu.addHeaderView(header, null, false);
-        menu.addFooterView(footer, null, false);
+        //menu.addFooterView(footer, null, false);
 
         // Let's use a modified ArrayAdapter so we can use a custom font on the list
         menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>()) {
