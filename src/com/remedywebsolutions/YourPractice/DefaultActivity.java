@@ -121,6 +121,10 @@ public class DefaultActivity extends SherlockActivity {
                 intent = new Intent(this, PracticeSearchActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.menu_rest_testing:
+                intent = new Intent(this, RestTesting.class);
+                startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

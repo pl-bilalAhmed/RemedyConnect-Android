@@ -28,6 +28,11 @@
                 android:title="@string/about"
                 android:showAsAction="never"
                 android:orderInCategory="1003"/>
+            <item
+                android:id="@+id/menu_rest_testing"
+                android:title="REST testing"
+                android:showAsAction="never"
+                android:orderInCategory="1004"/>
         </menu>
     </item>
 </menu>
