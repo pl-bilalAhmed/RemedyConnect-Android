@@ -50,7 +50,7 @@ public class MedSecureConnection  {
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(context.getApplicationContext(), s, Toast.LENGTH_LONG).show();
+            Toast.makeText(context.getApplicationContext(), "Your physician ID is: " + s, Toast.LENGTH_LONG).show();
         }
     }
 
