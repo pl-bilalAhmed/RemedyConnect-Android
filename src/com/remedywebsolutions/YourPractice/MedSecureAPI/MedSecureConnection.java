@@ -7,6 +7,8 @@ import com.pushio.manager.PushIOManager;
 
 import java.io.*;
 import java.net.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class MedSecureConnection  {
     // @TODO: check for internet connection
@@ -35,13 +37,25 @@ public class MedSecureConnection  {
 
     // Public interface
 
-    public String createHashedIdentifierForPushIO(String username) {
-        // @TODO implement this
-        return "?";
+    // Push.IO related -------------------------------------------------------------------------------------------------
+    public String getPushIOHash(String username) {
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        byte[] hash = new byte[0];
+        try {
+            hash = digest.digest(username.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return hash.toString();
     }
 
-    public void registerUserForNotifications() {
-        PushIOManager.getInstance(context).registerUserId(createHashedIdentifierForPushIO("?"));
+    public String getPushIOUUID() {
+        return PushIOManager.getInstance(context).getUUID();
     }
 
     // Starts async login API task
@@ -52,17 +66,58 @@ public class MedSecureConnection  {
 
     // Async login API task
     public class AsyncLoginAPITask extends AsyncTask<String, Void, String> {
+        String username;
+        String password;
+
         @Override
         protected String doInBackground(String... params) {
-            //return getPractice(Integer.parseInt(params[0]));
-            return getPhysicianID(params[0], params[1]);
+            username = params[0];
+            password = params[1];
+            return getPhysicianID(username, password);
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            Toast.makeText(context.getApplicationContext(), "Your physician ID is: " + s, Toast.LENGTH_LONG).show();
+        protected void onPostExecute(String ownID) {
+            // @TODO If successful, store credentials
+            if (ownID.equals("0")) {
+                Toast.makeText(context.getApplicationContext(),
+                        "Bad username / password, please try again.", Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(context.getApplicationContext(),
+                        "Your physician ID is: " + ownID, Toast.LENGTH_LONG).show();
+                new AsyncDeviceInsertTask().execute(new String[] {
+                        ownID,
+                        getPushIOHash(username),
+                });
+            }
+
         }
     }
+
+    public boolean stringIsInt(String str) {
+        return str.matches("-?\\d+"); // Not the most elegant solution, but will do...
+    }
+
+    public class AsyncDeviceInsertTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            return insertPhysicianMobileDevice(params[0], params[1]);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (stringIsInt(result)) {
+                Toast.makeText(context.getApplicationContext(),
+                        "Successfully added device for in-app notifications.", Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(context.getApplicationContext(),
+                        "Couldn't add device for in-app notifications.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    // API calls -------------------------------------------------------------------------------------------------------
 
     // Method for fetching practice info
     public String getPractice(int practiceID) {
@@ -105,7 +160,8 @@ public class MedSecureConnection  {
         return "";
     }
 
-    // Utilities
+    // Utilities -------------------------------------------------------------------------------------------------------
+
     private String readStreamToString(InputStream is) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, charset));
         StringBuilder out = new StringBuilder();
@@ -116,6 +172,8 @@ public class MedSecureConnection  {
         return out.toString();
     }
 
+
+    // @TODO Somehow we should check for the HTTP response type; typically, 400 - Bad request will be thrown on bad ones.
     private String httpURLWithMethod(String URLToDownload, String method) throws IOException {
         InputStream is = null;
 

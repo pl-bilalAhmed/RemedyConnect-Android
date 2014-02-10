@@ -61,12 +61,7 @@
     <list id="f10cf8e6-4f14-49e1-8631-b5acf07fc7c9" name="Integrating Push.io" comment="" />
     <list id="51660b46-0f62-4f44-94d7-e39fa6485ddb" name="Switching to indeterminate download progress" comment="Switching to indeterminate download progress" />
     <list id="5be22bf0-642f-4e6a-9cae-082ce871395f" name="MedSecure Web API implementation for registering the device" comment="Removes unused classes: CustomExpandableListAdapter and DataChecker." />
-    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Adds methods for fetching physician ID and for inserting a mobile device.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/activity_login.xml" />
-      <change type="DELETED" beforePath="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\res\layout\activity_rest_testing.xml" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\src\com\remedywebsolutions\YourPractice\RestTesting.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java" />
+    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Alters REST testing UI -&gt; login screen">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -145,20 +140,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="45" selection-start="867" selection-end="867" vertical-scroll-proportion="0.31454784" vertical-offset="0" max-vertical-offset="988">
+            <state line="26" column="5" selection-start="1194" selection-end="1194" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="450">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MedSecureConnection.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MedSecureConnection.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="0" selection-start="1746" selection-end="1746" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="2683">
-              <folding />
+            <state line="111" column="102" selection-start="3831" selection-end="3832" vertical-scroll-proportion="0.64891845" vertical-offset="1215" max-vertical-offset="3616">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -232,10 +229,12 @@
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MainActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/RestTesting.java" />
-        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/activity_rest_testing.xml" />
+        <option value="$PROJECT_DIR$/res/layout/activity_login.xml" />
+        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
       </list>
     </option>
   </component>
@@ -258,10 +257,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1358" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1456" />
-    <option name="height" value="916" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -317,7 +316,58 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Your Practice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="YourPractice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Your Practice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="YourPractice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="remedywebsolutions.YourPractice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Your Practice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="YourPractice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Your Practice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -418,64 +468,27 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Your Practice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Your Practice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="YourPractice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Your Practice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="YourPractice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="remedywebsolutions.YourPractice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Your Practice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="YourPractice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Your Practice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -544,14 +557,15 @@
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\res\values-sw600dp" />
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\assets\fonts" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.newpush.mypractice" />
-      <recent name="com.newpush.greenwoodpediatrics" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\libs" />
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\res\drawable-hdpi" />
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\assets" />
       <recent name="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.newpush.mypractice" />
+      <recent name="com.newpush.greenwoodpediatrics" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.MyPractice eszközön">
@@ -589,6 +603,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -614,19 +641,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1306,7 +1320,23 @@
       <created>1392041602120</created>
       <updated>1392041602120</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="Alters REST testing UI -&gt; login screen">
+      <created>1392042431202</created>
+      <updated>1392042431202</updated>
+    </task>
+    <task id="LOCAL-00139" summary="Adds login testing functionality">
+      <created>1392043208404</created>
+      <updated>1392043208404</updated>
+    </task>
+    <task id="LOCAL-00140" summary="Adds prototypes for Push.IO registration; includes new Push.IO API">
+      <created>1392048030537</created>
+      <updated>1392048030537</updated>
+    </task>
+    <task id="LOCAL-00141" summary="Adds prototypes for Push.IO registration; includes new Push.IO API&#10;">
+      <created>1392048042437</created>
+      <updated>1392048042437</updated>
+    </task>
+    <option name="localTasksCounter" value="142" />
     <option name="searchClosedTasks" value="true" />
     <servers />
   </component>
@@ -1331,37 +1361,37 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-8" width="1456" height="916" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19545455" sideWeight="0.6761269" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19848485" sideWeight="0.6761269" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49429658" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.27378964" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.70694864" order="3" side_tool="true" content_ui="tabs" x="26" y="124" width="1314" height="490" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.72408295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.72408295" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.80701756" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.80701756" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3939394" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.553429" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" x="26" y="191" width="1314" height="355" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.5538657" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" x="26" y="191" width="1314" height="355" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TF Uploader" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.37562606" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2081545" sideWeight="0.6761269" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20770393" sideWeight="0.6761269" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7490494" sideWeight="0.29305136" order="2" side_tool="false" content_ui="tabs" x="23" y="270" width="1320" height="197" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="554" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49429658" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3939394" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39899832" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1382,10 +1412,6 @@
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="Hides option menu on Search Your Practice and Select Your Practice screens." />
-    <MESSAGE value="Adds new splashscreen." />
-    <MESSAGE value="Adds landscape layout for the main menu." />
-    <MESSAGE value="Introduces Choose Your Practice functionality." />
     <MESSAGE value="Fixes language." />
     <MESSAGE value="Modifies workspace settings." />
     <MESSAGE value="Fixes clearing downloaded data for updates." />
@@ -1407,7 +1433,11 @@
     <MESSAGE value="Restores old REST testing functionality and Push.IO." />
     <MESSAGE value="Adds abstracted method to be able to extend on GETs later." />
     <MESSAGE value="Adds methods for fetching physician ID and for inserting a mobile device." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adds methods for fetching physician ID and for inserting a mobile device." />
+    <MESSAGE value="Alters REST testing UI -&gt; login screen" />
+    <MESSAGE value="Adds login testing functionality" />
+    <MESSAGE value="Adds prototypes for Push.IO registration; includes new Push.IO API" />
+    <MESSAGE value="Adds prototypes for Push.IO registration; includes new Push.IO API&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adds prototypes for Push.IO registration; includes new Push.IO API&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1450,6 +1480,22 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="5" selection-start="1194" selection-end="1194" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="49" selection-start="3173" selection-end="3173" vertical-scroll-proportion="0.0" vertical-offset="1425" max-vertical-offset="3060">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="78" selection-start="850" selection-end="850" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="375">
           <folding />
         </state>
@@ -1458,15 +1504,15 @@
     <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="41" selection-start="696" selection-end="696" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1425">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/pushio_config.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="109" selection-start="118" selection-end="118" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="45">
-          <folding />
-        </state>
+        <state line="1" column="109" selection-start="118" selection-end="118" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="45" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
@@ -1629,10 +1675,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/button.9.png">
-      <provider editor-type-id="ninepatcheditor">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="images">
+      <provider editor-type-id="ninepatcheditor">
         <state />
       </provider>
     </entry>
@@ -1687,11 +1733,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/menu/menu.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="75" selection-start="1466" selection-end="1466" vertical-scroll-proportion="0.84858567" vertical-offset="0" max-vertical-offset="1156">
-          <folding>
-            <element signature="e#483#499#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="34" column="75" selection-start="1466" selection-end="1466" vertical-scroll-proportion="0.84858567" vertical-offset="0" max-vertical-offset="1156" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/YourPracticeApplication.java">
@@ -1703,9 +1745,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="17" selection-start="125" selection-end="125" vertical-scroll-proportion="0.10309278" vertical-offset="0" max-vertical-offset="1251">
-          <folding />
-        </state>
+        <state line="2" column="17" selection-start="125" selection-end="125" vertical-scroll-proportion="0.10309278" vertical-offset="0" max-vertical-offset="1251" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project.properties">
@@ -1743,16 +1783,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/pushio_config.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="109" selection-start="118" selection-end="118" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="601">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="0" selection-start="1746" selection-end="1746" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="2683">
-          <folding />
-        </state>
+        <state line="1" column="109" selection-start="118" selection-end="118" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="601" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_login.xml">
@@ -1760,15 +1791,29 @@
         <state />
       </provider>
       <provider editor-type-id="text-editor">
-        <state line="28" column="0" selection-start="882" selection-end="882" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="1143">
+        <state line="28" column="0" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="450">
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="18" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1018" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="45" selection-start="867" selection-end="867" vertical-scroll-proportion="0.31454784" vertical-offset="0" max-vertical-offset="988">
+        <state line="26" column="5" selection-start="1194" selection-end="1194" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1048">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="102" selection-start="3831" selection-end="3832" vertical-scroll-proportion="0.64891845" vertical-offset="1215" max-vertical-offset="3616">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
