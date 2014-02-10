@@ -74,7 +74,7 @@ public class MedSecureConnection  {
         return out.toString();
     }
 
-    private String httpGetURL(String URLToDownload) throws IOException {
+    private String httpURLWithMethod(String URLToDownload, String method) throws IOException {
         InputStream is = null;
 
         try {
@@ -82,7 +82,7 @@ public class MedSecureConnection  {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(readTimeout);
             connection.setConnectTimeout(connectTimeout);
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod(method);
             connection.setDoInput(true);
             connection.setRequestProperty("Authorization", auth);
             connection.setRequestProperty("Content-Type", "application/json");
@@ -98,5 +98,9 @@ public class MedSecureConnection  {
                 is.close();
             }
         }
+    }
+
+    private String httpGetURL(String URLToDownload) throws IOException {
+        return httpURLWithMethod(URLToDownload, "GET");
     }
 }
