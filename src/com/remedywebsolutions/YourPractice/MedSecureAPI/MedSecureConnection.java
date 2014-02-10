@@ -8,6 +8,8 @@ import java.io.*;
 import java.net.*;
 
 public class MedSecureConnection  {
+    // @TODO: check for internet connection
+
     // Configuration
     static final String base = "https://MedSecureAPI.com/";
     static final String auth = "Basic em9sdGFuOnpvbHRhbjE=";
@@ -32,17 +34,18 @@ public class MedSecureConnection  {
 
     // Public interface
 
-    // Starts sample async API task
-    public void startAsyncGetPractice(Integer practiceID) {
-        SampleAsyncAPITask task = new SampleAsyncAPITask();
-        task.execute(new String[] { practiceID.toString() });
+    // Starts async login API task
+    public void startAsyncLogin(String username, String password) {
+        AsyncLoginAPITask task = new AsyncLoginAPITask();
+        task.execute(new String[] { username, password });
     }
 
-    // Sample async API task
-    public class SampleAsyncAPITask extends AsyncTask<String, Void, String> {
+    // Async login API task
+    public class AsyncLoginAPITask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            return getPractice(Integer.parseInt(params[0]));
+            //return getPractice(Integer.parseInt(params[0]));
+            return getPhysicianID(params[0], params[1]);
         }
 
         @Override

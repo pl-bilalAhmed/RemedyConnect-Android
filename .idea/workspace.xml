@@ -61,7 +61,12 @@
     <list id="f10cf8e6-4f14-49e1-8631-b5acf07fc7c9" name="Integrating Push.io" comment="" />
     <list id="51660b46-0f62-4f44-94d7-e39fa6485ddb" name="Switching to indeterminate download progress" comment="Switching to indeterminate download progress" />
     <list id="5be22bf0-642f-4e6a-9cae-082ce871395f" name="MedSecure Web API implementation for registering the device" comment="Removes unused classes: CustomExpandableListAdapter and DataChecker." />
-    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Adds abstracted method to be able to extend on GETs later.">
+    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Adds methods for fetching physician ID and for inserting a mobile device.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/activity_login.xml" />
+      <change type="DELETED" beforePath="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\res\layout\activity_rest_testing.xml" afterPath="" />
+      <change type="MOVED" beforePath="C:\Users\Authorized User\Documents\NewPush\Greenwood Pediatrics\Android\Project\src\com\remedywebsolutions\YourPractice\RestTesting.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -140,19 +145,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RestTesting.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/RestTesting.java">
+      <file leaf-file-name="LoginActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="54" selection-start="859" selection-end="859" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="988">
+            <state line="23" column="45" selection-start="867" selection-end="867" vertical-scroll-proportion="0.31454784" vertical-offset="0" max-vertical-offset="988">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MedSecureConnection.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MedSecureConnection.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="59" selection-start="2444" selection-end="2444" vertical-scroll-proportion="0.44954127" vertical-offset="617" max-vertical-offset="2638">
+            <state line="55" column="0" selection-start="1746" selection-end="1746" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="2683">
               <folding />
             </state>
           </provider>
@@ -223,13 +228,14 @@
         <option value="$PROJECT_DIR$/src/com/newpush/YourPractice/parser/ParserException.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/assets/pushio_config.json" />
-        <option value="$PROJECT_DIR$/res/layout/activity_rest_testing.xml" />
         <option value="$PROJECT_DIR$/res/menu/menu.xml" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MainActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/RestTesting.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
+        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/RestTesting.java" />
+        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/activity_rest_testing.xml" />
       </list>
     </option>
   </component>
@@ -367,6 +373,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="MedSecureAPI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Your Practice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Your Practice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1264,7 +1302,11 @@
       <created>1392041069135</created>
       <updated>1392041069135</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="Adds methods for fetching physician ID and for inserting a mobile device.">
+      <created>1392041602120</created>
+      <updated>1392041602120</updated>
+    </task>
+    <option name="localTasksCounter" value="138" />
     <option name="searchClosedTasks" value="true" />
     <servers />
   </component>
@@ -1295,8 +1337,10 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19545455" sideWeight="0.6761269" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19848485" sideWeight="0.6761269" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49429658" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.27378964" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.70694864" order="3" side_tool="true" content_ui="tabs" x="26" y="124" width="1314" height="490" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.72408295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1312,14 +1356,12 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TF Uploader" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.37562606" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2081545" sideWeight="0.6761269" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7496013" sideWeight="0.29305136" order="2" side_tool="false" content_ui="tabs" x="23" y="270" width="1320" height="197" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7490494" sideWeight="0.29305136" order="2" side_tool="false" content_ui="tabs" x="23" y="270" width="1320" height="197" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="554" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49441788" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39899832" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1340,7 +1382,6 @@
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="Starts preparing ProGuard settings." />
     <MESSAGE value="Hides option menu on Search Your Practice and Select Your Practice screens." />
     <MESSAGE value="Adds new splashscreen." />
     <MESSAGE value="Adds landscape layout for the main menu." />
@@ -1365,7 +1406,8 @@
     <MESSAGE value="About corrections.&#10;" />
     <MESSAGE value="Restores old REST testing functionality and Push.IO." />
     <MESSAGE value="Adds abstracted method to be able to extend on GETs later." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adds abstracted method to be able to extend on GETs later." />
+    <MESSAGE value="Adds methods for fetching physician ID and for inserting a mobile device." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adds methods for fetching physician ID and for inserting a mobile device." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1406,7 +1448,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/RestTesting.java">
+    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="78" selection-start="850" selection-end="850" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="375">
           <folding />
@@ -1446,7 +1488,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="2096" selection-start="2706" selection-end="2706" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="570" />
+        <state line="8" column="2096" selection-start="2706" selection-end="2706" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="570">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project.properties">
@@ -1514,7 +1558,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="1042" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="570" />
+        <state line="8" column="1042" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="570">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_about.xml">
@@ -1629,22 +1675,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="44" selection-start="654" selection-end="654" vertical-scroll-proportion="0.049916804" vertical-offset="120" max-vertical-offset="1426" />
+        <state line="8" column="44" selection-start="654" selection-end="654" vertical-scroll-proportion="0.049916804" vertical-offset="120" max-vertical-offset="1426">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/terms_and_conditions.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="84" selection-start="196" selection-end="196" vertical-scroll-proportion="0.12975779" vertical-offset="0" max-vertical-offset="1253" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_rest_testing.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="41" selection-start="470" selection-end="470" vertical-scroll-proportion="0.36458334" vertical-offset="0" max-vertical-offset="771">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/menu/menu.xml">
@@ -1710,16 +1748,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/RestTesting.java">
+    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="54" selection-start="859" selection-end="859" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="988">
+        <state line="55" column="0" selection-start="1746" selection-end="1746" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="2683">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_login.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="28" column="0" selection-start="882" selection-end="882" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="1143">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="59" selection-start="2444" selection-end="2444" vertical-scroll-proportion="0.44954127" vertical-offset="617" max-vertical-offset="2638">
+        <state line="23" column="45" selection-start="867" selection-end="867" vertical-scroll-proportion="0.31454784" vertical-offset="0" max-vertical-offset="988">
           <folding />
         </state>
       </provider>

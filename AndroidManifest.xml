@@ -101,7 +101,7 @@
         <activity android:name="com.remedywebsolutions.YourPractice.MainMenuActivity"/>
 
         <!-- @TODO: clean this up after testing the REST API -->
-        <activity android:name="com.remedywebsolutions.YourPractice.RestTesting"/>
+        <activity android:name=".LoginActivity"/>
 
     </application>
 

@@ -122,7 +122,7 @@ public class DefaultActivity extends SherlockActivity {
                 startActivity(intent);
                 return true;
             case R.id.menu_rest_testing:
-                intent = new Intent(this, RestTesting.class);
+                intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 return true;
         }
