@@ -3,6 +3,7 @@ package com.remedywebsolutions.YourPractice.MedSecureAPI;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
+import com.pushio.manager.PushIOManager;
 
 import java.io.*;
 import java.net.*;
@@ -33,6 +34,15 @@ public class MedSecureConnection  {
     }
 
     // Public interface
+
+    public String createHashedIdentifierForPushIO(String username) {
+        // @TODO implement this
+        return "?";
+    }
+
+    public void registerUserForNotifications() {
+        PushIOManager.getInstance(context).registerUserId(createHashedIdentifierForPushIO("?"));
+    }
 
     // Starts async login API task
     public void startAsyncLogin(String username, String password) {
