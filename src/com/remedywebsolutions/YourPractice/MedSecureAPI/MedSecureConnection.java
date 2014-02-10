@@ -54,7 +54,36 @@ public class MedSecureConnection  {
     // Method for fetching practice info
     public String getPractice(int practiceID) {
         try {
-            return httpGetURL(base + "api/Practice/GetPractice?practiceID=" + practiceID + "&" + api_token_post);
+            return httpGetURL(base + "api/Practice/GetPractice?practiceID=" + practiceID + "&" +
+                    api_token_post);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    // Method for fetching physician ID
+    public String getPhysicianID(String username, String password) {
+        try {
+            return httpGetURL(base + "api/Physician/GetPhysicianID?username=" + username + "&" +
+                    "password=" + password + "&" +
+                    api_token_post);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    // Method for inserting mobile device for physician
+    public String insertPhysicianMobileDevice(String physicianID, String deviceID) {
+        try {
+            return httpGetURL(base + "api/Physician/InsertPhysicianMobileDevice?physicianID=" + physicianID + "&" +
+                    "deviceID=" + deviceID + "&" +
+                    api_token_post);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
