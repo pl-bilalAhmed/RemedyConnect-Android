@@ -102,6 +102,7 @@
 
         <!-- @TODO: clean this up after testing the REST API -->
         <activity android:name=".LoginActivity"/>
+        <activity android:name=".MyAccountActivity"/>
 
     </application>
 

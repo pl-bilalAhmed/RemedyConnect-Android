@@ -18,6 +18,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
 import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatus;
 import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatusSummary;
@@ -68,22 +69,59 @@ public class DefaultActivity extends SherlockActivity {
         downloadSummary = new DownloadTaskStatusSummary();
     }
 
+    /**
+     * Sets the Home button's visibility.
+     *
+     * @param visible Whether the Home button should be visible or not.
+     */
     public void setHomeVisibility(boolean visible) {
         MenuItem item = abMenu.findItem(R.id.home);
         item.setVisible(visible);
     }
 
+    /**
+     * Disables the entire options menu for activities where it might be
+     * misleading.
+     */
     public void disableOptionsMenu() {
         MenuItem item = abMenu.findItem(R.id.more);
         item.setVisible(false);
     }
 
+    /**
+     * Sets up several menu item's visibility based on whether the user is logged in or not.
+     *
+     * This depends on the abMenu being set, so it should be called in {@link #onCreateOptionsMenu(this)}.
+     *
+     * @param loggedIn true if the user is logged in at the moment, false otherwise.
+     */
+    public void setMenuItemsVisibilityBasedOnLogin(boolean loggedIn) {
+        if (loggedIn) {
+            MenuItem item = abMenu.findItem(R.id.menu_login);
+            item.setVisible(false);
+        }
+        else {
+            MenuItem item = abMenu.findItem(R.id.menu_logout);
+            item.setVisible(false);
+            item = abMenu.findItem(R.id.menu_my_account);
+            item.setVisible(false);
+        }
+    }
+
+    /**
+     * Event for responding to options menu creation.
+     *
+     * Overrides default event to inflate our menu items into the given menu.
+     *
+     * @param menu Menu to inflate to.
+     * @return Whether inflating was successful or not.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
         com.actionbarsherlock.view.MenuInflater menuInflater = getSupportMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
         abMenu = menu;
+        setMenuItemsVisibilityBasedOnLogin(MedSecureConnection.isLoggedIn());
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -121,17 +159,29 @@ public class DefaultActivity extends SherlockActivity {
                 intent = new Intent(this, PracticeSearchActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.menu_rest_testing:
+            case R.id.menu_login:
                 intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_logout:
+                MedSecureConnection connection = new MedSecureConnection();
+                connection.setContext(DefaultActivity.this);
+                connection.startAsyncLogout();
+                return true;
+            case R.id.menu_my_account:
+                intent = new Intent(this, MyAccountActivity.class);
                 startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    // This sets the title with the informations stored in the Bundle.
-    // WARNING! Fire this only after the header has been inflated or you will
-    // get a nice NullPointerException.
+    /**
+     * Sets the title with the informations stored in the Bundle.
+     *
+     * WARNING! Fire this only after the header has been inflated or you will
+     * get a nice NullPointerException.
+     */
     public void setTitleFromIntentBundle() {
         if (extras != null && extras.containsKey("title")) {
             String title = extras.getString("title");
@@ -141,7 +191,11 @@ public class DefaultActivity extends SherlockActivity {
         }
     }
 
-    // Call this with the resource IDs of the TextViews to make links respond.
+    /**
+     * Sets up TextViews so that links will respond to clicks.
+     *
+     * @param textViewResourceIds The resource ids for text views.
+     */
     public void makeTextViewLinksClickable(Integer... textViewResourceIds) {
         for (Integer id : textViewResourceIds) {
             TextView text = (TextView) findViewById(id);
@@ -151,6 +205,11 @@ public class DefaultActivity extends SherlockActivity {
         }
     }
 
+    /**
+     * Sets up a title view, if there's any.
+     *
+     * @param title The title to set.
+     */
     @Override
     public void setTitle(CharSequence title) {
         super.setTitle(title);
@@ -160,6 +219,9 @@ public class DefaultActivity extends SherlockActivity {
         }
     }
 
+    /**
+     * Hides the title view, if there's any.
+     */
     public void suppressTitle() {
         TextView titleview = (TextView) findViewById(R.id.titleTextView);
         if (titleview != null) {
@@ -177,7 +239,13 @@ public class DefaultActivity extends SherlockActivity {
         }
     }
 
-    // Simple solution taken from: http://stackoverflow.com/a/5322390/238845
+    /**
+     * Deletes all previously downloaded files to prepare an update, for example.
+     *
+     * This simple solution was taken from: http://stackoverflow.com/a/5322390/238845 .
+     * To be used successfully, using {@link #saveIndex()} and {@link #restoreIndex()} is necessary.
+     *
+     */
     protected void deleteFiles() {
         String directoryPath = getApplicationContext().getFilesDir().getAbsolutePath();
         File file = new File(directoryPath);
@@ -193,6 +261,11 @@ public class DefaultActivity extends SherlockActivity {
         }
     }
 
+    /**
+     * Saves current index file into the cache dir to allow clearing data without any loss.
+     *
+     * Should be used with {@link #deleteFiles()} and {@link #restoreIndex()}.
+     */
     protected void saveIndex() {
         String tempDirPath = getApplicationContext().getCacheDir().getAbsolutePath();
         String indexPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/index.xml";
@@ -209,6 +282,11 @@ public class DefaultActivity extends SherlockActivity {
         }
     }
 
+    /**
+     * Restores current index file into the cache dir to allow clearing data without any loss.
+     *
+     * Should be used with {@link #deleteFiles()} and {@link #saveIndex()}.
+     */
     protected void restoreIndex() {
         String tempFilePath = getApplicationContext().getCacheDir().getAbsolutePath() + "/index.xml";
         String indexPath = getApplicationContext().getFilesDir().getAbsolutePath();

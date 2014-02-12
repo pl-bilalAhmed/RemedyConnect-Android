@@ -37,6 +37,10 @@ public class MedSecureConnection  {
 
     // Public interface
 
+    public static boolean isLoggedIn() {
+        return true;
+    }
+
     // Push.IO related -------------------------------------------------------------------------------------------------
     public String getPushIOHash(String username) {
         MessageDigest digest = null;
@@ -52,10 +56,6 @@ public class MedSecureConnection  {
             e.printStackTrace();
         }
         return hash.toString();
-    }
-
-    public String getPushIOUUID() {
-        return PushIOManager.getInstance(context).getUUID();
     }
 
     // Starts async login API task
@@ -93,6 +93,10 @@ public class MedSecureConnection  {
             }
 
         }
+    }
+
+    public void startAsyncLogout() {
+
     }
 
     public boolean stringIsInt(String str) {
