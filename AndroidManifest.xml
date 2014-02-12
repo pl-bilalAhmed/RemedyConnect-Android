@@ -100,9 +100,12 @@
         <activity android:name="com.remedywebsolutions.YourPractice.TermsActivity"/>
         <activity android:name="com.remedywebsolutions.YourPractice.MainMenuActivity"/>
 
-        <!-- @TODO: clean this up after testing the REST API -->
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MyAccountActivity"/>
+
+        <service
+            android:name="com.octo.android.robospice.UncachedSpiceService"
+            android:exported="false" />
 
     </application>
 

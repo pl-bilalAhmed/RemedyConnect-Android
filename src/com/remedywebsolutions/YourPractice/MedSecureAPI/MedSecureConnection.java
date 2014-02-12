@@ -42,7 +42,7 @@ public class MedSecureConnection  {
     // Public interface
 
     public static boolean isLoggedIn() {
-        return true;
+        return false;
     }
 
     // Storing data about users currently logged in ---------------------------------------------------------------------

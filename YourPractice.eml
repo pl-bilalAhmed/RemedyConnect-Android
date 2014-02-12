@@ -12,5 +12,6 @@
 	<levels>
 		<level name="TestFlightLib" value="project"/>
 		<level name="net.lingala.zip4j:zip4j:1.3.1" value="project"/>
+		<level name="RoboSpice 1.4.11 (core)" value="project"/>
 	</levels>
 </component>
