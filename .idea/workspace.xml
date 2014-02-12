@@ -61,13 +61,8 @@
     <list id="f10cf8e6-4f14-49e1-8631-b5acf07fc7c9" name="Integrating Push.io" comment="" />
     <list id="51660b46-0f62-4f44-94d7-e39fa6485ddb" name="Switching to indeterminate download progress" comment="Switching to indeterminate download progress" />
     <list id="5be22bf0-642f-4e6a-9cae-082ce871395f" name="MedSecure Web API implementation for registering the device" comment="Removes unused classes: CustomExpandableListAdapter and DataChecker." />
-    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Adds username hashing for device registration (and UUID fetching as well, for an alternative)">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MyAccountActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/activity_my_account.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java" />
+    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Adds demo UI for MedSecure API-relevant functions + improves docs.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/menu.xml" afterPath="$PROJECT_DIR$/res/menu/menu.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Project.iws" />
@@ -144,62 +139,71 @@
     <favorites_list name="Project" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="58" selection-start="792" selection-end="792" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="886">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MedSecureConnection.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="63" selection-start="2560" selection-end="2560" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="3676">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="menu.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/menu/menu.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="17" selection-start="1675" selection-end="1675" vertical-scroll-proportion="0.0" vertical-offset="104" max-vertical-offset="1306">
-              <folding>
-                <element signature="e#483#499#0" expanded="true" />
-                <element signature="e#697#727#0" expanded="true" />
-                <element signature="e#930#960#0" expanded="true" />
-                <element signature="e#1148#1163#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefaultActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="162" column="65" selection-start="6076" selection-end="6076" vertical-scroll-proportion="-0.72212976" vertical-offset="2384" max-vertical-offset="7711">
-              <folding>
-                <element signature="e#2346#2377#0" expanded="true" />
-                <element signature="e#11063#11093#0" expanded="true" />
-                <element signature="e#11682#11698#0" expanded="true" />
-                <element signature="e#15860#15876#0" expanded="true" />
-                <element signature="e#17559#17589#0" expanded="true" />
-                <element signature="e#18058#18106#0" expanded="true" />
-                <element signature="e#18866#18897#0" expanded="true" />
-                <element signature="e#19026#19062#0" expanded="true" />
-                <element signature="e#19185#19222#0" expanded="true" />
-                <element signature="e#20251#20275#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.39803624">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="12" column="48" selection-start="459" selection-end="459" vertical-scroll-proportion="0.17470881" vertical-offset="0" max-vertical-offset="916">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="menu.xml" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/res/menu/menu.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="40" column="17" selection-start="1675" selection-end="1675" vertical-scroll-proportion="0.0" vertical-offset="104" max-vertical-offset="1306">
+                  <folding>
+                    <element signature="e#483#499#0" expanded="true" />
+                    <element signature="e#697#727#0" expanded="true" />
+                    <element signature="e#930#960#0" expanded="true" />
+                    <element signature="e#1148#1163#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DefaultActivity.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="162" column="63" selection-start="6076" selection-end="6076" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="7711">
+                  <folding>
+                    <element signature="e#2346#2377#0" expanded="true" />
+                    <element signature="e#11063#11093#0" expanded="true" />
+                    <element signature="e#11682#11698#0" expanded="true" />
+                    <element signature="e#15860#15876#0" expanded="true" />
+                    <element signature="e#17559#17589#0" expanded="true" />
+                    <element signature="e#18058#18106#0" expanded="true" />
+                    <element signature="e#18866#18897#0" expanded="true" />
+                    <element signature="e#19026#19062#0" expanded="true" />
+                    <element signature="e#19185#19222#0" expanded="true" />
+                    <element signature="e#20251#20275#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="MedSecureConnection.java" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="47" column="39" selection-start="1429" selection-end="1429" vertical-scroll-proportion="0.2762063" vertical-offset="479" max-vertical-offset="4141">
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#2149#2165#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -272,10 +276,10 @@
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/res/menu/menu.xml" />
-        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MyAccountActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/activity_my_account.xml" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
       </list>
     </option>
   </component>
@@ -1371,7 +1375,11 @@
       <created>1392055714307</created>
       <updated>1392055714307</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="Adds demo UI for MedSecure API-relevant functions + improves docs.">
+      <created>1392237236116</created>
+      <updated>1392237236116</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <option name="searchClosedTasks" value="true" />
     <servers />
   </component>
@@ -1412,6 +1420,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.80701756" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3939394" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.5538657" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" x="26" y="191" width="1314" height="355" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32888147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1426,7 +1435,6 @@
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49429658" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3939394" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39899832" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1447,7 +1455,6 @@
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="Modifies workspace settings." />
     <MESSAGE value="Fixes clearing downloaded data for updates." />
     <MESSAGE value="Fixes main menu buttons for the button graphic standard." />
     <MESSAGE value="Cleans up code for release, removing logging" />
@@ -1472,7 +1479,8 @@
     <MESSAGE value="Adds prototypes for Push.IO registration; includes new Push.IO API" />
     <MESSAGE value="Adds prototypes for Push.IO registration; includes new Push.IO API&#10;" />
     <MESSAGE value="Adds username hashing for device registration (and UUID fetching as well, for an alternative)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adds username hashing for device registration (and UUID fetching as well, for an alternative)" />
+    <MESSAGE value="Adds demo UI for MedSecure API-relevant functions + improves docs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adds demo UI for MedSecure API-relevant functions + improves docs." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1525,6 +1533,7 @@
         <state line="17" column="41" selection-start="696" selection-end="696" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1425">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2149#2165#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1802,13 +1811,6 @@
         <state line="18" column="18" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1018" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="58" selection-start="792" selection-end="792" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="886">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/menu/menu.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="17" selection-start="1675" selection-end="1675" vertical-scroll-proportion="0.0" vertical-offset="104" max-vertical-offset="1306">
@@ -1848,18 +1850,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="63" selection-start="2560" selection-end="2560" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="3676">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="65" selection-start="6076" selection-end="6076" vertical-scroll-proportion="-0.72212976" vertical-offset="2384" max-vertical-offset="7711">
+        <state line="162" column="63" selection-start="6076" selection-end="6076" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="7711">
           <folding>
             <element signature="e#2346#2377#0" expanded="true" />
             <element signature="e#11063#11093#0" expanded="true" />
@@ -1871,6 +1864,23 @@
             <element signature="e#19026#19062#0" expanded="true" />
             <element signature="e#19185#19222#0" expanded="true" />
             <element signature="e#20251#20275#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="48" selection-start="459" selection-end="459" vertical-scroll-proportion="0.17470881" vertical-offset="0" max-vertical-offset="916">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="39" selection-start="1429" selection-end="1429" vertical-scroll-proportion="0.2762063" vertical-offset="479" max-vertical-offset="4141">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2149#2165#0" expanded="true" />
           </folding>
         </state>
       </provider>
