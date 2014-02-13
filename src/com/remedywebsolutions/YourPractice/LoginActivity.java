@@ -12,10 +12,15 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceRequest;
 
 public class LoginActivity extends Activity {
+    //private static final String KEY_RESULT = "login_result";
 
-    private static final String KEY_RESULT = "login_result";
+    private String username;
+    private String physicianId;
+    private String pushIOHash;
+
     private SpiceManager spiceManager= new SpiceManager(
             UncachedSpiceService.class
     );
@@ -43,7 +48,7 @@ public class LoginActivity extends Activity {
                 connection.setContext(LoginActivity.this);
                 EditText usernameEditor = (EditText) findViewById(R.id.userName);
                 EditText passwordEditor = (EditText) findViewById(R.id.password);
-                String username = usernameEditor.getText().toString();
+                username = usernameEditor.getText().toString();
                 String password = passwordEditor.getText().toString();
                 //connection.startAsyncLogin(username, password);
 
@@ -53,18 +58,40 @@ public class LoginActivity extends Activity {
         });
     }
 
+    private void usualFailureHandler(SpiceException spiceException) {
+        Toast.makeText(LoginActivity.this,
+                "Error: " + spiceException.getMessage(), Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    // Phase 1: request physician id from username/password
     private final class LoginRequestListener implements RequestListener<String> {
         @Override
         public void onRequestFailure(SpiceException spiceException) {
-            Toast.makeText(LoginActivity.this,
-                    "Error: " + spiceException.getMessage(), Toast.LENGTH_SHORT)
-                    .show();
+            usualFailureHandler(spiceException);
+        }
+
+        @Override
+        public void onRequestSuccess(String physicianId) {
+            LoginActivity.this.physicianId = physicianId;
+            RegisterDeviceRequest req = new RegisterDeviceRequest(physicianId, username);
+            spiceManager.execute(req, new RegisterDeviceListener());
+        }
+    }
+
+    private final class RegisterDeviceListener implements RequestListener<String> {
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+            usualFailureHandler(spiceException);
         }
 
         @Override
         public void onRequestSuccess(String result) {
-            Toast.makeText(LoginActivity.this,
-                    "Your physician ID is: " + result, Toast.LENGTH_LONG).show();
+            LoginActivity.this.pushIOHash = result;
         }
     }
+
+
+
+    // Phase 3: pull user data
 }
