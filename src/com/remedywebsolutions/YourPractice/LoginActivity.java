@@ -10,6 +10,7 @@ import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+import com.pushio.manager.PushIOManager;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceRequest;
@@ -88,6 +89,7 @@ public class LoginActivity extends Activity {
         @Override
         public void onRequestSuccess(String result) {
             LoginActivity.this.pushIOHash = result;
+            PushIOManager.getInstance(LoginActivity.this).registerUserId(LoginActivity.this.pushIOHash);
         }
     }
 

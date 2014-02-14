@@ -2,6 +2,7 @@ package com.remedywebsolutions.YourPractice.MedSecureAPI.requests;
 
 import android.os.Build;
 import com.octo.android.robospice.request.SpiceRequest;
+import com.pushio.manager.PushIOManager;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import org.apache.commons.io.IOUtils;
 
@@ -46,6 +47,7 @@ public class RegisterDeviceRequest extends SpiceRequest<String> {
 
         MedSecureConnection ms = new MedSecureConnection();
         String deviceId = ms.getPushIOHash(username);
+
         String urlToDownload = base +
                 "api/Physician/InsertPhysicianMobileDevice?physicianID=" + userId + "&" +
                 "deviceID=" + deviceId + "&" +
@@ -61,7 +63,7 @@ public class RegisterDeviceRequest extends SpiceRequest<String> {
         urlConnection.setRequestProperty("Authorization", auth);
         urlConnection.setRequestProperty("Content-Type", "application/json");
 
-        String physicianID = IOUtils.toString(urlConnection.getInputStream(), charset);
+        String result = IOUtils.toString(urlConnection.getInputStream(), charset);
         urlConnection.disconnect();
 
         return deviceId;

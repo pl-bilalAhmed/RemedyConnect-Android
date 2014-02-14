@@ -166,7 +166,6 @@ public class DefaultActivity extends SherlockActivity {
             case R.id.menu_logout:
                 MedSecureConnection connection = new MedSecureConnection();
                 connection.setContext(DefaultActivity.this);
-                connection.startAsyncLogout();
                 return true;
             case R.id.menu_my_account:
                 intent = new Intent(this, MyAccountActivity.class);
