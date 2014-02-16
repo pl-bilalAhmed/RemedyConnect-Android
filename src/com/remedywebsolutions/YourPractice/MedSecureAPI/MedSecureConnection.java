@@ -107,6 +107,7 @@ public class MedSecureConnection  {
         return IOUtils.toString(connection.getInputStream(), charset);
     }
 
+
     // Setters / getters
     public Context getContext() {
         return context;
@@ -142,27 +143,6 @@ public class MedSecureConnection  {
 
         HashMap<String, String> userData = new HashMap<String, String>(5);
         return userData;
-    }
-
-    //public getUsername
-
-    // Push.IO related -------------------------------------------------------------------------------------------------
-    public String getPushIOHash(String username) {
-        MessageDigest digest = null;
-        try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        byte[] hash = new byte[0];
-        String result = "";
-        try {
-            hash = digest.digest(username.getBytes("UTF-8"));
-            result = URLEncoder.encode(hash.toString(), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return result;
     }
 
 
