@@ -61,10 +61,9 @@
     <list id="f10cf8e6-4f14-49e1-8631-b5acf07fc7c9" name="Integrating Push.io" comment="" />
     <list id="51660b46-0f62-4f44-94d7-e39fa6485ddb" name="Switching to indeterminate download progress" comment="Switching to indeterminate download progress" />
     <list id="5be22bf0-642f-4e6a-9cae-082ce871395f" name="MedSecure Web API implementation for registering the device" comment="Removes unused classes: CustomExpandableListAdapter and DataChecker." />
-    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Major refactoring: adds better API call building.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/PushIOHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/requests/RegisterDeviceRequest.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/requests/RegisterDeviceRequest.java" />
+    <list default="true" id="7f63afdf-53e7-47ee-8d34-5acd26b7e8b5" name="Release cleanup" comment="Refactoring: moves Push.IO helper routine to the right place.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/LoggedInDataStorage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java" afterPath="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Project.iws" />
@@ -144,26 +143,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="LoginActivity.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="92" column="35" selection-start="3592" selection-end="3592" vertical-scroll-proportion="0.0" vertical-offset="733" max-vertical-offset="1846">
+                <state line="53" column="16" selection-start="2073" selection-end="2073" vertical-scroll-proportion="0.42762062" vertical-offset="313" max-vertical-offset="1816">
                   <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="MedSecureConnection.java" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="149" column="55" selection-start="4759" selection-end="4759" vertical-scroll-proportion="0.37437603" vertical-offset="1815" max-vertical-offset="2626">
-                  <folding>
-                    <element signature="e#3731#3732#0" expanded="true" />
-                    <element signature="e#3761#3762#0" expanded="true" />
-                    <element signature="e#3808#3809#0" expanded="true" />
-                    <element signature="e#3846#3847#0" expanded="true" />
-                    <element signature="e#4703#4719#0" expanded="true" />
-                  </folding>
                 </state>
               </provider>
             </entry>
@@ -190,12 +174,28 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="PushIOHelper.java" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="PushIOHelper.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/PushIOHelper.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="11" column="40" selection-start="324" selection-end="324" vertical-scroll-proportion="0.09983361" vertical-offset="105" max-vertical-offset="1021">
+                <state line="11" column="40" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="1000">
                   <folding>
                     <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LoggedInDataStorage.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/LoggedInDataStorage.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="46" column="39" selection-start="1356" selection-end="1356" vertical-scroll-proportion="1.2155173" vertical-offset="0" max-vertical-offset="1345">
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#424#425#0" expanded="true" />
+                    <element signature="e#454#455#0" expanded="true" />
+                    <element signature="e#501#502#0" expanded="true" />
+                    <element signature="e#539#540#0" expanded="true" />
+                    <element signature="e#1371#1387#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -232,7 +232,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/res/layout/activity_splashscreen.xml" />
         <option value="$PROJECT_DIR$/res/layout-land/activity_main_menu.xml" />
         <option value="$PROJECT_DIR$/proguard-project.txt" />
         <option value="$PROJECT_DIR$/res/layout/activity_about.xml" />
@@ -277,12 +276,13 @@
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MyAccountActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/activity_my_account.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/DefaultActivity.java" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/requests/LoginRequest.java" />
-        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/PushIOHelper.java" />
         <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/requests/RegisterDeviceRequest.java" />
+        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/LoggedInDataStorage.java" />
+        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java" />
+        <option value="$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java" />
       </list>
     </option>
   </component>
@@ -1399,7 +1399,19 @@
       <created>1392589621446</created>
       <updated>1392589621446</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="Refactoring: moves Push.IO helper routine to the right place.">
+      <created>1392589801662</created>
+      <updated>1392589801662</updated>
+    </task>
+    <task id="LOCAL-00150" summary="Cleans up connection module.">
+      <created>1392590029634</created>
+      <updated>1392590029634</updated>
+    </task>
+    <task id="LOCAL-00151" summary="Refactoring: moves the logged in storage module to the right place.">
+      <created>1392590171353</created>
+      <updated>1392590171353</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <option name="searchClosedTasks" value="true" />
     <servers />
   </component>
@@ -1475,9 +1487,6 @@
     </option>
     <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="Removes unused stuff, adds working ProGuard configuration." />
-    <MESSAGE value="Removes unused stuff, adds working ProGuard configuration. Bumps version number." />
-    <MESSAGE value="Modifies Terms and Conditions a bit." />
     <MESSAGE value="Adds the missing licenses to the About text." />
     <MESSAGE value="Fixes About text; slightly modifies search practice layout." />
     <MESSAGE value="Removes footer, as it is now empty.&#10;&#10;Avoids empty rows in menu lists." />
@@ -1500,7 +1509,10 @@
     <MESSAGE value="Adds basics for registering device." />
     <MESSAGE value="Modifies device registration request." />
     <MESSAGE value="Major refactoring: adds better API call building." />
-    <option name="LAST_COMMIT_MESSAGE" value="Major refactoring: adds better API call building." />
+    <MESSAGE value="Refactoring: moves Push.IO helper routine to the right place." />
+    <MESSAGE value="Cleans up connection module." />
+    <MESSAGE value="Refactoring: moves the logged in storage module to the right place." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring: moves the logged in storage module to the right place." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1541,11 +1553,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/terms_and_conditions.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="160" selection-start="196" selection-end="196" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="420" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="2096" selection-start="2706" selection-end="2706" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="570" />
@@ -1815,13 +1822,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="35" selection-start="3592" selection-end="3592" vertical-scroll-proportion="0.0" vertical-offset="733" max-vertical-offset="1846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/requests/RegisterDeviceRequest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="55" selection-start="787" selection-end="787" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1006">
@@ -1831,23 +1831,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/PushIOHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="40" selection-start="324" selection-end="324" vertical-scroll-proportion="0.09983361" vertical-offset="105" max-vertical-offset="1021">
+        <state line="11" column="40" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="1000">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/LoggedInDataStorage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="39" selection-start="1356" selection-end="1356" vertical-scroll-proportion="1.2155173" vertical-offset="0" max-vertical-offset="1345">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#424#425#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#501#502#0" expanded="true" />
+            <element signature="e#539#540#0" expanded="true" />
+            <element signature="e#1371#1387#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/MedSecureAPI/MedSecureConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="55" selection-start="4759" selection-end="4759" vertical-scroll-proportion="0.37437603" vertical-offset="1815" max-vertical-offset="2626">
+        <state line="79" column="73" selection-start="2697" selection-end="2697" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2041">
           <folding>
-            <element signature="e#3731#3732#0" expanded="true" />
-            <element signature="e#3761#3762#0" expanded="true" />
-            <element signature="e#3808#3809#0" expanded="true" />
-            <element signature="e#3846#3847#0" expanded="true" />
-            <element signature="e#4703#4719#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/remedywebsolutions/YourPractice/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="16" selection-start="2073" selection-end="2073" vertical-scroll-proportion="0.42762062" vertical-offset="313" max-vertical-offset="1816">
+          <folding />
         </state>
       </provider>
     </entry>

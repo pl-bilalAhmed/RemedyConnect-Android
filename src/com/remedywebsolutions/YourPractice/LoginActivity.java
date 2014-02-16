@@ -46,13 +46,11 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 MedSecureConnection connection = new MedSecureConnection();
-                connection.setContext(LoginActivity.this);
+                //connection.setContext(LoginActivity.this);
                 EditText usernameEditor = (EditText) findViewById(R.id.userName);
                 EditText passwordEditor = (EditText) findViewById(R.id.password);
                 username = usernameEditor.getText().toString();
                 String password = passwordEditor.getText().toString();
-                //connection.startAsyncLogin(username, password);
-
                 LoginRequest req = new LoginRequest(username, password);
                 spiceManager.execute(req, new LoginRequestListener());
             }
