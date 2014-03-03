@@ -1,34 +1,37 @@
 package com.remedywebsolutions.YourPractice.MedSecureAPI.requests;
 
-import android.net.Uri;
-import android.os.Build;
+import android.content.Context;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.request.SpiceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
-import org.apache.commons.io.IOUtils;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.responses.LoginResponse;
 
 import java.net.HttpURLConnection;
-import java.net.URL;
 
-public class LoginRequest extends SpiceRequest<String> {
+public class LoginRequest extends SpiceRequest<LoginResponse> {
     private String username;
     private String password;
+    private Context context;
 
-    public LoginRequest(String username, String password) {
-        super(String.class);
+    public LoginRequest(String username, String password, Context context) {
+        super(LoginResponse.class);
         this.username = username;
         this.password = password;
+        this.context = context;
     }
 
     @Override
-    public String loadDataFromNetwork() throws Exception {
-        MedSecureConnection msc = new MedSecureConnection();
-        msc.buildBaseURI("Physician", "GetPhysicianID", "GET");
-        msc.addParameter("username", username);
-        msc.addParameter("password", password);
-        HttpURLConnection connection = msc.initConnection();
-        String physicianID = MedSecureConnection.getStringResult(connection);
+    public LoginResponse loadDataFromNetwork() throws Exception {
+        MedSecureConnection msc = new MedSecureConnection(context);
+        msc.buildBaseURI("Users", "Login", "GET");
+        msc.addParameter("UserName", username);
+        msc.addParameter("Password", password);
+        HttpURLConnection connection = msc.initConnection(false);
+        String response = MedSecureConnection.getStringResult(connection);
         connection.disconnect();
 
-        return physicianID;
+        ObjectMapper mapper = new ObjectMapper();
+        LoginResponse loginResponse = mapper.readValue(response, LoginResponse.class);
+        return loginResponse;
     }
 }

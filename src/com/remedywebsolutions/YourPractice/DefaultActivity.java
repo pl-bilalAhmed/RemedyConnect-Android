@@ -18,6 +18,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
 import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatus;
@@ -121,7 +122,8 @@ public class DefaultActivity extends SherlockActivity {
         com.actionbarsherlock.view.MenuInflater menuInflater = getSupportMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
         abMenu = menu;
-        setMenuItemsVisibilityBasedOnLogin(MedSecureConnection.isLoggedIn());
+        LoggedInDataStorage storage = new LoggedInDataStorage(DefaultActivity.this);
+        setMenuItemsVisibilityBasedOnLogin(storage.isLoggedIn());
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -164,8 +166,7 @@ public class DefaultActivity extends SherlockActivity {
                 startActivity(intent);
                 return true;
             case R.id.menu_logout:
-                MedSecureConnection connection = new MedSecureConnection();
-                connection.setContext(DefaultActivity.this);
+                MedSecureConnection connection = new MedSecureConnection(DefaultActivity.this);
                 return true;
             case R.id.menu_my_account:
                 intent = new Intent(this, MyAccountActivity.class);

@@ -1,11 +1,13 @@
 package com.remedywebsolutions.YourPractice.MedSecureAPI;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
 
 /**
  * Class for handling connections with the MedSecure API.
@@ -14,7 +16,6 @@ import java.net.*;
  */
 public class MedSecureConnection  {
     static final String base = "https://MedSecureAPI.com/api/";
-    static final String auth = "Basic em9sdGFuOnpvbHRhbjE=";
     static final String api_key = "SSB3aWxsIG1ha2UgbXkgQVBJIHNlY3VyZQ%3d%3d";
     static final String token = "j2w%2bjHHs%2bF8fkvr7Vj5DlPuYg8VqXvOhbtaG4WaOqxA%3d";
     static final String charset = "UTF-8";
@@ -23,15 +24,17 @@ public class MedSecureConnection  {
 
     private Uri.Builder uriBuilder;
     private String method;
+    private Context context;
 
     /**
      * Constructor.
      */
-    public MedSecureConnection() {
+    public MedSecureConnection(Context context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
             System.setProperty("http.keepAlive", "false");
         }
         uriBuilder = Uri.parse(base).buildUpon();
+        this.context = context;
     }
 
     /**
@@ -71,14 +74,19 @@ public class MedSecureConnection  {
      * @return The initialized HTTP connection.
      * @throws IOException
      */
-    public HttpURLConnection initConnection() throws IOException {
+    public HttpURLConnection initConnection(Boolean passUserToken) throws IOException {
         addAPIParameters();
         HttpURLConnection connection = (HttpURLConnection) new URL(uriBuilder.build().toString()).openConnection();
         connection.setReadTimeout(readTimeout);
         connection.setConnectTimeout(connectTimeout);
         connection.setRequestMethod(method);
         connection.setDoInput(true);
-        connection.setRequestProperty("Authorization", auth);
+        if (passUserToken) {
+            LoggedInDataStorage storage = new LoggedInDataStorage(context);
+            HashMap<String, String> userData = storage.RetrieveData();
+            String auth = userData.get("token");
+            connection.setRequestProperty("Authorization", auth);
+        }
         connection.setRequestProperty("Content-Type", "application/json");
         return connection;
     }

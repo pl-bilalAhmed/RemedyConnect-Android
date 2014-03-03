@@ -14,5 +14,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/net.lingala.zip4j:zip4j:1.3.1"/>
 	<classpathentry kind="lib" path="libs/PushIOManager.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RoboSpice 1.4.11 (core)"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jackson-2.2.3"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
