@@ -13,38 +13,41 @@ public class LoggedInDataStorage {
     private Context context;
     static final String prefKey = "RemedyWebSolutionsYourPractice";
 
-    // Setters / getters
-    public Context getContext() {
-        return context;
-    }
-
     public void setContext(Context context) {
         this.context = context;
     }
 
-    public static boolean isLoggedIn() {
-        return false;
+    public boolean isLoggedIn() {
+        HashMap<String, String> userData = this.RetrieveData();
+        return Integer.parseInt(userData.get("physicianID")) != 0;
     }
 
-    // Storing data about users currently logged in ---------------------------------------------------------------------
-    public void fetchUserDataForStoring() {
-
-    }
-
-    public void StoreData() {
+    public void StoreDataOnLogin(int physicianID, String deviceID) {
         SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putInt("physicianID", 0);
-        editor.putString("deviceID", "");
+        editor.putInt("physicianID", physicianID);
+        editor.putString("deviceID", deviceID);
         editor.putString("name", "");
+        editor.commit();
+    }
+
+    public void StoreName(String name) {
+        SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("name", name);
         editor.commit();
     }
 
     public HashMap<String, String> RetrieveData() {
         SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
-        int myIntValue = sp.getInt("your_int_key", -1);
+        int physicianID = sp.getInt("physicianID", 0);
+        String deviceID = sp.getString("deviceID", "");
+        String name = sp.getString("name", "");
 
-        HashMap<String, String> userData = new HashMap<String, String>(5);
+        HashMap<String, String> userData = new HashMap<String, String>(3);
+        userData.put("phyisicianID", Integer.toString(physicianID));
+        userData.put("deviceID", deviceID);
+        userData.put("name", name);
         return userData;
     }
 
