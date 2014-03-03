@@ -16,8 +16,8 @@ import java.util.HashMap;
  */
 public class MedSecureConnection  {
     static final String base = "https://MedSecureAPI.com/api/";
-    static final String api_key = "SSB3aWxsIG1ha2UgbXkgQVBJIHNlY3VyZQ%3d%3d";
-    static final String token = "j2w%2bjHHs%2bF8fkvr7Vj5DlPuYg8VqXvOhbtaG4WaOqxA%3d";
+    static final String api_key = "SSB3aWxsIG1ha2UgbXkgQVBJIHNlY3VyZQ==";
+    static final String token = "j2w+jHHs+F8fkvr7Vj5DlPuYg8VqXvOhbtaG4WaOqxA=";
     static final String charset = "UTF-8";
     static final int readTimeout = 10000;
     static final int connectTimeout = 15000;
@@ -84,7 +84,7 @@ public class MedSecureConnection  {
         if (passUserToken) {
             LoggedInDataStorage storage = new LoggedInDataStorage(context);
             HashMap<String, String> userData = storage.RetrieveData();
-            String auth = userData.get("token");
+            String auth = "Basic " + userData.get("token");
             connection.setRequestProperty("Authorization", auth);
         }
         connection.setRequestProperty("Content-Type", "application/json");
