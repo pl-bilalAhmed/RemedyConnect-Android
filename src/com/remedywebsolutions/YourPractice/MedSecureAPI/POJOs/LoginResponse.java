@@ -1,4 +1,4 @@
-package com.remedywebsolutions.YourPractice.MedSecureAPI.responses;
+package com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs;
 
 public class LoginResponse {
     private int physicianID;

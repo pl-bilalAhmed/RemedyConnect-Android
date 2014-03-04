@@ -2,6 +2,7 @@ package com.remedywebsolutions.YourPractice;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +16,8 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.responses.LoginResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
 public class LoginActivity extends Activity {
     //private static final String KEY_RESULT = "login_result";
@@ -100,7 +102,23 @@ public class LoginActivity extends Activity {
             pushIOHash = result;
             dataStorage.StoreDeviceId(pushIOHash);
             PushIOManager.getInstance(LoginActivity.this).registerUserId(pushIOHash);
-            Toast.makeText(LoginActivity.this, "Push.IO hash: " + pushIOHash, Toast.LENGTH_LONG).show();
+            Log.d("YourPractice", "Registered with Push.IO with the following user ID: " +
+                    PushIOManager.getInstance(LoginActivity.this).getRegisteredUserId());
+            SendInAppNotificationRequest req = new SendInAppNotificationRequest(LoginActivity.this);
+            spiceManager.execute(req, new TestMessageListener());
+        }
+    }
+
+    private final class TestMessageListener implements RequestListener<String> {
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+            usualFailureHandler(spiceException);
+        }
+
+        @Override
+        public void onRequestSuccess(String result) {
+            Log.d("YourPractice", "Sending test notification, result: " + result);
+            Toast.makeText(LoginActivity.this, "Sent test notification...", Toast.LENGTH_SHORT).show();
         }
     }
 

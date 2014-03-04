@@ -4,7 +4,7 @@ import android.content.Context;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.request.SpiceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.responses.LoginResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 
 import java.net.HttpURLConnection;
 

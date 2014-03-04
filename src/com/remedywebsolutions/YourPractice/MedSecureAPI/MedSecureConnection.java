@@ -92,6 +92,19 @@ public class MedSecureConnection  {
     }
 
     /**
+     * Extends connection with POST content.
+     * @param connection The connection to use.
+     * @param content The content to put in the request.
+     */
+    public void setupPOSTForJSONContent(HttpURLConnection connection, String jsonContent) throws IOException {
+        connection.setFixedLengthStreamingMode(jsonContent.getBytes().length);
+        connection.setRequestProperty("Content-Type", "application/json");
+        PrintWriter out = new PrintWriter(connection.getOutputStream());
+        out.print(jsonContent);
+        out.close();
+    }
+
+    /**
      * Returns the entire response as a string.
      *
      * @param connection The connection to get the result.
