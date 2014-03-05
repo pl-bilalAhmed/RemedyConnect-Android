@@ -25,6 +25,7 @@ public class MessageListActivity extends DefaultActivity {
         setContentView(R.layout.activity_message_list);
         inboxItems = (ArrayList<InboxItem>) extras.get("inboxContents");
         Skin.applyActivityBackground(this);
+        setTitle("Inbox");
         messageListView = (ListView) findViewById(R.id.messageList);
         messageListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, new ArrayList<String>()) {
             public View getView(int pos, View convertView, ViewGroup parent) {

@@ -41,6 +41,8 @@ public class MyAccountActivity extends DefaultActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
+        Skin.applyActivityBackground(this);
+        setTitle("My Account");
         final Button testNotificationsButton = (Button) findViewById(R.id.btnSendTestNotification);
         inboxButton = (Button) findViewById(R.id.btnInbox);
         sentItemsButton = (Button) findViewById(R.id.btnSent);
