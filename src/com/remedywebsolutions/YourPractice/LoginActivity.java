@@ -1,6 +1,7 @@
 package com.remedywebsolutions.YourPractice;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +20,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceR
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends DefaultActivity {
     //private static final String KEY_RESULT = "login_result";
 
     private String username;
@@ -56,6 +57,12 @@ public class LoginActivity extends Activity {
         usernameEditor.setText("zoltan");
         passwordEditor.setText("zoltan1");
 
+        progress = new ProgressDialog(this);
+        progress.setCancelable(false);
+        progress.setCanceledOnTouchOutside(false);
+        progress.setIndeterminate(true);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +71,8 @@ public class LoginActivity extends Activity {
                 String password = passwordEditor.getText().toString();
                 LoginRequest req = new LoginRequest(username, password, LoginActivity.this);
                 spiceManager.execute(req, new LoginRequestListener());
+                progress.setMessage("Logging in...");
+                progress.show();
             }
         });
         dataStorage = new LoggedInDataStorage(LoginActivity.this);
@@ -73,6 +82,7 @@ public class LoginActivity extends Activity {
         Toast.makeText(LoginActivity.this,
                 "Error: " + spiceException.getMessage(), Toast.LENGTH_SHORT)
                 .show();
+        progress.dismiss();
     }
 
     private final class LoginRequestListener implements RequestListener<LoginResponse> {
@@ -85,7 +95,9 @@ public class LoginActivity extends Activity {
         public void onRequestSuccess(LoginResponse response) {
             physicianId = response.getPhysicianID();
             token = response.getToken();
+            progress.setMessage("Logged in, storing data...");
             dataStorage.StoreDataOnLogin(physicianId, token);
+            progress.setMessage("Logged in. Registering device...");
             RegisterDeviceRequest req = new RegisterDeviceRequest(physicianId, username, LoginActivity.this);
             spiceManager.execute(req, new RegisterDeviceListener());
         }
@@ -104,6 +116,7 @@ public class LoginActivity extends Activity {
             PushIOManager.getInstance(LoginActivity.this).registerUserId(pushIOHash);
             Log.d("YourPractice", "Registered with Push.IO with the following user ID: " +
                     PushIOManager.getInstance(LoginActivity.this).getRegisteredUserId());
+            progress.setMessage("Registered device. Sending test notification...");
             SendInAppNotificationRequest req = new SendInAppNotificationRequest(LoginActivity.this);
             spiceManager.execute(req, new TestMessageListener());
         }
@@ -117,6 +130,7 @@ public class LoginActivity extends Activity {
 
         @Override
         public void onRequestSuccess(String result) {
+            progress.dismiss();
             Log.d("YourPractice", "Sending test notification, result: " + result);
             Toast.makeText(LoginActivity.this, "Sent test notification...", Toast.LENGTH_SHORT).show();
         }
