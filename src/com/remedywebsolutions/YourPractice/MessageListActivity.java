@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
+import com.actionbarsherlock.internal.widget.IcsAdapterView;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItemsResponse;
@@ -49,6 +48,18 @@ public class MessageListActivity extends DefaultActivity {
             for (InboxItem item : inboxItems) {
                 messageListAdapter.add(item.fromPhysicianName);
             }
+            messageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(MessageListActivity.this,
+                            formatInboxItemForToast(position), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
+    }
+
+    private String formatInboxItemForToast(int index) {
+        InboxItem message = inboxItems.get(index);
+        String result = "Contents:\n" + message.message;
+        return result;
     }
 }

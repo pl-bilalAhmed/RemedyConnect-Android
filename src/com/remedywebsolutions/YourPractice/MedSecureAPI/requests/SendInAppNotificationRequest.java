@@ -28,8 +28,8 @@ public class SendInAppNotificationRequest extends SpiceRequest<String> {
         message.fromPhysicianID = 405;
         message.fromPhysicianName = "Tester";
         message.toPhysicianID = 405;
-        message.subject = "Test subject";
-        message.message = "Test message";
+        message.subject = "Oh, hi there!";
+        message.message = "This is a completely different test message. :)";
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(message);
         Log.d("YourPractice", "Test JSON content: " + jsonString);
