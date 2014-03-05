@@ -2,7 +2,9 @@ package com.remedywebsolutions.YourPractice;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,6 +58,15 @@ public class MyAccountActivity extends DefaultActivity {
             public void onClick(View v) {
                 SendInAppNotificationRequest req = new SendInAppNotificationRequest(MyAccountActivity.this);
                 spiceManager.execute(req, new TestMessageListener());
+            }
+        });
+
+        inboxButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyAccountActivity.this, MessageListActivity.class);
+                intent.putExtra("inboxContents", inbox);
+                startActivity(intent);
             }
         });
     }

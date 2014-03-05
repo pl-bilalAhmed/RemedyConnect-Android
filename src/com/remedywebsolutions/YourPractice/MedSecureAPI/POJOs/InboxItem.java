@@ -1,6 +1,8 @@
 package com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs;
 
-public class InboxItem {
+import java.io.Serializable;
+
+public class InboxItem implements Serializable {
     public int notificationID;
     public int toPhysicianID;
     public int fromPhysicianID;
