@@ -51,7 +51,7 @@ public class MyAccountActivity extends DefaultActivity {
         public void onRequestSuccess(String result) {
             progress.dismiss();
             Log.d("YourPractice", "Sending test notification, result: " + result);
-            Toast.makeText(MyAccountActivity.this, "Sent test notification...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyAccountActivity.this, "Test notification sent, it should arrive by now", Toast.LENGTH_SHORT).show();
         }
     }
 }

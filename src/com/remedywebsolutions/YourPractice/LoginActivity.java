@@ -112,6 +112,7 @@ public class LoginActivity extends DefaultActivity {
             progress.setMessage("Registered device - login complete.");
             progress.dismiss();
             onBackPressed();
+            Toast.makeText(LoginActivity.this, "You've been logged in.", Toast.LENGTH_LONG).show();
         }
     }
 }
