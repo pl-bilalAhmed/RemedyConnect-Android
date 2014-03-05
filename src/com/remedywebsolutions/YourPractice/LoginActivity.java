@@ -31,9 +31,7 @@ public class LoginActivity extends DefaultActivity {
     private EditText usernameEditor;
     private EditText passwordEditor;
 
-    private SpiceManager spiceManager= new SpiceManager(
-            UncachedSpiceService.class
-    );
+    private SpiceManager spiceManager= new SpiceManager(UncachedSpiceService.class);
 
     @Override
     protected void onStart() {
@@ -78,17 +76,12 @@ public class LoginActivity extends DefaultActivity {
         dataStorage = new LoggedInDataStorage(LoginActivity.this);
     }
 
-    private void usualFailureHandler(SpiceException spiceException) {
-        Toast.makeText(LoginActivity.this,
-                "Error: " + spiceException.getMessage(), Toast.LENGTH_SHORT)
-                .show();
-        progress.dismiss();
-    }
+
 
     private final class LoginRequestListener implements RequestListener<LoginResponse> {
         @Override
         public void onRequestFailure(SpiceException spiceException) {
-            usualFailureHandler(spiceException);
+            defaultSpiceFailureHandler(spiceException);
         }
 
         @Override
@@ -106,7 +99,7 @@ public class LoginActivity extends DefaultActivity {
     private final class RegisterDeviceListener implements RequestListener<String> {
         @Override
         public void onRequestFailure(SpiceException spiceException) {
-            usualFailureHandler(spiceException);
+            defaultSpiceFailureHandler(spiceException);
         }
 
         @Override
@@ -116,28 +109,9 @@ public class LoginActivity extends DefaultActivity {
             PushIOManager.getInstance(LoginActivity.this).registerUserId(pushIOHash);
             Log.d("YourPractice", "Registered with Push.IO with the following user ID: " +
                     PushIOManager.getInstance(LoginActivity.this).getRegisteredUserId());
-            progress.setMessage("Registered device. Sending test notification...");
-            SendInAppNotificationRequest req = new SendInAppNotificationRequest(LoginActivity.this);
-            spiceManager.execute(req, new TestMessageListener());
-        }
-    }
-
-    private final class TestMessageListener implements RequestListener<String> {
-        @Override
-        public void onRequestFailure(SpiceException spiceException) {
-            usualFailureHandler(spiceException);
-        }
-
-        @Override
-        public void onRequestSuccess(String result) {
+            progress.setMessage("Registered device - login complete.");
             progress.dismiss();
-            Log.d("YourPractice", "Sending test notification, result: " + result);
-            Toast.makeText(LoginActivity.this, "Sent test notification...", Toast.LENGTH_SHORT).show();
             onBackPressed();
         }
     }
-
-
-
-    // Phase 3: pull user data
 }

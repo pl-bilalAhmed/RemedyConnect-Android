@@ -18,6 +18,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
@@ -352,6 +353,13 @@ public class DefaultActivity extends SherlockActivity {
         } catch (RejectedExecutionException e) {
             Log.w("MyPractice Downloader", "Thread pool executor rejected the download task", e);
         }
+    }
+
+    protected void defaultSpiceFailureHandler(SpiceException spiceException) {
+        Toast.makeText(DefaultActivity.this,
+                "Error: " + spiceException.getMessage(), Toast.LENGTH_SHORT)
+                .show();
+        progress.dismiss();
     }
 
     // This AsyncTask is for downloading a single file.
