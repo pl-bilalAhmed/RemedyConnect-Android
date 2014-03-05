@@ -133,6 +133,7 @@ public class LoginActivity extends DefaultActivity {
             progress.dismiss();
             Log.d("YourPractice", "Sending test notification, result: " + result);
             Toast.makeText(LoginActivity.this, "Sent test notification...", Toast.LENGTH_SHORT).show();
+            onBackPressed();
         }
     }
 

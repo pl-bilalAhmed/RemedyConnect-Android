@@ -20,9 +20,16 @@ public class LoggedInDataStorage {
     public boolean isLoggedIn() {
         HashMap<String, String> userData = this.RetrieveData();
         if (userData.containsKey("physicianID")) {
-            return Integer.parseInt(userData.get("physicianID")) != 0;
+            String physicianIDstr = userData.get("physicianID");
+            Integer physicianIDint = Integer.parseInt(physicianIDstr);
+            return physicianIDint != 0;
         }
         else return false;
+    }
+
+    public void logOut() {
+        SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
+        sp.edit().clear().commit();
     }
 
     public void StoreDataOnLogin(int physicianID, String token) {
@@ -55,7 +62,7 @@ public class LoggedInDataStorage {
         String name = sp.getString("name", "");
 
         HashMap<String, String> userData = new HashMap<String, String>(3);
-        userData.put("phyisicianID", Integer.toString(physicianID));
+        userData.put("physicianID", Integer.toString(physicianID));
         userData.put("deviceID", deviceID);
         userData.put("token", token);
         userData.put("name", name);

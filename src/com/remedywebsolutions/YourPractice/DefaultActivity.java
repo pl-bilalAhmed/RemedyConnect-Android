@@ -70,6 +70,12 @@ public class DefaultActivity extends SherlockActivity {
         downloadSummary = new DownloadTaskStatusSummary();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.invalidateOptionsMenu();
+    }
+
     /**
      * Sets the Home button's visibility.
      *
@@ -167,6 +173,10 @@ public class DefaultActivity extends SherlockActivity {
                 return true;
             case R.id.menu_logout:
                 MedSecureConnection connection = new MedSecureConnection(DefaultActivity.this);
+                LoggedInDataStorage storage = new LoggedInDataStorage(DefaultActivity.this);
+                storage.logOut();
+                Toast.makeText(DefaultActivity.this, "You've been logged out.", Toast.LENGTH_LONG).show();
+                invalidateOptionsMenu();
                 return true;
             case R.id.menu_my_account:
                 intent = new Intent(this, MyAccountActivity.class);
