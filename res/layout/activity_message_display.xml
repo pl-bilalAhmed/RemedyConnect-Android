@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Zoltán Adamek MD"
+        android:id="@+id/fromTextView"
+        android:layout_marginBottom="8sp"
+        android:layout_marginLeft="4sp"
+        android:layout_marginRight="4sp"
+        android:layout_marginTop="4sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="About the new software version"
+        android:id="@+id/subjectTextView"
+        android:layout_marginBottom="8sp"
+        android:layout_marginLeft="4sp"
+        android:layout_marginRight="4sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="2014-02-02 22:22"
+        android:id="@+id/receivedTextView"
+        android:layout_marginBottom="8sp"
+        android:layout_marginLeft="4sp"
+        android:layout_marginRight="4sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Lóri nem is ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent odio urna, posuere id risus ut, facilisis ornare quam. Aenean lobortis lacus sit amet viverra hendrerit. Integer in imperdiet tortor, sit amet facilisis tortor. Praesent in elit non tellus pellentesque iaculis sit amet vel urna. Sed cursus ut enim et feugiat. Aenean condimentum mattis tincidunt. Nulla ut tincidunt urna. Vestibulum posuere mi vitae tincidunt ullamcorper. Phasellus a libero vel magna accumsan venenatis non et elit.  Proin eu lorem nec nisl blandit consectetur. Maecenas mauris ligula, consectetur vitae sem semper, molestie semper urna. Maecenas quis semper augue. Vestibulum commodo, dui ac bibendum sagittis, dui magna egestas ante, eu tincidunt leo lacus ac tortor. Phasellus eleifend egestas dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin dictum magna nec sollicitudin viverra.  Morbi vitae risus consequat, aliquam diam in, dictum purus. Mauris quis mauris non odio adipiscing auctor. Aliquam a dolor fermentum, pretium urna id, tincidunt nulla. Etiam lobortis, urna sit amet fermentum cursus, metus magna tincidunt risus, a euismod eros dolor sed augue. Aenean venenatis nisl magna. Pellentesque ullamcorper orci non est aliquet placerat. Sed quis pulvinar turpis. Duis condimentum ante mauris, et lobortis lorem porttitor nec. Pellentesque laoreet dui sapien, quis sagittis neque imperdiet at. Curabitur cursus mi a ligula tempor interdum at convallis enim. Etiam porttitor tortor vitae tincidunt sodales. Praesent sit amet faucibus mi. Vivamus vitae ullamcorper sapien.  Cras eget odio eu nibh tincidunt euismod. Nulla ultrices libero lacus, vitae egestas diam tincidunt a. Mauris rutrum gravida est, non semper arcu cursus ut. Suspendisse interdum mi vitae mollis venenatis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum sollicitudin interdum euismod. Nam dignissim purus eget pellentesque adipiscing. Integer condimentum accumsan purus, vitae sagittis turpis scelerisque ut.  Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse commodo facilisis enim nec faucibus. Quisque hendrerit ipsum nec nisi semper adipiscing. Mauris at magna in mi venenatis posuere. Pellentesque non odio tincidunt, fringilla nunc ac, placerat lacus. Nullam hendrerit mattis lectus, vel posuere sapien vestibulum condimentum. Cras ornare porta pellentesque. Ut commodo nulla vel diam commodo consequat. Sed malesuada est ac erat pulvinar, luctus dignissim nisl pretium. Suspendisse pharetra vehicula ligula, at dictum justo eleifend id. Duis iaculis purus ac porta aliquam."
+        android:id="@+id/messageTextView"
+        android:layout_marginBottom="8sp"
+        android:layout_marginLeft="4sp"
+        android:layout_marginRight="4sp"/>
+
+</LinearLayout>

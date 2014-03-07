@@ -2,6 +2,7 @@ package com.remedywebsolutions.YourPractice;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,8 +52,9 @@ public class MessageListActivity extends DefaultActivity {
             }
             messageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(MessageListActivity.this,
-                            formatInboxItemForToast(position), Toast.LENGTH_SHORT).show();
+                    Intent displayActivity = new Intent(MessageListActivity.this, MessageDisplayActivity.class);
+                    displayActivity.putExtra("inboxItem", inboxItems.get(position));
+                    startActivity(displayActivity);
                 }
             });
         }
