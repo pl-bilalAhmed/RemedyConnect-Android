@@ -4,11 +4,14 @@ import android.content.Context;
 import android.util.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.request.SpiceRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationRequestContent;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.PushIOHelper;
+import com.remedywebsolutions.YourPractice.R;
 
 import java.net.HttpURLConnection;
+import java.util.HashMap;
 
 public class SendInAppNotificationRequest extends SpiceRequest<String> {
     private Context context;
@@ -23,16 +26,17 @@ public class SendInAppNotificationRequest extends SpiceRequest<String> {
         MedSecureConnection msc = new MedSecureConnection(context);
         msc.buildBaseURI("Physician", "SendInAppNotification", "POST");
 
-        // Build a testing POJO:
+        LoggedInDataStorage storage = new LoggedInDataStorage(context);
+        HashMap<String, String> userData = storage.RetrieveData();
+
         InAppNotificationRequestContent message = new InAppNotificationRequestContent();
-        message.fromPhysicianID = 405;
-        message.fromPhysicianName = "Tester";
-        message.toPhysicianID = 405;
-        message.subject = "Oh, hi there!";
-        message.message = "This is a completely different test message. :)";
+        message.fromPhysicianID = Integer.parseInt(userData.get("physicianID"));
+        message.fromPhysicianName = userData.get("name");
+        message.toPhysicianID = message.fromPhysicianID;
+        message.subject = context.getString(R.string.test_inapp_notifications_subject);
+        message.message = context.getString(R.string.test_inapp_notifications_message);
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(message);
-        Log.d("YourPractice", "Test JSON content: " + jsonString);
         HttpURLConnection connection = msc.initConnection(true);
         msc.setupPOSTForJSONContent(connection, jsonString);
         String result = MedSecureConnection.getStringResult(connection);
