@@ -1,8 +1,6 @@
 package com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs;
 
-import java.io.Serializable;
-
-public class SentItem implements Serializable {
+public class SentItem extends MessageItem {
     public int notificationID;
     public int toPhysicianID;
     public int fromPhysicianID;

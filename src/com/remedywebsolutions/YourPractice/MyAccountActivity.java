@@ -75,6 +75,15 @@ public class MyAccountActivity extends DefaultActivity {
                 startActivity(intent);
             }
         });
+
+        sentItemsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyAccountActivity.this, MessageListActivity.class);
+                intent.putExtra("sentContents", sentItems);
+                startActivity(intent);
+            }
+        });
     }
 
     private void refreshMessages() {
