@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
@@ -76,6 +77,14 @@ public class DefaultActivity extends SherlockActivity {
         super.onResume();
         this.invalidateOptionsMenu();
     }
+
+    public void setProgressMessageWaitAndDismiss(String message) {
+        progress.setMessage(message);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                progress.dismiss();
+            }}, 3000);    }
 
     /**
      * Sets the Home button's visibility.

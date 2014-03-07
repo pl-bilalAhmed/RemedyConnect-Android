@@ -104,6 +104,7 @@
         <activity android:name=".MyAccountActivity"/>
         <activity android:name=".MessageListActivity"/>
         <activity android:name=".MessageDisplayActivity"/>
+        <activity android:name=".SendCustomMessageActivity"/>
 
         <service
             android:name="com.octo.android.robospice.UncachedSpiceService"

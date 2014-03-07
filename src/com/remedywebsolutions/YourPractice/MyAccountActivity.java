@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class MyAccountActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
-    Button inboxButton, sentItemsButton;
+    Button inboxButton, sentItemsButton, sendMessageButton;
     String defaultInboxText, defaultSentText;
     private ArrayList<InboxItem> inbox;
     private ArrayList<SentItem> sentItems;
@@ -47,6 +47,7 @@ public class MyAccountActivity extends DefaultActivity {
         Skin.applyActivityBackground(this);
         setTitle("My Account");
         final Button testNotificationsButton = (Button) findViewById(R.id.btnSendTestNotification);
+        sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
         inboxButton = (Button) findViewById(R.id.btnInbox);
         sentItemsButton = (Button) findViewById(R.id.btnSent);
         defaultInboxText = inboxButton.getText().toString();
@@ -64,6 +65,14 @@ public class MyAccountActivity extends DefaultActivity {
             public void onClick(View v) {
                 SendInAppNotificationRequest req = new SendInAppNotificationRequest(MyAccountActivity.this);
                 spiceManager.execute(req, new TestMessageListener());
+            }
+        });
+
+        sendMessageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyAccountActivity.this, SendCustomMessageActivity.class);
+                startActivity(intent);
             }
         });
 
