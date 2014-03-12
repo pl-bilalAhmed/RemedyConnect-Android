@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItemsResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
@@ -20,6 +22,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.FetchSentReques
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MyAccountActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
@@ -47,6 +50,10 @@ public class MyAccountActivity extends DefaultActivity {
         Skin.applyActivityBackground(this);
         setTitle("My Account");
         final Button testNotificationsButton = (Button) findViewById(R.id.btnSendTestNotification);
+        final TextView welcomeHeader = (TextView) findViewById(R.id.greetingsHeader);
+        LoggedInDataStorage storage = new LoggedInDataStorage(this);
+        HashMap<String, String> userData  = storage.RetrieveData();
+        welcomeHeader.setText("Welcome, " + userData.get("name")  + "!");
         sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
         inboxButton = (Button) findViewById(R.id.btnInbox);
         sentItemsButton = (Button) findViewById(R.id.btnSent);

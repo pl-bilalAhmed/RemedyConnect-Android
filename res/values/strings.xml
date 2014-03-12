@@ -32,7 +32,7 @@
         a search by practice name.
     </string>
     <string name="choose_your_practice">Choose Your Practice</string>
-    <string name="welcome_medsecure">Welcome!\nThis is the testing interface for in-app notifications. Please choose from the following options:</string>
+    <string name="welcome_medsecure">This is the testing interface for in-app notifications. Please choose from the following options:</string>
     <string name="test_inapp_notifications_message">The in-app notifications on your device are up and running.</string>
     <string name="test_inapp_notifications_subject">Welcome to MedSecure!</string>
 

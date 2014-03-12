@@ -41,6 +41,13 @@ public class LoggedInDataStorage {
         editor.commit();
     }
 
+    public void StorePhysicians(String physiciansJSON) {
+        SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("physicians", physiciansJSON);
+        editor.commit();
+    }
+
     public void StoreName(String name) {
         SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
@@ -62,13 +69,15 @@ public class LoggedInDataStorage {
         String deviceID = sp.getString("deviceID", "");
         String token = sp.getString("token", "");
         String name = sp.getString("name", "");
+        String physicians = sp.getString("physicians", "");
 
-        HashMap<String, String> userData = new HashMap<String, String>(3);
+        HashMap<String, String> userData = new HashMap<String, String>(6);
         userData.put("physicianID", Integer.toString(physicianID));
         userData.put("practiceID", Integer.toString(practiceID));
         userData.put("deviceID", deviceID);
         userData.put("token", token);
         userData.put("name", name);
+        userData.put("physicians", physicians);
         return userData;
     }
 

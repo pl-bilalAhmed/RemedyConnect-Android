@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -14,6 +16,9 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import com.pushio.manager.PushIOManager;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Physician;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
@@ -106,7 +111,35 @@ public class LoginActivity extends DefaultActivity {
             PushIOManager.getInstance(LoginActivity.this).registerUserId(pushIOHash);
             Log.d("YourPractice", "Registered with Push.IO with the following user ID: " +
                     PushIOManager.getInstance(LoginActivity.this).getRegisteredUserId());
-            progress.setMessage("Registered device - login complete.");
+            progress.setMessage("Registered device. Fetching your contacts...");
+            GetPhysiciansRequest req = new GetPhysiciansRequest(LoginActivity.this);
+            spiceManager.execute(req, new PullContactsListener());
+        }
+    }
+
+    private final class PullContactsListener implements RequestListener<PhysiciansResponse> {
+        @Override
+        public void onRequestFailure(SpiceException e) {
+            defaultSpiceFailureHandler(e);
+        }
+
+        @Override
+        public void onRequestSuccess(PhysiciansResponse physiciansResponse) {
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                String physicians = mapper.writeValueAsString(physiciansResponse);
+                dataStorage.StorePhysicians(physicians);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            String name = "";
+            for (Physician physician : physiciansResponse.physicians) {
+                if (physician.physicianID == physicianId) {
+                    name = physician.physicianName;
+                }
+            }
+            dataStorage.StoreName(name);
+            progress.setMessage("Fetched contacts - login complete.");
             progress.dismiss();
             onBackPressed();
             Toast.makeText(LoginActivity.this, "You've been logged in.", Toast.LENGTH_LONG).show();
