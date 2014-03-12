@@ -1,6 +1,5 @@
 package com.remedywebsolutions.YourPractice;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,14 +17,11 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
 public class LoginActivity extends DefaultActivity {
-    //private static final String KEY_RESULT = "login_result";
-
     private String username;
     private String token;
-    private int physicianId;
+    private int physicianId, practiceId;
     private String pushIOHash;
     private LoggedInDataStorage dataStorage;
     private EditText usernameEditor;
@@ -87,9 +83,10 @@ public class LoginActivity extends DefaultActivity {
         @Override
         public void onRequestSuccess(LoginResponse response) {
             physicianId = response.getPhysicianID();
+            practiceId = response.getPracticeID();
             token = response.getToken();
             progress.setMessage("Logged in, storing data...");
-            dataStorage.StoreDataOnLogin(physicianId, token);
+            dataStorage.StoreDataOnLogin(physicianId, practiceId, token);
             progress.setMessage("Logged in. Registering device...");
             RegisterDeviceRequest req = new RegisterDeviceRequest(physicianId, username, LoginActivity.this);
             spiceManager.execute(req, new RegisterDeviceListener());

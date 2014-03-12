@@ -32,10 +32,11 @@ public class LoggedInDataStorage {
         sp.edit().clear().commit();
     }
 
-    public void StoreDataOnLogin(int physicianID, String token) {
+    public void StoreDataOnLogin(int physicianID, int practiceID, String token) {
         SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("physicianID", physicianID);
+        editor.putInt("practiceID", practiceID);
         editor.putString("token", token);
         editor.commit();
     }
@@ -57,12 +58,14 @@ public class LoggedInDataStorage {
     public HashMap<String, String> RetrieveData() {
         SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
         int physicianID = sp.getInt("physicianID", 0);
+        int practiceID = sp.getInt("practiceID", 0);
         String deviceID = sp.getString("deviceID", "");
         String token = sp.getString("token", "");
         String name = sp.getString("name", "");
 
         HashMap<String, String> userData = new HashMap<String, String>(3);
         userData.put("physicianID", Integer.toString(physicianID));
+        userData.put("practiceID", Integer.toString(practiceID));
         userData.put("deviceID", deviceID);
         userData.put("token", token);
         userData.put("name", name);
