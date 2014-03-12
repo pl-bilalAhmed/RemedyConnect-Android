@@ -1,5 +1,7 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
@@ -73,8 +75,19 @@ public class MessageDisplayActivity extends DefaultActivity {
     private class DeleteButtonListener implements Button.OnClickListener {
         @Override
         public void onClick(View v) {
-            LoggedInDataStorage storage = new LoggedInDataStorage(MessageDisplayActivity.this);
-            HashMap<String, String> userData = storage.RetrieveData();
+            new AlertDialog.Builder(MessageDisplayActivity.this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("This message will be deleted.")
+                    .setMessage("This operation cannot be undone. Are you sure?")
+                    .setPositiveButton("Yes, delete it", new DeleteConfirmedButtonListener())
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+    }
+
+    private class DeleteConfirmedButtonListener implements DialogInterface.OnClickListener {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
             DeleteMessageRequest request;
             if (inboxMode) {
                 request = new DeleteMessageRequest(inboxItem.notificationID,
