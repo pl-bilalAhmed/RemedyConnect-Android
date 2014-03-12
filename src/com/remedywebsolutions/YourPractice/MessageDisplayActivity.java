@@ -2,6 +2,7 @@ package com.remedywebsolutions.YourPractice;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
@@ -25,7 +26,7 @@ public class MessageDisplayActivity extends DefaultActivity {
     private InboxItem inboxItem;
     private SentItem sentItem;
     private TextView nameView, subjectView, receivedView, messageView;
-    private Button deleteMessageButton;
+    private Button deleteMessageButton, replyButton;
 
     @Override
     protected void onStart() {
@@ -47,6 +48,7 @@ public class MessageDisplayActivity extends DefaultActivity {
         receivedView = (TextView) findViewById(R.id.receivedTextView);
         messageView = (TextView) findViewById(R.id.messageTextView);
         deleteMessageButton = (Button) findViewById(R.id.deleteMessageButton);
+        replyButton = (Button) findViewById(R.id.replyButton);
 
         nameView.setText("");
         subjectView.setText("");
@@ -60,6 +62,7 @@ public class MessageDisplayActivity extends DefaultActivity {
             subjectView.setText(inboxItem.subject);
             receivedView.setText(inboxItem.dateReceived);
             messageView.setText(inboxItem.message);
+            replyButton.setVisibility(View.VISIBLE);
         }
         else {
             sentItem = (SentItem) extras.get("messageItem");
@@ -67,9 +70,11 @@ public class MessageDisplayActivity extends DefaultActivity {
             subjectView.setText(sentItem.subject);
             receivedView.setText(sentItem.dateSent);
             messageView.setText(sentItem.message);
+            replyButton.setVisibility(View.GONE);
         }
 
         deleteMessageButton.setOnClickListener(new DeleteButtonListener());
+        replyButton.setOnClickListener(new ReplyButtonListener());
     }
 
     private class DeleteButtonListener implements Button.OnClickListener {
@@ -113,6 +118,17 @@ public class MessageDisplayActivity extends DefaultActivity {
             setProgressMessageWaitAndDismiss("Message deleted.");
             onBackPressed();
             // @TODO Check whether we should reload the message list and how.
+        }
+    }
+
+    private class ReplyButtonListener implements Button.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Intent replyActivity = new Intent(MessageDisplayActivity.this, SendCustomMessageActivity.class);
+            replyActivity.putExtra("subject", "Re: " + inboxItem.subject);
+            // @TODO We only handle inbox items right now
+            replyActivity.putExtra("toPhysicianID", inboxItem.fromPhysicianID);
+            startActivity(replyActivity);
         }
     }
 }

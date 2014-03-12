@@ -47,9 +47,16 @@
         android:layout_marginRight="4sp"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delete message"
         android:id="@+id/deleteMessageButton"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reply"
+        android:id="@+id/replyButton"
+        />
 
 </LinearLayout>

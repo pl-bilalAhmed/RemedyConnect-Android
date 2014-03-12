@@ -18,6 +18,9 @@ public class SendCustomMessageActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
 
     EditText subjectEditText, messageEditText;
+    private String subjectForReply;
+    private int toPhysicianIDForReply;
+    private boolean replyMode;
 
     @Override
     protected void onStart() {
@@ -37,6 +40,15 @@ public class SendCustomMessageActivity extends DefaultActivity {
         Button sendButton = (Button) findViewById(R.id.sendMessageButton);
         final EditText subjectEditText = (EditText) findViewById(R.id.subjectEditText);
         final EditText messageEditText = (EditText) findViewById(R.id.messageEditText);
+
+        subjectForReply = extras.getString("subject");
+        replyMode = (subjectForReply != null);
+        if (replyMode) {
+            toPhysicianIDForReply  = extras.getInt("toPhysicianID");
+            subjectEditText.setText(subjectForReply);
+            subjectEditText.setEnabled(false); // @TODO Should we leave this editable?
+        }
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,8 +57,14 @@ public class SendCustomMessageActivity extends DefaultActivity {
                 InAppNotificationRequestContent message = new InAppNotificationRequestContent();
                 message.fromPhysicianID = Integer.parseInt(userData.get("physicianID"));
                 message.fromPhysicianName = userData.get("name");
-                message.toPhysicianID = 405; // @TODO This isn't easy to implement
-                message.subject = subjectEditText.getText().toString();
+                if (replyMode) {
+                    message.toPhysicianID = toPhysicianIDForReply;
+                    message.subject = subjectForReply;
+                }
+                else {
+                    message.toPhysicianID = 405; // @TODO This isn't easy to implement
+                    message.subject = subjectEditText.getText().toString();
+                }
                 message.message = messageEditText.getText().toString();
                 SendInAppNotificationRequest req = new SendInAppNotificationRequest(SendCustomMessageActivity.this, message);
                 spiceManager.execute(req, new SendMessageListener());
