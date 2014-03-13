@@ -78,13 +78,24 @@ public class DefaultActivity extends SherlockActivity {
         this.invalidateOptionsMenu();
     }
 
-    public void setProgressMessageWaitAndDismiss(String message) {
+    public void setProgressMessageWaitAndDismiss(String message, boolean shouldGoBackAfter) {
         progress.setMessage(message);
+        progress.setProgress(100);
         Handler handler = new Handler();
+        final boolean triggerBack = shouldGoBackAfter;
         handler.postDelayed(new Runnable() {
             public void run() {
                 progress.dismiss();
-            }}, 3000);    }
+                if (triggerBack) {
+                    onBackPressed();
+                }
+            }}, 3000);
+    }
+
+    public void setProgressMessageWaitAndDismiss(String message) {
+        setProgressMessageWaitAndDismiss(message, false);
+    }
+
 
     /**
      * Sets the Home button's visibility.

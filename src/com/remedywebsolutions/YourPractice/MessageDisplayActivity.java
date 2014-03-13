@@ -128,6 +128,8 @@ public class MessageDisplayActivity extends DefaultActivity {
             replyActivity.putExtra("subject", "Re: " + inboxItem.subject);
             // @TODO We only handle inbox items right now
             replyActivity.putExtra("toPhysicianID", inboxItem.fromPhysicianID);
+            replyActivity.putExtra("conversationID", inboxItem.conversationID);
+            replyActivity.putExtra("toPhysicianName", inboxItem.fromPhysicianName);
             startActivity(replyActivity);
         }
     }

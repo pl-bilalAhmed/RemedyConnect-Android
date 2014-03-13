@@ -7,11 +7,11 @@ import com.octo.android.robospice.request.SpiceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationRequestContent;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.PushIOHelper;
 import com.remedywebsolutions.YourPractice.R;
 
 import java.net.HttpURLConnection;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class SendInAppNotificationRequest extends SpiceRequest<String> {
     private Context context;
@@ -29,7 +29,7 @@ public class SendInAppNotificationRequest extends SpiceRequest<String> {
         LoggedInDataStorage storage = new LoggedInDataStorage(context);
         HashMap<String, String> userData = storage.RetrieveData();
 
-        InAppNotificationRequestContent message = new InAppNotificationRequestContent();
+        message = new InAppNotificationRequestContent();
         message.fromPhysicianID = Integer.parseInt(userData.get("physicianID"));
         message.fromPhysicianName = userData.get("name");
         message.toPhysicianID = message.fromPhysicianID;
@@ -47,6 +47,7 @@ public class SendInAppNotificationRequest extends SpiceRequest<String> {
         HttpURLConnection connection = msc.initConnection(true);
         msc.setupPOSTForJSONContent(connection, jsonString);
         String result = MedSecureConnection.getStringResult(connection);
+        Log.d("API", result);
         connection.disconnect();
 
         return result;

@@ -1,6 +1,7 @@
 package com.remedywebsolutions.YourPractice.MedSecureAPI.requests;
 
 import android.content.Context;
+import android.util.Log;
 import com.octo.android.robospice.request.SpiceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 
@@ -33,6 +34,7 @@ public class DeleteMessageRequest extends SpiceRequest<String> {
         msc.addParameter("physicianID", Integer.toString(physicianID));
         HttpURLConnection connection = msc.initConnection(true);
         String result = MedSecureConnection.getStringResult(connection);
+        Log.w("API", "Result: " + result);
         connection.disconnect();
         return result;
     }
