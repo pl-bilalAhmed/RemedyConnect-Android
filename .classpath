@@ -5,7 +5,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/actionbarsherlock"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/TestFlightLib"/>
 	<classpathentry kind="lib" path="libs/jsoup-1.6.3.jar" sourcepath="C:/Users/Authorized User/Documents/NewPush/Greenwood Pediatrics/Android/Libraries/jsoup/jsoup-1.7.2-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/Authorized User/Documents/NewPush/Greenwood Pediatrics/Android/Libraries/jsoup/jsoup-1.7.2-javadoc.jar!/"/>

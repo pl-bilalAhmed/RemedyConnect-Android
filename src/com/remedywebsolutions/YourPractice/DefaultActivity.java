@@ -26,7 +26,6 @@ import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
 import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatus;
 import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatusSummary;
 import com.remedywebsolutions.YourPractice.parser.MainParser;
-import com.testflightapp.lib.TestFlight;
 import net.lingala.zip4j.exception.ZipException;
 
 import java.io.*;
@@ -391,7 +390,6 @@ public class DefaultActivity extends SherlockActivity {
         protected Void doInBackground(HashMap<String, String>... whatToDownload) {
             taskStatusIndex = downloadSummary.reservePlace();
             if (isOnline()) {
-                TestFlight.passCheckpoint("Downloading started, device is online");
                 publishProgress(new DownloadTaskStatus(DownloadStatusCodes.NETWORK_AVAILABLE));
                 String from = whatToDownload[0].get("from");
                 String to = whatToDownload[0].get("to");
@@ -418,10 +416,8 @@ public class DefaultActivity extends SherlockActivity {
                     urlStream.close();
                     fileOutputStream.flush();
                     fileOutputStream.close();
-                    TestFlight.log("Downloaded " + to);
 
                     if (!to.equals("skin/DesignPack.zip")) {
-                        TestFlight.log("Parsing " + to + " for additional downloads...");
                         // We have a feed, have to parse it to decide whether there's
                         // anything left to download...
                         publishProgress(new DownloadTaskStatus(DownloadStatusCodes.PARSING_FOR_MORE));
@@ -431,7 +427,6 @@ public class DefaultActivity extends SherlockActivity {
                             for (String subFeedURL : parser.getSubfeedURLs()) {
                                 filename = MainParser.subFeedURLToLocal(
                                         subFeedURL, Data.GetFeedRoot(getApplicationContext()));
-                                TestFlight.log("Found new file to download: " + from);
                                 HashMap<String, String> additionalDownload = new HashMap<String, String>(2);
                                 additionalDownload.put("from", subFeedURL);
                                 additionalDownload.put("to", filename);
@@ -441,7 +436,6 @@ public class DefaultActivity extends SherlockActivity {
                         publishProgress(new DownloadTaskStatus(DownloadStatusCodes.DOWNLOAD_FINISHED, downloadedSize, fileSize));
                     }
                     else {
-                        TestFlight.log("Extracting design pack...");
                         // We have a design pack, extract it
                         publishProgress(new DownloadTaskStatus(DownloadStatusCodes.EXTRACTING));
                         try {
