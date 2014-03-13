@@ -27,26 +27,26 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Test notifications"
+        android:text="@string/testNotifications"
         android:id="@+id/btnSendTestNotification"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send message"
+        android:text="@string/sendMessage"
         android:id="@+id/sendMessageButton"
         />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inbox"
+        android:text="@string/inbox"
         android:id="@+id/btnInbox"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sent items"
+        android:text="@string/sentItems"
         android:id="@+id/btnSent"
         />
 
