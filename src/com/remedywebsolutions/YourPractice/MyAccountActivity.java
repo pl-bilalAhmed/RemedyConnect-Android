@@ -1,6 +1,8 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.FetchInboxReque
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.FetchSentRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -148,11 +151,30 @@ public class MyAccountActivity extends DefaultActivity {
         }
     }
 
+    private void reloginSpiceFailureHandler(SpiceException e) {
+        spiceManager.cancelAllRequests();
+        if (e.getCause() instanceof IOException) {
+            // We should have an authentication failure here, so re-login the user...
+            new AlertDialog.Builder(MyAccountActivity.this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Your session has expired")
+                    .setMessage("You will need to log in again. Please OK to proceed.")
+                    .setPositiveButton("OK", new AlertDialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent loginIntent = new Intent(MyAccountActivity.this, LoginActivity.class);
+                            startActivity(loginIntent);
+                        }
+                    })
+                    .show();
+        }
+    }
+
     private final class InboxRequestListener implements  RequestListener<InboxItemsResponse> {
         @Override
         public void onRequestFailure(SpiceException e) {
             progress.dismiss();
-            defaultSpiceFailureHandler(e);
+            reloginSpiceFailureHandler(e);
         }
 
         @Override
@@ -167,7 +189,7 @@ public class MyAccountActivity extends DefaultActivity {
         @Override
         public void onRequestFailure(SpiceException e) {
             progress.dismiss();
-            defaultSpiceFailureHandler(e);
+            reloginSpiceFailureHandler(e);
         }
 
         @Override
