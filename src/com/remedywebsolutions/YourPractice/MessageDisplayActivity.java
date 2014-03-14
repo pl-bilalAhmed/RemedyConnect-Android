@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,7 +18,11 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteMessageRequest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class MessageDisplayActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
@@ -40,6 +45,13 @@ public class MessageDisplayActivity extends DefaultActivity {
         super.onStop();
     }
 
+    protected String formatDate(String dateFromAPI) throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        Date date = df.parse(dateFromAPI);
+        return android.text.format.DateFormat.getLongDateFormat(this).format(date) + " " +
+                android.text.format.DateFormat.getTimeFormat(this).format(date);
+    }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_display);
@@ -60,7 +72,11 @@ public class MessageDisplayActivity extends DefaultActivity {
             inboxItem = (InboxItem) extras.get("messageItem");
             nameView.setText(inboxItem.fromPhysicianName);
             subjectView.setText(inboxItem.subject);
-            receivedView.setText(inboxItem.dateReceived);
+            try {
+                receivedView.setText(formatDate(inboxItem.dateReceived));
+            } catch (ParseException e) {
+                receivedView.setText(inboxItem.dateReceived);
+            }
             messageView.setText(inboxItem.message);
             replyButton.setVisibility(View.VISIBLE);
         }
@@ -68,7 +84,11 @@ public class MessageDisplayActivity extends DefaultActivity {
             sentItem = (SentItem) extras.get("messageItem");
             nameView.setText(sentItem.toPhysicianName);
             subjectView.setText(sentItem.subject);
-            receivedView.setText(sentItem.dateSent);
+            try {
+                receivedView.setText(formatDate(sentItem.dateSent));
+            } catch (ParseException e) {
+                receivedView.setText(sentItem.dateSent);
+            }
             messageView.setText(sentItem.message);
             replyButton.setVisibility(View.GONE);
         }
@@ -125,6 +145,7 @@ public class MessageDisplayActivity extends DefaultActivity {
                     startActivity(myAccountIntent);
                 }
             });
+
         }
     }
 
