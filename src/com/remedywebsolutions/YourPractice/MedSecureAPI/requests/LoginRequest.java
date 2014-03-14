@@ -6,6 +6,7 @@ import com.octo.android.robospice.request.SpiceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 
 public class LoginRequest extends SpiceRequest<LoginResponse> {

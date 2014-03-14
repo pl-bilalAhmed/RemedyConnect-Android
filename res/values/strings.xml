@@ -49,5 +49,7 @@
     <string name="subject">Subject</string>
     <string name="yourMessage">Your message</string>
     <string name="sendMessage">Send message</string>
+    <string name="loginTextContent">For accessing MedSecure functionality, please provide your login credentials below.</string>
+    <string name="login">Login</string>
 
 </resources>

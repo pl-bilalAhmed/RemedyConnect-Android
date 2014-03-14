@@ -1,5 +1,6 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,8 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRe
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
+
+import java.io.IOException;
 
 public class LoginActivity extends DefaultActivity {
     private String username;
@@ -49,6 +52,7 @@ public class LoginActivity extends DefaultActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        setTitle(getString(R.string.login));
         final Button button = (Button) findViewById(R.id.buttonLogin);
         usernameEditor = (EditText) findViewById(R.id.userName);
         passwordEditor = (EditText) findViewById(R.id.password);
@@ -65,13 +69,12 @@ public class LoginActivity extends DefaultActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MedSecureConnection connection = new MedSecureConnection(LoginActivity.this);
                 username = usernameEditor.getText().toString();
                 String password = passwordEditor.getText().toString();
                 LoginRequest req = new LoginRequest(username, password, LoginActivity.this);
-                spiceManager.execute(req, new LoginRequestListener());
                 progress.setMessage("Logging in...");
                 progress.show();
+                spiceManager.execute(req, new LoginRequestListener());
             }
         });
         dataStorage = new LoggedInDataStorage(LoginActivity.this);
@@ -90,11 +93,22 @@ public class LoginActivity extends DefaultActivity {
             physicianId = response.getPhysicianID();
             practiceId = response.getPracticeID();
             token = response.getToken();
-            progress.setMessage("Logged in, storing data...");
-            dataStorage.StoreDataOnLogin(physicianId, practiceId, token);
-            progress.setMessage("Logged in. Registering device...");
-            RegisterDeviceRequest req = new RegisterDeviceRequest(physicianId, username, LoginActivity.this);
-            spiceManager.execute(req, new RegisterDeviceListener());
+            if (token != null) {
+                progress.setMessage("Logged in, storing data...");
+                dataStorage.StoreDataOnLogin(physicianId, practiceId, token);
+                progress.setMessage("Logged in. Registering device...");
+                RegisterDeviceRequest req = new RegisterDeviceRequest(physicianId, username, LoginActivity.this);
+                spiceManager.execute(req, new RegisterDeviceListener());
+            }
+            else {
+                progress.dismiss();
+                new AlertDialog.Builder(LoginActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Couldn't log you in")
+                        .setMessage("Unknown username or bad password - please try again.")
+                        .setPositiveButton("OK", null)
+                        .show();
+            }
         }
     }
 
