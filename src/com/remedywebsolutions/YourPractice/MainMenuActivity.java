@@ -24,7 +24,7 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
         Skin.applyMainMenuBackground(this);
         Skin.applyMainMenuButtons(this);
         Skin.applyThemeLogo(this, true);
-        if (extras.getBoolean("isRoot")) {
+        if (extras != null && extras.getBoolean("isRoot")) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
         }
@@ -108,7 +108,7 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
                     Data.GetFeedRoot(this));
             MainViewController.FireActivity(this,
                     localPath,
-                    menuButtonTexts.get(index));
+                    menuButtonTexts.get(index), 0);
         }
         else {
             if (!externalLinks.get(index).isEmpty()) {

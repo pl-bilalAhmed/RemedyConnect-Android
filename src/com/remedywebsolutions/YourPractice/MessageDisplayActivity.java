@@ -93,6 +93,8 @@ public class MessageDisplayActivity extends DefaultActivity {
     private class DeleteConfirmedButtonListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
+            progress.setMessage("Deleting message...");
+            progress.show();
             DeleteMessageRequest request;
             if (inboxMode) {
                 request = new DeleteMessageRequest(inboxItem.notificationID,
@@ -115,9 +117,14 @@ public class MessageDisplayActivity extends DefaultActivity {
 
         @Override
         public void onRequestSuccess(String s) {
-            setProgressMessageWaitAndDismiss("Message deleted.");
-            onBackPressed();
-            // @TODO Check whether we should reload the message list and how.
+            setProgressMessageWaitAndDismissWithRunnable("Message deleted.", new Runnable() {
+                @Override
+                public void run() {
+                    Intent myAccountIntent = new Intent(MessageDisplayActivity.this, MyAccountActivity.class);
+                    myAccountIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(myAccountIntent);
+                }
+            });
         }
     }
 

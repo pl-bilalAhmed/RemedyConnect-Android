@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainViewController {
-    public static void FireActivity(Context context, String parsePoint, String title) {
+    public static void FireActivity(Context context, String parsePoint, String title, int intentFlags) {
         String startPath = context.getFilesDir().getAbsolutePath() + "/";
         MainParser parser = new MainParser(startPath + parsePoint);
         if (parser.isMenu()) {
@@ -20,6 +20,9 @@ public class MainViewController {
             }
             else {
                 intent = new Intent(context, MenuActivity.class);
+            }
+            if (intentFlags != 0) {
+                intent.setFlags(intentFlags);
             }
             ArrayList<HashMap<String, String>> menuItems = parser.getMenu();
             ArrayList<String> items = new ArrayList<String>();
@@ -40,7 +43,9 @@ public class MainViewController {
         }
         else if (parser.isPage()) {
             Intent intent = new Intent(context, PageActivity.class);
-
+            if (intentFlags != 0) {
+                intent.setFlags(intentFlags);
+            }
             HashMap<String, String> page = parser.getPage();
 
             intent.putExtra("text", page.get("text"));
@@ -51,6 +56,9 @@ public class MainViewController {
         }
         else if (parser.isArticleSet()) {
             Intent intent = new Intent(context, ArticleSetActivity.class);
+            if (intentFlags != 0) {
+                intent.setFlags(intentFlags);
+            }
             intent.putExtra("articleTitles", parser.getArticleSetTitles());
             intent.putExtra("title", title);
             intent.putExtra("isRoot", parsePoint.equals("index.xml"));
@@ -60,12 +68,16 @@ public class MainViewController {
         }
     }
 
-    public static void FireActivity(DefaultActivity activity, String parsePoint) {
-        FireActivity(activity, parsePoint, activity.getString(R.string.welcome));
+    public static void FireActivity(DefaultActivity activity, String parsePoint, int intentFlags) {
+        FireActivity(activity, parsePoint, activity.getString(R.string.welcome), intentFlags);
     }
 
     public static void FireRootActivity(DefaultActivity activity) {
-        FireActivity(activity, "index.xml");
+        FireActivity(activity, "index.xml", 0);
+    }
+
+    public static void FireRootActivity(DefaultActivity activity, int intentFlags) {
+        FireActivity(activity, "index.xml", intentFlags);
     }
 
     public static void FireBrowser(Context context, String link) {

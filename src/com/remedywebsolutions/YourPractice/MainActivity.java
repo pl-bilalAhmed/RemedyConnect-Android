@@ -26,7 +26,7 @@ public class MainActivity extends DefaultActivity {
 
     public void checkDownloadedData() {
         if (Data.isDataAvailable(getApplicationContext())) {
-            MainViewController.FireActivity(this, "index.xml");
+            MainViewController.FireRootActivity(this);
             finish();
         } else {
             Intent practiceSearchActivity = new Intent(this, PracticeSearchActivity.class);

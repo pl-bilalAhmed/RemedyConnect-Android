@@ -83,7 +83,7 @@ public class MenuActivity extends DefaultActivity {
                                 Data.GetFeedRoot(view.getContext()));
                         MainViewController.FireActivity(view.getContext(),
                                 localPath,
-                                menuadapter.getItem(position + MENU_ITEMS_SHIFT)); // -1 everywhere because of the header element
+                                menuadapter.getItem(position + MENU_ITEMS_SHIFT), 0); // -1 everywhere because of the header element
                     }
                     else {
                         if (externalLinks.get(position + MENU_ITEMS_SHIFT) != null) {

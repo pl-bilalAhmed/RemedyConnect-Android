@@ -2,6 +2,7 @@ package com.remedywebsolutions.YourPractice;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -143,7 +144,14 @@ public class SendCustomMessageActivity extends DefaultActivity {
 
         @Override
         public void onRequestSuccess(String result) {
-            setProgressMessageWaitAndDismiss("Message sent.", true);
+            setProgressMessageWaitAndDismissWithRunnable("Message sent.", new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(SendCustomMessageActivity.this, MyAccountActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            });
         }
     }
 }

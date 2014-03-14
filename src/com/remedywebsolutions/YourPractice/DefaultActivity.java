@@ -77,18 +77,29 @@ public class DefaultActivity extends SherlockActivity {
         this.invalidateOptionsMenu();
     }
 
-    public void setProgressMessageWaitAndDismiss(String message, boolean shouldGoBackAfter) {
+    public void setProgressMessageWaitAndDismissWithRunnable(String message, Runnable finishRunnable) {
         progress.setMessage(message);
         progress.setProgress(100);
         Handler handler = new Handler();
-        final boolean triggerBack = shouldGoBackAfter;
+        final Runnable taskToRun = finishRunnable;
         handler.postDelayed(new Runnable() {
             public void run() {
                 progress.dismiss();
+                taskToRun.run();
+            }
+        }, 3000);
+    }
+
+    public void setProgressMessageWaitAndDismiss(String message, boolean shouldGoBackAfter) {
+        final boolean triggerBack = shouldGoBackAfter;
+        setProgressMessageWaitAndDismissWithRunnable(message, new Runnable() {
+            @Override
+            public void run() {
                 if (triggerBack) {
                     onBackPressed();
                 }
-            }}, 3000);
+            }
+        });
     }
 
     public void setProgressMessageWaitAndDismiss(String message) {
@@ -197,6 +208,7 @@ public class DefaultActivity extends SherlockActivity {
                 storage.logOut();
                 Toast.makeText(DefaultActivity.this, "You've been logged out.", Toast.LENGTH_LONG).show();
                 invalidateOptionsMenu();
+                MainViewController.FireRootActivity(this, Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return true;
             case R.id.menu_my_account:
                 intent = new Intent(this, MyAccountActivity.class);

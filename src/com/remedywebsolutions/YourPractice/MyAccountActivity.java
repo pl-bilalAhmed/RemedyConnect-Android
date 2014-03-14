@@ -32,18 +32,6 @@ public class MyAccountActivity extends DefaultActivity {
     private ArrayList<SentItem> sentItems;
     private boolean refreshFirstCallCompleted;
 
-    @Override
-    protected void onStart() {
-        spiceManager.start(this);
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        spiceManager.shouldStop();
-        super.onStop();
-    }
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
@@ -66,7 +54,6 @@ public class MyAccountActivity extends DefaultActivity {
         progress.setIndeterminate(true);
 
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        refreshMessages();
         testNotificationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +87,19 @@ public class MyAccountActivity extends DefaultActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        spiceManager.start(this);
+        super.onStart();
+        refreshMessages();
+    }
+
+    @Override
+    protected void onStop() {
+        spiceManager.shouldStop();
+        super.onStop();
     }
 
     private void refreshMessages() {
