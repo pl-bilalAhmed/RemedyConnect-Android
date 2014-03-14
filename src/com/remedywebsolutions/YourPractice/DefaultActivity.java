@@ -79,7 +79,6 @@ public class DefaultActivity extends SherlockActivity {
 
     public void setProgressMessageWaitAndDismissWithRunnable(String message, Runnable finishRunnable) {
         progress.setMessage(message);
-        progress.setProgress(100);
         Handler handler = new Handler();
         final Runnable taskToRun = finishRunnable;
         handler.postDelayed(new Runnable() {
@@ -87,7 +86,7 @@ public class DefaultActivity extends SherlockActivity {
                 progress.dismiss();
                 taskToRun.run();
             }
-        }, 3000);
+        }, 1000);
     }
 
     public void setProgressMessageWaitAndDismiss(String message, boolean shouldGoBackAfter) {
