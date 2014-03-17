@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -13,7 +13,10 @@
         android:text=""
         android:id="@+id/greetingsHeader"
         android:padding="5dp"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -22,32 +25,51 @@
         android:text="@string/welcome_medsecure"
         android:id="@+id/greetingsText"
         android:padding="5dp"
-        />
+        android:layout_below="@+id/greetingsHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/testNotifications"
-        android:id="@+id/btnSendTestNotification"/>
+        android:id="@+id/btnSendTestNotification"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/myAccountControlButtons" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sendMessage"
         android:id="@+id/sendMessageButton"
-        />
+        android:layout_below="@+id/greetingsText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/myAccountControlButtons"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/inbox"
-        android:id="@+id/btnInbox"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/sendMessageButton"
+        android:weightSum="1">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sentItems"
-        android:id="@+id/btnSent"
-        />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/inbox"
+            android:id="@+id/btnInbox"
+            android:layout_weight="0.50" />
 
-</LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/sentItems"
+            android:id="@+id/btnSent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+
+</RelativeLayout>
