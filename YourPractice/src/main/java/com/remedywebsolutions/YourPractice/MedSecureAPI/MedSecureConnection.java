@@ -94,11 +94,12 @@ public class MedSecureConnection  {
     /**
      * Extends connection with POST content.
      * @param connection The connection to use.
-     * @param content The content to put in the request.
+     * @param jsonContent The content to put in the request.
      */
     public void setupPOSTForJSONContent(HttpURLConnection connection, String jsonContent) throws IOException {
         connection.setFixedLengthStreamingMode(jsonContent.getBytes().length);
         connection.setRequestProperty("Content-Type", "application/json");
+        connection.setDoOutput(true); // For fixing issue similar to this one: http://stackoverflow.com/questions/13247836/android-java-net-protocolexception-does-not-support-output
         PrintWriter out = new PrintWriter(connection.getOutputStream());
         out.print(jsonContent);
         out.close();
