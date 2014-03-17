@@ -34,7 +34,6 @@ package="com.remedywebsolutions.YourPractice">
         android:name="com.remedywebsolutions.YourPractice.MainActivity"
         android:label="@string/title_activity_main">
         <intent-filter>
-            <action android:name="com.remedywebsolutions.YourPractice.NOTIFICATIONPRESSED"/>
             <category android:name="android.intent.category.DEFAULT"/>
         </intent-filter>
     </activity>
@@ -94,7 +93,12 @@ package="com.remedywebsolutions.YourPractice">
     <activity android:name="com.remedywebsolutions.YourPractice.MainMenuActivity"/>
 
     <activity android:name=".LoginActivity"/>
-    <activity android:name=".MyAccountActivity"/>
+    <activity android:name=".MyAccountActivity">
+        <intent-filter>
+            <action android:name="com.remedywebsolutions.YourPractice.NOTIFICATIONPRESSED"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+        </intent-filter>
+    </activity>
     <activity android:name=".MessageListActivity"/>
     <activity android:name=".MessageDisplayActivity"/>
     <activity android:name=".SendCustomMessageActivity"/>
