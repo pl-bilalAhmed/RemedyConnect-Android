@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">YourPractice</string>
+    <string name="title_activity_main">YourPractice</string>
+    <string name="update">Update Your Practice Info</string>
+    <string name="title_activity_about">About</string>
+    <string name="about_developers">This application was developed by RemedyWebSolutions. <a href="http://remedywebsolutions.com">Remedy Web Solutions</a> offers a host of services including web design, peer-reviewed pediatric/adult content, hosting, mobile solutions and other online tools for medical professionals.\n\n</string>
+    <string name="about_libs">This application uses the <a href="http://jsoup.org">jsoup</a> open source software library under the MIT license.\n\nCopyright © 2009 &#8211; 2013 Jonathan Hedley (jonathan@hedley.net)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n<b>Zip4j License</b>\n\nCopyright 2013 Srikanth Reddy Lingala\n\nLicensed under the Apache License, Version 2.0 (the "License");\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.\n\n\n\n<b>ActionBarSherlock license</b>\n\nCopyright 2012 Jake Wharton\n\nLicensed under the Apache License, Version 2.0 (the "License"); You may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
+    <string name="welcome">Welcome!</string>
+    <string name="title_activity_page_my_doctor">Page My Doctor</string>
+    <string name="page_my_doctor_intro">We use a third-party service, Page My Doctor, so you can page the on-call provider with an urgent question after hours. First time users will register first. It’s simple! Please be brief and specific. Pagers and cell phones won’t take long messages easily.</string>
+    <string name="page_my_doctor_open">Open Page My Doctor</string>
+    <string name="logo_description">Logo</string>
+    <string name="title_select_practice">Select your practice</string>
+    <string name="practice_search_description">Welcome! Your are about to download information that your primary care provider has approved. Please ensure that you have a working Internet connection before starting the search. \nThis information is only intended for registered patients of this organization. Please choose the practice where you, or your family member, is a registered patient.\nTo select your practice, type and search. If you would like to search for the nearest practice, start a location-based search below.</string>
+    <string name="practiceSearchEditHint">My Practice</string>
+    <string name="practiceSearchStartByNameText">Search by name</string>
+    <string name="practiceSearchStartByLocationText">Search by location</string>
+    <string name="about">About</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+
+    <string name="downloading">Downloading practice information, please wait&#8230;</string>
+    <string name="download_failed">Failed to download data. Please ensure that your Internet connection is working and try again.</string>
+    <string name="extracting_design">Extracting design, please wait&#8230;</string>
+    <string name="parsing_for_more">Discovering additional content, please wait&#8230;</string>
+    <string name="starting_additional_download">Found new content, please wait&#8230;</string>
+    <string name="menu_background">Menu background</string>
+    <string name="logo">Logo</string>
+    <string name="splashscreen">Splashscreen</string>
+    <string name="couldnt_find_practice_near_location">We couldn\'t find a practice near to your location, please start
+        a search by practice name.
+    </string>
+    <string name="choose_your_practice">Choose Your Practice</string>
+    <string name="welcome_medsecure">This is the testing interface for in-app notifications. Please choose from the following options:</string>
+    <string name="test_inapp_notifications_message">The in-app notifications on your device are up and running.</string>
+    <string name="test_inapp_notifications_subject">Welcome to MedSecure!</string>
+    <string name="yourUsername">Your username</string>
+    <string name="yourPassword">Your password</string>
+    <string name="Login">Login</string>
+    <string name="deleteMessage">Delete message</string>
+    <string name="replyMessage">Reply</string>
+    <string name="myAccount">My Account</string>
+    <string name="logout">Logout</string>
+    <string name="testNotifications">Test notifications</string>
+    <string name="sendMessage">Send message</string>
+    <string name="inbox">Inbox</string>
+    <string name="sentItems">Sent items</string>
+    <string name="subject">Subject</string>
+    <string name="yourMessage">Your message</string>
+    <string name="sendYourMessage">Send message</string>
+    <string name="loginTextContent">For accessing MedSecure functionality, please provide your login credentials below.</string>
+    <string name="login">Login</string>
+
+</resources>

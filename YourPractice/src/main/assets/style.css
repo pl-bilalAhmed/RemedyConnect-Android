@@ -1,0 +1,56 @@
+@font-face {
+   font-family: 'OpenSans';
+   src: url('file:///android_asset/fonts/OpenSans-Regular.ttf');
+   font-weight: normal;
+   font-style: normal;
+}
+@font-face {
+   font-family: 'OpenSans';
+   src: url('file:///android_asset/fonts/OpenSans-Bold.ttf');
+   font-weight: bold;
+   font-style: normal;
+}
+@font-face {
+   font-family: 'OpenSans';
+   src: url('file:///android_asset/fonts/OpenSans-Italic.ttf');
+   font-weight: normal;
+   font-style: italic;
+}
+@font-face {
+   font-family: 'OpenSans';
+   src: url('file:///android_asset/fonts/OpenSans-BoldItalic.ttf');
+   font-weight: bold;
+   font-style: italic;
+}
+
+@font-face {
+   font-family: 'OpenSansCondensedBold';
+   src: url('file:///android_asset/fonts/OpenSans-CondBold.ttf');
+}
+
+html {
+    font-family: 'OpenSans';
+    background-color: rgba(255, 255, 255, 0);
+    color: #000000;
+}
+
+html, body {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.headerLogo {
+    width: 100%;
+}
+
+@media screen and (orientation:landscape) {
+    .headerLogo {
+        width: 66%;
+        padding-left: 16%;
+        padding-right: 16%;
+        margin: 0;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'OpenSansCondensedBold';
+}

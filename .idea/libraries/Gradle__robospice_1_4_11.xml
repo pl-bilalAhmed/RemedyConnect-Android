@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: robospice-1.4.11">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/YourPractice/libs/robospice-1.4.11.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
