@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -10,13 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recipientSpinner"
-        android:spinnerMode="dropdown"/>
+        android:spinnerMode="dropdown"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/subjectEditText"
-        android:hint="@string/subject"/>
+        android:hint="@string/subject"
+        android:layout_below="@id/recipientSpinner"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -24,16 +27,20 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/messageEditText"
-        android:layout_weight="0.78"
         android:hint="@string/yourMessage"
-        android:maxLines="10"
-        android:gravity="top"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        android:layout_below="@id/subjectEditText"
+        android:layout_above="@id/sendMessageButton"
+        android:singleLine="false"
+        android:gravity="top" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sendYourMessage"
-        android:id="@+id/sendMessageButton"/>
+        android:id="@+id/sendMessageButton"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentBottom="true" />
 
-</LinearLayout>
+</RelativeLayout>
