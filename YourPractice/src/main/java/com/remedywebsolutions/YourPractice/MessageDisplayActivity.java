@@ -8,6 +8,7 @@ import android.os.Message;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
@@ -33,6 +34,7 @@ public class MessageDisplayActivity extends DefaultActivity {
     private InboxItem inboxItem;
     private SentItem sentItem;
     private TextView nameView, subjectView, receivedView, messageView;
+    private ProgressBar progressBar;
     private Button deleteMessageButton, replyButton;
 
     @Override
@@ -58,6 +60,7 @@ public class MessageDisplayActivity extends DefaultActivity {
         super.onCreate(savedInstanceState);
         reportPhase("Message display");
         setContentView(R.layout.activity_message_display);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         nameView = (TextView) findViewById(R.id.fromTextView);
         subjectView = (TextView) findViewById(R.id.subjectTextView);
         receivedView = (TextView) findViewById(R.id.receivedTextView);
@@ -71,6 +74,8 @@ public class MessageDisplayActivity extends DefaultActivity {
         messageView.setText("");
 
         inboxMode = extras.getBoolean("inboxMode");
+        replyButton.setVisibility(View.GONE);
+        deleteMessageButton.setVisibility(View.GONE);
         if (inboxMode) {
             inboxItem = (InboxItem) extras.get("messageItem");
             nameView.setText(inboxItem.fromPhysicianName);
@@ -91,7 +96,6 @@ public class MessageDisplayActivity extends DefaultActivity {
             } catch (ParseException e) {
                 receivedView.setText(sentItem.dateSent);
             }
-            replyButton.setVisibility(View.GONE);
         }
 
         startFetchingMessage();
@@ -178,16 +182,20 @@ public class MessageDisplayActivity extends DefaultActivity {
         public void onRequestFailure(SpiceException e) {
             setProgressMessageWaitAndDismiss("Couldn't fetch message, please try again later.");
             defaultSpiceFailureHandler(e);
+            progressBar.setVisibility(View.GONE);
         }
 
         @Override
         public void onRequestSuccess(InboxItem inboxItem) {
-            MessageDisplayActivity.this.inboxItem.message = inboxItem.message;
-            replyButton.setVisibility(View.VISIBLE);
-            MessageDisplayActivity.this.messageView.setText(inboxItem.message);
-
             deleteMessageButton.setOnClickListener(new DeleteButtonListener());
             replyButton.setOnClickListener(new ReplyButtonListener());
+
+            MessageDisplayActivity.this.inboxItem.message = inboxItem.message;
+            replyButton.setVisibility(View.VISIBLE);
+            deleteMessageButton.setVisibility(View.VISIBLE);
+            MessageDisplayActivity.this.messageView.setText(inboxItem.message);
+            progressBar.setVisibility(View.GONE);
+
         }
     }
 
@@ -196,15 +204,18 @@ public class MessageDisplayActivity extends DefaultActivity {
         public void onRequestFailure(SpiceException e) {
             setProgressMessageWaitAndDismiss("Couldn't fetch message, please try again later.");
             defaultSpiceFailureHandler(e);
+            progressBar.setVisibility(View.GONE);
         }
 
         @Override
         public void onRequestSuccess(SentItem sentItem) {
-            MessageDisplayActivity.this.sentItem.message = sentItem.message;
-            MessageDisplayActivity.this.messageView.setText(sentItem.message);
-
             deleteMessageButton.setOnClickListener(new DeleteButtonListener());
             replyButton.setOnClickListener(new ReplyButtonListener());
+
+            MessageDisplayActivity.this.sentItem.message = sentItem.message;
+            MessageDisplayActivity.this.messageView.setText(sentItem.message);
+            deleteMessageButton.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
         }
     }
 }
