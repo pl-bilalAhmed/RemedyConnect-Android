@@ -17,6 +17,8 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteMessageRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.FetchInboxItem;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.FetchSentItem;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -78,8 +80,7 @@ public class MessageDisplayActivity extends DefaultActivity {
             } catch (ParseException e) {
                 receivedView.setText(inboxItem.dateReceived);
             }
-            messageView.setText(inboxItem.message);
-            replyButton.setVisibility(View.VISIBLE);
+            // We only activate the reply button if the message is loaded...
         }
         else {
             sentItem = (SentItem) extras.get("messageItem");
@@ -90,12 +91,21 @@ public class MessageDisplayActivity extends DefaultActivity {
             } catch (ParseException e) {
                 receivedView.setText(sentItem.dateSent);
             }
-            messageView.setText(sentItem.message);
             replyButton.setVisibility(View.GONE);
         }
 
-        deleteMessageButton.setOnClickListener(new DeleteButtonListener());
-        replyButton.setOnClickListener(new ReplyButtonListener());
+        startFetchingMessage();
+    }
+
+    private void startFetchingMessage() {
+        if (inboxMode) {
+            FetchInboxItem req = new FetchInboxItem(this, inboxItem.notificationID);
+            spiceManager.execute(req, new InboxItemListener());
+        }
+        else {
+            FetchSentItem req = new FetchSentItem(this, sentItem.notificationID);
+            spiceManager.execute(req, new SentItemListener());
+        }
     }
 
     private class DeleteButtonListener implements Button.OnClickListener {
@@ -160,6 +170,41 @@ public class MessageDisplayActivity extends DefaultActivity {
             replyActivity.putExtra("conversationID", inboxItem.conversationID);
             replyActivity.putExtra("toPhysicianName", inboxItem.fromPhysicianName);
             startActivity(replyActivity);
+        }
+    }
+
+    private class InboxItemListener implements RequestListener<InboxItem> {
+        @Override
+        public void onRequestFailure(SpiceException e) {
+            setProgressMessageWaitAndDismiss("Couldn't fetch message, please try again later.");
+            defaultSpiceFailureHandler(e);
+        }
+
+        @Override
+        public void onRequestSuccess(InboxItem inboxItem) {
+            MessageDisplayActivity.this.inboxItem.message = inboxItem.message;
+            replyButton.setVisibility(View.VISIBLE);
+            MessageDisplayActivity.this.messageView.setText(inboxItem.message);
+
+            deleteMessageButton.setOnClickListener(new DeleteButtonListener());
+            replyButton.setOnClickListener(new ReplyButtonListener());
+        }
+    }
+
+    private class SentItemListener implements RequestListener<SentItem> {
+        @Override
+        public void onRequestFailure(SpiceException e) {
+            setProgressMessageWaitAndDismiss("Couldn't fetch message, please try again later.");
+            defaultSpiceFailureHandler(e);
+        }
+
+        @Override
+        public void onRequestSuccess(SentItem sentItem) {
+            MessageDisplayActivity.this.sentItem.message = sentItem.message;
+            MessageDisplayActivity.this.messageView.setText(sentItem.message);
+
+            deleteMessageButton.setOnClickListener(new DeleteButtonListener());
+            replyButton.setOnClickListener(new ReplyButtonListener());
         }
     }
 }
