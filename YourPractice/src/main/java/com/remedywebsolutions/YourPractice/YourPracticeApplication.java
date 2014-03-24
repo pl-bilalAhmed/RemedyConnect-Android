@@ -9,11 +9,10 @@ public class YourPracticeApplication extends Application {
         super.onCreate();
 
         // Instantiate the Push IO Manager:
-        //PushIOManager pushIOManager = PushIOManager.getInstance(this);
+        PushIOManager pushIOManager = PushIOManager.getInstance(this);
 
         // Ensure that any registration changes with Google get reflected with Push IO.
         // Also registers for Broadcast Push Notifications (All Users).
-        //pushIOManager.ensureRegistration();
-        //pushIOManager.registerCategory(null);
+        pushIOManager.ensureRegistration();
     }
 }
