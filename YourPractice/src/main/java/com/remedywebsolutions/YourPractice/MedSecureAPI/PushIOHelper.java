@@ -3,7 +3,6 @@ package com.remedywebsolutions.YourPractice.MedSecureAPI;
 import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
