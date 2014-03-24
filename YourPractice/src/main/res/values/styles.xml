@@ -14,10 +14,12 @@
         <item name="android:windowBackground">@null</item>
         <item name="android:windowNoTitle">true</item>
     </style>
-    <style name="MainMenuButton" parent="@android:style/Widget.Button">
+    <style name="ButtonBase" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button</item>
-        <item name="android:textSize">20dp</item>
         <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="MainMenuButton" parent="@style/ButtonBase">
+        <item name="android:textSize">20dp</item>
     </style>
     <style name="MyPractice.ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
         <item name="titleTextStyle">@style/MyPractice.ActionBar.TitleTextStyle</item>

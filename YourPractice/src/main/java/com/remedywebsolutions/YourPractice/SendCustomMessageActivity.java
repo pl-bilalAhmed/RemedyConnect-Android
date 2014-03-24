@@ -56,6 +56,8 @@ public class SendCustomMessageActivity extends DefaultActivity {
         subjectEditText = (EditText) findViewById(R.id.subjectEditText);
         messageEditText = (EditText) findViewById(R.id.messageEditText);
         recipientSpinner = (Spinner) findViewById(R.id.recipientSpinner);
+        Skin.applyActivityBackground(this);
+        Skin.applyButtonStyle(this, sendButton);
 
         LoggedInDataStorage storage = new LoggedInDataStorage(this);
         HashMap<String, String> userData = storage.RetrieveData();
@@ -67,13 +69,13 @@ public class SendCustomMessageActivity extends DefaultActivity {
         }
 
         // Set up adapter for recipient
-        recipientAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, new ArrayList<String>()) {
+        recipientAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View v = convertView;
                 if (v == null) {
                     LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    v = inflater.inflate(android.R.layout.simple_spinner_item, null);
+                    v = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, null);
                 }
                 TextView text = (TextView)v.findViewById(android.R.id.text1);
                 text.setText(this.getItem(position));

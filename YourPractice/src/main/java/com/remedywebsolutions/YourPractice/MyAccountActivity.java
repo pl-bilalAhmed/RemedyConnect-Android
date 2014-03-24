@@ -49,6 +49,12 @@ public class MyAccountActivity extends DefaultActivity {
         sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
         inboxButton = (Button) findViewById(R.id.btnInbox);
         sentItemsButton = (Button) findViewById(R.id.btnSent);
+
+        Skin.applyButtonStyle(this, sendMessageButton);
+        Skin.applyButtonStyle(this, inboxButton);
+        Skin.applyButtonStyle(this, sentItemsButton);
+        Skin.applyButtonStyle(this, testNotificationsButton);
+
         defaultInboxText = inboxButton.getText().toString();
         defaultSentText = sentItemsButton.getText().toString();
 

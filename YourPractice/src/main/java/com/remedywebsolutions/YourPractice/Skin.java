@@ -138,6 +138,19 @@ public class Skin {
         }
     }
 
+    public static void applyButtonStyle(Activity activity, Button button) {
+        String filePath = getSkinDirectoryPath(activity) + "/button.9.png";
+        File buttonFile = new File(filePath);
+        Typeface typeface = Typeface.createFromAsset(activity.getAssets(), "fonts/OpenSans-CondLight.ttf");
+        if (buttonFile.exists()) {
+            Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
+            NinePatchDrawable np = NinePatchBitmapFactory.createNinePatchWithCapInsets(activity.getResources(),
+                    bitmapBg, 16, 16, bitmapBg.getHeight()-16, bitmapBg.getWidth()-16, null);
+            button.setTypeface(typeface);
+            Skin.setBackgroundOf(button, np);
+        }
+    }
+
     public static void applyMainMenuButtons(Activity mainMenuActivity) {
         String filePath = getSkinDirectoryPath(mainMenuActivity) + "/button.9.png";
         File buttonFile = new File(filePath);

@@ -60,6 +60,8 @@ public class MessageDisplayActivity extends DefaultActivity {
         super.onCreate(savedInstanceState);
         reportPhase("Message display");
         setContentView(R.layout.activity_message_display);
+
+        Skin.applyActivityBackground(this);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         nameView = (TextView) findViewById(R.id.fromTextView);
         subjectView = (TextView) findViewById(R.id.subjectTextView);
@@ -67,6 +69,8 @@ public class MessageDisplayActivity extends DefaultActivity {
         messageView = (TextView) findViewById(R.id.messageTextView);
         deleteMessageButton = (Button) findViewById(R.id.deleteMessageButton);
         replyButton = (Button) findViewById(R.id.replyButton);
+        Skin.applyButtonStyle(this, replyButton);
+        Skin.applyButtonStyle(this, deleteMessageButton);
 
         nameView.setText("");
         subjectView.setText("");
