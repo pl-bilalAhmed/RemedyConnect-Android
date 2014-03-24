@@ -52,5 +52,6 @@
     <string name="loginTextContent">For accessing MedSecure functionality, please provide your login credentials below.</string>
     <string name="login">Login</string>
     <string name="selectRecipientPrompt">Please select a recipient</string>
+    <string name="passcodeSettings">Passcode settings</string>
 
 </resources>

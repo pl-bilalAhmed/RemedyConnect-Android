@@ -14,6 +14,7 @@ import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+import org.wordpress.passcodelock.*;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItemsResponse;
@@ -29,7 +30,7 @@ import java.util.HashMap;
 
 public class MyAccountActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
-    Button inboxButton, sentItemsButton, sendMessageButton;
+    Button inboxButton, sentItemsButton, sendMessageButton, passcodePrefsButton;
     String defaultInboxText, defaultSentText;
     private ArrayList<InboxItem> inbox;
     private ArrayList<SentItem> sentItems;
@@ -49,11 +50,13 @@ public class MyAccountActivity extends DefaultActivity {
         sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
         inboxButton = (Button) findViewById(R.id.btnInbox);
         sentItemsButton = (Button) findViewById(R.id.btnSent);
+        passcodePrefsButton = (Button) findViewById(R.id.passcodeSettingsButton);
 
         Skin.applyButtonStyle(this, sendMessageButton);
         Skin.applyButtonStyle(this, inboxButton);
         Skin.applyButtonStyle(this, sentItemsButton);
         Skin.applyButtonStyle(this, testNotificationsButton);
+        Skin.applyButtonStyle(this, passcodePrefsButton);
 
         defaultInboxText = inboxButton.getText().toString();
         defaultSentText = sentItemsButton.getText().toString();
@@ -94,6 +97,14 @@ public class MyAccountActivity extends DefaultActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MyAccountActivity.this, MessageListActivity.class);
                 intent.putExtra("sentContents", sentItems);
+                startActivity(intent);
+            }
+        });
+
+        passcodePrefsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyAccountActivity.this, PasscodePreferencesActivity.class);
                 startActivity(intent);
             }
         });
