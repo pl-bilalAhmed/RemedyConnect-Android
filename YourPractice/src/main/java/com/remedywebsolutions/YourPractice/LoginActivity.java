@@ -63,6 +63,7 @@ public class LoginActivity extends DefaultActivity {
         setTitle(getString(R.string.login));
         final Button button = (Button) findViewById(R.id.buttonLogin);
         Skin.applyButtonStyle(this, button);
+        Skin.applyActivityBackground(this);
         usernameEditor = (EditText) findViewById(R.id.userName);
         passwordEditor = (EditText) findViewById(R.id.password);
 
