@@ -30,11 +30,12 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        style="@style/MainMenuButton"
+        style="@style/MyAccountButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/testNotifications"
         android:id="@+id/btnSendTestNotification"
+        android:drawableLeft="@drawable/lightbulb"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="8sp"
@@ -42,9 +43,10 @@
         android:layout_below="@+id/myAccountControlButtons" />
 
     <Button
-        style="@style/MainMenuButton"
+        style="@style/MyAccountButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/pencilplus"
         android:text="@string/sendMessage"
         android:id="@+id/sendMessageButton"
         android:layout_marginBottom="8sp"
@@ -54,10 +56,11 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        style="@style/MainMenuButton"
+        style="@style/MyAccountButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/passcodeSettings"
+        android:drawableLeft="@drawable/gear"
         android:id="@+id/passcodeSettingsButton"
         android:layout_marginBottom="8sp"
         android:layout_marginTop="8sp"
@@ -78,19 +81,21 @@
         android:weightSum="1">
 
         <Button
-            style="@style/MainMenuButton"
+            style="@style/MyAccountButton"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:text="@string/inbox"
+            android:drawableLeft="@drawable/boxdownload"
             android:id="@+id/btnInbox"
             android:layout_marginRight="4sp"
             android:layout_weight="0.50" />
 
         <Button
-            style="@style/MainMenuButton"
+            style="@style/MyAccountButton"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:text="@string/sentItems"
+            android:drawableLeft="@drawable/boxupload"
             android:id="@+id/btnSent"
             android:layout_marginLeft="4sp"
             android:layout_weight="0.5" />

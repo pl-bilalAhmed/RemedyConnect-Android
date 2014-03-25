@@ -58,6 +58,12 @@ public class MyAccountActivity extends DefaultActivity {
         Skin.applyButtonStyle(this, testNotificationsButton);
         Skin.applyButtonStyle(this, passcodePrefsButton);
 
+        fixButtonPaddings(sendMessageButton);
+        fixButtonPaddings(inboxButton);
+        fixButtonPaddings(sentItemsButton);
+        fixButtonPaddings(testNotificationsButton);
+        fixButtonPaddings(passcodePrefsButton);
+
         defaultInboxText = inboxButton.getText().toString();
         defaultSentText = sentItemsButton.getText().toString();
 
@@ -108,6 +114,10 @@ public class MyAccountActivity extends DefaultActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void fixButtonPaddings(Button button) {
+        button.setPadding(16, 8, 16, 8);
     }
 
     @Override
