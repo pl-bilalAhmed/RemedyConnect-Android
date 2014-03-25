@@ -29,6 +29,8 @@ import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatusSummary;
 import com.remedywebsolutions.YourPractice.parser.MainParser;
 import net.lingala.zip4j.exception.ZipException;
 
+import org.wordpress.passcodelock.AppLockManager;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -228,6 +230,8 @@ public class DefaultActivity extends SherlockActivity {
                 LoggedInDataStorage storage = new LoggedInDataStorage(DefaultActivity.this);
                 storage.logOut();
                 Toast.makeText(DefaultActivity.this, "You've been logged out.", Toast.LENGTH_LONG).show();
+                // Reset passcode lock
+                AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
                 invalidateOptionsMenu();
                 MainViewController.FireRootActivity(this, Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return true;

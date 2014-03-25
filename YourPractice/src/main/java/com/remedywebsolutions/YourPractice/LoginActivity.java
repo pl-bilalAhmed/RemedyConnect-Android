@@ -2,6 +2,8 @@ package com.remedywebsolutions.YourPractice;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,9 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 
+import org.wordpress.passcodelock.PasscodeManagePasswordActivity;
+import org.wordpress.passcodelock.PasscodePreferencesActivity;
+
 import java.io.IOException;
 
 public class LoginActivity extends DefaultActivity {
@@ -34,6 +39,8 @@ public class LoginActivity extends DefaultActivity {
     private LoggedInDataStorage dataStorage;
     private EditText usernameEditor;
     private EditText passwordEditor;
+
+    static final int ENABLE_PASSLOCK = 0;
 
     private SpiceManager spiceManager= new SpiceManager(UncachedSpiceService.class);
 
@@ -153,8 +160,38 @@ public class LoginActivity extends DefaultActivity {
             dataStorage.StoreName(name);
             progress.setMessage("Fetched contacts - login complete.");
             progress.dismiss();
-            onBackPressed();
-            Toast.makeText(LoginActivity.this, "You've been logged in.", Toast.LENGTH_LONG).show();
+
+            Toast.makeText(LoginActivity.this, "You've been logged in.", Toast.LENGTH_SHORT).show();
+
+            new AlertDialog.Builder(LoginActivity.this)
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .setTitle("Set up a passcode")
+                    .setMessage("For safety reasons, setting up a 4-digit passcode is necessary.\n\nPlease press OK to proceed.")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent passcodeIntent = new Intent(LoginActivity.this, PasscodeManagePasswordActivity.class);
+                            passcodeIntent.putExtra("type", ENABLE_PASSLOCK);
+                            startActivityForResult(passcodeIntent, ENABLE_PASSLOCK);
+                        }
+                    })
+                    .show();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ENABLE_PASSLOCK:
+                if (resultCode == RESULT_OK) {
+                    Toast.makeText(LoginActivity.this, "Passcode successfully set.", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                break;
+        }
+        onBackPressed();
+
     }
 }
