@@ -1,6 +1,5 @@
 package com.remedywebsolutions.YourPractice;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,17 +7,20 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
-import com.actionbarsherlock.internal.widget.IcsAdapterView;
-import com.fasterxml.jackson.databind.DeserializationFeature;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItemsResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.MessageItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -35,7 +37,9 @@ public class MessageListActivity extends DefaultActivity {
         reportPhase("Message list");
         setContentView(R.layout.activity_message_list);
         inboxItems = (ArrayList<InboxItem>) extras.get("inboxContents");
+        Collections.reverse(inboxItems);
         sentItems = (ArrayList<SentItem>) extras.get("sentContents");
+        Collections.reverse(sentItems);
         inboxMode =  (inboxItems != null);
 
         Skin.applyActivityBackground(this);
