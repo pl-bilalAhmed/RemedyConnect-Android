@@ -37,9 +37,9 @@ public class MessageListActivity extends DefaultActivity {
         reportPhase("Message list");
         setContentView(R.layout.activity_message_list);
         inboxItems = (ArrayList<InboxItem>) extras.get("inboxContents");
-        Collections.reverse(inboxItems);
+        if (inboxItems != null) { Collections.reverse(inboxItems); }
         sentItems = (ArrayList<SentItem>) extras.get("sentContents");
-        Collections.reverse(sentItems);
+        if (sentItems != null) { Collections.reverse(sentItems); }
         inboxMode =  (inboxItems != null);
 
         Skin.applyActivityBackground(this);

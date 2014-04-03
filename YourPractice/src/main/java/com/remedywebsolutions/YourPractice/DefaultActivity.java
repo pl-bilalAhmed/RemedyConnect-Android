@@ -31,6 +31,7 @@ import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatusSummary;
 import com.remedywebsolutions.YourPractice.parser.MainParser;
 import net.lingala.zip4j.exception.ZipException;
 
+import org.wordpress.passcodelock.AbstractAppLock;
 import org.wordpress.passcodelock.AppLockManager;
 
 import java.io.*;
@@ -433,7 +434,7 @@ public class DefaultActivity extends SherlockActivity {
         @Override
         protected Void doInBackground(HashMap<String, String>... whatToDownload) {
             taskStatusIndex = downloadSummary.reservePlace();
-            if (isOnline()) {
+            if (DefaultActivity.this.isOnline()) {
                 publishProgress(new DownloadTaskStatus(DownloadStatusCodes.NETWORK_AVAILABLE));
                 String from = whatToDownload[0].get("from");
                 String to = whatToDownload[0].get("to");
@@ -571,13 +572,23 @@ public class DefaultActivity extends SherlockActivity {
             }
             return directoryPath;
         }
+    }
 
-        public boolean isOnline() {
-            ConnectivityManager cm =
-                    (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            return netInfo != null && netInfo.isConnected();
-        }
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnected();
+    }
+
+    public void disablePasscode() {
+        AbstractAppLock lock = AppLockManager.getInstance().getCurrentAppLock();
+        lock.disable();
+    }
+
+    public void enablePasscode() {
+        AbstractAppLock lock = AppLockManager.getInstance().getCurrentAppLock();
+        lock.enable();
     }
 }
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.SpiceManager;
@@ -18,18 +19,14 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.pushio.manager.PushIOManager;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Physician;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 
 import org.wordpress.passcodelock.PasscodeManagePasswordActivity;
-import org.wordpress.passcodelock.PasscodePreferencesActivity;
-
-import java.io.IOException;
 
 public class LoginActivity extends DefaultActivity {
     private String username;
@@ -146,20 +143,7 @@ public class LoginActivity extends DefaultActivity {
 
         @Override
         public void onRequestSuccess(PhysiciansResponse physiciansResponse) {
-            ObjectMapper mapper = new ObjectMapper();
-            try {
-                String physicians = mapper.writeValueAsString(physiciansResponse);
-                dataStorage.StorePhysicians(physicians);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-            String name = "";
-            for (Physician physician : physiciansResponse.physicians) {
-                if (physician.physicianID == physicianId) {
-                    name = physician.physicianName;
-                }
-            }
-            dataStorage.StoreName(name);
+            getAndSetNameFromResponse(physiciansResponse, physicianId);
             progress.setMessage("Fetched contacts - login complete.");
             progress.dismiss();
 
@@ -179,6 +163,24 @@ public class LoginActivity extends DefaultActivity {
                     })
                     .show();
         }
+    }
+
+    public String getAndSetNameFromResponse(PhysiciansResponse physiciansResponse, int physicianId) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String physicians = mapper.writeValueAsString(physiciansResponse);
+            dataStorage.StorePhysicians(physicians);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        String name = "";
+        for (Physician physician : physiciansResponse.physicians) {
+            if (physician.physicianID == physicianId) {
+                name = physician.physicianName;
+            }
+        }
+        dataStorage.StoreName(name);
+        return name;
     }
 
     @Override

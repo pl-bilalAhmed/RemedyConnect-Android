@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainViewController {
-    public static void FireActivity(Context context, String parsePoint, String title, int intentFlags) {
+    public static Intent GetIntent(Context context, String parsePoint, String title, int intentFlags) {
         String startPath = context.getFilesDir().getAbsolutePath() + "/";
         MainParser parser = new MainParser(startPath + parsePoint);
+        Intent intent = null;
         if (parser.isMenu()) {
             Boolean isRoot = (parsePoint.equals("index.xml"));
-            Intent intent;
             if (isRoot) {
                 intent = new Intent(context, MainMenuActivity.class);
             }
@@ -38,11 +38,9 @@ public class MainViewController {
             intent.putExtra("externalLinks", externalLinks);
             intent.putExtra("title", title);
             intent.putExtra("isRoot", isRoot);
-
-            context.startActivity(intent);
         }
         else if (parser.isPage()) {
-            Intent intent = new Intent(context, PageActivity.class);
+            intent = new Intent(context, PageActivity.class);
             if (intentFlags != 0) {
                 intent.setFlags(intentFlags);
             }
@@ -51,11 +49,9 @@ public class MainViewController {
             intent.putExtra("text", page.get("text"));
             intent.putExtra("title", page.get("title"));
             intent.putExtra("isRoot", parsePoint.equals("index.xml"));
-
-            context.startActivity(intent);
         }
         else if (parser.isArticleSet()) {
-            Intent intent = new Intent(context, ArticleSetActivity.class);
+            intent = new Intent(context, ArticleSetActivity.class);
             if (intentFlags != 0) {
                 intent.setFlags(intentFlags);
             }
@@ -63,13 +59,23 @@ public class MainViewController {
             intent.putExtra("title", title);
             intent.putExtra("isRoot", parsePoint.equals("index.xml"));
             intent.putExtra("xml", startPath + parsePoint);
+        }
+        return intent;
+    }
 
+    public static void FireActivity(Context context, String parsePoint, String title, int intentFlags) {
+        Intent intent = GetIntent(context, parsePoint, title, intentFlags);
+        if (intent != null) {
             context.startActivity(intent);
         }
     }
 
     public static void FireActivity(DefaultActivity activity, String parsePoint, int intentFlags) {
         FireActivity(activity, parsePoint, activity.getString(R.string.welcome), intentFlags);
+    }
+
+    public static Intent GetRootIntent(Context context) {
+        return GetIntent(context, "index.xml", context.getString(R.string.welcome), 0);
     }
 
     public static void FireRootActivity(DefaultActivity activity) {
