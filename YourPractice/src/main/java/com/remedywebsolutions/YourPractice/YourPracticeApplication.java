@@ -17,6 +17,9 @@ public class YourPracticeApplication extends Application {
         // Also registers for Broadcast Push Notifications (All Users).
         pushIOManager.ensureRegistration();
 
+        // Switch stacking notifications off.
+        pushIOManager.setNotificationsStacked(false);
+
         AppLockManager.getInstance().enableDefaultAppLockIfAvailable(this);
     }
 }
