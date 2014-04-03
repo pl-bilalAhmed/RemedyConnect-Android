@@ -155,7 +155,7 @@ public class SendCustomMessageActivity extends DefaultActivity {
         public void onRequestSuccess(SendInAppNotificationRequestResponse result) {
             String message;
             if (result.didSendMessageSuccessfully()) {
-                message = "Test notification sent. It should arrive in a sec...";
+                message = "Message sent.";
             }
             else {
                 message = "Couldn't send notification.";

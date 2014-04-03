@@ -42,7 +42,6 @@ public class GetInAppNotificationInboxItemsRequest extends SpiceRequest<InboxIte
         InboxItemsResponse result = new InboxItemsResponse();
         InboxItem[] inboxItems = mapper.readValue(response, InboxItem[].class);
         result.inboxItemsArray = new ArrayList<InboxItem>(Arrays.asList(inboxItems));
-
         return result;
     }
 }
