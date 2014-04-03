@@ -10,19 +10,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
-import org.wordpress.passcodelock.*;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItemsResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItemsResponse;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.FetchInboxRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.FetchSentRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationInboxItemsRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationSentItemsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
+
+import org.wordpress.passcodelock.PasscodePreferencesActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -137,9 +140,9 @@ public class MyAccountActivity extends DefaultActivity {
         refreshFirstCallCompleted = false;
         progress.setMessage("Refreshing messages...");
         progress.show();
-        FetchInboxRequest inboxReq = new FetchInboxRequest(MyAccountActivity.this);
+        GetInAppNotificationInboxItemsRequest inboxReq = new GetInAppNotificationInboxItemsRequest(MyAccountActivity.this);
         spiceManager.execute(inboxReq, new InboxRequestListener());
-        FetchSentRequest sentReq = new FetchSentRequest(MyAccountActivity.this);
+        GetInAppNotificationSentItemsRequest sentReq = new GetInAppNotificationSentItemsRequest(MyAccountActivity.this);
         spiceManager.execute(sentReq, new SentItemsRequestListener());
     }
 
@@ -155,17 +158,24 @@ public class MyAccountActivity extends DefaultActivity {
         updateNumberForButton(defaultSentText, sentItems, sentItemsButton);
     }
 
-    private final class TestMessageListener implements RequestListener<String> {
+    private final class TestMessageListener implements RequestListener<SendInAppNotificationRequestResponse> {
         @Override
         public void onRequestFailure(SpiceException spiceException) {
             defaultSpiceFailureHandler(spiceException);
         }
 
         @Override
-        public void onRequestSuccess(String result) {
+        public void onRequestSuccess(SendInAppNotificationRequestResponse result) {
             progress.dismiss();
-            Log.d("YourPractice", "Sending test notification, result: " + result);
-            Toast.makeText(MyAccountActivity.this, "Test notification sent, it should arrive by now", Toast.LENGTH_SHORT).show();
+            Log.d("YourPractice", "Sending test notification, result: " + result.status);
+            String message;
+            if (result.didSendMessageSuccessfully()) {
+                message = "Test notification sent. It should arrive in a sec...";
+            }
+            else {
+                message = "Couldn't send notification.";
+            }
+            Toast.makeText(MyAccountActivity.this, message, Toast.LENGTH_SHORT).show();
             refreshMessages();
         }
     }

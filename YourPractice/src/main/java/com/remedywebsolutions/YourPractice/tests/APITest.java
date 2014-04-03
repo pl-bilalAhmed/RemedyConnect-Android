@@ -9,8 +9,8 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceRequest;
 
 public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private LoginActivity loginActivity;
@@ -58,11 +58,11 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         pullPhysicians();
     }
 
-    public void testMessageToSelf() throws Exception {
+    /*public void testMessageToSelf() throws Exception {
         LoginResponse loginResponse = login();
         registerDevice(loginResponse);
-
-    }
+        pullPhysicians();
+    }*/
 
     /**
      * Checks whether a string is a hexadecimal representation of a number.
@@ -76,10 +76,10 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private LoginResponse login() throws Exception {
         LoginRequest loginReq = new LoginRequest("zoltan", "zoltan1", loginActivity);
         LoginResponse result = loginReq.loadDataFromNetwork();
-        assertEquals("Practice ID check", result.getPracticeID(), 36);
-        assertEquals("Physician ID check", result.getPhysicianID(), 405);
-        assertTrue("Got token", result.getToken().length() > 0);
-        assertTrue("Well-formatted token", isHex(result.getToken()));
+        assertEquals("Practice ID does not match", result.getPracticeID(), 36);
+        assertEquals("Physician ID does not match", result.getPhysicianID(), 405);
+        assertTrue("Token has zero length", result.getToken().length() > 0);
+        assertTrue("Token isn't well-formatted", isHex(result.getToken()));
         return result;
     }
 
@@ -88,10 +88,10 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         physicianID = loginResponse.getPhysicianID();
         String token = loginResponse.getToken();
         dataStorage.StoreDataOnLogin(physicianID, practiceID, token);
-        RegisterDeviceRequest registerReq = new RegisterDeviceRequest(physicianID, "zoltan", loginActivity);
+        InsertPhysicianMobileDeviceRequest registerReq = new InsertPhysicianMobileDeviceRequest(physicianID, practiceID, "zoltan", loginActivity);
         String response = registerReq.loadDataFromNetwork();
-        assertNotNull("Got response", response.length() > 0);
-        assertTrue("Well-formatted device ID", isHex(response));
+        assertNotNull("Doesn't have response", response.length() > 0);
+        assertTrue("The device ID is not well-formatted", isHex(response));
         dataStorage.StoreDeviceId(response);
         return response;
     }
@@ -99,10 +99,12 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private void pullPhysicians() throws Exception {
         GetPhysiciansRequest pullContactsReq = new GetPhysiciansRequest(loginActivity);
         PhysiciansResponse physicians = pullContactsReq.loadDataFromNetwork();
-        assertNotNull("Got contacts", physicians);
-        assertTrue("Got at least 4 physicians", physicians.physicians.size() >= 4);
+        assertNotNull("No contacts", physicians.physicians.size() == 0);
+        assertTrue("Less than expected number of physicians: got " + physicians.physicians.size() + ", which is less than four",
+                physicians.physicians.size() >= 4);
         String name = loginActivity.getAndSetNameFromResponse(physicians, physicianID);
-        assertEquals("Name matches", name, "Zoltan Adamek, MD");
+        assertNotNull("Name is not set", name);
+        assertEquals("Name does not match", name, "Zoltan Adamek, MD");
     }
 
 

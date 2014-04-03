@@ -23,8 +23,8 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Physician;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.RegisterDeviceRequest;
 
 import org.wordpress.passcodelock.PasscodeManagePasswordActivity;
 
@@ -101,7 +101,12 @@ public class LoginActivity extends DefaultActivity {
                 progress.setMessage("Logged in, storing data...");
                 dataStorage.StoreDataOnLogin(physicianId, practiceId, token);
                 progress.setMessage("Logged in. Registering device...");
-                RegisterDeviceRequest req = new RegisterDeviceRequest(physicianId, username, LoginActivity.this);
+                InsertPhysicianMobileDeviceRequest req =
+                        new InsertPhysicianMobileDeviceRequest(physicianId,
+                                                                practiceId,
+                                                                username,
+                                                                LoginActivity.this);
+
                 spiceManager.execute(req, new RegisterDeviceListener());
             }
             else {
@@ -173,7 +178,7 @@ public class LoginActivity extends DefaultActivity {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        String name = "";
+        String name = null;
         for (Physician physician : physiciansResponse.physicians) {
             if (physician.physicianID == physicianId) {
                 name = physician.physicianName;

@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -14,17 +12,15 @@ import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteMessageRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.FetchInboxItem;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.FetchSentItem;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationItemRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationInBoxItemRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationSentItemRequest;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 
 public class MessageDisplayActivity extends DefaultActivity {
@@ -107,11 +103,11 @@ public class MessageDisplayActivity extends DefaultActivity {
 
     private void startFetchingMessage() {
         if (inboxMode) {
-            FetchInboxItem req = new FetchInboxItem(this, inboxItem.notificationID);
+            GetInAppNotificationInBoxItemRequest req = new GetInAppNotificationInBoxItemRequest(this, inboxItem.notificationID);
             spiceManager.execute(req, new InboxItemListener());
         }
         else {
-            FetchSentItem req = new FetchSentItem(this, sentItem.notificationID);
+            GetInAppNotificationSentItemRequest req = new GetInAppNotificationSentItemRequest(this, sentItem.notificationID);
             spiceManager.execute(req, new SentItemListener());
         }
     }
@@ -134,14 +130,14 @@ public class MessageDisplayActivity extends DefaultActivity {
         public void onClick(DialogInterface dialog, int which) {
             progress.setMessage("Deleting message...");
             progress.show();
-            DeleteMessageRequest request;
+            DeleteInAppNotificationItemRequest request;
             if (inboxMode) {
-                request = new DeleteMessageRequest(inboxItem.notificationID,
-                        inboxItem.toPhysicianID, false, MessageDisplayActivity.this);
+                request = new DeleteInAppNotificationItemRequest(inboxItem.notificationID,
+                        inboxItem.practiceID, inboxItem.toPhysicianID, false, MessageDisplayActivity.this);
             }
             else {
-                request = new DeleteMessageRequest(sentItem.notificationID,
-                        sentItem.fromPhysicianID, true, MessageDisplayActivity.this);
+                request = new DeleteInAppNotificationItemRequest(sentItem.notificationID,
+                        sentItem.practiceID, sentItem.fromPhysicianID, true, MessageDisplayActivity.this);
             }
             spiceManager.execute(request, new DeleteRequestListener());
         }
@@ -156,7 +152,14 @@ public class MessageDisplayActivity extends DefaultActivity {
 
         @Override
         public void onRequestSuccess(String s) {
-            setProgressMessageWaitAndDismissWithRunnable("Message deleted.", new Runnable() {
+            String message = null;
+            if (s == "true") {
+                message = "Message deleted.";
+            }
+            else {
+                message = "Couldn't delete message.";
+            }
+            setProgressMessageWaitAndDismissWithRunnable(message, new Runnable() {
                 @Override
                 public void run() {
                     Intent myAccountIntent = new Intent(MessageDisplayActivity.this, MyAccountActivity.class);

@@ -7,7 +7,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
@@ -17,12 +22,12 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationRequestContent;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Physician;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class SendCustomMessageActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
@@ -118,6 +123,7 @@ public class SendCustomMessageActivity extends DefaultActivity {
                 InAppNotificationRequestContent message = new InAppNotificationRequestContent();
                 message.fromPhysicianID = Integer.parseInt(userData.get("physicianID"));
                 message.fromPhysicianName = userData.get("name");
+                message.practiceID = Integer.parseInt(userData.get("practiceID"));
                 if (replyMode) {
                     message.toPhysicianID = toPhysicianIDForReply;
                     message.subject = subjectForReply;
@@ -138,7 +144,7 @@ public class SendCustomMessageActivity extends DefaultActivity {
         });
     }
 
-    private final class SendMessageListener implements RequestListener<String> {
+    private final class SendMessageListener implements RequestListener<SendInAppNotificationRequestResponse> {
         @Override
         public void onRequestFailure(SpiceException spiceException) {
             setProgressMessageWaitAndDismiss("Couldn't send message.");
@@ -146,8 +152,15 @@ public class SendCustomMessageActivity extends DefaultActivity {
         }
 
         @Override
-        public void onRequestSuccess(String result) {
-            setProgressMessageWaitAndDismissWithRunnable("Message sent.", new Runnable() {
+        public void onRequestSuccess(SendInAppNotificationRequestResponse result) {
+            String message;
+            if (result.didSendMessageSuccessfully()) {
+                message = "Test notification sent. It should arrive in a sec...";
+            }
+            else {
+                message = "Couldn't send notification.";
+            }
+            setProgressMessageWaitAndDismissWithRunnable(message, new Runnable() {
                 @Override
                 public void run() {
                     Intent intent = new Intent(SendCustomMessageActivity.this, MyAccountActivity.class);

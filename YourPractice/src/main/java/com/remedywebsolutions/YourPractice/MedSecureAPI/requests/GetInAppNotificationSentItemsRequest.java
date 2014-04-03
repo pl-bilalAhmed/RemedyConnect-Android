@@ -1,36 +1,35 @@
 package com.remedywebsolutions.YourPractice.MedSecureAPI.requests;
 
 import android.content.Context;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.request.SpiceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.*;
 
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
-public class FetchSentItem extends SpiceRequest<SentItem> {
+public class GetInAppNotificationSentItemsRequest extends SpiceRequest<SentItemsResponse> {
     private Context context;
-    private int notificationID;
 
-    public FetchSentItem(Context context, int notificationID) {
-        super(SentItem.class);
+    public GetInAppNotificationSentItemsRequest(Context context) {
+        super(SentItemsResponse.class);
         this.context = context;
-        this.notificationID = notificationID;
     }
 
     @Override
-    public SentItem loadDataFromNetwork() throws Exception {
+    public SentItemsResponse loadDataFromNetwork() throws Exception {
         LoggedInDataStorage storage = new LoggedInDataStorage(context);
         HashMap<String, String> userData = storage.RetrieveData();
         String physicianID = userData.get("physicianID");
+        String practiceID = userData.get("practiceID");
 
         MedSecureConnection msc = new MedSecureConnection(context);
-        msc.buildBaseURI("Physician", "GetInAppNotificationSentItem", "GET");
-        msc.addParameter("NotificationID", Integer.toString(notificationID));
+        msc.buildBaseURI("Communication", "GetInAppNotificationSentItems", "GET");
+        msc.addParameter("PracticeID", practiceID);
         msc.addParameter("PhysicianID", physicianID);
 
         HttpURLConnection connection = msc.initConnection(true);
@@ -38,7 +37,9 @@ public class FetchSentItem extends SpiceRequest<SentItem> {
         connection.disconnect();
 
         ObjectMapper mapper = new ObjectMapper();
-        SentItem result = mapper.readValue(response, SentItem.class);
+        SentItemsResponse result = new SentItemsResponse();
+        SentItem[] sentItems = mapper.readValue(response, SentItem[].class);
+        result.sentItemsArray = new ArrayList<SentItem>(Arrays.asList(sentItems));
 
         return result;
     }

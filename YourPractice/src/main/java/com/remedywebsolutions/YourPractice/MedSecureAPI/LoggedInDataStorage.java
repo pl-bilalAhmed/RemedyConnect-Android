@@ -62,6 +62,12 @@ public class LoggedInDataStorage {
         editor.commit();
     }
 
+    /**
+     * Retrieves data from the shared preferences, where the user data is stored.
+     *
+     * @return A hashmap with the following keys: physicianID, practiceID, deviceID, token, name,
+     *         physicians.
+     */
     public HashMap<String, String> RetrieveData() {
         SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
         int physicianID = sp.getInt("physicianID", 0);

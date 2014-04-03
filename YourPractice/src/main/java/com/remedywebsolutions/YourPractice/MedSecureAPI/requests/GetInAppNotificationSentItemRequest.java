@@ -6,33 +6,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.request.SpiceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItemsResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
-public class FetchInboxItem extends SpiceRequest<InboxItem> {
+public class GetInAppNotificationSentItemRequest extends SpiceRequest<SentItem> {
     private Context context;
     private int notificationID;
 
-    public FetchInboxItem(Context context, int notificationID) {
-        super(InboxItem.class);
+    public GetInAppNotificationSentItemRequest(Context context, int notificationID) {
+        super(SentItem.class);
         this.context = context;
         this.notificationID = notificationID;
     }
 
     @Override
-    public InboxItem loadDataFromNetwork() throws Exception {
+    public SentItem loadDataFromNetwork() throws Exception {
         LoggedInDataStorage storage = new LoggedInDataStorage(context);
         HashMap<String, String> userData = storage.RetrieveData();
         String physicianID = userData.get("physicianID");
+        String practiceID = userData.get("practiceID");
 
         MedSecureConnection msc = new MedSecureConnection(context);
-        msc.buildBaseURI("Physician", "GetInAppNotificationInBoxItem", "GET");
+        msc.buildBaseURI("Communication", "GetInAppNotificationSentItem", "GET");
         msc.addParameter("NotificationID", Integer.toString(notificationID));
+        msc.addParameter("PracticeID", practiceID);
         msc.addParameter("PhysicianID", physicianID);
 
         HttpURLConnection connection = msc.initConnection(true);
@@ -40,7 +39,7 @@ public class FetchInboxItem extends SpiceRequest<InboxItem> {
         connection.disconnect();
 
         ObjectMapper mapper = new ObjectMapper();
-        InboxItem result = mapper.readValue(response, InboxItem.class);
+        SentItem result = mapper.readValue(response, SentItem.class);
 
         return result;
     }
