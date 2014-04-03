@@ -8,9 +8,12 @@ import com.remedywebsolutions.YourPractice.MainViewController;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationItemRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
 public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private LoginActivity loginActivity;
@@ -58,11 +61,13 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         pullPhysicians();
     }
 
-    /*public void testMessageToSelf() throws Exception {
+    public void testMessageToSelfAndDelete() throws Exception {
         LoginResponse loginResponse = login();
         registerDevice(loginResponse);
         pullPhysicians();
-    }*/
+        int notificationID = sendTestMessageToSelf();
+        deleteTestMessage(notificationID);
+    }
 
     /**
      * Checks whether a string is a hexadecimal representation of a number.
@@ -107,5 +112,25 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         assertEquals("Name does not match", name, "Zoltan Adamek, MD");
     }
 
+    /**
+     * Sends a test message to self.
+     *
+     * @return The notification ID.
+     * @throws Exception
+     */
+    private int sendTestMessageToSelf() throws Exception {
+        SendInAppNotificationRequest req = new SendInAppNotificationRequest(loginActivity);
+        SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
+        assertTrue("Couldn't send message, failed with status " + result.status,
+                result.didSendMessageSuccessfully());
+        return result.notificationID;
+    }
 
+    private void deleteTestMessage(int notificationID) throws Exception {
+        DeleteInAppNotificationItemRequest req = new DeleteInAppNotificationItemRequest(
+                notificationID, practiceID, physicianID, false, loginActivity
+        );
+        String result = req.loadDataFromNetwork();
+        assertTrue("Failed to delete message", result.equals("true"));
+    }
 }

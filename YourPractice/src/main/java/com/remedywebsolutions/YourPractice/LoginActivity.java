@@ -84,8 +84,6 @@ public class LoginActivity extends DefaultActivity {
         dataStorage = new LoggedInDataStorage(LoginActivity.this);
     }
 
-
-
     private final class LoginRequestListener implements RequestListener<LoginResponse> {
         @Override
         public void onRequestFailure(SpiceException spiceException) {
