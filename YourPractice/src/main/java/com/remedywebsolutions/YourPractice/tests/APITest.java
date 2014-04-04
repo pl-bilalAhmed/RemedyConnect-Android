@@ -48,7 +48,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
      * @throws Exception
      */
     public void testPreConditions() throws Exception {
-        assertTrue("App is online", loginActivity.isOnline());
+        assertTrue("App is not online...?", loginActivity.isOnline());
     }
 
     /**
@@ -81,8 +81,8 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private LoginResponse login() throws Exception {
         LoginRequest loginReq = new LoginRequest("zoltan", "zoltan1", loginActivity);
         LoginResponse result = loginReq.loadDataFromNetwork();
-        assertEquals("Practice ID does not match", result.getPracticeID(), 36);
-        assertEquals("Physician ID does not match", result.getPhysicianID(), 405);
+        assertEquals("Practice ID does not match", 36, result.getPracticeID());
+        assertEquals("Physician ID does not match", 405, result.getPhysicianID());
         assertTrue("Token has zero length", result.getToken().length() > 0);
         assertTrue("Token isn't well-formatted", isHex(result.getToken()));
         return result;
