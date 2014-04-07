@@ -114,9 +114,18 @@ public class MessageListActivity extends DefaultActivity {
             else {
                 displayActivity.putExtra("sentItems", sentItems);
             }
-            startActivity(displayActivity);
+            startActivityForResult(displayActivity, position);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (inboxMode) {
+            inboxItems.get(requestCode).dateOpened = "READ";
+            messageListAdapter.notifyDataSetChanged();
+        }
     }
 
     private String getRelativeTimeForTimeString(String timeString) {

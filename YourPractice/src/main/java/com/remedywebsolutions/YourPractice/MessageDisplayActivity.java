@@ -37,6 +37,18 @@ public class MessageDisplayActivity extends DefaultActivity {
     private TextView nameView, subjectView, receivedView, messageView;
     private ProgressBar progressBar;
     private Button deleteMessageButton, replyButton;
+    private boolean loaded;
+
+    @Override
+    public void onBackPressed() {
+        if (loaded) {
+            setResult(RESULT_OK);
+        }
+        else {
+            setResult(RESULT_CANCELED);
+        }
+        super.onBackPressed();
+    }
 
     @Override
     protected void onStart() {
@@ -110,6 +122,7 @@ public class MessageDisplayActivity extends DefaultActivity {
     }
 
     private void startFetchingMessage() {
+        loaded = false;
         if (inboxMode) {
             GetInAppNotificationInBoxItemRequest req = new GetInAppNotificationInBoxItemRequest(this, inboxItem.notificationID);
             spiceManager.execute(req, new InboxItemListener());
@@ -213,13 +226,13 @@ public class MessageDisplayActivity extends DefaultActivity {
         public void onRequestSuccess(InboxItem inboxItem) {
             deleteMessageButton.setOnClickListener(new DeleteButtonListener());
             replyButton.setOnClickListener(new ReplyButtonListener());
-
+            inboxItem.dateReceived = "READ";
             MessageDisplayActivity.this.inboxItem.message = inboxItem.message;
             replyButton.setVisibility(View.VISIBLE);
             deleteMessageButton.setVisibility(View.VISIBLE);
             MessageDisplayActivity.this.messageView.setText(inboxItem.message);
             progressBar.setVisibility(View.GONE);
-
+            loaded = true;
         }
     }
 
@@ -240,6 +253,7 @@ public class MessageDisplayActivity extends DefaultActivity {
             MessageDisplayActivity.this.messageView.setText(sentItem.message);
             deleteMessageButton.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
+            loaded = true;
         }
     }
 }
