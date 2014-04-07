@@ -66,7 +66,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         registerDevice(loginResponse);
         pullPhysicians();
         int notificationID = sendTestMessageToSelf();
-        deleteTestMessage(notificationID);
+        deleteTestMessages(notificationID);
     }
 
     /**
@@ -126,11 +126,16 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         return result.notificationID;
     }
 
-    private void deleteTestMessage(int notificationID) throws Exception {
+    private void deleteTestMessages(int notificationID) throws Exception {
         DeleteInAppNotificationItemRequest req = new DeleteInAppNotificationItemRequest(
                 notificationID, practiceID, physicianID, false, loginActivity
         );
         String result = req.loadDataFromNetwork();
-        assertTrue("Failed to delete message", result.equals("true"));
+        assertTrue("Failed to delete inbox message", result.equals("true"));
+        req = new DeleteInAppNotificationItemRequest(
+                notificationID, practiceID, physicianID, true, loginActivity
+        );
+        result = req.loadDataFromNetwork();
+        assertTrue("Failed to delete sent message", result.equals("true"));
     }
 }

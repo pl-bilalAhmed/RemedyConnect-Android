@@ -137,7 +137,7 @@ public class MessageDisplayActivity extends DefaultActivity {
             }
             else {
                 request = new DeleteInAppNotificationItemRequest(sentItem.notificationID,
-                        sentItem.practiceID, sentItem.fromPhysicianID, true, MessageDisplayActivity.this);
+                        sentItem.practiceID, sentItem.toPhysicianID, true, MessageDisplayActivity.this);
             }
             spiceManager.execute(request, new DeleteRequestListener());
         }
