@@ -77,9 +77,13 @@ public class MessageListActivity extends DefaultActivity {
                     SentItem currentItem = sentItems.get(pos);
                     messagePartnerTextView.setText(currentItem.toPhysicianName);
                     subjectTextView.setText(currentItem.subject);
-                    // @TODO: this should be the read time instead...
                     timeTextView.setText("Sent " + getRelativeTimeForTimeString(currentItem.dateSent));
-                    readStatusImageView.setVisibility(View.GONE);
+                    if (currentItem.dateRead != null) {
+                        readStatusImageView.setImageResource(R.drawable.mailopened_black);
+                    }
+                    else {
+                        readStatusImageView.setImageResource(R.drawable.mail_black);
+                    }
                 }
 
                 messagePartnerTextView.setTypeface(Skin.menuFont(MessageListActivity.this));

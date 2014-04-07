@@ -10,5 +10,5 @@ public class SentItem extends MessageItem {
     public String subject;
     public String message;
     public String dateSent;
-    // @TODO No date received property? Hm...
+    public String dateRead;
 }
