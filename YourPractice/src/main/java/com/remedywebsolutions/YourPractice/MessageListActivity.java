@@ -36,10 +36,11 @@ public class MessageListActivity extends DefaultActivity {
         super.onCreate(savedInstanceState);
         reportPhase("Message list");
         setContentView(R.layout.activity_message_list);
+        Boolean shouldReverse = extras.getBoolean("shouldReverseList", true);
         inboxItems = (ArrayList<InboxItem>) extras.get("inboxContents");
-        if (inboxItems != null) { Collections.reverse(inboxItems); }
+        if (inboxItems != null && shouldReverse) { Collections.reverse(inboxItems); }
         sentItems = (ArrayList<SentItem>) extras.get("sentContents");
-        if (sentItems != null) { Collections.reverse(sentItems); }
+        if (sentItems != null && shouldReverse) { Collections.reverse(sentItems); }
         inboxMode =  (inboxItems != null);
 
         Skin.applyActivityBackground(this);
@@ -105,13 +106,14 @@ public class MessageListActivity extends DefaultActivity {
         messageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent displayActivity = new Intent(MessageListActivity.this, MessageDisplayActivity.class);
+            displayActivity.putExtra("inboxMode", inboxMode);
+            displayActivity.putExtra("position", position);
             if (inboxMode) {
-                displayActivity.putExtra("messageItem", inboxItems.get(position));
+                displayActivity.putExtra("inboxItems", inboxItems);
             }
             else {
-                displayActivity.putExtra("messageItem", sentItems.get(position));
+                displayActivity.putExtra("sentItems", sentItems);
             }
-            displayActivity.putExtra("inboxMode", inboxMode);
             startActivity(displayActivity);
             }
         });

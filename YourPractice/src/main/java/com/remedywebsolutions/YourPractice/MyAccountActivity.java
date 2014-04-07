@@ -41,6 +41,15 @@ public class MyAccountActivity extends DefaultActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
+        for( String t : extras.keySet()) {
+            try {
+                Log.d("class", "extra key: " + t + " value: " + extras.getString(t));
+            } catch (Exception e ){
+                Log.d("class", "Not a string", e);
+            }
+        }
+        */
         reportPhase("My account");
         setContentView(R.layout.activity_my_account);
         Skin.applyActivityBackground(this);

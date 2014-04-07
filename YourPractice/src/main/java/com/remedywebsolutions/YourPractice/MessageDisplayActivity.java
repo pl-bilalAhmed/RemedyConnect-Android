@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -20,6 +21,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotific
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -27,6 +29,9 @@ public class MessageDisplayActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
 
     private boolean inboxMode;
+    private ArrayList<InboxItem> inboxItems;
+    private ArrayList<SentItem> sentItems;
+    private int position;
     private InboxItem inboxItem;
     private SentItem sentItem;
     private TextView nameView, subjectView, receivedView, messageView;
@@ -76,8 +81,10 @@ public class MessageDisplayActivity extends DefaultActivity {
         inboxMode = extras.getBoolean("inboxMode");
         replyButton.setVisibility(View.GONE);
         deleteMessageButton.setVisibility(View.GONE);
+        position = extras.getInt("position");
         if (inboxMode) {
-            inboxItem = (InboxItem) extras.get("messageItem");
+            inboxItems = (ArrayList<InboxItem>) extras.get("inboxItems");
+            inboxItem = inboxItems.get(position);
             nameView.setText(inboxItem.fromPhysicianName);
             subjectView.setText(inboxItem.subject);
             try {
@@ -88,7 +95,8 @@ public class MessageDisplayActivity extends DefaultActivity {
             // We only activate the reply button if the message is loaded...
         }
         else {
-            sentItem = (SentItem) extras.get("messageItem");
+            sentItems = (ArrayList<SentItem>) extras.get("sentItems");
+            sentItem = sentItems.get(position);
             nameView.setText(sentItem.toPhysicianName);
             subjectView.setText(sentItem.subject);
             try {
@@ -162,9 +170,18 @@ public class MessageDisplayActivity extends DefaultActivity {
             setProgressMessageWaitAndDismissWithRunnable(message, new Runnable() {
                 @Override
                 public void run() {
-                    Intent myAccountIntent = new Intent(MessageDisplayActivity.this, MyAccountActivity.class);
-                    myAccountIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(myAccountIntent);
+                    Intent messageListIntent = new Intent(MessageDisplayActivity.this, MessageListActivity.class);
+                    messageListIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    messageListIntent.putExtra("shouldReverseList", false);
+                    if (inboxMode) {
+                        inboxItems.remove(position);
+                        messageListIntent.putExtra("inboxContents", inboxItems);
+                    }
+                    else {
+                        sentItems.remove(position);
+                        messageListIntent.putExtra("sentContents", sentItems);
+                    }
+                    startActivity(messageListIntent);
                 }
             });
 
