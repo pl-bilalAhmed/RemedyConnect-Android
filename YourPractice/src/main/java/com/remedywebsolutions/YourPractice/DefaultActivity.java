@@ -153,7 +153,8 @@ public class DefaultActivity extends SherlockActivity {
     /**
      * Sets up several menu item's visibility based on whether the user is logged in or not.
      *
-     * This depends on the abMenu being set, so it should be called in {@link #onCreateOptionsMenu(this)}.
+     * This depends on the abMenu being set, so it should be called in
+     * {@link com.remedywebsolutions.YourPractice.DefaultActivity#onCreateOptionsMenu(com.actionbarsherlock.view.Menu)}.
      *
      * @param loggedIn true if the user is logged in at the moment, false otherwise.
      */
