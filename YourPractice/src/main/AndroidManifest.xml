@@ -16,7 +16,7 @@ package="com.remedywebsolutions.YourPractice">
     android:theme="@style/appTheme"
     android:name="com.remedywebsolutions.YourPractice.YourPracticeApplication">
 
-    <!-- Push.IO-releated -->
+    <!-- Push.IO-related -->
     <receiver android:name="com.pushio.manager.PushIOBroadcastReceiver"
         android:permission="com.google.android.c2dm.permission.SEND">
         <intent-filter>

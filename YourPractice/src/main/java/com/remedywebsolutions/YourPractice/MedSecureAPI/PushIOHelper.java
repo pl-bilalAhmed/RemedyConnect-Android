@@ -17,7 +17,7 @@ public class PushIOHelper {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        byte[] hash = new byte[0];
+        byte[] hash;
         StringBuilder hexString = new StringBuilder();
         try {
             hash = digest.digest(username.getBytes("UTF-8"));

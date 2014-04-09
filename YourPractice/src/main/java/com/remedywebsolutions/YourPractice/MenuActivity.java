@@ -26,7 +26,6 @@ public class MenuActivity extends DefaultActivity {
         menu = (ListView) findViewById(R.id.menu);
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.default_header_listitem, menu, false);
-        ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.default_footer_listitem, menu, false);
 
         for (int i = 0; i < header.getChildCount(); ++i) {
             View v = header.getChildAt(i);

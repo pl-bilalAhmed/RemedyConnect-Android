@@ -15,6 +15,7 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -22,19 +23,25 @@ import com.actionbarsherlock.view.MenuItem;
 import com.flurry.android.FlurryAgent;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
 import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
 import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatus;
 import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatusSummary;
 import com.remedywebsolutions.YourPractice.parser.MainParser;
+
 import net.lingala.zip4j.exception.ZipException;
 
 import org.wordpress.passcodelock.AbstractAppLock;
 import org.wordpress.passcodelock.AppLockManager;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -228,7 +235,6 @@ public class DefaultActivity extends SherlockActivity {
                 startActivity(intent);
                 return true;
             case R.id.menu_logout:
-                MedSecureConnection connection = new MedSecureConnection(DefaultActivity.this);
                 LoggedInDataStorage storage = new LoggedInDataStorage(DefaultActivity.this);
                 storage.logOut();
                 Toast.makeText(DefaultActivity.this, "You've been logged out.", Toast.LENGTH_LONG).show();
@@ -419,7 +425,7 @@ public class DefaultActivity extends SherlockActivity {
                 .show();
         spiceException.printStackTrace();
         HashMap<String, String> errorMap = new HashMap<String, String>();
-        errorMap.put("stacktrace", spiceException.getStackTrace().toString());
+        errorMap.put("stacktrace", Arrays.toString(spiceException.getStackTrace()));
         errorMap.put("message", spiceException.getMessage());
         FlurryAgent.logEvent("RoboSpice error", errorMap);
         progress.dismiss();

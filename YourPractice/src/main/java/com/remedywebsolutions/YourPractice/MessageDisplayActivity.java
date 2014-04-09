@@ -177,7 +177,7 @@ public class MessageDisplayActivity extends DefaultActivity {
 
         @Override
         public void onRequestSuccess(String s) {
-            String message = null;
+            String message;
             if (s.equals("true")) {
                 message = "Message deleted.";
             }
