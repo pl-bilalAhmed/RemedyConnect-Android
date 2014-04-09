@@ -32,4 +32,7 @@
     <style name="MyPractice.ActionBar.TitleTextStyle" parent="@style/TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse">
         <item name="android:textSize">14sp</item>
     </style>
+    <style name="TransparentWebView" parent="@style/AppTheme">
+        <item name="android:background">@color/transparent</item>
+    </style>
 </resources>
