@@ -20,7 +20,7 @@
             android:linksClickable="true"
             android:padding="5dp"
             android:text="@string/about_developers"
-            android:textSize="18dp"
+            android:textSize="18sp"
             tools:context=".AboutActivity" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:linksClickable="true"
             android:padding="5dp"
             android:text="@string/about_libs"
-            android:textSize="13dp"
+            android:textSize="13sp"
             tools:context=".AboutActivity" />
         
         <include

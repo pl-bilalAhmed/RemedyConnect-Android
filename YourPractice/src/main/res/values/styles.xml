@@ -19,7 +19,7 @@
         <item name="android:textColor">#ffffff</item>
     </style>
     <style name="MainMenuButton" parent="@style/ButtonBase">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
     </style>
     <style name="MyAccountButton" parent="@style/MainMenuButton">
         <item name="android:layout_marginLeft">8sp</item>
