@@ -53,5 +53,7 @@
     <string name="login">Login</string>
     <string name="selectRecipientPrompt">Please select a recipient</string>
     <string name="passcodeSettings">Passcode settings</string>
+    <string name="home">Home</string>
+    <string name="more">More...</string>
 
 </resources>

@@ -2,11 +2,13 @@
     <item
         android:id="@+id/home"
         android:showAsAction="ifRoom"
-        android:icon="@drawable/ic_menu_home" />
+        android:icon="@drawable/ic_menu_home"
+        android:title="@string/home" />
     <item
         android:id="@+id/more"
         android:showAsAction="always"
-        android:icon="@drawable/abs__ic_menu_moreoverflow_holo_dark">
+        android:icon="@drawable/abs__ic_menu_moreoverflow_holo_dark"
+        android:title="@string/more">
         <menu android:id="@+id/more_submenu">
             <item
                 android:id="@+id/menu_update"
