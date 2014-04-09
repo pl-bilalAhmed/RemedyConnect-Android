@@ -56,7 +56,7 @@ public class MessageListActivity extends DefaultActivity {
                 View v = convertView;
                 if (v == null) {
                     LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    v = inflater.inflate(R.layout.messagelist_row, null);
+                    v = inflater.inflate(R.layout.messagelist_row, parent, false);
                 }
                 TextView messagePartnerTextView = (TextView)v.findViewById(R.id.messagePartnerTextView);
                 TextView subjectTextView = (TextView)v.findViewById(R.id.messageSubjectTextView);

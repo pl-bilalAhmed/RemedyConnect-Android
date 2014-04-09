@@ -44,7 +44,7 @@ public class MenuActivity extends DefaultActivity {
                 View v = convertView;
                 if (v == null) {
                     LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    v = vi.inflate(android.R.layout.simple_list_item_1, null);
+                    v = vi.inflate(android.R.layout.simple_list_item_1, parent, false);
                 }
                 TextView tv = (TextView)v.findViewById(android.R.id.text1);
                 tv.setText(this.getItem(pos));

@@ -80,7 +80,7 @@ public class SendCustomMessageActivity extends DefaultActivity {
                 View v = convertView;
                 if (v == null) {
                     LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    v = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, null);
+                    v = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
                 }
                 TextView text = (TextView)v.findViewById(android.R.id.text1);
                 text.setText(this.getItem(position));
