@@ -12,7 +12,7 @@
         android:id="@+id/messagePartnerTextView"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:text="Sender"/>
+        android:text="@string/sender"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,12 +25,12 @@
         android:layout_marginBottom="6sp"
         android:singleLine="true"
         android:ellipsize="end"
-        android:text="What happens " />
+        android:text="@string/what_happens" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Read 4 mins ago"
+        android:text="@string/read_four_mins_ago"
         android:textSize="14sp"
         android:textStyle="italic"
         android:id="@+id/timeAgo"
@@ -46,6 +46,7 @@
         android:layout_marginLeft="8sp"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@id/messageSubjectTextView"
+        android:contentDescription="@string/read_icon"
         android:id="@+id/mailIcon"
         android:src="@drawable/mailopened_black"/>
 </RelativeLayout>

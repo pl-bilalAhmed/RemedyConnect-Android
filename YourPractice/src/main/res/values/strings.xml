@@ -54,6 +54,10 @@
     <string name="selectRecipientPrompt">Please select a recipient</string>
     <string name="passcodeSettings">Passcode settings</string>
     <string name="home">Home</string>
-    <string name="more">More...</string>
+    <string name="more">More</string>
+    <string name="sender">Sender</string>
+    <string name="what_happens">What happens </string>
+    <string name="read_four_mins_ago">Read 4 mins ago</string>
+    <string name="read_icon">Read icon</string>
 
 </resources>

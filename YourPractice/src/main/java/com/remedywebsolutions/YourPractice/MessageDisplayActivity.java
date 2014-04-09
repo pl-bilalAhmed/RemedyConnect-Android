@@ -95,26 +95,30 @@ public class MessageDisplayActivity extends DefaultActivity {
         deleteMessageButton.setVisibility(View.GONE);
         position = extras.getInt("position");
         if (inboxMode) {
-            inboxItems = (ArrayList<InboxItem>) extras.get("inboxItems");
-            inboxItem = inboxItems.get(position);
-            nameView.setText(inboxItem.fromPhysicianName);
-            subjectView.setText(inboxItem.subject);
-            try {
-                receivedView.setText(formatDate(inboxItem.dateReceived));
-            } catch (ParseException e) {
-                receivedView.setText(inboxItem.dateReceived);
+            if (extras.get("inboxItems") instanceof ArrayList) {
+                inboxItems = (ArrayList<InboxItem>) extras.get("inboxItems");
+                inboxItem = inboxItems.get(position);
+                nameView.setText(inboxItem.fromPhysicianName);
+                subjectView.setText(inboxItem.subject);
+                try {
+                    receivedView.setText(formatDate(inboxItem.dateReceived));
+                } catch (ParseException e) {
+                    receivedView.setText(inboxItem.dateReceived);
+                }
+                // We only activate the reply button if the message is loaded...
             }
-            // We only activate the reply button if the message is loaded...
         }
         else {
-            sentItems = (ArrayList<SentItem>) extras.get("sentItems");
-            sentItem = sentItems.get(position);
-            nameView.setText(sentItem.toPhysicianName);
-            subjectView.setText(sentItem.subject);
-            try {
-                receivedView.setText(formatDate(sentItem.dateSent));
-            } catch (ParseException e) {
-                receivedView.setText(sentItem.dateSent);
+            if (extras.get("sentItems") instanceof ArrayList) {
+                sentItems = (ArrayList<SentItem>) extras.get("sentItems");
+                sentItem = sentItems.get(position);
+                nameView.setText(sentItem.toPhysicianName);
+                subjectView.setText(sentItem.subject);
+                try {
+                    receivedView.setText(formatDate(sentItem.dateSent));
+                } catch (ParseException e) {
+                    receivedView.setText(sentItem.dateSent);
+                }
             }
         }
 

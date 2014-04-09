@@ -325,8 +325,8 @@ public class DefaultActivity extends SherlockActivity {
             try {
                 Process p = runtime.exec(deleteCmd);
                 p.waitFor();
-            } catch (IOException e) {
-            } catch (InterruptedException e) {
+            } catch (IOException ignored) {
+            } catch (InterruptedException ignored) {
             }
         }
     }
@@ -346,8 +346,8 @@ public class DefaultActivity extends SherlockActivity {
             try {
                 Process p = runtime.exec(cpCmd);
                 p.waitFor();
-            } catch (IOException e) {
-            } catch (InterruptedException e) {
+            } catch (IOException ignored) {
+            } catch (InterruptedException ignored) {
             }
         }
     }
@@ -367,8 +367,8 @@ public class DefaultActivity extends SherlockActivity {
             try {
                 Process p = runtime.exec(cpCmd);
                 p.waitFor();
-            } catch (IOException e) {
-            } catch (InterruptedException e) {
+            } catch (IOException ignored) {
+            } catch (InterruptedException ignored) {
             }
         }
     }

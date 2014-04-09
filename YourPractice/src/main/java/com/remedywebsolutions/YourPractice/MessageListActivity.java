@@ -37,9 +37,13 @@ public class MessageListActivity extends DefaultActivity {
         reportPhase("Message list");
         setContentView(R.layout.activity_message_list);
         Boolean shouldReverse = extras.getBoolean("shouldReverseList", true);
-        inboxItems = (ArrayList<InboxItem>) extras.get("inboxContents");
+        if (extras.get("inboxContents") instanceof ArrayList) {
+            inboxItems = (ArrayList<InboxItem>) extras.get("inboxContents");
+        }
         if (inboxItems != null && shouldReverse) { Collections.reverse(inboxItems); }
-        sentItems = (ArrayList<SentItem>) extras.get("sentContents");
+        if (extras.get("sentContents") instanceof ArrayList) {
+            sentItems = (ArrayList<SentItem>) extras.get("sentContents");
+        }
         if (sentItems != null && shouldReverse) { Collections.reverse(sentItems); }
         inboxMode =  (inboxItems != null);
 
