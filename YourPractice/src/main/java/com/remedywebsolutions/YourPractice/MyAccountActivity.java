@@ -76,6 +76,8 @@ public class MyAccountActivity extends DefaultActivity {
         fixButtonPaddings(testNotificationsButton);
         fixButtonPaddings(passcodePrefsButton);
 
+        assert inboxButton.getText() != null;
+        assert sentItemsButton.getText() != null;
         defaultInboxText = inboxButton.getText().toString();
         defaultSentText = sentItemsButton.getText().toString();
 

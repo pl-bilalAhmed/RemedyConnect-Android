@@ -45,6 +45,7 @@ public class SelectPracticeActivity extends DefaultActivity {
     protected void setupMenu() {
         @SuppressWarnings("unchecked")
         ArrayList<HashMap<String, String>> practices = (ArrayList<HashMap<String, String>>)extras.getSerializable("practices");
+        assert practices != null;
         for (HashMap<String, String> practice : practices) {
             Map<String, String> practiceMenuItem = new HashMap<String, String>(3);
             practiceMenuItem.put("Practice", practice.get("name"));

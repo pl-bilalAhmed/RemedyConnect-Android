@@ -10,7 +10,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.remedywebsolutions.YourPractice.parser.MainParser;
+
+import java.util.ArrayList;
 
 public class ArticleSetActivity extends DefaultActivity {
     protected ArrayAdapter<String> adapter;
@@ -29,12 +32,15 @@ public class ArticleSetActivity extends DefaultActivity {
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.default_header_listitem, list, false);
         ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.default_footer_listitem, list, false);
 
+        assert header != null;
         for (int i = 0; i < header.getChildCount(); ++i) {
             View v = header.getChildAt(i);
+            assert v != null;
             if (v.getId() == R.id.titleTextView) {
-                ((TextView)v).setTypeface(Skin.menuHeaderFont(this));
+                ((TextView) v).setTypeface(Skin.menuHeaderFont(this));
             }
         }
+
 
         list.addHeaderView(header, null, false);
         list.addFooterView(footer, null, false);
@@ -49,6 +55,7 @@ public class ArticleSetActivity extends DefaultActivity {
                     LayoutInflater vi = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
                     v = vi.inflate(android.R.layout.simple_list_item_1, parent, false);
                 }
+                assert v != null;
                 TextView tv = (TextView)v.findViewById(android.R.id.text1);
                 tv.setText(this.getItem(pos));
                 tv.setTypeface(Skin.menuFont(getApplicationContext()));
@@ -57,7 +64,9 @@ public class ArticleSetActivity extends DefaultActivity {
         };
         list.setAdapter(adapter);
 
-        for (String listItem : extras.getStringArrayList("articleTitles")) {
+        ArrayList<String> articleTitles = extras.getStringArrayList("articleTitles");
+        assert articleTitles != null;
+        for (String listItem : articleTitles) {
             adapter.add(listItem);
         }
 

@@ -39,8 +39,6 @@ public class GetInAppNotificationInBoxItemRequest extends SpiceRequest<InboxItem
         connection.disconnect();
 
         ObjectMapper mapper = new ObjectMapper();
-        InboxItem result = mapper.readValue(response, InboxItem.class);
-
-        return result;
+        return mapper.readValue(response, InboxItem.class);
     }
 }

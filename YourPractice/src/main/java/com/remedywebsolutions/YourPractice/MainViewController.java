@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.net.Uri;
 import com.remedywebsolutions.YourPractice.parser.MainParser;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainViewController {
     public static Intent GetIntent(Context context, String parsePoint, String title, int intentFlags) {
-        String startPath = context.getFilesDir().getAbsolutePath() + "/";
+        File filesDir = context.getFilesDir();
+        assert filesDir != null;
+        String startPath = filesDir.getAbsolutePath() + "/";
         MainParser parser = new MainParser(startPath + parsePoint);
         Intent intent = null;
         if (parser.isMenu()) {

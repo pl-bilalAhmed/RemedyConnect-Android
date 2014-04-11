@@ -34,7 +34,6 @@ public class SendCustomMessageActivity extends DefaultActivity {
 
     private EditText subjectEditText, messageEditText;
     private Spinner recipientSpinner;
-    private ArrayAdapter<String> recipientAdapter;
     private String subjectForReply;
     private int toPhysicianIDForReply;
     private String conversationIDForReply;
@@ -74,15 +73,16 @@ public class SendCustomMessageActivity extends DefaultActivity {
         }
 
         // Set up adapter for recipient
-        recipientAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>()) {
+        ArrayAdapter<String> recipientAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View v = convertView;
                 if (v == null) {
-                    LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     v = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
                 }
-                TextView text = (TextView)v.findViewById(android.R.id.text1);
+                assert v != null;
+                TextView text = (TextView) v.findViewById(android.R.id.text1);
                 text.setText(this.getItem(position));
                 return v;
             }
@@ -133,8 +133,10 @@ public class SendCustomMessageActivity extends DefaultActivity {
                     // Get position in recipient spinner
                     int position = recipientSpinner.getSelectedItemPosition();
                     message.toPhysicianID = physicians.physicians.get(position).physicianID;
+                    assert subjectEditText.getText() != null;
                     message.subject = subjectEditText.getText().toString();
                 }
+                assert messageEditText.getText() != null;
                 message.message = messageEditText.getText().toString();
                 SendInAppNotificationRequest req = new SendInAppNotificationRequest(SendCustomMessageActivity.this, message);
                 spiceManager.execute(req, new SendMessageListener());

@@ -20,6 +20,7 @@ public class PushIOHelper {
         byte[] hash;
         StringBuilder hexString = new StringBuilder();
         try {
+            assert digest != null;
             hash = digest.digest(username.getBytes("UTF-8"));
             // Create Hex String
             for (byte aMessageDigest : hash) {

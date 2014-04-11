@@ -39,8 +39,6 @@ public class GetInAppNotificationSentItemRequest extends SpiceRequest<SentItem> 
         connection.disconnect();
 
         ObjectMapper mapper = new ObjectMapper();
-        SentItem result = mapper.readValue(response, SentItem.class);
-
-        return result;
+        return mapper.readValue(response, SentItem.class);
     }
 }

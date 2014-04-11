@@ -65,11 +65,13 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
         int noOfInvisibleChilds = 0;
         for (int i = 0; i < childCount; i++) {
             View v = linearLayout.getChildAt(i);
+            assert v != null;
             if (v.getVisibility() == View.INVISIBLE) {
                 ++noOfInvisibleChilds;
             }
         }
         if (noOfInvisibleChilds == childCount) {
+            assert linearLayout.getLayoutParams() != null;
             linearLayout.getLayoutParams().height = 0;
         }
     }

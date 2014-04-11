@@ -30,7 +30,6 @@ public class LoginRequest extends SpiceRequest<LoginResponse> {
         connection.disconnect();
 
         ObjectMapper mapper = new ObjectMapper();
-        LoginResponse loginResponse = mapper.readValue(response, LoginResponse.class);
-        return loginResponse;
+        return mapper.readValue(response, LoginResponse.class);
     }
 }

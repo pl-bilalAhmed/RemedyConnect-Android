@@ -34,7 +34,7 @@ public class MessageDisplayActivity extends DefaultActivity {
     private int position;
     private InboxItem inboxItem;
     private SentItem sentItem;
-    private TextView nameView, subjectView, receivedView, messageView;
+    private TextView messageView;
     private ProgressBar progressBar;
     private Button deleteMessageButton, replyButton;
     private boolean loaded;
@@ -76,9 +76,9 @@ public class MessageDisplayActivity extends DefaultActivity {
 
         Skin.applyActivityBackground(this);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        nameView = (TextView) findViewById(R.id.fromTextView);
-        subjectView = (TextView) findViewById(R.id.subjectTextView);
-        receivedView = (TextView) findViewById(R.id.receivedTextView);
+        TextView nameView = (TextView) findViewById(R.id.fromTextView);
+        TextView subjectView = (TextView) findViewById(R.id.subjectTextView);
+        TextView receivedView = (TextView) findViewById(R.id.receivedTextView);
         messageView = (TextView) findViewById(R.id.messageTextView);
         deleteMessageButton = (Button) findViewById(R.id.deleteMessageButton);
         replyButton = (Button) findViewById(R.id.replyButton);
@@ -96,6 +96,7 @@ public class MessageDisplayActivity extends DefaultActivity {
         position = extras.getInt("position");
         if (inboxMode) {
             if (extras.get("inboxItems") instanceof ArrayList) {
+                //noinspection unchecked
                 inboxItems = (ArrayList<InboxItem>) extras.get("inboxItems");
                 inboxItem = inboxItems.get(position);
                 nameView.setText(inboxItem.fromPhysicianName);
@@ -110,6 +111,7 @@ public class MessageDisplayActivity extends DefaultActivity {
         }
         else {
             if (extras.get("sentItems") instanceof ArrayList) {
+                //noinspection unchecked
                 sentItems = (ArrayList<SentItem>) extras.get("sentItems");
                 sentItem = sentItems.get(position);
                 nameView.setText(sentItem.toPhysicianName);

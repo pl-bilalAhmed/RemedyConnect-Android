@@ -38,10 +38,12 @@ public class MessageListActivity extends DefaultActivity {
         setContentView(R.layout.activity_message_list);
         Boolean shouldReverse = extras.getBoolean("shouldReverseList", true);
         if (extras.get("inboxContents") instanceof ArrayList) {
+            //noinspection unchecked
             inboxItems = (ArrayList<InboxItem>) extras.get("inboxContents");
         }
         if (inboxItems != null && shouldReverse) { Collections.reverse(inboxItems); }
         if (extras.get("sentContents") instanceof ArrayList) {
+            //noinspection unchecked
             sentItems = (ArrayList<SentItem>) extras.get("sentContents");
         }
         if (sentItems != null && shouldReverse) { Collections.reverse(sentItems); }
@@ -62,6 +64,7 @@ public class MessageListActivity extends DefaultActivity {
                     LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     v = inflater.inflate(R.layout.messagelist_row, parent, false);
                 }
+                assert v != null;
                 TextView messagePartnerTextView = (TextView)v.findViewById(R.id.messagePartnerTextView);
                 TextView subjectTextView = (TextView)v.findViewById(R.id.messageSubjectTextView);
                 TextView timeTextView = (TextView)v.findViewById(R.id.timeAgo);

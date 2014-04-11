@@ -76,7 +76,9 @@ public class MedSecureConnection  {
      */
     public HttpURLConnection initConnection(Boolean passUserToken) throws IOException {
         addAPIParameters();
-        HttpURLConnection connection = (HttpURLConnection) new URL(uriBuilder.build().toString()).openConnection();
+        Uri uri = uriBuilder.build();
+        assert uri != null;
+        HttpURLConnection connection = (HttpURLConnection) new URL(uri.toString()).openConnection();
         connection.setReadTimeout(readTimeout);
         connection.setConnectTimeout(connectTimeout);
         connection.setRequestMethod(method);

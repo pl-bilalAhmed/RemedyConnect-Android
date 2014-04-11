@@ -6,13 +6,12 @@ import com.pushio.manager.PushIOManager;
 
 public class MainActivity extends DefaultActivity {
     private static String PUSH_KEY_ALERT = "alert";
-    private PushIOManager mPushIOManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPushIOManager = PushIOManager.getInstance(this);
+        PushIOManager mPushIOManager = PushIOManager.getInstance(this);
         mPushIOManager.ensureRegistration();
     }
 

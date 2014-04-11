@@ -70,6 +70,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
     public void startFetchingByName() {
         EditText practiceNameView = (EditText)this.findViewById(R.id.practiceSearchEdit);
+        assert practiceNameView.getText() != null;
         String practiceName = practiceNameView.getText().toString();
         Intent intent = new Intent(this, RootDownloadService.class);
         intent.putExtra("receiver", new DownloadReceiver(new Handler()));
@@ -134,6 +135,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
             }
             if (resultCode == DownloadStatusCodes.DOWNLOAD_FAILED) {
                 progress.dismiss();
+                assert getApplicationContext() != null;
                 Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
                 setResult(Activity.RESULT_FIRST_USER);
             }
@@ -145,6 +147,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     }
 
     protected void startParsingPractices() {
+        assert this.getFilesDir() != null;
         MainParser parser = new MainParser(this.getFilesDir().getAbsolutePath() + "/root.xml");
         if (parser.isRoot()) {
             ArrayList<HashMap<String, String>> practices = parser.getRootPractices();
@@ -154,11 +157,13 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                 startActivity(intent);
             }
             else {
+                assert getApplicationContext() != null;
                 Toast.makeText(getApplicationContext(), getString(R.string.couldnt_find_practice_near_location),
                         Toast.LENGTH_LONG).show();
             }
         }
         else {
+            assert getApplicationContext() != null;
             Toast.makeText(getApplicationContext(), getString(R.string.couldnt_find_practice_near_location),
                     Toast.LENGTH_LONG).show();
         }

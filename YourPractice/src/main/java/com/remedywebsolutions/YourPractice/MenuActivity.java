@@ -26,9 +26,10 @@ public class MenuActivity extends DefaultActivity {
         menu = (ListView) findViewById(R.id.menu);
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.default_header_listitem, menu, false);
-
+        assert header != null;
         for (int i = 0; i < header.getChildCount(); ++i) {
             View v = header.getChildAt(i);
+            assert v != null;
             if (v.getId() == R.id.titleTextView) {
                 ((TextView)v).setTypeface(Skin.menuHeaderFont(this));
             }
@@ -45,6 +46,7 @@ public class MenuActivity extends DefaultActivity {
                     LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     v = vi.inflate(android.R.layout.simple_list_item_1, parent, false);
                 }
+                assert v != null;
                 TextView tv = (TextView)v.findViewById(android.R.id.text1);
                 tv.setText(this.getItem(pos));
                 tv.setTypeface(Skin.menuFont(getApplicationContext()));
@@ -67,7 +69,10 @@ public class MenuActivity extends DefaultActivity {
 
     protected void setupMenu() {
         if (menuadapter.getCount() < 2) {
-            for (String s : extras.getStringArrayList("menuitems")) {
+            assert extras != null;
+            ArrayList<String> menuitems = extras.getStringArrayList("menuitems");
+            assert menuitems != null;
+            for (String s : menuitems) {
                 menuadapter.add(s);
             }
             menu.setOnItemClickListener(new OnItemClickListener() {
@@ -75,6 +80,7 @@ public class MenuActivity extends DefaultActivity {
                     int MENU_ITEMS_SHIFT = -1;
 
                     ArrayList<String> feeds = extras.getStringArrayList("feeds");
+                    assert feeds != null;
                     ArrayList<String> externalLinks = extras.getStringArrayList("externalLinks");
                     String feed = feeds.get(position + MENU_ITEMS_SHIFT);
                     if (feed != null && feed.length() > 0) {
@@ -86,6 +92,7 @@ public class MenuActivity extends DefaultActivity {
                                 menuadapter.getItem(position + MENU_ITEMS_SHIFT), 0); // -1 everywhere because of the header element
                     }
                     else {
+                        assert externalLinks != null;
                         if (externalLinks.get(position + MENU_ITEMS_SHIFT) != null) {
                             MainViewController.FireBrowser(view.getContext(),
                                     externalLinks.get(position + MENU_ITEMS_SHIFT));

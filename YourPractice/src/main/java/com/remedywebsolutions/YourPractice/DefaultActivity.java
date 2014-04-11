@@ -323,6 +323,8 @@ public class DefaultActivity extends SherlockActivity {
      *
      */
     protected void deleteFiles() {
+        assert getApplicationContext() != null;
+        assert getApplicationContext().getFilesDir() != null;
         String directoryPath = getApplicationContext().getFilesDir().getAbsolutePath();
         File file = new File(directoryPath);
         if (file.exists()) {
@@ -343,6 +345,9 @@ public class DefaultActivity extends SherlockActivity {
      * Should be used with {@link #deleteFiles()} and {@link #restoreIndex()}.
      */
     protected void saveIndex() {
+        assert getApplicationContext() != null;
+        assert getApplicationContext().getFilesDir() != null;
+        assert getApplicationContext().getCacheDir() != null;
         String tempDirPath = getApplicationContext().getCacheDir().getAbsolutePath();
         String indexPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/index.xml";
         File file = new File(indexPath);
@@ -364,6 +369,9 @@ public class DefaultActivity extends SherlockActivity {
      * Should be used with {@link #deleteFiles()} and {@link #saveIndex()}.
      */
     protected void restoreIndex() {
+        assert getApplicationContext() != null;
+        assert getApplicationContext().getFilesDir() != null;
+        assert getApplicationContext().getCacheDir() != null;
         String tempFilePath = getApplicationContext().getCacheDir().getAbsolutePath() + "/index.xml";
         String indexPath = getApplicationContext().getFilesDir().getAbsolutePath();
         File file = new File(tempFilePath);
@@ -561,6 +569,7 @@ public class DefaultActivity extends SherlockActivity {
                 case DownloadStatusCodes.EXTRACTING_FAILED:
                     threadPoolExecutor.shutdown();
                     progress.dismiss();
+                    assert getApplicationContext() != null;
                     Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
                     setResult(Activity.RESULT_FIRST_USER);
                     break;
@@ -568,6 +577,8 @@ public class DefaultActivity extends SherlockActivity {
         }
 
         protected String prepareDirectory() {
+            assert getApplicationContext() != null;
+            assert getApplicationContext().getFilesDir() != null;
             String directoryPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/";
             File directory = new File(directoryPath);
             if (directory.mkdir() || directory.isDirectory()) {

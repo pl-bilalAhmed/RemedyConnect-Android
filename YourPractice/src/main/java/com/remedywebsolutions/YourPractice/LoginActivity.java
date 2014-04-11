@@ -30,9 +30,7 @@ import org.wordpress.passcodelock.PasscodeManagePasswordActivity;
 
 public class LoginActivity extends DefaultActivity {
     private String username;
-    private String token;
-    private int physicianId, practiceId;
-    private String pushIOHash;
+    private int physicianId;
     private LoggedInDataStorage dataStorage;
     private EditText usernameEditor;
     private EditText passwordEditor;
@@ -73,6 +71,8 @@ public class LoginActivity extends DefaultActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                assert usernameEditor.getText() != null;
+                assert passwordEditor.getText() != null;
                 username = usernameEditor.getText().toString();
                 String password = passwordEditor.getText().toString();
                 LoginRequest req = new LoginRequest(username, password, LoginActivity.this);
@@ -93,15 +93,15 @@ public class LoginActivity extends DefaultActivity {
         @Override
         public void onRequestSuccess(LoginResponse response) {
             physicianId = response.getPhysicianID();
-            practiceId = response.getPracticeID();
-            token = response.getToken();
+            int practiceId = response.getPracticeID();
+            String token = response.getToken();
             if (token != null) {
                 progress.setMessage("Logged in, storing data...");
                 dataStorage.StoreDataOnLogin(physicianId, practiceId, token);
                 progress.setMessage("Logged in. Registering device...");
                 InsertPhysicianMobileDeviceRequest req =
                         new InsertPhysicianMobileDeviceRequest(physicianId,
-                                                                practiceId,
+                                practiceId,
                                                                 username,
                                                                 LoginActivity.this);
 
@@ -126,8 +126,7 @@ public class LoginActivity extends DefaultActivity {
         }
 
         @Override
-        public void onRequestSuccess(String result) {
-            pushIOHash = result;
+        public void onRequestSuccess(String pushIOHash) {
             dataStorage.StoreDeviceId(pushIOHash);
             PushIOManager.getInstance(LoginActivity.this).registerUserId(pushIOHash);
             Log.d("YourPractice", "Registered with Push.IO with the following user ID: " +

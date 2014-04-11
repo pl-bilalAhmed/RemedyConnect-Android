@@ -49,9 +49,8 @@ public class SendInAppNotificationRequest extends SpiceRequest<SendInAppNotifica
         msc.setupPOSTForJSONContent(connection, jsonString);
         String result = MedSecureConnection.getStringResult(connection);
         connection.disconnect();
-        SendInAppNotificationRequestResponse response = mapper.readValue(result,
-                SendInAppNotificationRequestResponse.class);
 
-        return response;
+        return mapper.readValue(result,
+                SendInAppNotificationRequestResponse.class);
     }
 }

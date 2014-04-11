@@ -5,6 +5,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 
 public abstract class AbstractDownloadService extends IntentService {
@@ -15,12 +17,21 @@ public abstract class AbstractDownloadService extends IntentService {
         super(name);
     }
 
+    @Nullable
     protected String prepareDirectory() {
-        String directoryPath = this.getApplicationContext().getFilesDir().getAbsolutePath() + "/";
-        File directory = new File(directoryPath);
-        //noinspection ResultOfMethodCallIgnored
-        directory.mkdir();
-        return directoryPath;
+        Context context = this.getApplicationContext();
+        if (context != null) {
+            File filesDir = context.getFilesDir();
+            if (filesDir != null) {
+                String directoryPath = filesDir.getAbsolutePath() + "/";
+                File directory = new File(directoryPath);
+                //noinspection ResultOfMethodCallIgnored
+                directory.mkdir();
+                return directoryPath;
+            }
+            throw new IllegalStateException("Files dir shouldn't be null");
+        }
+        throw new IllegalStateException("Application context shouldn't be null");
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
