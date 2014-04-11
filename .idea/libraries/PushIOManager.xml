@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="PushIOManager">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/YourPractice/libs/PushIOManager.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
