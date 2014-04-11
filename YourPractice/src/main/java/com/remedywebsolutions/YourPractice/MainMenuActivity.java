@@ -103,7 +103,7 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
     }
 
     void onClickFireActivity(Integer index) {
-        if (!feeds.get(index).isEmpty()) {
+        if (feeds.get(index).length() > 0) {
             String localPath = MainParser.subFeedURLToLocal(
                     feeds.get(index),
                     Data.GetFeedRoot(this));
@@ -112,7 +112,7 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
                     menuButtonTexts.get(index), 0);
         }
         else {
-            if (!externalLinks.get(index).isEmpty()) {
+            if (externalLinks.get(index).length() > 0) {
                 MainViewController.FireBrowser(this, externalLinks.get(index));
             }
         }

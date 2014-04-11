@@ -77,7 +77,7 @@ public class MenuActivity extends DefaultActivity {
                     ArrayList<String> feeds = extras.getStringArrayList("feeds");
                     ArrayList<String> externalLinks = extras.getStringArrayList("externalLinks");
                     String feed = feeds.get(position + MENU_ITEMS_SHIFT);
-                    if (feed != null && !feed.isEmpty()) {
+                    if (feed != null && feed.length() > 0) {
                         String localPath = MainParser.subFeedURLToLocal(
                                 feed,
                                 Data.GetFeedRoot(view.getContext()));

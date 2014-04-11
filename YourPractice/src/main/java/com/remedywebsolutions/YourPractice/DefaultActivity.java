@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.IntentCompat;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
@@ -551,7 +552,7 @@ public class DefaultActivity extends SherlockActivity {
                         setResult(Activity.RESULT_OK);
                         progress.setMessage("Download finished.");
                         Intent intent = new Intent(DefaultActivity.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     }

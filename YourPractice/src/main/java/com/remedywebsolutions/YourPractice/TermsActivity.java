@@ -13,7 +13,7 @@ public class TermsActivity extends DefaultActivity {
         display = (WebView) findViewById(R.id.pageWebView);
         Skin.applyViewBackground(this, display);
         display.setBackgroundColor(0);
-        display.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+        //display.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
         suppressTitle();
         setTitle(R.string.terms_and_conditions);
         display.loadUrl("file:///android_asset/terms_and_conditions.html");

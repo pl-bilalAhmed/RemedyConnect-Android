@@ -125,7 +125,7 @@ public class MainParser {
         ArrayList<String> subfeedURLs = new ArrayList<String>();
         ArrayList<HashMap<String, String>> menu = getMenu();
         for (HashMap<String, String> menuItem : menu) {
-            if (!menuItem.get("feed").isEmpty()) {
+            if (menuItem.get("feed").length() > 0) {
                 subfeedURLs.add(menuItem.get("feed"));
             }
         }
