@@ -6,11 +6,14 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.remedywebsolutions.YourPractice.LoginActivity;
 import com.remedywebsolutions.YourPractice.MainViewController;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationItemRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationInBoxItemRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InitiateInAppGroupNotification;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
@@ -67,6 +70,14 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         pullPhysicians();
         int notificationID = sendTestMessageToSelf();
         deleteTestMessages(notificationID);
+    }
+
+    public void testSendGroupMessage() throws Exception {
+        LoginResponse loginResponse = login();
+        registerDevice(loginResponse);
+        pullPhysicians();
+        int notificationID = sendGroupMessage();
+        getGroupMessage(notificationID);
     }
 
     /**
@@ -137,5 +148,19 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         );
         result = req.loadDataFromNetwork();
         assertTrue("Failed to delete sent message", result.equals("true"));
+    }
+
+    private int sendGroupMessage() throws Exception {
+        InitiateInAppGroupNotification req = new InitiateInAppGroupNotification(loginActivity);
+        SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
+        assertTrue("Couldn't send message, failed with status " + result.status,
+                result.didSendMessageSuccessfully());
+        return result.notificationID;
+    }
+
+    private void getGroupMessage(int notificationID) throws Exception {
+        GetInAppNotificationInBoxItemRequest req = new GetInAppNotificationInBoxItemRequest(loginActivity, notificationID);
+        InboxItem result = req.loadDataFromNetwork();
+        assertTrue("Recipient list doesn't contain sender as expected", result.toPhysicianID != physicianID);
     }
 }
