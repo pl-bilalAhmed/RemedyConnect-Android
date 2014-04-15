@@ -6,22 +6,27 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.remedywebsolutions.YourPractice.LoginActivity;
 import com.remedywebsolutions.YourPractice.MainViewController;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationRequestContent;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.RecipientsResponseWrapper;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationItemRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationInBoxItemRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationRecipientsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InitiateInAppGroupNotification;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppGroupNotificationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
+
+import java.util.Map;
 
 public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private LoginActivity loginActivity;
     private LoggedInDataStorage dataStorage;
     private int physicianID, practiceID;
+    private String name;
 
     public APITest() {
         super(LoginActivity.class);
@@ -76,8 +81,9 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         LoginResponse loginResponse = login();
         registerDevice(loginResponse);
         pullPhysicians();
-        int notificationID = sendGroupMessage();
-        getGroupMessage(notificationID);
+        SendInAppNotificationRequestResponse result = sendGroupMessage();
+        getGroupMessageRecipients(result.conversationID);
+        replyToGroupMessage(result.conversationID);
     }
 
     /**
@@ -104,7 +110,9 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         physicianID = loginResponse.getPhysicianID();
         String token = loginResponse.getToken();
         dataStorage.StoreDataOnLogin(physicianID, practiceID, token);
-        InsertPhysicianMobileDeviceRequest registerReq = new InsertPhysicianMobileDeviceRequest(physicianID, practiceID, "zoltan", loginActivity);
+        InsertPhysicianMobileDeviceRequest registerReq =
+                new InsertPhysicianMobileDeviceRequest(physicianID, practiceID,
+                                                        "zoltan", loginActivity);
         String response = registerReq.loadDataFromNetwork();
         assertNotNull("Doesn't have response", response.length() > 0);
         assertTrue("The device ID is not well-formatted", isHex(response));
@@ -116,9 +124,10 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         GetPhysiciansRequest pullContactsReq = new GetPhysiciansRequest(loginActivity);
         PhysiciansResponse physicians = pullContactsReq.loadDataFromNetwork();
         assertNotNull("No contacts", physicians.physicians.size() == 0);
-        assertTrue("Less than expected number of physicians: got " + physicians.physicians.size() + ", which is less than four",
+        assertTrue("Less than expected number of physicians: got " +
+                        physicians.physicians.size() + ", which is less than four",
                 physicians.physicians.size() >= 4);
-        String name = loginActivity.getAndSetNameFromResponse(physicians, physicianID);
+        name = loginActivity.getAndSetNameFromResponse(physicians, physicianID);
         assertNotNull("Name is not set", name);
         assertEquals("Name does not match", name, "Zoltan Adamek, MD");
     }
@@ -150,17 +159,37 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         assertTrue("Failed to delete sent message", result.equals("true"));
     }
 
-    private int sendGroupMessage() throws Exception {
+    private SendInAppNotificationRequestResponse sendGroupMessage() throws Exception {
         InitiateInAppGroupNotification req = new InitiateInAppGroupNotification(loginActivity);
         SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
         assertTrue("Couldn't send message, failed with status " + result.status,
                 result.didSendMessageSuccessfully());
-        return result.notificationID;
+        return result;
     }
 
-    private void getGroupMessage(int notificationID) throws Exception {
-        GetInAppNotificationInBoxItemRequest req = new GetInAppNotificationInBoxItemRequest(loginActivity, notificationID);
-        InboxItem result = req.loadDataFromNetwork();
-        assertTrue("Recipient list doesn't contain sender as expected", result.toPhysicianID != physicianID);
+    private void getGroupMessageRecipients(String conversationID) throws Exception {
+        GetInAppNotificationRecipientsRequest req =
+                new GetInAppNotificationRecipientsRequest(loginActivity, conversationID);
+        RecipientsResponseWrapper recipientsWrapper = req.loadDataFromNetwork();
+        Map<String, String> recipients = recipientsWrapper.getRecipients();
+        assertTrue("Recipient list doesn't contain sender as expected",
+                recipients.containsKey(Integer.toString(physicianID)));
+        assertTrue("Recipient list doesn't contain everyone",
+                recipients.containsKey("17") && recipients.containsKey("521"));
+    }
+
+    private void replyToGroupMessage(String conversationID) throws Exception {
+        InAppNotificationRequestContent message = new InAppNotificationRequestContent();
+        message.conversationID = conversationID;
+        message.fromPhysicianID = physicianID;
+        message.fromPhysicianName = name;
+        message.practiceID = practiceID;
+        message.subject = "Re: test";
+        message.message = "A test reply";
+        SendInAppGroupNotificationRequest req =
+                new SendInAppGroupNotificationRequest(loginActivity, message);
+        SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
+        assertTrue("Couldn't send message, failed with status " + result.status,
+                result.didSendMessageSuccessfully());
     }
 }
