@@ -1,7 +1,9 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,6 +30,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotifi
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class SendCustomMessageActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
@@ -57,6 +60,7 @@ public class SendCustomMessageActivity extends DefaultActivity {
         reportPhase("Send custom message");
         setContentView(R.layout.activity_send_custom_message);
         Button sendButton = (Button) findViewById(R.id.sendMessageButton);
+        Button chooseGroupRecipientsButton = (Button) findViewById(R.id.selectGroupRecipientsButton);
         subjectEditText = (EditText) findViewById(R.id.subjectEditText);
         messageEditText = (EditText) findViewById(R.id.messageEditText);
         recipientSpinner = (Spinner) findViewById(R.id.recipientSpinner);
@@ -72,6 +76,36 @@ public class SendCustomMessageActivity extends DefaultActivity {
             e.printStackTrace();
         }
 
+        Boolean groupMode;
+        if (extras != null) {
+            subjectForReply = extras.getString("subject");
+            groupMode = extras.getBoolean("groupMode", false);
+        }
+        else {
+            subjectForReply = null;
+            groupMode = false;
+        }
+        if (groupMode) {
+            recipientSpinner.setVisibility(View.GONE);
+            chooseGroupRecipientsButton.setVisibility(View.VISIBLE);
+            Skin.applyButtonStyle(this, chooseGroupRecipientsButton);
+            chooseGroupRecipientsButton.setOnClickListener(new ShowRecipientChooserButtonListener());
+        }
+        else {
+            recipientSpinner.setVisibility(View.VISIBLE);
+            chooseGroupRecipientsButton.setVisibility(View.GONE);
+            setupRecipientAdapter();
+            sendButton.setOnClickListener(new SendButtonListener());
+        }
+
+        progress = new ProgressDialog(this);
+        progress.setCancelable(false);
+        progress.setCanceledOnTouchOutside(false);
+        progress.setIndeterminate(true);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+    }
+
+    private void setupRecipientAdapter() {
         // Set up adapter for recipient
         ArrayAdapter<String> recipientAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>()) {
             @Override
@@ -88,12 +122,6 @@ public class SendCustomMessageActivity extends DefaultActivity {
             }
         };
         recipientSpinner.setAdapter(recipientAdapter);
-        if (extras != null) {
-            subjectForReply = extras.getString("subject");
-        }
-        else {
-            subjectForReply = null;
-        }
         replyMode = (subjectForReply != null);
         if (replyMode) {
             recipientSpinner.setEnabled(false);
@@ -108,42 +136,77 @@ public class SendCustomMessageActivity extends DefaultActivity {
                 recipientAdapter.add(physician.physicianName);
             }
         }
+    }
 
-        progress = new ProgressDialog(this);
-        progress.setCancelable(false);
-        progress.setCanceledOnTouchOutside(false);
-        progress.setIndeterminate(true);
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoggedInDataStorage storage = new LoggedInDataStorage(SendCustomMessageActivity.this);
-                HashMap<String, String> userData = storage.RetrieveData();
-                InAppNotificationRequestContent message = new InAppNotificationRequestContent();
-                message.fromPhysicianID = Integer.parseInt(userData.get("physicianID"));
-                message.fromPhysicianName = userData.get("name");
-                message.practiceID = Integer.parseInt(userData.get("practiceID"));
-                if (replyMode) {
-                    message.toPhysicianID = toPhysicianIDForReply;
-                    message.subject = subjectForReply;
-                    message.conversationID = conversationIDForReply;
-                }
-                else {
-                    // Get position in recipient spinner
-                    int position = recipientSpinner.getSelectedItemPosition();
-                    message.toPhysicianID = physicians.physicians.get(position).physicianID;
-                    assert subjectEditText.getText() != null;
-                    message.subject = subjectEditText.getText().toString();
-                }
-                assert messageEditText.getText() != null;
-                message.message = messageEditText.getText().toString();
-                SendInAppNotificationRequest req = new SendInAppNotificationRequest(SendCustomMessageActivity.this, message);
-                spiceManager.execute(req, new SendMessageListener());
-                progress.setMessage("Sending message...");
-                progress.show();
+    private class SendButtonListener implements Button.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            LoggedInDataStorage storage = new LoggedInDataStorage(SendCustomMessageActivity.this);
+            HashMap<String, String> userData = storage.RetrieveData();
+            InAppNotificationRequestContent message = new InAppNotificationRequestContent();
+            message.fromPhysicianID = Integer.parseInt(userData.get("physicianID"));
+            message.fromPhysicianName = userData.get("name");
+            message.practiceID = Integer.parseInt(userData.get("practiceID"));
+            if (replyMode) {
+                message.toPhysicianID = toPhysicianIDForReply;
+                message.subject = subjectForReply;
+                message.conversationID = conversationIDForReply;
             }
-        });
+            else {
+                // Get position in recipient spinner
+                int position = recipientSpinner.getSelectedItemPosition();
+                message.toPhysicianID = physicians.physicians.get(position).physicianID;
+                assert subjectEditText.getText() != null;
+                message.subject = subjectEditText.getText().toString();
+            }
+            assert messageEditText.getText() != null;
+            message.message = messageEditText.getText().toString();
+            SendInAppNotificationRequest req = new SendInAppNotificationRequest(SendCustomMessageActivity.this, message);
+            spiceManager.execute(req, new SendMessageListener());
+            progress.setMessage("Sending message...");
+            progress.show();
+        }
+    }
+
+    private class ShowRecipientChooserButtonListener implements Button.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(SendCustomMessageActivity.this);
+            List<CharSequence> physicianNames = new ArrayList<CharSequence>();
+            for (Physician physician : physicians.physicians) {
+                physicianNames.add(physician.physicianName);
+            }
+            final ArrayList<Integer> selectedItems = new ArrayList<Integer>();
+            builder.setTitle("Choose recipients")
+                    .setMultiChoiceItems(physicianNames.toArray(new CharSequence[physicianNames.size()]), null,
+                            new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which,
+                                                    boolean isChecked) {
+                                    if (isChecked) {
+                                        // If the user checked the item, add it to the selected items
+                                        selectedItems.add(which);
+                                    } else if (selectedItems.contains(which)) {
+                                        // Else, if the item is already in the array, remove it
+                                        selectedItems.remove(Integer.valueOf(which));
+                                    }
+                                }
+                            })
+                            // Set the action buttons
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     private final class SendMessageListener implements RequestListener<SendInAppNotificationRequestResponse> {

@@ -59,12 +59,25 @@
         style="@style/MyAccountButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/pencilplus"
+        android:text="@string/sendGroupMessage"
+        android:id="@+id/sendGroupMessageButton"
+        android:layout_marginBottom="8sp"
+        android:layout_marginTop="8sp"
+        android:layout_below="@+id/sendMessageButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="@style/MyAccountButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/passcodeSettings"
         android:drawableLeft="@drawable/gear"
         android:id="@+id/passcodeSettingsButton"
         android:layout_marginBottom="8sp"
         android:layout_marginTop="8sp"
-        android:layout_below="@+id/btnSendTestNotification"
+        android:layout_below="@+id/myAccountControlButtons"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -77,7 +90,7 @@
         android:layout_marginTop="8sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/sendMessageButton"
+        android:layout_below="@+id/sendGroupMessageButton"
         android:weightSum="1">
 
         <Button

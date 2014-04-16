@@ -60,5 +60,7 @@
     <string name="read_four_mins_ago">Read 4 mins ago</string>
     <string name="read_icon">Read icon</string>
     <string name="testing_group_messages">Testing group messages</string>
+    <string name="select_recipients">Select recipients</string>
+    <string name="sendGroupMessage">Send a group message</string>
 
 </resources>

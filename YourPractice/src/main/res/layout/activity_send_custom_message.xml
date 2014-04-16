@@ -16,12 +16,23 @@
         android:minHeight="48sp"
         android:prompt="@string/selectRecipientPrompt"/>
 
+    <Button
+        style="@style/MainMenuButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_recipients"
+        android:id="@+id/selectGroupRecipientsButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_below="@id/recipientSpinner"
+        android:visibility="gone" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/subjectEditText"
         android:hint="@string/subject"
-        android:layout_below="@id/recipientSpinner"
+        android:layout_below="@id/selectGroupRecipientsButton"
         android:layout_marginTop="8sp"
         android:layout_marginBottom="8sp" />
 
