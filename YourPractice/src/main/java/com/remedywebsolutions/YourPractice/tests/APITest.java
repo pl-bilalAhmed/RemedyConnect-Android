@@ -14,10 +14,10 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificat
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationItemRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationRecipientsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InitiateInAppGroupNotification;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.NewInAppGroupNotification;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppGroupNotificationRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.ReplyToInAppGroupNotificationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
 import java.util.ArrayList;
@@ -182,7 +182,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
     }
 
     private SendInAppNotificationRequestResponse sendGroupMessage() throws Exception {
-        InitiateInAppGroupNotification req = new InitiateInAppGroupNotification(loginActivity);
+        NewInAppGroupNotification req = new NewInAppGroupNotification(loginActivity);
         SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
         assertTrue("Couldn't send message, failed with status " + result.status,
                 result.didSendMessageSuccessfully());
@@ -208,8 +208,8 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         message.practiceID = practiceID;
         message.subject = "Re: test";
         message.message = "A test reply - " + appendText;
-        SendInAppGroupNotificationRequest req =
-                new SendInAppGroupNotificationRequest(loginActivity, message);
+        ReplyToInAppGroupNotificationRequest req =
+                new ReplyToInAppGroupNotificationRequest(loginActivity, message);
         SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
         assertTrue("Couldn't send message, failed with status " + result.status,
                 result.didSendMessageSuccessfully());

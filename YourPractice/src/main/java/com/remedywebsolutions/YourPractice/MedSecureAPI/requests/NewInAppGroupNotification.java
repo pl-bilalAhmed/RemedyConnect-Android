@@ -13,17 +13,17 @@ import com.remedywebsolutions.YourPractice.R;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 
-public class InitiateInAppGroupNotification extends SpiceRequest<SendInAppNotificationRequestResponse> {
+public class NewInAppGroupNotification extends SpiceRequest<SendInAppNotificationRequestResponse> {
     private Context context;
     private InAppNotificationGroupRequestContent message;
 
-    public InitiateInAppGroupNotification(Context context, InAppNotificationGroupRequestContent message) {
+    public NewInAppGroupNotification(Context context, InAppNotificationGroupRequestContent message) {
         super(SendInAppNotificationRequestResponse.class);
         this.context = context;
         this.message = message;
     }
 
-    public InitiateInAppGroupNotification(Context context) {
+    public NewInAppGroupNotification(Context context) {
         super(SendInAppNotificationRequestResponse.class);
         this.context = context;
         LoggedInDataStorage storage = new LoggedInDataStorage(context);
@@ -41,7 +41,7 @@ public class InitiateInAppGroupNotification extends SpiceRequest<SendInAppNotifi
     @Override
     public SendInAppNotificationRequestResponse loadDataFromNetwork() throws Exception {
         MedSecureConnection msc = new MedSecureConnection(context);
-        msc.buildBaseURI("Communication", "InitiateInAppGroupNotification", "POST");
+        msc.buildBaseURI("Communication", "NewInAppGroupNotification", "POST");
 
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(message);
