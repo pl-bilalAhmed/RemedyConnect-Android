@@ -20,6 +20,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppGroupNotificationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
@@ -73,8 +74,15 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         LoginResponse loginResponse = login();
         registerDevice(loginResponse);
         pullPhysicians();
-        int notificationID = sendTestMessageToSelf();
-        deleteTestMessages(notificationID);
+        ArrayList<Integer> notifications = new ArrayList<Integer>();
+        SendInAppNotificationRequestResponse result = sendTestMessageToSelf();
+        notifications.add(result.notificationID);
+        result = sendTestMessageToSelfReply(result.conversationID);
+        notifications.add(result.notificationID);
+        result = sendTestMessageToSelfReply(result.conversationID);
+        notifications.add(result.notificationID);
+        // @TODO The test for creating the conversation threads extends this point.
+        deleteTestMessages(notifications);
     }
 
     public void testSendGroupMessage() throws Exception {
@@ -140,25 +148,37 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
      * @return The notification ID.
      * @throws Exception
      */
-    private int sendTestMessageToSelf() throws Exception {
+    private SendInAppNotificationRequestResponse sendTestMessageToSelf() throws Exception {
         SendInAppNotificationRequest req = new SendInAppNotificationRequest(loginActivity);
         SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
         assertTrue("Couldn't send message, failed with status " + result.status,
                 result.didSendMessageSuccessfully());
-        return result.notificationID;
+        return result;
     }
 
-    private void deleteTestMessages(int notificationID) throws Exception {
-        DeleteInAppNotificationItemRequest req = new DeleteInAppNotificationItemRequest(
-                notificationID, practiceID, physicianID, false, loginActivity
-        );
-        String result = req.loadDataFromNetwork();
-        assertTrue("Failed to delete inbox message", result.equals("true"));
-        req = new DeleteInAppNotificationItemRequest(
-                notificationID, practiceID, physicianID, true, loginActivity
-        );
-        result = req.loadDataFromNetwork();
-        assertTrue("Failed to delete sent message", result.equals("true"));
+    private SendInAppNotificationRequestResponse sendTestMessageToSelfReply(String conversationID) throws Exception {
+        InAppNotificationRequestContent message = new InAppNotificationRequestContent();
+        message.fillWithSelfTestMessageReply(loginActivity, conversationID);
+        SendInAppNotificationRequest req = new SendInAppNotificationRequest(loginActivity, message);
+        SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
+        assertTrue("Couldn't send message, failed with status " + result.status,
+                result.didSendMessageSuccessfully());
+        return result;
+    }
+
+    private void deleteTestMessages(ArrayList<Integer> notifications) throws Exception {
+        for (Integer notificationID : notifications) {
+            DeleteInAppNotificationItemRequest req = new DeleteInAppNotificationItemRequest(
+                    notificationID, practiceID, physicianID, false, loginActivity
+            );
+            String result = req.loadDataFromNetwork();
+            assertTrue("Failed to delete inbox message", result.equals("true"));
+            req = new DeleteInAppNotificationItemRequest(
+                    notificationID, practiceID, physicianID, true, loginActivity
+            );
+            result = req.loadDataFromNetwork();
+            assertTrue("Failed to delete sent message", result.equals("true"));
+        }
     }
 
     private SendInAppNotificationRequestResponse sendGroupMessage() throws Exception {
