@@ -83,7 +83,9 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         pullPhysicians();
         SendInAppNotificationRequestResponse result = sendGroupMessage();
         getGroupMessageRecipients(result.conversationID);
-        replyToGroupMessage(result.conversationID);
+        replyToGroupMessage(result.conversationID, "First reply");
+        replyToGroupMessage(result.conversationID, "Second reply");
+        replyToGroupMessage(result.conversationID, "Third reply");
     }
 
     /**
@@ -178,14 +180,14 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
                 recipients.containsKey("17") && recipients.containsKey("521"));
     }
 
-    private void replyToGroupMessage(String conversationID) throws Exception {
+    private void replyToGroupMessage(String conversationID, String appendText) throws Exception {
         InAppNotificationRequestContent message = new InAppNotificationRequestContent();
         message.conversationID = conversationID;
         message.fromPhysicianID = physicianID;
         message.fromPhysicianName = name;
         message.practiceID = practiceID;
         message.subject = "Re: test";
-        message.message = "A test reply";
+        message.message = "A test reply - " + appendText;
         SendInAppGroupNotificationRequest req =
                 new SendInAppGroupNotificationRequest(loginActivity, message);
         SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
