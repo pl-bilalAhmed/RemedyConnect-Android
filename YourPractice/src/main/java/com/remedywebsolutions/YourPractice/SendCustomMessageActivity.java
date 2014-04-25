@@ -42,6 +42,7 @@ public class SendCustomMessageActivity extends DefaultActivity {
     private String conversationIDForReply;
     private boolean replyMode;
     private PhysiciansResponse physicians;
+    private ArrayList<Boolean> selectedPhysicians;
 
     @Override
     protected void onStart() {
@@ -169,26 +170,43 @@ public class SendCustomMessageActivity extends DefaultActivity {
     }
 
     private class ShowRecipientChooserButtonListener implements Button.OnClickListener {
+        private boolean[] toPrimitiveBooleanArray(final List<Boolean> booleanList) {
+            final boolean[] primitives = new boolean[booleanList.size()];
+            int index = 0;
+            for (Boolean object : booleanList) {
+                primitives[index++] = object;
+            }
+            return primitives;
+        }
+
         @Override
         public void onClick(View v) {
             AlertDialog.Builder builder = new AlertDialog.Builder(SendCustomMessageActivity.this);
             List<CharSequence> physicianNames = new ArrayList<CharSequence>();
             for (Physician physician : physicians.physicians) {
                 physicianNames.add(physician.physicianName);
+
             }
-            final ArrayList<Integer> selectedItems = new ArrayList<Integer>();
+
+            // Initialize the selection list if it doesn't exist yet
+            if (selectedPhysicians == null) {
+                selectedPhysicians = new ArrayList<Boolean>();
+                for (Physician ignored : physicians.physicians) {
+                    selectedPhysicians.add(false);
+                }
+            }
+            final ArrayList<Boolean> newSelection = (ArrayList<Boolean>) selectedPhysicians.clone();
             builder.setTitle("Choose recipients")
-                    .setMultiChoiceItems(physicianNames.toArray(new CharSequence[physicianNames.size()]), null,
+                    .setMultiChoiceItems(physicianNames.toArray(new CharSequence[physicianNames.size()]),
+                            toPrimitiveBooleanArray(newSelection),
                             new DialogInterface.OnMultiChoiceClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which,
                                                     boolean isChecked) {
                                     if (isChecked) {
-                                        // If the user checked the item, add it to the selected items
-                                        selectedItems.add(which);
-                                    } else if (selectedItems.contains(which)) {
-                                        // Else, if the item is already in the array, remove it
-                                        selectedItems.remove(Integer.valueOf(which));
+                                        newSelection.set(which, true);
+                                    } else if (newSelection.get(which)) {
+                                        newSelection.set(which, false);
                                     }
                                 }
                             })
@@ -196,12 +214,13 @@ public class SendCustomMessageActivity extends DefaultActivity {
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-
+                            selectedPhysicians = newSelection;
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
+                            // We can leave this empty, just ignore what has happened
                         }
                     });
             AlertDialog dialog = builder.create();
