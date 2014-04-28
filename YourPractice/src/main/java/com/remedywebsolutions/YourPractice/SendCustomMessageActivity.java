@@ -21,10 +21,12 @@ import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationGroupRequestContent;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationRequestContent;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Physician;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.NewInAppGroupNotification;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
 import java.io.IOException;
@@ -39,8 +41,9 @@ public class SendCustomMessageActivity extends DefaultActivity {
     private Spinner recipientSpinner;
     private String subjectForReply;
     private int toPhysicianIDForReply;
+    private ArrayList<Integer> toPhysicianIDs;
     private String conversationIDForReply;
-    private boolean replyMode;
+    private boolean replyMode, groupMode;
     private PhysiciansResponse physicians;
     private ArrayList<Boolean> selectedPhysicians;
 
@@ -77,7 +80,6 @@ public class SendCustomMessageActivity extends DefaultActivity {
             e.printStackTrace();
         }
 
-        Boolean groupMode;
         if (extras != null) {
             subjectForReply = extras.getString("subject");
             groupMode = extras.getBoolean("groupMode", false);
@@ -86,11 +88,13 @@ public class SendCustomMessageActivity extends DefaultActivity {
             subjectForReply = null;
             groupMode = false;
         }
+        replyMode = (subjectForReply != null);
         if (groupMode) {
             recipientSpinner.setVisibility(View.GONE);
-            chooseGroupRecipientsButton.setVisibility(View.VISIBLE);
+            if (!replyMode) { chooseGroupRecipientsButton.setVisibility(View.VISIBLE); }
             Skin.applyButtonStyle(this, chooseGroupRecipientsButton);
             chooseGroupRecipientsButton.setOnClickListener(new ShowRecipientChooserButtonListener());
+            sendButton.setOnClickListener(new SendButtonListener());
         }
         else {
             recipientSpinner.setVisibility(View.VISIBLE);
@@ -123,10 +127,10 @@ public class SendCustomMessageActivity extends DefaultActivity {
             }
         };
         recipientSpinner.setAdapter(recipientAdapter);
-        replyMode = (subjectForReply != null);
         if (replyMode) {
             recipientSpinner.setEnabled(false);
             toPhysicianIDForReply  = extras.getInt("toPhysicianID");
+            toPhysicianIDs = extras.getIntegerArrayList("toPhysicianIDs");
             conversationIDForReply = extras.getString("conversationID");
             subjectEditText.setText(subjectForReply);
             subjectEditText.setEnabled(false); // @TODO Should we leave this editable?
@@ -139,53 +143,90 @@ public class SendCustomMessageActivity extends DefaultActivity {
         }
     }
 
+    private boolean[] toPrimitiveBooleanArray(final List<Boolean> booleanList) {
+        final boolean[] primitives = new boolean[booleanList.size()];
+        int index = 0;
+        for (Boolean object : booleanList) {
+            primitives[index++] = object;
+        }
+        return primitives;
+    }
+
+    private int[] toPrimitiveIntegerArray(final List<Integer> booleanList) {
+        final int[] primitives = new int[booleanList.size()];
+        int index = 0;
+        for (Integer object : booleanList) {
+            primitives[index++] = object;
+        }
+        return primitives;
+    }
+
     private class SendButtonListener implements Button.OnClickListener {
         @Override
         public void onClick(View v) {
             LoggedInDataStorage storage = new LoggedInDataStorage(SendCustomMessageActivity.this);
             HashMap<String, String> userData = storage.RetrieveData();
-            InAppNotificationRequestContent message = new InAppNotificationRequestContent();
-            message.fromPhysicianID = Integer.parseInt(userData.get("physicianID"));
-            message.fromPhysicianName = userData.get("name");
-            message.practiceID = Integer.parseInt(userData.get("practiceID"));
-            if (replyMode) {
-                message.toPhysicianID = toPhysicianIDForReply;
-                message.subject = subjectForReply;
-                message.conversationID = conversationIDForReply;
+
+            if (groupMode) {
+                InAppNotificationGroupRequestContent message = new InAppNotificationGroupRequestContent();
+                message.fromPhysicianID = Integer.parseInt(userData.get("physicianID"));
+                message.fromPhysicianName = userData.get("name");
+                message.practiceID = Integer.parseInt(userData.get("practiceID"));
+                if (replyMode) {
+                    message.toPhysicianIDs = toPrimitiveIntegerArray(toPhysicianIDs);
+                    message.subject = subjectForReply;
+                    message.conversationID = conversationIDForReply;
+                } else {
+                    int i = 0;
+                    toPhysicianIDs = new ArrayList<Integer>();
+                    for (Physician physician: physicians.physicians) {
+                        if (selectedPhysicians.get(i)) {
+                            toPhysicianIDs.add(physician.physicianID);
+                        }
+                        ++i;
+                    }
+                    message.toPhysicianIDs = toPrimitiveIntegerArray(toPhysicianIDs);
+                    assert subjectEditText.getText() != null;
+                    message.subject = subjectEditText.getText().toString();
+                }
+                assert messageEditText.getText() != null;
+                message.message = messageEditText.getText().toString();
+                NewInAppGroupNotification req = new NewInAppGroupNotification(SendCustomMessageActivity.this, message);
+                spiceManager.execute(req, new SendMessageListener());
             }
             else {
-                // Get position in recipient spinner
-                int position = recipientSpinner.getSelectedItemPosition();
-                message.toPhysicianID = physicians.physicians.get(position).physicianID;
-                assert subjectEditText.getText() != null;
-                message.subject = subjectEditText.getText().toString();
+                InAppNotificationRequestContent message = new InAppNotificationRequestContent();
+                message.fromPhysicianID = Integer.parseInt(userData.get("physicianID"));
+                message.fromPhysicianName = userData.get("name");
+                message.practiceID = Integer.parseInt(userData.get("practiceID"));
+                if (replyMode) {
+                    message.toPhysicianID = toPhysicianIDForReply;
+                    message.subject = subjectForReply;
+                    message.conversationID = conversationIDForReply;
+                } else {
+                    // Get position in recipient spinner
+                    int position = recipientSpinner.getSelectedItemPosition();
+                    message.toPhysicianID = physicians.physicians.get(position).physicianID;
+                    assert subjectEditText.getText() != null;
+                    message.subject = subjectEditText.getText().toString();
+                }
+                assert messageEditText.getText() != null;
+                message.message = messageEditText.getText().toString();
+                SendInAppNotificationRequest req = new SendInAppNotificationRequest(SendCustomMessageActivity.this, message);
+                spiceManager.execute(req, new SendMessageListener());
             }
-            assert messageEditText.getText() != null;
-            message.message = messageEditText.getText().toString();
-            SendInAppNotificationRequest req = new SendInAppNotificationRequest(SendCustomMessageActivity.this, message);
-            spiceManager.execute(req, new SendMessageListener());
             progress.setMessage("Sending message...");
             progress.show();
         }
     }
 
     private class ShowRecipientChooserButtonListener implements Button.OnClickListener {
-        private boolean[] toPrimitiveBooleanArray(final List<Boolean> booleanList) {
-            final boolean[] primitives = new boolean[booleanList.size()];
-            int index = 0;
-            for (Boolean object : booleanList) {
-                primitives[index++] = object;
-            }
-            return primitives;
-        }
-
         @Override
         public void onClick(View v) {
             AlertDialog.Builder builder = new AlertDialog.Builder(SendCustomMessageActivity.this);
             List<CharSequence> physicianNames = new ArrayList<CharSequence>();
             for (Physician physician : physicians.physicians) {
                 physicianNames.add(physician.physicianName);
-
             }
 
             // Initialize the selection list if it doesn't exist yet
@@ -195,7 +236,7 @@ public class SendCustomMessageActivity extends DefaultActivity {
                     selectedPhysicians.add(false);
                 }
             }
-            final ArrayList<Boolean> newSelection = (ArrayList<Boolean>) selectedPhysicians.clone();
+            final ArrayList<Boolean> newSelection = new ArrayList<Boolean>(selectedPhysicians);
             builder.setTitle("Choose recipients")
                     .setMultiChoiceItems(physicianNames.toArray(new CharSequence[physicianNames.size()]),
                             toPrimitiveBooleanArray(newSelection),
