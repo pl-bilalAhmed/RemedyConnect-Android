@@ -13,17 +13,22 @@ import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.RecipientsResponseWrapper;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationItemRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationInBoxItemRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationRecipientsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationSentItemRequest;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class MessageDisplayActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
@@ -31,6 +36,7 @@ public class MessageDisplayActivity extends DefaultActivity {
     private boolean inboxMode;
     private ArrayList<InboxItem> inboxItems;
     private ArrayList<SentItem> sentItems;
+    private Map<String, String> recipients;
     private int position;
     private InboxItem inboxItem;
     private SentItem sentItem;
@@ -132,11 +138,16 @@ public class MessageDisplayActivity extends DefaultActivity {
         if (inboxMode) {
             GetInAppNotificationInBoxItemRequest req = new GetInAppNotificationInBoxItemRequest(this, inboxItem.notificationID);
             spiceManager.execute(req, new InboxItemListener());
+            GetInAppNotificationRecipientsRequest recipientsRequest = new GetInAppNotificationRecipientsRequest(this, inboxItem.conversationID);
+            spiceManager.execute(recipientsRequest, new RecipientsListener());
         }
         else {
             GetInAppNotificationSentItemRequest req = new GetInAppNotificationSentItemRequest(this, sentItem.notificationID);
             spiceManager.execute(req, new SentItemListener());
+            GetInAppNotificationRecipientsRequest recipientsRequest = new GetInAppNotificationRecipientsRequest(this, inboxItem.conversationID);
+            spiceManager.execute(recipientsRequest, new RecipientsListener());
         }
+
     }
 
     private class DeleteButtonListener implements Button.OnClickListener {
@@ -207,6 +218,20 @@ public class MessageDisplayActivity extends DefaultActivity {
         }
     }
 
+    private ArrayList<Integer> filterSelfFromRecipients(Map<String, String> recipients) {
+        LoggedInDataStorage storage = new LoggedInDataStorage(MessageDisplayActivity.this);
+        HashMap<String, String> userData = storage.RetrieveData();
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        int selfPhysicianID = Integer.parseInt(userData.get("physicianID"));
+        for (String key : recipients.keySet()) {
+            Integer physicianID = Integer.parseInt(key);
+            if (physicianID != selfPhysicianID) {
+                result.add(physicianID);
+            }
+        }
+        return result;
+    }
+
     private class ReplyButtonListener implements Button.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -214,6 +239,7 @@ public class MessageDisplayActivity extends DefaultActivity {
             replyActivity.putExtra("subject", "Re: " + inboxItem.subject);
             // @TODO We only handle inbox items right now
             replyActivity.putExtra("toPhysicianID", inboxItem.fromPhysicianID);
+            replyActivity.putExtra("toPhysicianIDs", filterSelfFromRecipients(recipients));
             replyActivity.putExtra("conversationID", inboxItem.conversationID);
             replyActivity.putExtra("toPhysicianName", inboxItem.fromPhysicianName);
             startActivity(replyActivity);
@@ -260,6 +286,20 @@ public class MessageDisplayActivity extends DefaultActivity {
             deleteMessageButton.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
             loaded = true;
+        }
+    }
+
+    private class RecipientsListener implements RequestListener<RecipientsResponseWrapper> {
+        @Override
+        public void onRequestFailure(SpiceException e) {
+            setProgressMessageWaitAndDismiss("Couldn't fetch message, please try again later.");
+            defaultSpiceFailureHandler(e);
+            progressBar.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onRequestSuccess(RecipientsResponseWrapper recipientsResponseWrapper) {
+            recipients = recipientsResponseWrapper.getRecipients();
         }
     }
 }

@@ -5,16 +5,16 @@ import android.content.Context;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.request.SpiceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationRequestContent;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationGroupRequestContent;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
 
 import java.net.HttpURLConnection;
 
 public class ReplyToInAppGroupNotificationRequest extends SpiceRequest<SendInAppNotificationRequestResponse> {
     private Context context;
-    private InAppNotificationRequestContent message;
+    private InAppNotificationGroupRequestContent message;
 
-    public ReplyToInAppGroupNotificationRequest(Context context, InAppNotificationRequestContent message) {
+    public ReplyToInAppGroupNotificationRequest(Context context, InAppNotificationGroupRequestContent message) {
         super(SendInAppNotificationRequestResponse.class);
         this.context = context;
         this.message = message;

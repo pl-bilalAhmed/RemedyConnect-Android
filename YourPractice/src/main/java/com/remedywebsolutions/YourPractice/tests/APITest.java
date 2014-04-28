@@ -6,6 +6,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.remedywebsolutions.YourPractice.LoginActivity;
 import com.remedywebsolutions.YourPractice.MainViewController;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationGroupRequestContent;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationRequestContent;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
@@ -14,9 +15,9 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificat
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationItemRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationRecipientsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.NewInAppGroupNotification;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.NewInAppGroupNotification;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.ReplyToInAppGroupNotificationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
@@ -201,7 +202,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
     }
 
     private void replyToGroupMessage(String conversationID, String appendText) throws Exception {
-        InAppNotificationRequestContent message = new InAppNotificationRequestContent();
+        InAppNotificationGroupRequestContent message = new InAppNotificationGroupRequestContent();
         message.conversationID = conversationID;
         message.fromPhysicianID = physicianID;
         message.fromPhysicianName = name;

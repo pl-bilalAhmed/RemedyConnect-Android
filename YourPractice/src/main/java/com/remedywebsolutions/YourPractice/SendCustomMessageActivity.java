@@ -27,6 +27,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Physician;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.NewInAppGroupNotification;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.ReplyToInAppGroupNotificationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
 import java.io.IOException;
@@ -82,7 +83,9 @@ public class SendCustomMessageActivity extends DefaultActivity {
 
         if (extras != null) {
             subjectForReply = extras.getString("subject");
+            toPhysicianIDs = extras.getIntegerArrayList("toPhysicianIDs");
             groupMode = extras.getBoolean("groupMode", false);
+            groupMode = groupMode || (toPhysicianIDs != null && !toPhysicianIDs.isEmpty());
         }
         else {
             subjectForReply = null;
@@ -101,6 +104,12 @@ public class SendCustomMessageActivity extends DefaultActivity {
             chooseGroupRecipientsButton.setVisibility(View.GONE);
             setupRecipientAdapter();
             sendButton.setOnClickListener(new SendButtonListener());
+        }
+        if (replyMode) {
+            toPhysicianIDForReply  = extras.getInt("toPhysicianID");
+            conversationIDForReply = extras.getString("conversationID");
+            subjectEditText.setText(subjectForReply);
+            subjectEditText.setEnabled(false);
         }
 
         progress = new ProgressDialog(this);
@@ -129,11 +138,6 @@ public class SendCustomMessageActivity extends DefaultActivity {
         recipientSpinner.setAdapter(recipientAdapter);
         if (replyMode) {
             recipientSpinner.setEnabled(false);
-            toPhysicianIDForReply  = extras.getInt("toPhysicianID");
-            toPhysicianIDs = extras.getIntegerArrayList("toPhysicianIDs");
-            conversationIDForReply = extras.getString("conversationID");
-            subjectEditText.setText(subjectForReply);
-            subjectEditText.setEnabled(false); // @TODO Should we leave this editable?
             recipientAdapter.add(extras.getString("toPhysicianName"));
         }
         else {
@@ -173,9 +177,12 @@ public class SendCustomMessageActivity extends DefaultActivity {
                 message.fromPhysicianName = userData.get("name");
                 message.practiceID = Integer.parseInt(userData.get("practiceID"));
                 if (replyMode) {
-                    message.toPhysicianIDs = toPrimitiveIntegerArray(toPhysicianIDs);
                     message.subject = subjectForReply;
                     message.conversationID = conversationIDForReply;
+                    assert messageEditText.getText() != null;
+                    message.message = messageEditText.getText().toString();
+                    ReplyToInAppGroupNotificationRequest req = new ReplyToInAppGroupNotificationRequest(SendCustomMessageActivity.this, message);
+                    spiceManager.execute(req, new SendMessageListener());
                 } else {
                     int i = 0;
                     toPhysicianIDs = new ArrayList<Integer>();
@@ -188,11 +195,11 @@ public class SendCustomMessageActivity extends DefaultActivity {
                     message.toPhysicianIDs = toPrimitiveIntegerArray(toPhysicianIDs);
                     assert subjectEditText.getText() != null;
                     message.subject = subjectEditText.getText().toString();
+                    assert messageEditText.getText() != null;
+                    message.message = messageEditText.getText().toString();
+                    NewInAppGroupNotification req = new NewInAppGroupNotification(SendCustomMessageActivity.this, message);
+                    spiceManager.execute(req, new SendMessageListener());
                 }
-                assert messageEditText.getText() != null;
-                message.message = messageEditText.getText().toString();
-                NewInAppGroupNotification req = new NewInAppGroupNotification(SendCustomMessageActivity.this, message);
-                spiceManager.execute(req, new SendMessageListener());
             }
             else {
                 InAppNotificationRequestContent message = new InAppNotificationRequestContent();
