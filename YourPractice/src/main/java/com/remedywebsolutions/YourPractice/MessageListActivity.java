@@ -83,7 +83,7 @@ public class MessageListActivity extends DefaultActivity {
                 }
                 else {
                     SentItem currentItem = sentItems.get(pos);
-                    messagePartnerTextView.setText(currentItem.toPhysicianName);
+                    messagePartnerTextView.setText(currentItem.getRecipients());
                     subjectTextView.setText(currentItem.subject);
                     timeTextView.setText("Sent " + getRelativeTimeForTimeString(currentItem.dateSent));
                     if (currentItem.dateRead != null) {

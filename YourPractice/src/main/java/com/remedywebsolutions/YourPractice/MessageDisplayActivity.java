@@ -17,9 +17,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.RecipientsResponseWrapper;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationItemRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationInBoxItemRequest;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationRecipientsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationSentItemRequest;
 
 import java.text.ParseException;
@@ -120,7 +118,7 @@ public class MessageDisplayActivity extends DefaultActivity {
                 //noinspection unchecked
                 sentItems = (ArrayList<SentItem>) extras.get("sentItems");
                 sentItem = sentItems.get(position);
-                nameView.setText(sentItem.toPhysicianName);
+                nameView.setText(sentItem.getRecipients());
                 subjectView.setText(sentItem.subject);
                 try {
                     receivedView.setText(formatDate(sentItem.dateSent));
@@ -138,14 +136,14 @@ public class MessageDisplayActivity extends DefaultActivity {
         if (inboxMode) {
             GetInAppNotificationInBoxItemRequest req = new GetInAppNotificationInBoxItemRequest(this, inboxItem.notificationID);
             spiceManager.execute(req, new InboxItemListener());
-            GetInAppNotificationRecipientsRequest recipientsRequest = new GetInAppNotificationRecipientsRequest(this, inboxItem.conversationID);
-            spiceManager.execute(recipientsRequest, new RecipientsListener());
+            //GetInAppNotificationRecipientsRequest recipientsRequest = new GetInAppNotificationRecipientsRequest(this, inboxItem.conversationID);
+            //spiceManager.execute(recipientsRequest, new RecipientsListener());
         }
         else {
             GetInAppNotificationSentItemRequest req = new GetInAppNotificationSentItemRequest(this, sentItem.notificationID);
             spiceManager.execute(req, new SentItemListener());
-            GetInAppNotificationRecipientsRequest recipientsRequest = new GetInAppNotificationRecipientsRequest(this, inboxItem.conversationID);
-            spiceManager.execute(recipientsRequest, new RecipientsListener());
+            //GetInAppNotificationRecipientsRequest recipientsRequest = new GetInAppNotificationRecipientsRequest(this, inboxItem.conversationID);
+            //spiceManager.execute(recipientsRequest, new RecipientsListener());
         }
 
     }
@@ -168,6 +166,7 @@ public class MessageDisplayActivity extends DefaultActivity {
         public void onClick(DialogInterface dialog, int which) {
             progress.setMessage("Deleting message...");
             progress.show();
+            /*
             DeleteInAppNotificationItemRequest request;
             if (inboxMode) {
                 request = new DeleteInAppNotificationItemRequest(inboxItem.notificationID,
@@ -178,6 +177,8 @@ public class MessageDisplayActivity extends DefaultActivity {
                         sentItem.practiceID, sentItem.toPhysicianID, true, MessageDisplayActivity.this);
             }
             spiceManager.execute(request, new DeleteRequestListener());
+            */
+
         }
     }
 
