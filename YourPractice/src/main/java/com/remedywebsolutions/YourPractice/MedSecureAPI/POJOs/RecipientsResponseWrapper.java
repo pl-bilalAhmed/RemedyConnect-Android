@@ -1,15 +1,16 @@
 package com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs;
 
-import java.util.Map;
+import java.util.ArrayList;
 
 public class RecipientsResponseWrapper {
-    public Map<String, String> getRecipients() {
-        return recipients;
-    }
+    public ArrayList<Recipient> recipients;
 
-    private Map<String,String> recipients;
-
-    public RecipientsResponseWrapper(Map<String, String> recipients) {
-        this.recipients = recipients;
+    public boolean containsPhysicianID(int physicianID) {
+        for (Recipient r : recipients) {
+            if (r.physicianID == physicianID) {
+                return true;
+            }
+        }
+        return false;
     }
 }

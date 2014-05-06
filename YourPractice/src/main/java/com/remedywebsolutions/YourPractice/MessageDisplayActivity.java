@@ -15,6 +15,7 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Recipient;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.RecipientsResponseWrapper;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationInBoxItemRequest;
@@ -26,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 public class MessageDisplayActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
@@ -34,7 +34,7 @@ public class MessageDisplayActivity extends DefaultActivity {
     private boolean inboxMode;
     private ArrayList<InboxItem> inboxItems;
     private ArrayList<SentItem> sentItems;
-    private Map<String, String> recipients;
+    private ArrayList<Recipient> recipients;
     private int position;
     private InboxItem inboxItem;
     private SentItem sentItem;
@@ -219,15 +219,14 @@ public class MessageDisplayActivity extends DefaultActivity {
         }
     }
 
-    private ArrayList<Integer> filterSelfFromRecipients(Map<String, String> recipients) {
+    private ArrayList<Integer> filterSelfFromRecipients(ArrayList<Recipient> recipients) {
         LoggedInDataStorage storage = new LoggedInDataStorage(MessageDisplayActivity.this);
         HashMap<String, String> userData = storage.RetrieveData();
         ArrayList<Integer> result = new ArrayList<Integer>();
         int selfPhysicianID = Integer.parseInt(userData.get("physicianID"));
-        for (String key : recipients.keySet()) {
-            Integer physicianID = Integer.parseInt(key);
-            if (physicianID != selfPhysicianID) {
-                result.add(physicianID);
+        for (Recipient recipient : recipients) {
+            if (recipient.physicianID != selfPhysicianID) {
+                result.add(recipient.physicianID);
             }
         }
         return result;
@@ -300,7 +299,7 @@ public class MessageDisplayActivity extends DefaultActivity {
 
         @Override
         public void onRequestSuccess(RecipientsResponseWrapper recipientsResponseWrapper) {
-            recipients = recipientsResponseWrapper.getRecipients();
+            recipients = recipientsResponseWrapper.recipients;
         }
     }
 }

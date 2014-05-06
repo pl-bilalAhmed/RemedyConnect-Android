@@ -21,8 +21,6 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.NewInAppGroupNo
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.ReplyToInAppGroupNotificationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
-import java.util.Map;
-
 public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private LoginActivity loginActivity;
     private LoggedInDataStorage dataStorage;
@@ -240,11 +238,11 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         GetInAppNotificationRecipientsRequest req =
                 new GetInAppNotificationRecipientsRequest(loginActivity, conversationID);
         RecipientsResponseWrapper recipientsWrapper = req.loadDataFromNetwork();
-        Map<String, String> recipients = recipientsWrapper.getRecipients();
         assertTrue("Recipient list doesn't contain sender as expected",
-                recipients.containsKey(Integer.toString(physicianID)));
+                recipientsWrapper.containsPhysicianID(physicianID));
         assertTrue("Recipient list doesn't contain everyone",
-                recipients.containsKey("17") && recipients.containsKey("521"));
+                recipientsWrapper.containsPhysicianID(17) &&
+                        recipientsWrapper.containsPhysicianID(521));
     }
 
     /**

@@ -6,11 +6,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.request.SpiceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MedSecureConnection;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Recipient;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.RecipientsResponseWrapper;
 
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class GetInAppNotificationRecipientsRequest extends SpiceRequest<RecipientsResponseWrapper> {
     private Context context;
@@ -36,9 +37,10 @@ public class GetInAppNotificationRecipientsRequest extends SpiceRequest<Recipien
         connection.disconnect();
 
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> recipients = new ObjectMapper().readValue(
-                result, mapper.getTypeFactory().constructMapType(HashMap.class, String.class, String.class));
-
-        return new RecipientsResponseWrapper(recipients);
+        ArrayList<Recipient> recipientList = new ObjectMapper().readValue(result,
+                mapper.getTypeFactory().constructCollectionType(ArrayList.class, Recipient.class));
+        RecipientsResponseWrapper recipientsWrapper = new RecipientsResponseWrapper();
+        recipientsWrapper.recipients = recipientList;
+        return recipientsWrapper;
     }
 }
