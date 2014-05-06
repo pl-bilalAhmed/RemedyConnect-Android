@@ -42,12 +42,10 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         loginActivity = getActivity();
         dataStorage = new LoggedInDataStorage(loginActivity);
         dataStorage.logOut();
-        loginActivity.disablePasscode();
     }
 
     @Override
     public void tearDown() throws Exception {
-        loginActivity.enablePasscode();
         dataStorage.logOut();
         super.tearDown();
     }
@@ -127,6 +125,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         assertEquals("Physician ID does not match", 405, result.getPhysicianID());
         assertTrue("Token has zero length", result.getToken().length() > 0);
         assertTrue("Token isn't well-formatted", isHex(result.getToken()));
+        loginActivity.disablePasscode();
         return result;
     }
 

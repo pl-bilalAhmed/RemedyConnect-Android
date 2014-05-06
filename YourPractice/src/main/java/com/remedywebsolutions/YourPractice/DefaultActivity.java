@@ -598,14 +598,14 @@ public class DefaultActivity extends SherlockActivity {
         return netInfo != null && netInfo.isConnected();
     }
 
+    /**
+     * Disable the passcode.
+     *
+     * This method is used by the API testing to avoid asking for passcode during the testing.
+     */
     public void disablePasscode() {
         AbstractAppLock lock = AppLockManager.getInstance().getCurrentAppLock();
-        lock.disable();
-    }
-
-    public void enablePasscode() {
-        AbstractAppLock lock = AppLockManager.getInstance().getCurrentAppLock();
-        lock.enable();
+        lock.setPassword(null);
     }
 }
 
