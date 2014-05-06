@@ -12,7 +12,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.RecipientsResponseWrapper;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationItemRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationByConversationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationRecipientsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
@@ -21,7 +21,6 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.NewInAppGroupNo
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.ReplyToInAppGroupNotificationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
@@ -71,19 +70,22 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         pullPhysicians();
     }
 
+    /**
+     * Self-messaging test scenario.
+     *
+     * Sends a message to self with two replies, then deletes the conversation.
+     * @throws Exception
+     */
     public void testMessageToSelfAndDelete() throws Exception {
         LoginResponse loginResponse = login();
         registerDevice(loginResponse);
         pullPhysicians();
-        ArrayList<Integer> notifications = new ArrayList<Integer>();
         SendInAppNotificationRequestResponse result = sendTestMessageToSelf();
-        notifications.add(result.notificationID);
-        result = sendTestMessageToSelfReply(result.conversationID);
-        notifications.add(result.notificationID);
-        result = sendTestMessageToSelfReply(result.conversationID);
-        notifications.add(result.notificationID);
+        String conversationID = result.conversationID;
+        sendTestMessageToSelfReply(conversationID);
+        sendTestMessageToSelfReply(conversationID);
         // @TODO The test for creating the conversation threads extends this point.
-        deleteTestMessages(notifications);
+        deleteTestMessages(conversationID);
     }
 
     public void testSendGroupMessage() throws Exception {
@@ -167,19 +169,24 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         return result;
     }
 
-    private void deleteTestMessages(ArrayList<Integer> notifications) throws Exception {
-        for (Integer notificationID : notifications) {
-            DeleteInAppNotificationItemRequest req = new DeleteInAppNotificationItemRequest(
-                    notificationID, practiceID, physicianID, false, loginActivity
-            );
-            String result = req.loadDataFromNetwork();
-            assertTrue("Failed to delete inbox message", result.equals("true"));
-            req = new DeleteInAppNotificationItemRequest(
-                    notificationID, practiceID, physicianID, true, loginActivity
-            );
-            result = req.loadDataFromNetwork();
-            assertTrue("Failed to delete sent message", result.equals("true"));
-        }
+    /**
+     * Deletes test messages by their conversation ID, both from the inbox and from the sent items.
+     * @param conversationID The conversation ID used.
+     * @throws Exception
+     */
+    private void deleteTestMessages(String conversationID) throws Exception {
+        DeleteInAppNotificationByConversationRequest req;
+        req = new DeleteInAppNotificationByConversationRequest(
+                conversationID, practiceID, physicianID, false, loginActivity
+        );
+        String result = req.loadDataFromNetwork();
+        assertTrue("Failed to delete inbox message", result.equals("true"));
+
+        req = new DeleteInAppNotificationByConversationRequest(
+                conversationID, practiceID, physicianID, true, loginActivity
+        );
+        result = req.loadDataFromNetwork();
+        assertTrue("Failed to delete sent message", result.equals("true"));
     }
 
     private SendInAppNotificationRequestResponse sendGroupMessage() throws Exception {
