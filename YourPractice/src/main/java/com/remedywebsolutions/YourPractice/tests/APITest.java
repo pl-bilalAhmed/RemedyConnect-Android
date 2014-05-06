@@ -115,6 +115,11 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         return str.matches("\\p{XDigit}+");
     }
 
+    /**
+     * Performs a login.
+     * @return The login response from the API.
+     * @throws Exception
+     */
     private LoginResponse login() throws Exception {
         LoginRequest loginReq = new LoginRequest("zoltan", "zoltan1", loginActivity);
         LoginResponse result = loginReq.loadDataFromNetwork();
@@ -125,6 +130,12 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         return result;
     }
 
+    /**
+     * Registers the device.
+     * @param loginResponse The earlier login response to use.
+     * @return The returned device ID.
+     * @throws Exception
+     */
     private String registerDevice(LoginResponse loginResponse) throws Exception {
         practiceID = loginResponse.getPracticeID();
         physicianID = loginResponse.getPhysicianID();
@@ -140,6 +151,10 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         return response;
     }
 
+    /**
+     * Gets the list of the physicians in the practice.
+     * @throws Exception
+     */
     private void pullPhysicians() throws Exception {
         GetPhysiciansRequest pullContactsReq = new GetPhysiciansRequest(loginActivity);
         PhysiciansResponse physicians = pullContactsReq.loadDataFromNetwork();
@@ -166,7 +181,15 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         return result;
     }
 
-    private SendInAppNotificationRequestResponse sendTestMessageToSelfReply(String conversationID) throws Exception {
+    /**
+     * Sends reply to the earlier self-test message.
+     * @param conversationID The conversation ID used.
+     * @return The response from the API.
+     * @throws Exception
+     */
+    private SendInAppNotificationRequestResponse sendTestMessageToSelfReply(String conversationID)
+                                                                                throws Exception {
+
         InAppNotificationRequestContent message = new InAppNotificationRequestContent();
         message.fillWithSelfTestMessageReply(loginActivity, conversationID);
         SendInAppNotificationRequest req = new SendInAppNotificationRequest(loginActivity, message);
@@ -196,6 +219,11 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         assertTrue("Failed to delete sent message", result.equals("true"));
     }
 
+    /**
+     * Sends a new group message.
+     * @return The response from the API.
+     * @throws Exception
+     */
     private SendInAppNotificationRequestResponse sendGroupMessage() throws Exception {
         NewInAppGroupNotification req = new NewInAppGroupNotification(loginActivity);
         SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
@@ -204,6 +232,11 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         return result;
     }
 
+    /**
+     * Checks whether the recipients can be fetched correctly for a given conversation.
+     * @param conversationID The conversation ID of the conversation to check.
+     * @throws Exception
+     */
     private void getGroupMessageRecipients(String conversationID) throws Exception {
         GetInAppNotificationRecipientsRequest req =
                 new GetInAppNotificationRecipientsRequest(loginActivity, conversationID);
@@ -215,6 +248,13 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
                 recipients.containsKey("17") && recipients.containsKey("521"));
     }
 
+    /**
+     * Sends a reply to a group message.
+     * @param conversationID The conversation ID used.
+     * @param appendText A text to append to the message body (to make the messages different, thus
+     *                   easier to check.)
+     * @throws Exception
+     */
     private void replyToGroupMessage(String conversationID, String appendText) throws Exception {
         InAppNotificationGroupRequestContent message = new InAppNotificationGroupRequestContent();
         message.conversationID = conversationID;
