@@ -84,19 +84,26 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         String conversationID = result.conversationID;
         sendTestMessageToSelfReply(conversationID);
         sendTestMessageToSelfReply(conversationID);
-        // @TODO The test for creating the conversation threads extends this point.
         deleteTestMessages(conversationID);
     }
 
+    /**
+     * Group messaging test scenario.
+     *
+     * Sends a message to a group with three replies, then deletes the conversation.
+     * @throws Exception
+     */
     public void testSendGroupMessage() throws Exception {
         LoginResponse loginResponse = login();
         registerDevice(loginResponse);
         pullPhysicians();
         SendInAppNotificationRequestResponse result = sendGroupMessage();
-        getGroupMessageRecipients(result.conversationID);
-        replyToGroupMessage(result.conversationID, "First reply");
-        replyToGroupMessage(result.conversationID, "Second reply");
-        replyToGroupMessage(result.conversationID, "Third reply");
+        String conversationID = result.conversationID;
+        getGroupMessageRecipients(conversationID);
+        replyToGroupMessage(conversationID, "First reply");
+        replyToGroupMessage(conversationID, "Second reply");
+        replyToGroupMessage(conversationID, "Third reply");
+        deleteTestMessages(conversationID);
     }
 
     /**
