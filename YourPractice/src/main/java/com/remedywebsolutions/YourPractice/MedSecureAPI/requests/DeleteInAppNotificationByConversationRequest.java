@@ -37,9 +37,9 @@ public class DeleteInAppNotificationByConversationRequest extends SpiceRequest<S
             msc.buildBaseURI("Communication", "DeleteInAppNotificationSentByConversation", "GET");
         }
 
-        msc.addParameter("conversationID", conversationID);
-        msc.addParameter("practiceID", Integer.toString(practiceID));
-        msc.addParameter("physicianID", Integer.toString(physicianID));
+        msc.addParameter("ConversationID", conversationID);
+        msc.addParameter("PracticeID", Integer.toString(practiceID));
+        msc.addParameter("PhysicianID", Integer.toString(physicianID));
         HttpURLConnection connection = msc.initConnection(true);
         String result = MedSecureConnection.getStringResult(connection);
         Log.w("API", "Result of deletion: " + result);
