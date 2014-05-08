@@ -62,6 +62,13 @@ public class LoggedInDataStorage {
         editor.commit();
     }
 
+    public void StoreTimezoneOffset(Integer offset) {
+        SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("timezoneOffset", offset);
+        editor.commit();
+    }
+
     /**
      * Retrieves data from the shared preferences, where the user data is stored.
      *

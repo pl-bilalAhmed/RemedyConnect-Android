@@ -15,6 +15,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificat
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationByConversationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationRecipientsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPracticeUtcTimeZoneOffsetRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.NewInAppGroupNotification;
@@ -64,6 +65,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         LoginResponse loginResponse = login();
         registerDevice(loginResponse);
         pullPhysicians();
+        getPracticeTimezoneOffset();
     }
 
     /**
@@ -76,6 +78,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         LoginResponse loginResponse = login();
         registerDevice(loginResponse);
         pullPhysicians();
+        getPracticeTimezoneOffset();
         SendInAppNotificationRequestResponse result = sendTestMessageToSelf();
         String conversationID = result.conversationID;
         sendTestMessageToSelfReply(conversationID);
@@ -93,6 +96,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         LoginResponse loginResponse = login();
         registerDevice(loginResponse);
         pullPhysicians();
+        getPracticeTimezoneOffset();
         SendInAppNotificationRequestResponse result = sendGroupMessage();
         String conversationID = result.conversationID;
         getGroupMessageRecipients(conversationID);
@@ -162,6 +166,19 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         name = loginActivity.getAndSetNameFromResponse(physicians, physicianID);
         assertNotNull("Name is not set", name);
         assertEquals("Name does not match", name, "Zoltan Adamek, MD");
+    }
+
+    /**
+     * Gets the timezone offset for the actual practice.
+     * @throws Exception
+     */
+    private void getPracticeTimezoneOffset() throws Exception {
+        GetPracticeUtcTimeZoneOffsetRequest req =
+                new GetPracticeUtcTimeZoneOffsetRequest(practiceID, loginActivity);
+        Integer offset = req.loadDataFromNetwork();
+        assertTrue("Timezone offset differs from expected: got " + offset.toString() ,
+                offset == 6 || offset == 7);
+        dataStorage.StoreTimezoneOffset(offset);
     }
 
     /**
