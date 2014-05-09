@@ -19,6 +19,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Recipient;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.RecipientsResponseWrapper;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationByConversationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationInBoxItemRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationSentItemRequest;
 
@@ -40,6 +41,7 @@ public class MessageDisplayActivity extends DefaultActivity {
     private ProgressBar progressBar;
     private Button deleteMessageButton, replyButton;
     private boolean loaded;
+    private HashMap<String, String> loginData;
 
     @Override
     public void onBackPressed() {
@@ -91,7 +93,7 @@ public class MessageDisplayActivity extends DefaultActivity {
         position = extras.getInt("position");
 
         LoggedInDataStorage dataStorage = new LoggedInDataStorage(this);
-        HashMap<String, String> loginData = dataStorage.RetrieveData();
+        loginData = dataStorage.RetrieveData();
         int offsetFromAPIHours = Integer.parseInt(loginData.get("timezoneOffset"));
 
         if (inboxMode) {
@@ -162,19 +164,19 @@ public class MessageDisplayActivity extends DefaultActivity {
         public void onClick(DialogInterface dialog, int which) {
             progress.setMessage("Deleting message...");
             progress.show();
-            /*
-            DeleteInAppNotificationItemRequest request;
+
+            DeleteInAppNotificationByConversationRequest request;
+            int selfPhysicianID = Integer.parseInt(loginData.get("physicianID"));
+            int practiceID = Integer.parseInt(loginData.get("practiceID"));
             if (inboxMode) {
-                request = new DeleteInAppNotificationItemRequest(inboxItem.notificationID,
-                        inboxItem.practiceID, inboxItem.toPhysicianID, false, MessageDisplayActivity.this);
+                request = new DeleteInAppNotificationByConversationRequest(inboxItem.conversationID,
+                        practiceID, selfPhysicianID, false, MessageDisplayActivity.this);
             }
             else {
-                request = new DeleteInAppNotificationItemRequest(sentItem.notificationID,
-                        sentItem.practiceID, sentItem.toPhysicianID, true, MessageDisplayActivity.this);
+                request = new DeleteInAppNotificationByConversationRequest(sentItem.conversationID,
+                        practiceID, selfPhysicianID, true, MessageDisplayActivity.this);
             }
             spiceManager.execute(request, new DeleteRequestListener());
-            */
-
         }
     }
 
