@@ -13,6 +13,7 @@ import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.DateOperations;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Recipient;
@@ -22,11 +23,8 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotific
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationSentItemRequest;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class MessageDisplayActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
@@ -66,13 +64,6 @@ public class MessageDisplayActivity extends DefaultActivity {
         super.onStop();
     }
 
-    protected String formatDate(String dateFromAPI) throws ParseException {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-        Date date = df.parse(dateFromAPI);
-        return android.text.format.DateFormat.getLongDateFormat(this).format(date) + " " +
-                android.text.format.DateFormat.getTimeFormat(this).format(date);
-    }
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         reportPhase("Message display");
@@ -98,6 +89,11 @@ public class MessageDisplayActivity extends DefaultActivity {
         replyButton.setVisibility(View.GONE);
         deleteMessageButton.setVisibility(View.GONE);
         position = extras.getInt("position");
+
+        LoggedInDataStorage dataStorage = new LoggedInDataStorage(this);
+        HashMap<String, String> loginData = dataStorage.RetrieveData();
+        int offsetFromAPIHours = Integer.parseInt(loginData.get("timezoneOffset"));
+
         if (inboxMode) {
             if (extras.get("inboxItems") instanceof ArrayList) {
                 //noinspection unchecked
@@ -106,7 +102,8 @@ public class MessageDisplayActivity extends DefaultActivity {
                 nameView.setText(inboxItem.fromPhysicianName);
                 subjectView.setText(inboxItem.subject);
                 try {
-                    receivedView.setText(formatDate(inboxItem.dateReceived));
+                    receivedView.setText(
+                            DateOperations.reformatToLocal(inboxItem.dateReceived, offsetFromAPIHours, this));
                 } catch (ParseException e) {
                     receivedView.setText(inboxItem.dateReceived);
                 }
@@ -118,10 +115,13 @@ public class MessageDisplayActivity extends DefaultActivity {
                 //noinspection unchecked
                 sentItems = (ArrayList<SentItem>) extras.get("sentItems");
                 sentItem = sentItems.get(position);
+                int selfPhysicianID = Integer.parseInt(loginData.get("physicianID"));
+                sentItem.filterSelfFromRecipients(selfPhysicianID);
                 nameView.setText(sentItem.getRecipients());
                 subjectView.setText(sentItem.subject);
                 try {
-                    receivedView.setText(formatDate(sentItem.dateSent));
+                    receivedView.setText(
+                            DateOperations.reformatToLocal(sentItem.dateSent, offsetFromAPIHours, this));
                 } catch (ParseException e) {
                     receivedView.setText(sentItem.dateSent);
                 }
@@ -136,14 +136,10 @@ public class MessageDisplayActivity extends DefaultActivity {
         if (inboxMode) {
             GetInAppNotificationInBoxItemRequest req = new GetInAppNotificationInBoxItemRequest(this, inboxItem.notificationID);
             spiceManager.execute(req, new InboxItemListener());
-            //GetInAppNotificationRecipientsRequest recipientsRequest = new GetInAppNotificationRecipientsRequest(this, inboxItem.conversationID);
-            //spiceManager.execute(recipientsRequest, new RecipientsListener());
         }
         else {
             GetInAppNotificationSentItemRequest req = new GetInAppNotificationSentItemRequest(this, sentItem.notificationID);
             spiceManager.execute(req, new SentItemListener());
-            //GetInAppNotificationRecipientsRequest recipientsRequest = new GetInAppNotificationRecipientsRequest(this, inboxItem.conversationID);
-            //spiceManager.execute(recipientsRequest, new RecipientsListener());
         }
 
     }

@@ -4,8 +4,6 @@ import android.app.Application;
 
 import com.pushio.manager.PushIOManager;
 
-import net.danlew.android.joda.ResourceZoneInfoProvider;
-
 import org.wordpress.passcodelock.AppLockManager;
 
 public class YourPracticeApplication extends Application {
@@ -23,8 +21,6 @@ public class YourPracticeApplication extends Application {
 
         // Switch stacking notifications off.
         pushIOManager.setNotificationsStacked(false);
-
-        ResourceZoneInfoProvider.init(this);
 
         AppLockManager.getInstance().enableDefaultAppLockIfAvailable(this);
     }

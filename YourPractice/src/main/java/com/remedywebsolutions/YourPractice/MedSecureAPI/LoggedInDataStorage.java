@@ -79,18 +79,20 @@ public class LoggedInDataStorage {
         SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
         int physicianID = sp.getInt("physicianID", 0);
         int practiceID = sp.getInt("practiceID", 0);
+        int timezoneOffset = sp.getInt("timezoneOffset", 0);
         String deviceID = sp.getString("deviceID", "");
         String token = sp.getString("token", "");
         String name = sp.getString("name", "");
         String physicians = sp.getString("physicians", "");
 
-        HashMap<String, String> userData = new HashMap<String, String>(6);
+        HashMap<String, String> userData = new HashMap<String, String>(7);
         userData.put("physicianID", Integer.toString(physicianID));
         userData.put("practiceID", Integer.toString(practiceID));
         userData.put("deviceID", deviceID);
         userData.put("token", token);
         userData.put("name", name);
         userData.put("physicians", physicians);
+        userData.put("timezoneOffset", Integer.toString(timezoneOffset));
         return userData;
     }
 

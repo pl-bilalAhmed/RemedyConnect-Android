@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.MessageItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
@@ -22,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class MessageListActivity extends DefaultActivity {
@@ -30,12 +32,16 @@ public class MessageListActivity extends DefaultActivity {
     private ArrayList<InboxItem> inboxItems;
     private ArrayList<SentItem> sentItems;
     private boolean inboxMode;
+    private HashMap<String, String> loginData;
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         reportPhase("Message list");
         setContentView(R.layout.activity_message_list);
+
+        loginData = new LoggedInDataStorage(this).RetrieveData();
+
         Boolean shouldReverse = extras.getBoolean("shouldReverseList", true);
         if (extras.get("inboxContents") instanceof ArrayList) {
             //noinspection unchecked
@@ -83,6 +89,8 @@ public class MessageListActivity extends DefaultActivity {
                 }
                 else {
                     SentItem currentItem = sentItems.get(pos);
+                    int selfPhysicianID = Integer.parseInt(loginData.get("physicianID"));
+                    currentItem.filterSelfFromRecipients(selfPhysicianID);
                     messagePartnerTextView.setText(currentItem.getRecipients());
                     subjectTextView.setText(currentItem.subject);
                     timeTextView.setText("Sent " + getRelativeTimeForTimeString(currentItem.dateSent));

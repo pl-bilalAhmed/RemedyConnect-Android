@@ -23,6 +23,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Physician;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPracticeUtcTimeZoneOffsetRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 
@@ -30,7 +31,7 @@ import org.wordpress.passcodelock.PasscodeManagePasswordActivity;
 
 public class LoginActivity extends DefaultActivity {
     private String username;
-    private int physicianId;
+    private int physicianId, practiceId;
     private LoggedInDataStorage dataStorage;
     private EditText usernameEditor;
     private EditText passwordEditor;
@@ -93,7 +94,7 @@ public class LoginActivity extends DefaultActivity {
         @Override
         public void onRequestSuccess(LoginResponse response) {
             physicianId = response.getPhysicianID();
-            int practiceId = response.getPracticeID();
+            practiceId = response.getPracticeID();
             String token = response.getToken();
             if (token != null) {
                 progress.setMessage("Logged in, storing data...");
@@ -146,7 +147,23 @@ public class LoginActivity extends DefaultActivity {
         @Override
         public void onRequestSuccess(PhysiciansResponse physiciansResponse) {
             getAndSetNameFromResponse(physiciansResponse, physicianId);
-            progress.setMessage("Fetched contacts - login complete.");
+            progress.setMessage("Fetching practice info...");
+            GetPracticeUtcTimeZoneOffsetRequest req =
+                    new GetPracticeUtcTimeZoneOffsetRequest(practiceId, LoginActivity.this);
+            spiceManager.execute(req, new TimezoneOffsetListener());
+        }
+    }
+
+    private final class TimezoneOffsetListener implements RequestListener<Integer> {
+        @Override
+        public void onRequestFailure(SpiceException e) {
+            defaultSpiceFailureHandler(e);
+        }
+
+        @Override
+        public void onRequestSuccess(Integer offset) {
+            dataStorage.StoreTimezoneOffset(offset);
+            progress.setMessage("Login complete.");
             progress.dismiss();
 
             Toast.makeText(LoginActivity.this, "You've been logged in.", Toast.LENGTH_SHORT).show();
