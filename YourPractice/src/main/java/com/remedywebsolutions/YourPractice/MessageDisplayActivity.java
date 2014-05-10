@@ -3,6 +3,7 @@ package com.remedywebsolutions.YourPractice;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -73,31 +74,49 @@ public class MessageDisplayActivity extends DefaultActivity {
 
         Skin.applyActivityBackground(this);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        TextView nameView = (TextView) findViewById(R.id.fromTextView);
+        TextView fromView = (TextView) findViewById(R.id.fromTextView);
+        TextView toView = (TextView) findViewById(R.id.toTextView);
         TextView subjectView = (TextView) findViewById(R.id.subjectTextView);
         TextView receivedView = (TextView) findViewById(R.id.receivedTextView);
         messageView = (TextView) findViewById(R.id.messageTextView);
         deleteMessageButton = (Button) findViewById(R.id.deleteMessageButton);
         replyButton = (Button) findViewById(R.id.replyButton);
+
         Skin.applyButtonStyle(this, replyButton);
         Skin.applyButtonStyle(this, deleteMessageButton);
+        fromView.setTypeface(Skin.menuFont(this));
+        toView.setTypeface(Skin.menuFont(this));
+        subjectView.setTypeface(Skin.menuFont(this), Typeface.BOLD);
+        receivedView.setTypeface(Skin.menuFont(this), Typeface.ITALIC);
+        messageView.setTypeface(Skin.menuFont(this));
 
-        nameView.setText("");
+        fromView.setText("");
+        toView.setText("");
         subjectView.setText("");
         receivedView.setText("");
         messageView.setText("");
+        toView.setVisibility(View.GONE);
 
         inboxMode = extras.getBoolean("inboxMode");
         replyButton.setVisibility(View.GONE);
         deleteMessageButton.setVisibility(View.GONE);
         position = extras.getInt("position");
 
+        HashMap<String, String> loginData = new LoggedInDataStorage(this).RetrieveData();
+        int selfPhysicianID = Integer.parseInt(loginData.get("physicianID"));
+
         if (inboxMode) {
             if (extras.get("inboxItems") instanceof ArrayList) {
                 //noinspection unchecked
                 inboxItems = (ArrayList<InboxItem>) extras.get("inboxItems");
                 inboxItem = inboxItems.get(position);
-                nameView.setText(inboxItem.fromPhysicianName);
+                fromView.setText("From: " + inboxItem.fromPhysicianName);
+
+                if (inboxItem.recipients.length > 1) {
+                    toView.setVisibility(View.VISIBLE);
+                    toView.setText("To: " + inboxItem.getFilteredRecipients(selfPhysicianID));
+                }
+
                 subjectView.setText(inboxItem.subject);
                 try {
                     receivedView.setText(
@@ -113,8 +132,9 @@ public class MessageDisplayActivity extends DefaultActivity {
                 //noinspection unchecked
                 sentItems = (ArrayList<SentItem>) extras.get("sentItems");
                 sentItem = sentItems.get(position);
-                int selfPhysicianID = Integer.parseInt(loginData.get("physicianID"));
-                nameView.setText(sentItem.getFilteredRecipients(selfPhysicianID));
+                fromView.setVisibility(View.GONE);
+                toView.setVisibility(View.VISIBLE);
+                toView.setText("To: " + sentItem.getFilteredRecipients(selfPhysicianID));
                 subjectView.setText(sentItem.subject);
                 try {
                     receivedView.setText(
