@@ -12,7 +12,7 @@ public class MessageItem implements Serializable {
     public String message;
     public Recipient[] recipients;
 
-    public void filterSelfFromRecipients(int selfPhysicianID) {
+    public String getFilteredRecipients(int selfPhysicianID) {
         ArrayList<Recipient> recipientList = new ArrayList<Recipient>();
         for (Recipient recipient: recipients) {
             if (recipients.length == 1 ||
@@ -20,7 +20,15 @@ public class MessageItem implements Serializable {
                 recipientList.add(recipient);
             }
         }
-        recipients = recipientList.toArray(new Recipient[0]);
+        String result = "";
+        for (Recipient recipient : recipientList) {
+            if (result.isEmpty()) {
+                result = result.concat(recipient.physicianName);
+            } else {
+                result = result.concat(", " + recipient.physicianName);
+            }
+        }
+        return result;
     }
 
     public String getRecipients() {

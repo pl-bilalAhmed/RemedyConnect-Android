@@ -118,8 +118,7 @@ public class MessageDisplayActivity extends DefaultActivity {
                 sentItems = (ArrayList<SentItem>) extras.get("sentItems");
                 sentItem = sentItems.get(position);
                 int selfPhysicianID = Integer.parseInt(loginData.get("physicianID"));
-                sentItem.filterSelfFromRecipients(selfPhysicianID);
-                nameView.setText(sentItem.getRecipients());
+                nameView.setText(sentItem.getFilteredRecipients(selfPhysicianID));
                 subjectView.setText(sentItem.subject);
                 try {
                     receivedView.setText(

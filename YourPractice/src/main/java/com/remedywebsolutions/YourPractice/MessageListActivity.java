@@ -90,8 +90,7 @@ public class MessageListActivity extends DefaultActivity {
                 else {
                     SentItem currentItem = sentItems.get(pos);
                     int selfPhysicianID = Integer.parseInt(loginData.get("physicianID"));
-                    currentItem.filterSelfFromRecipients(selfPhysicianID);
-                    messagePartnerTextView.setText(currentItem.getRecipients());
+                    messagePartnerTextView.setText(currentItem.getFilteredRecipients(selfPhysicianID));
                     subjectTextView.setText(currentItem.subject);
                     timeTextView.setText("Sent " + getRelativeTimeForTimeString(currentItem.dateSent));
                     if (currentItem.dateRead != null) {
