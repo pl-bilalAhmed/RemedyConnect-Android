@@ -3,7 +3,6 @@ package com.remedywebsolutions.YourPractice;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +12,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.remedywebsolutions.YourPractice.MedSecureAPI.DateOperations;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.MessageItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class MessageListActivity extends DefaultActivity {
     protected ArrayAdapter<MessageItem> messageListAdapter;
@@ -79,7 +76,13 @@ public class MessageListActivity extends DefaultActivity {
                     InboxItem currentItem = inboxItems.get(pos);
                     messagePartnerTextView.setText(currentItem.fromPhysicianName);
                     subjectTextView.setText(currentItem.subject);
-                    timeTextView.setText("Received " + getRelativeTimeForTimeString(currentItem.dateReceived));
+                    try {
+                        timeTextView.setText("Received " +
+                                DateOperations.reformatToLocalRelative(currentItem.dateReceived));
+                    } catch (ParseException e) {
+                        timeTextView.setVisibility(View.GONE);
+                    }
+
                     if (currentItem.dateOpened != null) {
                         readStatusImageView.setImageResource(R.drawable.mailopened_black);
                     }
@@ -92,7 +95,13 @@ public class MessageListActivity extends DefaultActivity {
                     int selfPhysicianID = Integer.parseInt(loginData.get("physicianID"));
                     messagePartnerTextView.setText(currentItem.getFilteredRecipients(selfPhysicianID));
                     subjectTextView.setText(currentItem.subject);
-                    timeTextView.setText("Sent " + getRelativeTimeForTimeString(currentItem.dateSent));
+                    try {
+                        timeTextView.setText("Sent " +
+                                DateOperations.reformatToLocalRelative(currentItem.dateSent));
+                    } catch (ParseException e) {
+                        timeTextView.setVisibility(View.GONE);
+                    }
+
                     if (currentItem.dateRead != null) {
                         readStatusImageView.setImageResource(R.drawable.mailopened_black);
                     }
@@ -139,19 +148,6 @@ public class MessageListActivity extends DefaultActivity {
         if (inboxMode) {
             inboxItems.get(requestCode).dateOpened = "READ";
             messageListAdapter.notifyDataSetChanged();
-        }
-    }
-
-    private String getRelativeTimeForTimeString(String timeString) {
-        Date date = ParseDateTimeString(timeString);
-        return DateUtils.getRelativeTimeSpanString(date.getTime()).toString();
-    }
-
-    public Date ParseDateTimeString(String dateTimeString) {
-        try {
-            return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US).parse(dateTimeString);
-        } catch (ParseException e) {
-            return null;
         }
     }
 }

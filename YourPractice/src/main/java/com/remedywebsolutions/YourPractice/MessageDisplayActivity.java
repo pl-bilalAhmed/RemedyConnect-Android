@@ -101,7 +101,7 @@ public class MessageDisplayActivity extends DefaultActivity {
                 subjectView.setText(inboxItem.subject);
                 try {
                     receivedView.setText(
-                            DateOperations.reformatToLocal(inboxItem.dateReceived, this));
+                            DateOperations.reformatToLocalBasic(inboxItem.dateReceived, this));
                 } catch (ParseException e) {
                     receivedView.setText(inboxItem.dateReceived);
                 }
@@ -118,7 +118,7 @@ public class MessageDisplayActivity extends DefaultActivity {
                 subjectView.setText(sentItem.subject);
                 try {
                     receivedView.setText(
-                            DateOperations.reformatToLocal(sentItem.dateSent, this));
+                            DateOperations.reformatToLocalBasic(sentItem.dateSent, this));
                 } catch (ParseException e) {
                     receivedView.setText(sentItem.dateSent);
                 }
