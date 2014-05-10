@@ -92,10 +92,6 @@ public class MessageDisplayActivity extends DefaultActivity {
         deleteMessageButton.setVisibility(View.GONE);
         position = extras.getInt("position");
 
-        LoggedInDataStorage dataStorage = new LoggedInDataStorage(this);
-        loginData = dataStorage.RetrieveData();
-        int offsetFromAPIHours = Integer.parseInt(loginData.get("timezoneOffset"));
-
         if (inboxMode) {
             if (extras.get("inboxItems") instanceof ArrayList) {
                 //noinspection unchecked
@@ -105,7 +101,7 @@ public class MessageDisplayActivity extends DefaultActivity {
                 subjectView.setText(inboxItem.subject);
                 try {
                     receivedView.setText(
-                            DateOperations.reformatToLocal(inboxItem.dateReceived, offsetFromAPIHours, this));
+                            DateOperations.reformatToLocal(inboxItem.dateReceived, this));
                 } catch (ParseException e) {
                     receivedView.setText(inboxItem.dateReceived);
                 }
@@ -122,7 +118,7 @@ public class MessageDisplayActivity extends DefaultActivity {
                 subjectView.setText(sentItem.subject);
                 try {
                     receivedView.setText(
-                            DateOperations.reformatToLocal(sentItem.dateSent, offsetFromAPIHours, this));
+                            DateOperations.reformatToLocal(sentItem.dateSent, this));
                 } catch (ParseException e) {
                     receivedView.setText(sentItem.dateSent);
                 }
