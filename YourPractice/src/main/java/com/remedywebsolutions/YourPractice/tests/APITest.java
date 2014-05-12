@@ -6,14 +6,21 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.remedywebsolutions.YourPractice.LoginActivity;
 import com.remedywebsolutions.YourPractice.MainViewController;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.MessageThread;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.MessageThreadMessage;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.MessageThreads;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationGroupRequestContent;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationRequestContent;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItemsResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.RecipientsResponseWrapper;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItemsResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationByConversationRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationInboxItemsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationRecipientsRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotificationSentItemsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPracticeUtcTimeZoneOffsetRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
@@ -21,6 +28,8 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.NewInAppGroupNotification;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.ReplyToInAppGroupNotificationRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.SendInAppNotificationRequest;
+
+import java.util.Date;
 
 public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private LoginActivity loginActivity;
@@ -84,6 +93,63 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         sendTestMessageToSelfReply(conversationID);
         sendTestMessageToSelfReply(conversationID);
         deleteTestMessages(conversationID);
+    }
+
+    /**
+     * Self-messaging test scenario with threading.
+     *
+     * Sends a message to self with two replies, then deletes the conversation while checking how
+     * the threading works.
+     * @throws Exception
+     */
+    public void testMessageToSelfAndDeleteWithThreading() throws Exception {
+        LoginResponse loginResponse = login();
+        registerDevice(loginResponse);
+        pullPhysicians();
+        getPracticeTimezoneOffset();
+
+        MessageThreads threads = assembleMessageThreads();
+        int numOfThreads = threads.numOfThreads();
+
+        SendInAppNotificationRequestResponse result = sendTestMessageToSelf();
+        String conversationID = result.conversationID;
+        threads = assembleMessageThreads();
+        assertTrue("Num of threads hasn't increased", threads.numOfThreads() == numOfThreads + 1);
+        MessageThread thread = threads.threadByConversationID(conversationID);
+        assertNotNull("Thread should exists in the threads", thread);
+        assertTrue("Num of messages should be 1 here", thread.numOfMessages() == 1);
+
+        sendTestMessageToSelfReply(conversationID);
+        threads = assembleMessageThreads();
+        thread = threads.threadByConversationID(conversationID);
+        assertTrue("Num of messages should be 2 here", thread.numOfMessages() == 2);
+
+        sendTestMessageToSelfReply(conversationID);
+        threads = assembleMessageThreads();
+        thread = threads.threadByConversationID(conversationID);
+        assertTrue("Num of messages should be 3 here", thread.numOfMessages() == 3);
+
+        checkThreadSorting(thread);
+
+        deleteTestMessages(conversationID);
+        threads = assembleMessageThreads();
+        thread = threads.threadByConversationID(conversationID);
+        assertNull("Thread exists in the threads after deletion", thread);
+    }
+
+    /**
+     * Checks whether a thread's messages are well-sorted by sent date.
+     * @param thread The thread to check.
+     */
+    private void checkThreadSorting(MessageThread thread) {
+        Date startingDate = null;
+        for (MessageThreadMessage message: thread.getMessages()) {
+            assertNotNull("Sent time shouldn't be null", message.getSentTime());
+            Date sentTime = message.getSentTime();
+            assertTrue("Message thread should be sorted by date in ascending order",
+                    startingDate == null || sentTime.compareTo(startingDate) > 0);
+            startingDate = sentTime;
+        }
     }
 
     /**
@@ -282,5 +348,16 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
         assertTrue("Couldn't send message, failed with status " + result.status,
                 result.didSendMessageSuccessfully());
+    }
+
+    private MessageThreads assembleMessageThreads() throws Exception{
+        GetInAppNotificationInboxItemsRequest inboxReq =
+                new GetInAppNotificationInboxItemsRequest(loginActivity);
+        InboxItemsResponse inboxResponse = inboxReq.loadDataFromNetwork();
+        GetInAppNotificationSentItemsRequest sentItemsReq =
+                new GetInAppNotificationSentItemsRequest(loginActivity);
+        SentItemsResponse sentItemsResponse = sentItemsReq.loadDataFromNetwork();
+        MessageThreads threads = new MessageThreads(inboxResponse, sentItemsResponse);
+        return threads;
     }
 }
