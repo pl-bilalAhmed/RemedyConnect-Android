@@ -7,13 +7,14 @@ android {
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 19
-        versionCode 34
+        versionCode 38
         versionName "1.3"
     }
 
     signingConfigs {
         release {
-            storeFile file("/Users/zadamek/Documents/NewPush/Android keystore/yourpractice_release_keystore")
+            storeFile file("/Users/za" +
+                    "damek/Documents/NewPush/Android keystore/yourpractice_release_keystore")
             storePassword "sGOUE4b1i[b^8l2I"
             keyAlias "yourpractice release key"
             keyPassword "S]\$!nwzZv/T=]Imk"
