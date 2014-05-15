@@ -401,6 +401,11 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
                 result.didSendMessageSuccessfully());
     }
 
+    /**
+     * Creates message threads from the results of the inbox and sent items call.
+     * @return The resulting message threads object.
+     * @throws Exception
+     */
     private MessageThreads assembleMessageThreads() throws Exception{
         GetInAppNotificationInboxItemsRequest inboxReq =
                 new GetInAppNotificationInboxItemsRequest(loginActivity);
