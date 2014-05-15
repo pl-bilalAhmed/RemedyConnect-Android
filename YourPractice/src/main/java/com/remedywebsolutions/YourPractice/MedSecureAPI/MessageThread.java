@@ -4,6 +4,8 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Recipient;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,6 +98,23 @@ public class MessageThread {
             sortThread();
         }
         return messages;
+    }
+
+    public boolean hasBeenRead() {
+        for (MessageThreadMessage message: messages) {
+            if (!message.getRead()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String getRecipientNameList() {
+        ArrayList<String> names = new ArrayList<String>(recipients.length);
+        for (Recipient recipient: recipients) {
+            names.add(recipient.physicianName);
+        }
+        return StringUtils.join(names, ", ");
     }
 
     public int numOfMessages() {

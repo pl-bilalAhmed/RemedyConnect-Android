@@ -25,20 +25,21 @@ public class MessageThreads {
     private HashMap<String, MessageThread> threads;
 
     /**
-     * Assembles the threads from the API responses.
-     * @param inboxItemsResponse The response for the inbox items call.
-     * @param sentItemsResponse The response for the sent items call.
+     * Assembles the threads from the API results (arraylists only, not the full response objects)
+     * @param inboxItems The list of the inbox items.
+     * @param sentItems The list of the sent items.
+     * @param ownName The name of the logged in user.
      */
-    public MessageThreads(InboxItemsResponse inboxItemsResponse,
-                          SentItemsResponse sentItemsResponse,
+    public MessageThreads(ArrayList<InboxItem> inboxItems,
+                          ArrayList<SentItem> sentItems,
                           String ownName) {
         Log.d("Message threads", "Creating threads wrapper from " +
-                inboxItemsResponse.inboxItemsArray.size() + " inbox items and " +
-                sentItemsResponse.sentItemsArray.size() + " sent items");
+                inboxItems.size() + " inbox items and " +
+                sentItems.size() + " sent items");
         threads = new HashMap<String, MessageThread>();
 
         Log.d("Message threads", "Processing inbox...");
-        for (InboxItem inboxItem : inboxItemsResponse.inboxItemsArray) {
+        for (InboxItem inboxItem : inboxItems) {
             MessageThread thread = threadByConversationID(inboxItem.conversationID);
             Log.d("Message threads", "Checking whether conversation " + inboxItem.conversationID +
                     " exists");
@@ -53,7 +54,7 @@ public class MessageThreads {
             thread.AddToThread(inboxItem);
         }
         Log.d("Message threads", "Sent items...");
-        for (SentItem sentItem : sentItemsResponse.sentItemsArray) {
+        for (SentItem sentItem : sentItems) {
             MessageThread thread = threadByConversationID(sentItem.conversationID);
             Log.d("Message threads", "Checking whether conversation " + sentItem.conversationID +
                     " exists");
@@ -67,6 +68,18 @@ public class MessageThreads {
             Log.d("Message threads", "Adding sent item message");
             thread.AddToThread(sentItem, ownName);
         }
+    }
+
+    /**
+     * Assembles the threads from the API responses.
+     * @param inboxItemsResponse The response for the inbox items call.
+     * @param sentItemsResponse The response for the sent items call.
+     * @param ownName The name of the logged in user.
+     */
+    public MessageThreads(InboxItemsResponse inboxItemsResponse,
+                          SentItemsResponse sentItemsResponse,
+                          String ownName) {
+        this(inboxItemsResponse.inboxItemsArray, sentItemsResponse.sentItemsArray, ownName);
     }
 
     /**

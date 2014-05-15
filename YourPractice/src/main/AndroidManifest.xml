@@ -101,6 +101,7 @@ package="com.remedywebsolutions.YourPractice">
         </intent-filter>
     </activity>
     <activity android:name=".MessageListActivity"/>
+    <activity android:name=".MessageThreadsActivity"/>
     <activity android:name=".MessageDisplayActivity"/>
     <activity android:name=".SendCustomMessageActivity"/>
 

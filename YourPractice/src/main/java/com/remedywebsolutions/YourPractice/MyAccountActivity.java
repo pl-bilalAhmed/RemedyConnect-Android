@@ -33,7 +33,8 @@ import java.util.HashMap;
 
 public class MyAccountActivity extends DefaultActivity {
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
-    Button inboxButton, sentItemsButton, sendMessageButton, sendGroupMessageButton, passcodePrefsButton;
+    Button inboxButton, sentItemsButton, sendMessageButton,
+            sendGroupMessageButton, passcodePrefsButton, messagesButton;
     String defaultInboxText, defaultSentText;
     private ArrayList<InboxItem> inbox;
     private ArrayList<SentItem> sentItems;
@@ -61,12 +62,14 @@ public class MyAccountActivity extends DefaultActivity {
         welcomeHeader.setText("Welcome, " + userData.get("name")  + "!");
         sendMessageButton = (Button) findViewById(R.id.sendMessageButton);
         sendGroupMessageButton = (Button) findViewById(R.id.sendGroupMessageButton);
+        messagesButton = (Button) findViewById(R.id.messageThreadsButton);
         inboxButton = (Button) findViewById(R.id.btnInbox);
         sentItemsButton = (Button) findViewById(R.id.btnSent);
         passcodePrefsButton = (Button) findViewById(R.id.passcodeSettingsButton);
 
         Skin.applyButtonStyle(this, sendMessageButton);
         Skin.applyButtonStyle(this, sendGroupMessageButton);
+        Skin.applyButtonStyle(this, messagesButton);
         Skin.applyButtonStyle(this, inboxButton);
         Skin.applyButtonStyle(this, sentItemsButton);
         Skin.applyButtonStyle(this, testNotificationsButton);
@@ -74,6 +77,7 @@ public class MyAccountActivity extends DefaultActivity {
 
         fixButtonPaddings(sendMessageButton);
         fixButtonPaddings(sendGroupMessageButton);
+        fixButtonPaddings(messagesButton);
         fixButtonPaddings(inboxButton);
         fixButtonPaddings(sentItemsButton);
         fixButtonPaddings(testNotificationsButton);
@@ -111,6 +115,16 @@ public class MyAccountActivity extends DefaultActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MyAccountActivity.this, SendCustomMessageActivity.class);
                 intent.putExtra("groupMode", true);
+                startActivity(intent);
+            }
+        });
+
+        messagesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyAccountActivity.this, MessageThreadsActivity.class);
+                intent.putExtra("inboxContents", inbox);
+                intent.putExtra("sentContents", sentItems);
                 startActivity(intent);
             }
         });

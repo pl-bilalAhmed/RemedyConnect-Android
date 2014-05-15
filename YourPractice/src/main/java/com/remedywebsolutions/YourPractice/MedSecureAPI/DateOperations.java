@@ -45,7 +45,7 @@ public class DateOperations {
      * @param date The The date to work on.
      * @return The properly formatted string representation of the given date.
      */
-    private static String getRelativeTimeForTimeString(Date date) {
+    public static String getRelativeTimeForTimeString(Date date) {
         return DateUtils.getRelativeTimeSpanString(date.getTime()).toString();
     }
 

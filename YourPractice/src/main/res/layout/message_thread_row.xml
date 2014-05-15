@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4sp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/messagePartnersTextView"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:text="@string/sender"
+        android:layout_toLeftOf="@+id/timeAgo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/messagePartnersTextView"
+        android:layout_toStartOf="@+id/mailIcon"
+        android:id="@+id/messageSubjectTextView"
+        android:textSize="16sp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="6sp"
+        android:layout_marginBottom="6sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:text="@string/what_happens" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/read_four_mins_ago"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        android:id="@+id/timeAgo"
+        android:layout_alignBaseline="@id/messagePartnersTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:maxLength="25" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0sp"
+        android:layout_marginBottom="0sp"
+        android:layout_marginLeft="8sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/messageSubjectTextView"
+        android:contentDescription="@string/read_icon"
+        android:id="@+id/mailIcon"
+        android:src="@drawable/mailopened_black"/>
+</RelativeLayout>
