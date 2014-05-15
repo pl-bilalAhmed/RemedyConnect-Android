@@ -181,6 +181,7 @@ public class MessageDisplayActivity extends DefaultActivity {
             progress.show();
 
             DeleteInAppNotificationByConversationRequest request;
+            // @TODO: fix possible nullexception here
             int selfPhysicianID = Integer.parseInt(loginData.get("physicianID"));
             int practiceID = Integer.parseInt(loginData.get("practiceID"));
             if (inboxMode) {

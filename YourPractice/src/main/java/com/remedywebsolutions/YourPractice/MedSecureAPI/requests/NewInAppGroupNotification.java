@@ -38,6 +38,13 @@ public class NewInAppGroupNotification extends SpiceRequest<SendInAppNotificatio
         message.message = context.getString(R.string.testing_group_messages);
     }
 
+    public NewInAppGroupNotification(Context context, Boolean toSelfOnly) {
+        this(context);
+        if (toSelfOnly) {
+            message.toPhysicianIDs = new int[]{message.fromPhysicianID};
+        }
+    }
+
     @Override
     public SendInAppNotificationRequestResponse loadDataFromNetwork() throws Exception {
         MedSecureConnection msc = new MedSecureConnection(context);

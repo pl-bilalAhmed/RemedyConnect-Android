@@ -1,7 +1,9 @@
 package com.remedywebsolutions.YourPractice.tests;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 
 import com.remedywebsolutions.YourPractice.LoginActivity;
 import com.remedywebsolutions.YourPractice.MainViewController;
@@ -117,17 +119,17 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         assertTrue("Num of threads hasn't increased", threads.numOfThreads() == numOfThreads + 1);
         MessageThread thread = threads.threadByConversationID(conversationID);
         assertNotNull("Thread should exists in the threads", thread);
-        assertTrue("Num of messages should be 1 here", thread.numOfMessages() == 1);
-
-        sendTestMessageToSelfReply(conversationID);
-        threads = assembleMessageThreads();
-        thread = threads.threadByConversationID(conversationID);
         assertTrue("Num of messages should be 2 here", thread.numOfMessages() == 2);
 
         sendTestMessageToSelfReply(conversationID);
         threads = assembleMessageThreads();
         thread = threads.threadByConversationID(conversationID);
-        assertTrue("Num of messages should be 3 here", thread.numOfMessages() == 3);
+        assertTrue("Num of messages should be 4 here", thread.numOfMessages() == 4);
+
+        sendTestMessageToSelfReply(conversationID);
+        threads = assembleMessageThreads();
+        thread = threads.threadByConversationID(conversationID);
+        assertTrue("Num of messages should be 6 here", thread.numOfMessages() == 6);
 
         checkThreadSorting(thread);
 
@@ -136,6 +138,51 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         thread = threads.threadByConversationID(conversationID);
         assertNull("Thread exists in the threads after deletion", thread);
     }
+
+    /**
+     * Self-messaging in a group test scenario with threading.
+     *
+     * Sends a message to self with two replies, then deletes the conversation while checking how
+     * the threading works.
+     * @throws Exception
+     */
+    public void testGroupMessageToSelfAndDeleteWithThreading() throws Exception {
+        LoginResponse loginResponse = login();
+        registerDevice(loginResponse);
+        pullPhysicians();
+        getPracticeTimezoneOffset();
+
+        MessageThreads threads = assembleMessageThreads();
+        int numOfThreads = threads.numOfThreads();
+
+        SendInAppNotificationRequestResponse result = sendGroupMessage(false);
+        String conversationID = result.conversationID;
+        threads = assembleMessageThreads();
+        assertTrue("Num of threads hasn't increased", threads.numOfThreads() == numOfThreads + 1);
+        MessageThread thread = threads.threadByConversationID(conversationID);
+        assertNotNull("Thread should exists in the threads", thread);
+        assertTrue("Num of messages should be 2 here", thread.numOfMessages() == 2);
+
+        SystemClock.sleep(1500);
+        replyToGroupMessage(conversationID, "First reply");
+        threads = assembleMessageThreads();
+        thread = threads.threadByConversationID(conversationID);
+        assertTrue("Num of messages should be 4 here", thread.numOfMessages() == 4);
+
+        SystemClock.sleep(1500);
+        replyToGroupMessage(conversationID, "Second reply");
+        threads = assembleMessageThreads();
+        thread = threads.threadByConversationID(conversationID);
+        assertTrue("Num of messages should be 6 here", thread.numOfMessages() == 6);
+
+        checkThreadSorting(thread);
+
+        deleteTestMessages(conversationID);
+        threads = assembleMessageThreads();
+        thread = threads.threadByConversationID(conversationID);
+        assertNull("Thread exists in the threads after deletion", thread);
+    }
+
 
     /**
      * Checks whether a thread's messages are well-sorted by sent date.
@@ -147,7 +194,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
             assertNotNull("Sent time shouldn't be null", message.getSentTime());
             Date sentTime = message.getSentTime();
             assertTrue("Message thread should be sorted by date in ascending order",
-                    startingDate == null || sentTime.compareTo(startingDate) > 0);
+                    startingDate == null || sentTime.compareTo(startingDate) >= 0);
             startingDate = sentTime;
         }
     }
@@ -163,7 +210,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         registerDevice(loginResponse);
         pullPhysicians();
         getPracticeTimezoneOffset();
-        SendInAppNotificationRequestResponse result = sendGroupMessage();
+        SendInAppNotificationRequestResponse result = sendGroupMessage(false);
         String conversationID = result.conversationID;
         getGroupMessageRecipients(conversationID);
         replyToGroupMessage(conversationID, "First reply");
@@ -274,8 +321,11 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         message.fillWithSelfTestMessageReply(loginActivity, conversationID);
         SendInAppNotificationRequest req = new SendInAppNotificationRequest(loginActivity, message);
         SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
+        Log.d("Message threads", "Reply sent for conversation ID " + conversationID +
+                ", got reply for " + result.conversationID);
         assertTrue("Couldn't send message, failed with status " + result.status,
                 result.didSendMessageSuccessfully());
+        assertEquals("Reply should have the same conversation ID", conversationID, result.conversationID);
         return result;
     }
 
@@ -301,11 +351,12 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
     /**
      * Sends a new group message.
+     * @param selfOnly Only sends message to self (but the message is still a group message)
      * @return The response from the API.
      * @throws Exception
      */
-    private SendInAppNotificationRequestResponse sendGroupMessage() throws Exception {
-        NewInAppGroupNotification req = new NewInAppGroupNotification(loginActivity);
+    private SendInAppNotificationRequestResponse sendGroupMessage(boolean selfOnly) throws Exception {
+        NewInAppGroupNotification req = new NewInAppGroupNotification(loginActivity, selfOnly);
         SendInAppNotificationRequestResponse result = req.loadDataFromNetwork();
         assertTrue("Couldn't send message, failed with status " + result.status,
                 result.didSendMessageSuccessfully());
@@ -357,7 +408,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         GetInAppNotificationSentItemsRequest sentItemsReq =
                 new GetInAppNotificationSentItemsRequest(loginActivity);
         SentItemsResponse sentItemsResponse = sentItemsReq.loadDataFromNetwork();
-        MessageThreads threads = new MessageThreads(inboxResponse, sentItemsResponse);
+        MessageThreads threads = new MessageThreads(inboxResponse, sentItemsResponse, name);
         return threads;
     }
 }

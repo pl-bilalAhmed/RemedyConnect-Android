@@ -4,7 +4,10 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Recipient;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -16,24 +19,60 @@ public class MessageThread {
     private Recipient[] recipients;
     private Date lastUpdate;
     private ArrayList<MessageThreadMessage> messages;
+    private Boolean sorted;
 
-    public MessageThread(String conversationID, String subject, Recipient[] recipients, Date lastUpdate) {
+    public MessageThread(String conversationID, String subject, Recipient[] recipients) {
         this.conversationID = conversationID;
         this.subject = subject;
         this.recipients = recipients;
+        this.lastUpdate = null;
+        this.sorted = false;
         messages = new ArrayList<MessageThreadMessage>();
     }
 
     public void AddToThread(InboxItem inboxItem) {
-
+        try {
+            MessageThreadMessage msg = new MessageThreadMessage(inboxItem.fromPhysicianID,
+                    inboxItem.fromPhysicianName, inboxItem.message,
+                    DateOperations.parseDate(inboxItem.dateReceived), inboxItem.dateOpened != null);
+            messages.add(msg);
+            if (lastUpdate == null || lastUpdate.compareTo(msg.getSentTime()) < 0) {
+                lastUpdate = msg.getSentTime();
+            }
+            this.sorted = false;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void AddToThread(SentItem sentItem) {
+    public void AddToThread(SentItem sentItem, String ownName) {
+        try {
+            MessageThreadMessage msg = new MessageThreadMessage(sentItem.fromPhysicianID,
+                    ownName, sentItem.message,
+                    DateOperations.parseDate(sentItem.dateSent), sentItem.dateRead != null);
+            messages.add(msg);
+            if (lastUpdate == null || lastUpdate.compareTo(msg.getSentTime()) < 0) {
+                lastUpdate = msg.getSentTime();
+            }
+            this.sorted = false;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
+    /**
+     * Compares messages for ascending order.
+     */
+    private class MessageSortingComparator implements Comparator<MessageThreadMessage> {
+        @Override
+        public int compare(MessageThreadMessage lhs, MessageThreadMessage rhs) {
+            return lhs.getSentTime().compareTo(rhs.getSentTime());
+        }
     }
 
     private void sortThread() {
-
+        Collections.sort(messages, new MessageSortingComparator());
+        this.sorted = true;
     }
 
     public String getConversationID() {
@@ -53,6 +92,9 @@ public class MessageThread {
     }
 
     public ArrayList<MessageThreadMessage> getMessages() {
+        if (!sorted) {
+            sortThread();
+        }
         return messages;
     }
 
