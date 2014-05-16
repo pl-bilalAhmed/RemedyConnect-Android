@@ -163,13 +163,13 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         assertNotNull("Thread should exists in the threads", thread);
         assertTrue("Num of messages should be 2 here", thread.numOfMessages() == 2);
 
-        SystemClock.sleep(1500);
+        SystemClock.sleep(100);
         replyToGroupMessage(conversationID, "First reply");
         threads = assembleMessageThreads();
         thread = threads.threadByConversationID(conversationID);
         assertTrue("Num of messages should be 4 here", thread.numOfMessages() == 4);
 
-        SystemClock.sleep(1500);
+        SystemClock.sleep(100);
         replyToGroupMessage(conversationID, "Second reply");
         threads = assembleMessageThreads();
         thread = threads.threadByConversationID(conversationID);
