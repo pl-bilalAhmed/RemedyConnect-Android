@@ -62,5 +62,5 @@
     <string name="testing_group_messages">Testing group messages</string>
     <string name="select_recipients">Select recipients</string>
     <string name="sendGroupMessage">Send a group message</string>
-
+    <string name="loremIpsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper aliquam arcu eu convallis. In hac habitasse platea dictumst. In tincidunt orci et enim rutrum, at fringilla orci laoreet. Donec convallis lacinia tempus. Nullam a tristique purus, et pretium lectus. Maecenas et dui augue. Nullam porttitor sem ac odio pellentesque tincidunt. In volutpat, ante iaculis tincidunt consequat, elit nunc laoreet mi, id interdum mauris sem a velit.</string>
 </resources>

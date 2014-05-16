@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="12sp"
+    android:paddingBottom="12sp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/threadMessageSentBy"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="@string/sender"
+        android:layout_toLeftOf="@+id/threadMessageSentAt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/read_four_mins_ago"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:id="@+id/threadMessageSentAt"
+        android:maxLength="25"
+        android:layout_alignEnd="@+id/threadMessageReadIcon"
+        android:layout_marginRight="25dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0sp"
+        android:layout_marginBottom="0sp"
+        android:layout_marginLeft="8sp"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/read_icon"
+        android:id="@+id/threadMessageReadIcon"
+        android:src="@drawable/mailopened_black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loremIpsum"
+        android:textSize="14sp"
+        android:id="@+id/threadMessageBody"
+        android:layout_marginTop="14sp"
+        android:layout_below="@id/threadMessageSentBy"
+        android:layout_alignParentLeft="true"/>
+</RelativeLayout>
