@@ -1,5 +1,6 @@
 package com.remedywebsolutions.YourPractice.MedSecureAPI;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  *
  * This class is a subset of the MessageItem one intentionally to avoid storing extra information.
  */
-public class MessageThreadMessage {
+public class MessageThreadMessage implements Serializable {
     private int fromPhysicianID;
     private String fromPhysicianName;
     private String message;

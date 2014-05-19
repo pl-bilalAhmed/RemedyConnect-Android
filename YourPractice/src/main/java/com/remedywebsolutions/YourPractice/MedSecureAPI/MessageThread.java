@@ -6,6 +6,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SentItem;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +16,7 @@ import java.util.Date;
 /**
  * Class for a message thread.
  */
-public class MessageThread {
+public class MessageThread implements Serializable {
     private String conversationID;
     private String subject;
     private Recipient[] recipients;

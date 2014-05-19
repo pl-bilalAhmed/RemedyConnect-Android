@@ -102,6 +102,7 @@ package="com.remedywebsolutions.YourPractice">
     </activity>
     <activity android:name=".MessageListActivity"/>
     <activity android:name=".MessageThreadsActivity"/>
+    <activity android:name=".MessageThreadActivity"/>
     <activity android:name=".MessageDisplayActivity"/>
     <activity android:name=".SendCustomMessageActivity"/>
 

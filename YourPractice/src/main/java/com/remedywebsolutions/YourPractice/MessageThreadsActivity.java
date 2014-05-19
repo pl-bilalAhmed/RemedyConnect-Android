@@ -1,10 +1,12 @@
 package com.remedywebsolutions.YourPractice;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -91,6 +93,14 @@ public class MessageThreadsActivity extends DefaultActivity {
                 threadsListAdapter.add(thread);
             }
         }
+
+        threadsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent threadDisplayActivity = new Intent(MessageThreadsActivity.this, MessageThreadActivity.class);
+                threadDisplayActivity.putExtra("thread", threadList.get(position));
+                startActivityForResult(threadDisplayActivity, position);
+            }
+        });
     }
 
 }

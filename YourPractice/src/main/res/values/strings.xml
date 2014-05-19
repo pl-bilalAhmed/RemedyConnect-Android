@@ -39,6 +39,7 @@
     <string name="yourPassword">Your password</string>
     <string name="Login">Login</string>
     <string name="deleteMessage">Delete message</string>
+    <string name="deleteThread">Delete thread</string>
     <string name="replyMessage">Reply</string>
     <string name="myAccount">My Account</string>
     <string name="logout">Logout</string>
