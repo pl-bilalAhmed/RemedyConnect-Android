@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
@@ -25,7 +24,10 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.DateOperations;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MessageThread;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.MessageThreadMessage;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InAppNotificationGroupRequestContent;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SendInAppNotificationRequestResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.DeleteInAppNotificationByConversationRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.ReplyToInAppGroupNotificationRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,6 +127,21 @@ public class MessageThreadActivity extends DefaultActivity {
         }
     }
 
+    private void replyWith(String messageBody) {
+        InAppNotificationGroupRequestContent message = new InAppNotificationGroupRequestContent();
+        message.conversationID = thread.getConversationID();
+        message.subject = thread.getSubject();
+        message.fromPhysicianID = Integer.parseInt(loginData.get("physicianID"));
+        message.fromPhysicianName = loginData.get("name");
+        message.practiceID = Integer.parseInt(loginData.get("practiceID"));
+        message.message = messageBody;
+        ReplyToInAppGroupNotificationRequest req =
+                new ReplyToInAppGroupNotificationRequest(MessageThreadActivity.this, message);
+        progress.setMessage("Sending message...");
+        progress.show();
+        spiceManager.execute(req, new SendReplyListener());
+    }
+
     private class DeleteButtonListener implements Button.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -220,7 +237,9 @@ public class MessageThreadActivity extends DefaultActivity {
                     .setView(input)
                     .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            Toast.makeText(MessageThreadActivity.this, input.getText(), Toast.LENGTH_LONG).show();
+                            if (input.getText() != null) {
+                                replyWith(input.getText().toString());
+                            }
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -228,6 +247,33 @@ public class MessageThreadActivity extends DefaultActivity {
                             // Do nothing.
                         }
                     }).show();
+        }
+    }
+
+    private class SendReplyListener implements RequestListener<SendInAppNotificationRequestResponse> {
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+            setProgressMessageWaitAndDismiss("Couldn't send message.");
+            defaultSpiceFailureHandler(spiceException);
+        }
+
+        @Override
+        public void onRequestSuccess(SendInAppNotificationRequestResponse result) {
+            String message;
+            if (result.didSendMessageSuccessfully()) {
+                message = "Message sent.";
+            }
+            else {
+                message = "Couldn't send message. Please try again later!";
+            }
+            setProgressMessageWaitAndDismissWithRunnable(message, new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(MessageThreadActivity.this, MyAccountActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            });
         }
     }
 }
