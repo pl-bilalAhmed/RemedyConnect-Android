@@ -32,7 +32,7 @@ public class MessageThreads {
      */
     public MessageThreads(ArrayList<InboxItem> inboxItems,
                           ArrayList<SentItem> sentItems,
-                          String ownName) {
+                          String ownName, int ownPhysicianID) {
         Log.d("Message threads", "Creating threads wrapper from " +
                 inboxItems.size() + " inbox items and " +
                 sentItems.size() + " sent items");
@@ -51,7 +51,7 @@ public class MessageThreads {
                 threads.put(inboxItem.conversationID, thread);
             }
             Log.d("Message threads", "Adding inbox message");
-            thread.AddToThread(inboxItem);
+            thread.AddToThread(inboxItem, ownPhysicianID);
         }
         Log.d("Message threads", "Sent items...");
         for (SentItem sentItem : sentItems) {
@@ -78,8 +78,9 @@ public class MessageThreads {
      */
     public MessageThreads(InboxItemsResponse inboxItemsResponse,
                           SentItemsResponse sentItemsResponse,
-                          String ownName) {
-        this(inboxItemsResponse.inboxItemsArray, sentItemsResponse.sentItemsArray, ownName);
+                          String ownName, int ownPhysicianID) {
+        this(inboxItemsResponse.inboxItemsArray, sentItemsResponse.sentItemsArray,
+                ownName, ownPhysicianID);
     }
 
     /**

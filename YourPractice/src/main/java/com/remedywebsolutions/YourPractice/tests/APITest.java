@@ -413,7 +413,8 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         GetInAppNotificationSentItemsRequest sentItemsReq =
                 new GetInAppNotificationSentItemsRequest(loginActivity);
         SentItemsResponse sentItemsResponse = sentItemsReq.loadDataFromNetwork();
-        MessageThreads threads = new MessageThreads(inboxResponse, sentItemsResponse, name);
+        MessageThreads threads = new MessageThreads(inboxResponse, sentItemsResponse,
+                                                    name, physicianID);
         return threads;
     }
 }

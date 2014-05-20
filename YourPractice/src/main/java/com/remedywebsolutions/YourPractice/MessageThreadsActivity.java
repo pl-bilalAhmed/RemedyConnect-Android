@@ -47,7 +47,8 @@ public class MessageThreadsActivity extends DefaultActivity {
         }
 
         String username = loginData.get("name");
-        threads = new MessageThreads(inboxItems, sentItems, username);
+        int ownPhysicianID = Integer.parseInt(loginData.get("physicianID"));
+        threads = new MessageThreads(inboxItems, sentItems, username, ownPhysicianID);
         final ArrayList<MessageThread> threadList =
                 new ArrayList<MessageThread>(threads.getThreads().values());
 

@@ -33,16 +33,20 @@ public class MessageThread implements Serializable {
         messages = new ArrayList<MessageThreadMessage>();
     }
 
-    public void AddToThread(InboxItem inboxItem) {
+    public void AddToThread(InboxItem inboxItem, int ownPhysicianID) {
         try {
-            MessageThreadMessage msg = new MessageThreadMessage(inboxItem.fromPhysicianID,
-                    inboxItem.fromPhysicianName, inboxItem.message,
-                    DateOperations.parseDate(inboxItem.dateReceived), inboxItem.dateOpened != null);
-            messages.add(msg);
-            if (lastUpdate == null || lastUpdate.compareTo(msg.getSentTime()) < 0) {
-                lastUpdate = msg.getSentTime();
+            // Only add the message to the thread if it's not our own: for those, it makes more
+            // sense to display as sent items.
+            if (inboxItem.fromPhysicianID != ownPhysicianID) {
+                MessageThreadMessage msg = new MessageThreadMessage(inboxItem.fromPhysicianID,
+                        inboxItem.fromPhysicianName, inboxItem.message,
+                        DateOperations.parseDate(inboxItem.dateReceived), inboxItem.dateOpened != null);
+                messages.add(msg);
+                if (lastUpdate == null || lastUpdate.compareTo(msg.getSentTime()) < 0) {
+                    lastUpdate = msg.getSentTime();
+                }
+                this.sorted = false;
             }
-            this.sorted = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
