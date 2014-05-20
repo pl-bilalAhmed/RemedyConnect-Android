@@ -49,8 +49,7 @@ public class MessageThreadsActivity extends DefaultActivity {
         String username = loginData.get("name");
         int ownPhysicianID = Integer.parseInt(loginData.get("physicianID"));
         threads = new MessageThreads(inboxItems, sentItems, username, ownPhysicianID);
-        final ArrayList<MessageThread> threadList =
-                new ArrayList<MessageThread>(threads.getThreads().values());
+        final ArrayList<MessageThread> threadList = threads.getSortedThreads();
 
         threadsListView = (ListView) findViewById(R.id.messageThreads);
         threadsListAdapter = new ArrayAdapter<MessageThread>(this, R.layout.message_thread_row,

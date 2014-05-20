@@ -96,7 +96,7 @@ public class MessageThreads {
     /**
      * Sorts the threads by date internally.
      */
-    private ArrayList<MessageThread> getSortedThreads() {
+    public ArrayList<MessageThread> getSortedThreads() {
         ArrayList<MessageThread> threadsList = new ArrayList<MessageThread>(threads.values());
         Collections.sort(threadsList, new ThreadSortingComparator());
         return threadsList;
