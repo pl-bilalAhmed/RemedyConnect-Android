@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
@@ -75,6 +77,7 @@ public class MessageThreadActivity extends DefaultActivity {
         Skin.applyButtonStyle(this, replyMessage);
 
         deleteMessage.setOnClickListener(new DeleteButtonListener());
+        replyMessage.setOnClickListener(new ReplyButtonListener());
 
         threadListView = (ListView) findViewById(R.id.threadMessages);
         threadListAdapter = new ArrayAdapter<MessageThreadMessage>(this, R.layout.message_thread_message_row,
@@ -205,6 +208,26 @@ public class MessageThreadActivity extends DefaultActivity {
                 }
             });
 
+        }
+    }
+
+    private class ReplyButtonListener implements Button.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            final EditText input = new EditText(MessageThreadActivity.this);
+            new AlertDialog.Builder(MessageThreadActivity.this)
+                    .setTitle("Send reply")
+                    .setView(input)
+                    .setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Toast.makeText(MessageThreadActivity.this, input.getText(), Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            // Do nothing.
+                        }
+                    }).show();
         }
     }
 }
