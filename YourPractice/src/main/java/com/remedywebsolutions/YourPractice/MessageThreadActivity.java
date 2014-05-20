@@ -102,7 +102,7 @@ public class MessageThreadActivity extends DefaultActivity {
 
                 messageSentBy.setText(currentMessage.getFromPhysicianName());
                 messageBody.setText(currentMessage.getMessage());
-                messageSentAt.setText("Received " +
+                messageSentAt.setText(
                         DateOperations.getRelativeTimeForTimeString(currentMessage.getSentTime()));
 
                 if (currentMessage.getRead()) {
@@ -125,6 +125,14 @@ public class MessageThreadActivity extends DefaultActivity {
                 threadListAdapter.add(message);
             }
         }
+
+        // Scroll all the way down to display the last message
+        threadListView.post(new Runnable() {
+            @Override
+            public void run() {
+                threadListView.setSelection(threadListView.getCount());;
+            }
+        });
     }
 
     private void replyWith(String messageBody) {

@@ -47,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/pencilplus"
+        android:visibility="gone"
         android:text="@string/sendMessage"
         android:id="@+id/sendMessageButton"
         android:layout_marginBottom="8sp"
@@ -58,9 +59,9 @@
     <Button
         style="@style/MyAccountButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="92sp"
         android:drawableLeft="@drawable/pencilplus"
-        android:text="@string/sendGroupMessage"
+        android:text="@string/sendMessage"
         android:id="@+id/sendGroupMessageButton"
         android:layout_marginBottom="8sp"
         android:layout_marginTop="8sp"
@@ -71,8 +72,9 @@
     <Button
         style="@style/MyAccountButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Messages"
+        android:layout_height="92sp"
+        android:text="@string/my_messages"
+        android:drawableLeft="@drawable/boxdownload"
         android:id="@+id/messageThreadsButton"
         android:layout_marginBottom="8sp"
         android:layout_marginTop="8sp"
@@ -103,6 +105,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/messageThreadsButton"
+        android:visibility="gone"
         android:weightSum="1">
 
         <Button

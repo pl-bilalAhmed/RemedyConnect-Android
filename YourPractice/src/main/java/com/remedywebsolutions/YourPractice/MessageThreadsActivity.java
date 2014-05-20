@@ -72,7 +72,7 @@ public class MessageThreadsActivity extends DefaultActivity {
 
                 messagePartnersTextView.setText(currentThread.getRecipientNameList());
                 subjectTextView.setText(currentThread.getSubject());
-                timeTextView.setText("Received " +
+                timeTextView.setText(
                         DateOperations.getRelativeTimeForTimeString(currentThread.getLastUpdate()));
 
                 if (currentThread.hasBeenRead()) {
