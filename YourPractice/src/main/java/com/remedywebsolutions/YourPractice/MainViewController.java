@@ -24,9 +24,11 @@ public class MainViewController {
             else {
                 intent = new Intent(context, MenuActivity.class);
             }
+
             if (intentFlags != 0) {
                 intent.setFlags(intentFlags);
             }
+
             ArrayList<HashMap<String, String>> menuItems = parser.getMenu();
             ArrayList<String> items = new ArrayList<String>();
             ArrayList<String> feeds = new ArrayList<String>();
@@ -41,6 +43,7 @@ public class MainViewController {
             intent.putExtra("externalLinks", externalLinks);
             intent.putExtra("title", title);
             intent.putExtra("isRoot", isRoot);
+
         }
         else if (parser.isPage()) {
             intent = new Intent(context, PageActivity.class);

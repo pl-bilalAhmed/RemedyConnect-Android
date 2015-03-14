@@ -15,7 +15,8 @@ import java.util.HashMap;
  * All implementation details (endpoints, connection settings etc.) should be here.
  */
 public class MedSecureConnection  {
-    static final String base = "https://MedSecureAPI.com/api/";
+   // static final String base = "https://MedSecureAPI.com/api/";
+    static final String base = "https://tsapitest.remedyconnect.com/api/";
     static final String api_key = "SSB3aWxsIG1ha2UgbXkgQVBJIHNlY3VyZQ==";
     static final String token = "j2w+jHHs+F8fkvr7Vj5DlPuYg8VqXvOhbtaG4WaOqxA=";
     static final String charset = "UTF-8";

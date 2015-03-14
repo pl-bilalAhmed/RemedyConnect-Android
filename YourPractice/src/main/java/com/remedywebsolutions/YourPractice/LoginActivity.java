@@ -58,7 +58,7 @@ public class LoginActivity extends DefaultActivity {
         setContentView(R.layout.activity_login);
         setTitle(getString(R.string.login));
         final Button button = (Button) findViewById(R.id.buttonLogin);
-        Skin.applyButtonStyle(this, button);
+      //  Skin.applyButtonStyle(this, button);
         Skin.applyActivityBackground(this);
         usernameEditor = (EditText) findViewById(R.id.userName);
         passwordEditor = (EditText) findViewById(R.id.password);
@@ -68,6 +68,7 @@ public class LoginActivity extends DefaultActivity {
         progress.setCanceledOnTouchOutside(false);
         progress.setIndeterminate(true);
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

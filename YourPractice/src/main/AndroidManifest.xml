@@ -39,6 +39,7 @@ package="com.remedywebsolutions.YourPractice">
     </activity>
     <activity android:name=".DefaultActivity" />
     <activity android:name=".MainMenuActivity" />
+    <activity android:name=".SelectModeActivity" />
     <activity
         android:name="com.remedywebsolutions.YourPractice.SplashActivity"
         android:label="@string/title_activity_main"
