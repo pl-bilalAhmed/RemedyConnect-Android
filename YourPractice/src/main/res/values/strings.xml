@@ -61,6 +61,8 @@
     <string name="selectRecipientPrompt">Please select a recipient</string>
     <string name="passcodeSettings">Passcode settings</string>
     <string name="home">Home</string>
+    <string name="MyMessages">My Messages</string>
+    <string name="Admin">Admin</string>
     <string name="more">More</string>
     <string name="sender">Sender</string>
     <string name="what_happens">What happens </string>

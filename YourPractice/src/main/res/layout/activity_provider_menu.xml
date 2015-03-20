@@ -29,8 +29,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bottomButtonRow"
-        android:id="@+id/midButtonRow">
+        android:id="@+id/midButtonRow"
+        android:layout_alignTop="@+id/bottomButtonRow">
 
         <Button
             style="@style/MainMenuButton"
@@ -39,7 +39,7 @@
             android:layout_weight="0.5"
             android:id="@+id/menuButton3"
             android:layout_margin="10dp"
-            />
+            android:text="@string/MyMessages" />
 
         <Button
             style="@style/MainMenuButton"
@@ -48,25 +48,16 @@
             android:layout_weight="0.5"
             android:id="@+id/menuButton4"
             android:layout_margin="10dp"
-            />
+            android:text="@string/Admin" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
         android:id="@+id/bottomButtonRow"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp">
+        android:orientation="vertical"></LinearLayout>
 
-        <Button
-            style="@style/MainMenuButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.08"
-            android:id="@+id/menuButton5"
-            android:layout_margin="10dp"
-            android:layout_marginRight="90dp" />
 
-    </LinearLayout>
 </RelativeLayout>

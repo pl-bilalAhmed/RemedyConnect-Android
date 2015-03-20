@@ -231,8 +231,12 @@ public class DefaultActivity extends SherlockActivity {
                 intent = new Intent(this, PracticeSearchActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.menu_provider:
+            case R.id.menu_provider_mode:
                 intent = new Intent(this, SelectModeActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menu_provider:
+                intent = new Intent(this, ProviderMenuActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_login:
