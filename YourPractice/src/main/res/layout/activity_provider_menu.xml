@@ -57,7 +57,8 @@
         android:layout_height="175dp"
         android:id="@+id/bottomButtonRow"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"
+        android:layout_marginBottom="75dp"></LinearLayout>
 
 
 </RelativeLayout>

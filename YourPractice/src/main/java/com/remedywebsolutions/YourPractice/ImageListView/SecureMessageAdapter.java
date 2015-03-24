@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.CallTypes;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SecureCallMessage;
 import com.remedywebsolutions.YourPractice.R;
 
@@ -58,16 +59,60 @@ public class SecureMessageAdapter extends BaseAdapter {
         TextView phone = (TextView)vi.findViewById(R.id.Phone); // phone
         ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
 
+
         SecureCallMessage secureMessage  = data.get(position);
+        if (secureMessage.wasOpened ) {
+            vi.setBackgroundResource(R.color.light_gray);
+        }
 
         
         // Setting all values in listview
-        patient.setText(secureMessage.patientFirstName + " " + secureMessage.patientLastName);
-        dob.setText(secureMessage.patientDob);
+        String name = secureMessage.callerFirstName + " " + secureMessage.callerLastName;
+        if(secureMessage.callerTitle != null)
+        {
+            name = secureMessage.callerTitle + " " + name;
+        }
+        patient.setText(name);
+        dob.setText("DOB:" + secureMessage.patientDob);
         date.setText(secureMessage.messageDate);
         message.setText(secureMessage.message);
         phone.setText(secureMessage.phone);
-       // thumb_image.setImageResource(R.a);
+        switch (secureMessage.callTypeId)
+        {
+            case CallTypes.patientToDoctor:
+                ((ImageView)thumb_image).setImageResource(R.drawable.p2d);
+                break;
+            case CallTypes.AnsSvcToDoctor:
+                ((ImageView)thumb_image).setImageResource(R.drawable.a2d);
+                break;
+            case CallTypes.appointment:
+                ((ImageView)thumb_image).setImageResource(R.drawable.apt);
+                break;
+            case CallTypes.doctorToDoctor:
+                ((ImageView)thumb_image).setImageResource(R.drawable.d2d);
+                break;
+            case CallTypes.newbornToDoctor:
+                ((ImageView)thumb_image).setImageResource(R.drawable.n2d);
+                break;
+            case CallTypes.RoundingDoctor:
+                ((ImageView)thumb_image).setImageResource(R.drawable.rnd);
+                break;
+            case CallTypes.hospitalAdm:
+                ((ImageView)thumb_image).setImageResource(R.drawable.adm);
+                break;
+            case CallTypes.rxRefill:
+                ((ImageView)thumb_image).setImageResource(R.drawable.rxd);
+                break;
+            case CallTypes.TriageToDoctor:
+                ((ImageView)thumb_image).setImageResource(R.drawable.triage);
+                break;
+            case CallTypes.pageMyDoctor:
+                ((ImageView)thumb_image).setImageResource(R.drawable.p2d);
+                break;
+        }
+        if(secureMessage.urgent) {
+            ((ImageView)thumb_image).setImageResource(R.drawable.urgent);
+        }
 
         return vi;
     }

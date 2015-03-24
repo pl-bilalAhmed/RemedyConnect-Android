@@ -52,13 +52,14 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
         switch (v.getId()) {
 
             case R.id.menuButton3:
-                onClickFireActivity(2);
-                break;
-            case R.id.menuButton4:
-                onClickFireActivity(3);
 
                 Intent intent = new Intent(this, SecureCallListActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.menuButton4:
+                onClickFireActivity(3);
+                MainViewController.FireBrowser(this, "https://admin.remedyoncall.com");
+
                 break;
 
         }

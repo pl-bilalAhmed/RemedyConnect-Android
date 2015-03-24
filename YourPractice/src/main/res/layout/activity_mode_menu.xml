@@ -1,11 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/mainMenuLayout"
-                android:columnCount="4"
-                android:layout_gravity="right"
-                android:background="#ff2a8ac7">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mainMenuLayout"
+    android:columnCount="4"
+    android:layout_gravity="right">
 
+    <ImageView
+        android:id="@+id/mainMenuBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/background_texture"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/menu_background"/>
 
     <ImageView
         android:id="@+id/logo"
@@ -14,9 +22,11 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/logo"
+        android:src="@drawable/logo"
         android:padding="5dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/roc_logo" />
+        android:scaleType="fitCenter"/>
+
+
 
 
     <LinearLayout

@@ -11,7 +11,9 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         super.onCreate(savedInstanceState);
         reportPhase("Select application mode");
         setContentView(R.layout.activity_mode_menu);
-        //Skin.applyActivityBackground(this);
+        Skin.applyMainMenuBackground(this);
+
+        Skin.applyThemeLogo(this, true);
         setTitle(R.string.title_select_practice);
 
         View b1 = this.findViewById(R.id.button);

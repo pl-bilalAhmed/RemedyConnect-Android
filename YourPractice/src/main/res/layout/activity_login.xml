@@ -10,14 +10,14 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="fill_parent"
-        android:layout_height="120dp"
+        android:layout_height="75dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/logo"
         android:padding="5dp"
         android:scaleType="fitCenter"
         android:src="@drawable/roc_logo"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -25,12 +25,12 @@
         android:text="@string/loginTextContent"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/loginTextView"
-        android:layout_margin="5dp"
         android:textColor="#ffffffff"
-        android:layout_weight="0.29"
+        android:layout_weight="0.06"
         android:layout_centerVertical="true"
-        android:gravity="center"
-        />
+        android:gravity="center|left"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="10dp" />
 
 
     <TextView
@@ -39,7 +39,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/loginMessage"
         android:id="@+id/textView"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:layout_marginLeft="33dp" />
 
     <EditText
         android:layout_width="fill_parent"

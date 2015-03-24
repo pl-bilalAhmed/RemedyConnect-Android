@@ -51,7 +51,7 @@ public class SecureCallListActivity extends DefaultActivity {
         setContentView(R.layout.activity_message_list);
 
         loginData = new LoggedInDataStorage(this).RetrieveData();
-
+        Skin.applyActivityBackground(this);
      //   Boolean shouldReverse = extras.getBoolean("shouldReverseList", true);
 
         messageListView = (ListView) findViewById(R.id.messageList);
