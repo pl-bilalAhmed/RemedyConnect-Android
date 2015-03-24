@@ -1,5 +1,6 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,6 +56,9 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
                 break;
             case R.id.menuButton4:
                 onClickFireActivity(3);
+
+                Intent intent = new Intent(this, SecureCallListActivity.class);
+                startActivity(intent);
                 break;
 
         }

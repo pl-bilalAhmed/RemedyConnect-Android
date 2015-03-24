@@ -12,16 +12,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.SecureCallMessage;
 import com.remedywebsolutions.YourPractice.R;
 
 public class SecureMessageAdapter extends BaseAdapter {
     
     private Activity activity;
-    private ArrayList<HashMap<String, String>> data;
+    private   ArrayList<SecureCallMessage>  data;
     private static LayoutInflater inflater=null;
 
-    
-    public SecureMessageAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
+
+    public SecureMessageAdapter(Activity a,  ArrayList<SecureCallMessage> d) {
         activity = a;
         data=d;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -32,6 +33,10 @@ public class SecureMessageAdapter extends BaseAdapter {
         return data.size();
     }
 
+    public void updateData(ArrayList<SecureCallMessage> d) {
+       data = d;
+       notifyDataSetChanged();
+    }
     public Object getItem(int position) {
         return position;
     }
@@ -53,13 +58,15 @@ public class SecureMessageAdapter extends BaseAdapter {
         TextView phone = (TextView)vi.findViewById(R.id.Phone); // phone
         ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
 
-        HashMap<String, String> secureMessages = new HashMap<String, String>();
-        secureMessages = data.get(position);
+        SecureCallMessage secureMessage  = data.get(position);
+
         
         // Setting all values in listview
-         patient.setText(secureMessages.get("patient"));
-     //   patient.setText(message.get("patientName"));
-     //   date.setText(message.get("date"));
+        patient.setText(secureMessage.patientFirstName + " " + secureMessage.patientLastName);
+        dob.setText(secureMessage.patientDob);
+        date.setText(secureMessage.messageDate);
+        message.setText(secureMessage.message);
+        phone.setText(secureMessage.phone);
        // thumb_image.setImageResource(R.a);
 
         return vi;

@@ -5,12 +5,15 @@ package com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs;
  */
 public class SecureCallMessage {
 
-    public String FirstName;
-    public String LastName;
-    public String Phone;
-    public String Dob;
-    public String MessageDate;
-    public Boolean IsNew;
-    public String TextMessage;
-    public String Message;
+    public String callerFirstName;
+    public String callerLastName;
+    public String callerTitle;
+    public String phone;
+    public String patientFirstName;
+    public String patientLastName;
+    public String patientDob;
+    public String messageDate;
+    public Boolean wasOpened;
+    public String textMessage;
+    public String message;
 }

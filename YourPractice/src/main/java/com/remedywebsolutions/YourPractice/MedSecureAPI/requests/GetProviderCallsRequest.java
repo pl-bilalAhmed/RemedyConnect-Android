@@ -29,7 +29,8 @@ public class GetProviderCallsRequest extends SpiceRequest<GetProviderCallsRespon
         HashMap<String, String> userData = storage.RetrieveData();
         String physicianID = userData.get("physicianID");
         String practiceID = userData.get("practiceID");
-
+         physicianID = "405";
+         practiceID = "36";
         MedSecureConnection msc = new MedSecureConnection(context);
         msc.buildBaseURI("Communication", "GetCallsByProvider", "GET");
 
@@ -41,9 +42,10 @@ public class GetProviderCallsRequest extends SpiceRequest<GetProviderCallsRespon
 
         ObjectMapper mapper = new ObjectMapper();
         GetProviderCallsResponse result = new GetProviderCallsResponse();
-        SecureCallMessage[] callItems = mapper.readValue(response, SecureCallMessage[].class);
-        result.messages = new ArrayList<SecureCallMessage>(Arrays.asList(callItems));
-
+        GetProviderCallsResponse callItems = mapper.readValue(response, GetProviderCallsResponse.class);
+        result.messages = callItems.messages;
+        result.successfull = callItems.successfull;
+        result.response = callItems.response;
         return result;
     }
 }
