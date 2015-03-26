@@ -58,7 +58,15 @@
         android:id="@+id/bottomButtonRow"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
-        android:layout_marginBottom="75dp"></LinearLayout>
+        android:layout_marginBottom="75dp">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
 
 
 </RelativeLayout>

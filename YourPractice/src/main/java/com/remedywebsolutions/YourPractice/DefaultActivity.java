@@ -212,7 +212,17 @@ public class DefaultActivity extends SherlockActivity {
                 this.onBackPressed();
                 return true;
             case R.id.home:
-                MainViewController.FireRootActivity(this);
+                if(Data.IsProviderMode(getApplicationContext()))
+                {
+                    intent = new Intent(this, ProviderMenuActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    MainViewController.FireRootActivity(this);
+                    finish();
+                }
+               // MainViewController.FireRootActivity(this);
                 return true;
             case R.id.menu_about:
                 intent = new Intent(this, AboutActivity.class);

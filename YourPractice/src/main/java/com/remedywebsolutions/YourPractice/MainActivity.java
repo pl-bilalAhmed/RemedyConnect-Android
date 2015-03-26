@@ -17,8 +17,25 @@ public class MainActivity extends DefaultActivity {
 
     public void checkDownloadedData() {
         if (Data.isDataAvailable(getApplicationContext())) {
-            MainViewController.FireRootActivity(this);
-            finish();
+            if (Data.AppModeSelected(getApplicationContext())) {
+                if(Data.IsProviderMode(getApplicationContext()))
+                {
+                    Intent intent = new Intent(this, ProviderMenuActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    MainViewController.FireRootActivity(this);
+                    finish();
+                }
+            }
+            else
+            {
+                Intent intent = new Intent(this, SelectModeActivity.class);
+                startActivity(intent);
+            }
+
+
         } else {
             Intent practiceSearchActivity = new Intent(this, PracticeSearchActivity.class);
             startActivity(practiceSearchActivity);

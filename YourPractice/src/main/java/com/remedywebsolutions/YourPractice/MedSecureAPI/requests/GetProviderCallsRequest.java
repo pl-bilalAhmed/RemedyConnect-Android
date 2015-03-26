@@ -29,8 +29,7 @@ public class GetProviderCallsRequest extends SpiceRequest<GetProviderCallsRespon
         HashMap<String, String> userData = storage.RetrieveData();
         String physicianID = userData.get("physicianID");
         String practiceID = userData.get("practiceID");
-         physicianID = "405";
-         practiceID = "36";
+
         MedSecureConnection msc = new MedSecureConnection(context);
         msc.buildBaseURI("Communication", "GetCallsByProvider", "GET");
 

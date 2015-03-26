@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="109dp"
             android:layout_weight="0.5"
-            android:id="@+id/button"
+            android:id="@+id/provider_mode_button"
             android:layout_margin="10dp"
             android:text="@string/button_provide_staff_text"
             android:textColor="#ff2a8ac7" />
@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="109dp"
             android:layout_weight="0.5"
-            android:id="@+id/button10"
+            android:id="@+id/patient_mode_button"
             android:layout_margin="10dp"
             android:textColor="#ff2a8ac7"
             android:text="@string/button_patient_gardian_text" />

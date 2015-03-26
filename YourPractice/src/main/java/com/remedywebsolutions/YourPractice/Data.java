@@ -11,6 +11,8 @@ import java.io.File;
 public final class Data {
     public static final String ROOT = "https://cms.pediatricweb.com/mobile-app";
     public static final String PREFS_NAME = "PWPrefs";
+    public static final String mProviderMode = "provider";
+    public static final String mPatientMode = "patient";
 
     @SuppressWarnings("FinalStaticMethod")
     public static final boolean isDataAvailable(Context context) {
@@ -21,6 +23,39 @@ public final class Data {
         }
 
         return data_available;
+    }
+    @SuppressWarnings("FinalStaticMethod")
+    public static final void SetProviderAppMode(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("mode", mProviderMode);
+        editor.commit();
+    }
+    @SuppressWarnings("FinalStaticMethod")
+    public static final void SetPatientAppMode(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("mode", mPatientMode);
+        editor.commit();
+    }
+
+    @SuppressWarnings("FinalStaticMethod")
+    public static final Boolean AppModeSelected(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+
+        return settings.contains("mode");
+    }
+
+    @SuppressWarnings("FinalStaticMethod")
+    public static final Boolean IsProviderMode(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        if(settings.contains("mode")) {
+            return settings.getString("mode", "").equals(mProviderMode);
+        }
+        else
+        {
+            return false;
+        }
     }
 
     @SuppressWarnings("FinalStaticMethod")
