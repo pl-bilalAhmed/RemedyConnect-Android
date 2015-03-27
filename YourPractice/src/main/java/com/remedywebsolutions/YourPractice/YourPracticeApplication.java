@@ -23,5 +23,7 @@ public class YourPracticeApplication extends Application {
         pushIOManager.setNotificationsStacked(false);
 
         AppLockManager.getInstance().enableDefaultAppLockIfAvailable(this);
+
+
     }
 }

@@ -1,138 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.remedywebsolutions.YourPractice">
+    package="com.remedywebsolutions.YourPractice" >
 
-<uses-permission android:name="com.remedywebsolutions.YourPractice.C2D_MESSAGE" />
-<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-<uses-permission android:name="android.permission.WAKE_LOCK" />
-<uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-<permission android:name="com.remedywebsolutions.YourPractice.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.remedywebsolutions.YourPractice.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-<application
-    android:allowBackup="true"
-    android:icon="@drawable/ic_launcher"
-    android:label="@string/app_name"
-    android:theme="@style/appTheme"
-    android:name="com.remedywebsolutions.YourPractice.YourPracticeApplication">
+    <permission
+        android:name="com.remedywebsolutions.YourPractice.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="com.remedywebsolutions.YourPractice.permission.PUSHIO_MESSAGE"
+        android:protectionLevel="signature" />
 
-    <!-- Push.IO-related -->
-    <receiver android:name="com.pushio.manager.PushIOBroadcastReceiver"
-        android:permission="com.google.android.c2dm.permission.SEND">
-        <intent-filter>
-            <action  android:name="com.google.android.c2dm.intent.RECEIVE" />
-            <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-            <category android:name="com.remedywebsolutions.YourPractice" />
-        </intent-filter>
-    </receiver>
+    <uses-permission android:name="com.remedywebsolutions.YourPractice.permission.PUSHIO_MESSAGE" />
 
-    <activity android:name="com.pushio.manager.PushIOActivityLauncher" android:exported="true" />
-    <service android:name="com.pushio.manager.PushIOGCMIntentService" />
-    <service android:name="com.pushio.manager.PushIOEngagementService" />
+    <application
+        android:name=".YourPracticeApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/appTheme" >
 
-    <activity
-        android:name="com.remedywebsolutions.YourPractice.MainActivity"
-        android:label="@string/title_activity_main">
-        <intent-filter>
-            <category android:name="android.intent.category.DEFAULT"/>
-        </intent-filter>
-    </activity>
-    <activity android:name=".DefaultActivity" />
-    <activity android:name=".MainMenuActivity" />
-    <activity android:name=".SelectModeActivity" />
-    <activity android:name=".ProviderMenuActivity" />
-    <activity android:name=".SecureCallListActivity" >
-        <intent-filter>
-            <action android:name="com.remedywebsolutions.YourPractice.NOTIFICATIONPRESSED"/>
-            <category android:name="android.intent.category.DEFAULT"/>
-        </intent-filter>
+        <!-- Push.IO-related -->
+        <receiver
+            android:name="com.pushio.manager.PushIOBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.remedywebsolutions.YourPractice" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".PushIOBroadCastReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.remedywebsolutions.YourPractice.PUSHIOPUSH" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.pushio.manager.PushIOActivityLauncher"
+            android:exported="true" />
+
+        <service android:name="com.pushio.manager.PushIOGCMIntentService" />
+        <service android:name="com.pushio.manager.PushIOEngagementService" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
-    <activity
-        android:name="com.remedywebsolutions.YourPractice.SplashActivity"
-        android:label="@string/title_activity_main"
-        android:theme="@style/Theme.Splash"
-        android:noHistory="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN"/>
-            <category android:name="android.intent.category.LAUNCHER"/>
-        </intent-filter>
-    </activity>
+        <activity android:name=".DefaultActivity" />
+        <activity android:name=".MainMenuActivity" />
+        <activity android:name=".SelectModeActivity" />
+        <activity android:name=".ProviderMenuActivity" />
+        <activity android:name=".SecureCallListActivity" >
+            <intent-filter>
+                <action android:name="com.remedywebsolutions.YourPractice.NOTIFICATIONPRESSED" />
 
-    <service android:name="com.remedywebsolutions.YourPractice.downloader.RootDownloadService"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/title_activity_main"
+            android:noHistory="true"
+            android:theme="@style/Theme.Splash" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    <activity android:name="com.remedywebsolutions.YourPractice.MenuActivity"
-        android:parentActivityName=".MainActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.remedywebsolutions.YourPractice.MainActivity"/>
-    </activity>
-    <activity android:name="com.remedywebsolutions.YourPractice.PageActivity"
-        android:parentActivityName=".MainActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.remedywebsolutions.YourPractice.MainActivity"/>
-    </activity>
-    <activity android:name="com.remedywebsolutions.YourPractice.ArticleSetActivity"
-        android:parentActivityName=".MainActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.remedywebsolutions.YourPractice.MainActivity"/>
-    </activity>
-    <activity
-        android:name="com.remedywebsolutions.YourPractice.PageMyDoctorActivity"
-        android:label="@string/title_activity_page_my_doctor"
-        android:parentActivityName=".MainActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.remedywebsolutions.YourPractice.MainActivity"/>
-    </activity>
-    <activity
-        android:name="com.remedywebsolutions.YourPractice.PracticeSearchActivity"
-        android:label="Search your practice"
-        android:parentActivityName=".MainActivity"
-        android:noHistory="true">
-    </activity>
-    <activity android:name="com.remedywebsolutions.YourPractice.SelectPracticeActivity"
-        android:parentActivityName=".MainActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.remedywebsolutions.YourPractice.PracticeSearchActivity"/>
-    </activity>
-    <activity android:name="com.remedywebsolutions.YourPractice.AboutActivity"/>
-    <activity android:name="com.remedywebsolutions.YourPractice.TermsActivity"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-    <activity android:name=".LoginActivity"/>
-    <activity android:name=".MyAccountActivity">
+        <service android:name=".downloader.RootDownloadService" />
 
-    </activity>
-    <activity android:name=".MessageListActivity"/>
-    <activity android:name=".MessageThreadsActivity"/>
-    <activity android:name=".MessageThreadActivity"/>
-    <activity android:name=".MessageDisplayActivity"/>
-    <activity android:name=".SendCustomMessageActivity"/>
+        <activity
+            android:name=".MenuActivity"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.remedywebsolutions.YourPractice.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PageActivity"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.remedywebsolutions.YourPractice.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ArticleSetActivity"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.remedywebsolutions.YourPractice.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PageMyDoctorActivity"
+            android:label="@string/title_activity_page_my_doctor"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.remedywebsolutions.YourPractice.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PracticeSearchActivity"
+            android:label="Search your practice"
+            android:noHistory="true"
+            android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity
+            android:name=".SelectPracticeActivity"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.remedywebsolutions.YourPractice.PracticeSearchActivity" />
+        </activity>
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".TermsActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MyAccountActivity" >
+        </activity>
+        <activity android:name=".MessageListActivity" />
+        <activity android:name=".MessageThreadsActivity" />
+        <activity android:name=".MessageThreadActivity" />
+        <activity android:name=".MessageDisplayActivity" />
+        <activity android:name=".SendCustomMessageActivity" />
 
-    <service
-        android:name="com.octo.android.robospice.UncachedSpiceService"
-        android:exported="false" />
+        <service
+            android:name="com.octo.android.robospice.UncachedSpiceService"
+            android:exported="false" />
 
-    <!-- Passcode lock related activities -->
-    <activity
-        android:name="org.wordpress.passcodelock.PasscodeUnlockActivity"
-        android:theme="@style/Theme.Sherlock.Light.NoActionBar"
-        android:windowSoftInputMode="stateHidden" >
-    </activity>
-    <activity
-        android:name="org.wordpress.passcodelock.PasscodePreferencesActivity"
-        android:configChanges="orientation|keyboardHidden|screenSize"
-        android:theme="@style/Theme.Sherlock.Light"
-        android:windowSoftInputMode="stateHidden" >
-    </activity>
-    <activity
-        android:name="org.wordpress.passcodelock.PasscodeManagePasswordActivity"
-        android:theme="@style/Theme.Sherlock.Light.NoActionBar"
-        android:windowSoftInputMode="stateHidden" >
-    </activity>
+        <!-- Passcode lock related activities -->
+        <activity
+            android:name="org.wordpress.passcodelock.PasscodeUnlockActivity"
+            android:theme="@style/Theme.Sherlock.Light.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="org.wordpress.passcodelock.PasscodePreferencesActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.Sherlock.Light"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="org.wordpress.passcodelock.PasscodeManagePasswordActivity"
+            android:theme="@style/Theme.Sherlock.Light.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
 
-</application>
+        <service
+            android:name=".NotificationBroadcastReceiver"
+            android:exported="false" >
+        </service>
+        <service
+            android:name=".NotificationIntentService"
+            android:exported="false" >
+        </service>
+
+        <activity
+            android:name=".NotificationActivity"
+            android:label="@string/title_activity_notification"
+            android:parentActivityName=".ProviderMenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.remedywebsolutions.YourPractice.ProviderMenuActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>
