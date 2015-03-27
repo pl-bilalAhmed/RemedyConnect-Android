@@ -167,15 +167,23 @@ public class DefaultActivity extends SherlockActivity {
      * @param loggedIn true if the user is logged in at the moment, false otherwise.
      */
     public void setMenuItemsVisibilityBasedOnLogin(boolean loggedIn) {
-        if (loggedIn) {
-            MenuItem item = abMenu.findItem(R.id.menu_login);
-            item.setVisible(false);
+        MenuItem li_item = abMenu.findItem(R.id.menu_login);
+        MenuItem lo_item = abMenu.findItem(R.id.menu_logout);
+        if(Data.IsProviderMode(getApplicationContext())) {
+            if (loggedIn) {
+
+                li_item.setVisible(false);
+            } else {
+
+                lo_item.setVisible(false);
+                //     item = abMenu.findItem(R.id.menu_my_account);
+                //   item.setVisible(false);
+            }
         }
-        else {
-            MenuItem item = abMenu.findItem(R.id.menu_logout);
-            item.setVisible(false);
-            item = abMenu.findItem(R.id.menu_my_account);
-            item.setVisible(false);
+        else
+        {
+            li_item.setVisible(false);
+            lo_item.setVisible(false);
         }
     }
 
@@ -245,10 +253,6 @@ public class DefaultActivity extends SherlockActivity {
                 intent = new Intent(this, SelectModeActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.menu_provider:
-                intent = new Intent(this, ProviderMenuActivity.class);
-                startActivity(intent);
-                return true;
             case R.id.menu_login:
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
@@ -260,12 +264,15 @@ public class DefaultActivity extends SherlockActivity {
                 // Reset passcode lock
                 AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
                 invalidateOptionsMenu();
-                MainViewController.FireRootActivity(this, Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                return true;
-            case R.id.menu_my_account:
-                intent = new Intent(this, MyAccountActivity.class);
+                Data.ClearRegistered(getApplicationContext());
+                intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
+                finish();
                 return true;
+         //   case R.id.menu_my_account:
+            //    intent = new Intent(this, MyAccountActivity.class);
+            //    startActivity(intent);
+              //  return true;
         }
         return super.onOptionsItemSelected(item);
     }

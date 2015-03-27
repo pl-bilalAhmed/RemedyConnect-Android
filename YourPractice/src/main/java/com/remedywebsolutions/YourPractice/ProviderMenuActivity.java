@@ -48,6 +48,7 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         switch (item.getItemId()) {
+            case R.id.home:
             case android.R.id.home:
                 // In this app, we can just simple force the Up button to behave the same way as the Back.
               //  this.onBackPressed();
@@ -58,12 +59,22 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
 
     @Override
     protected void onStart() {
-        View target =  findViewById(R.id.imageView2);
-        BadgeView badge = new BadgeView(this, target);
-        badge.setText("12");
-        badge.setTextSize(16);
-        badge.setBadgeMargin(20);
-        badge.show();
+
+        if(Data.IsRegistered(getApplicationContext())) {
+            View target =  findViewById(R.id.imageView2);
+            BadgeView badge = new BadgeView(this, target);
+            badge.setText("12");
+            badge.setTextSize(16);
+            badge.setBadgeMargin(20);
+            badge.show();
+        }
+        else
+        {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         super.onStart();
 
     }

@@ -3,14 +3,12 @@ apply plugin: 'android'
 android {
     compileSdkVersion 19
     buildToolsVersion '19.1.0'
-
     defaultConfig {
-        minSdkVersion 10
+        minSdkVersion 11
         targetSdkVersion 19
         versionCode 38
         versionName "1.3"
     }
-
     signingConfigs {
         release {
             storeFile file("/Users/za" +
@@ -20,21 +18,21 @@ android {
             keyPassword "S]\$!nwzZv/T=]Imk"
         }
     }
-
     buildTypes {
         release {
-            minifyEnabled  false
+            minifyEnabled false
             debuggable false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/NOTICE.txt'
+    }
+    productFlavors {
     }
 }
 

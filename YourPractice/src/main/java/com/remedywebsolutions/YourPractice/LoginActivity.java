@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.android.robospice.SpiceManager;
@@ -42,6 +43,7 @@ public class LoginActivity extends DefaultActivity {
 
     @Override
     protected void onStart() {
+
         spiceManager.start(this);
         super.onStart();
     }
@@ -50,6 +52,19 @@ public class LoginActivity extends DefaultActivity {
     protected void onStop() {
         spiceManager.shouldStop();
         super.onStop();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.home:
+            case android.R.id.home:
+                // In this app, we can just simple force the Up button to behave the same way as the Back.
+                //  this.onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -98,6 +113,7 @@ public class LoginActivity extends DefaultActivity {
             practiceId = response.getPracticeID();
             String token = response.getToken();
             if (token != null) {
+                Data.SetRegistered(getApplicationContext());
                 progress.setMessage("Logged in, storing data...");
                 dataStorage.StoreDataOnLogin(physicianId, practiceId, token);
                 progress.setMessage("Logged in. Registering device...");
@@ -133,9 +149,13 @@ public class LoginActivity extends DefaultActivity {
             PushIOManager.getInstance(LoginActivity.this).registerUserId(pushIOHash);
             Log.d("YourPractice", "Registered with Push.IO with the following user ID: " +
                     PushIOManager.getInstance(LoginActivity.this).getRegisteredUserId());
-            progress.setMessage("Registered device. Fetching your contacts...");
-            GetPhysiciansRequest req = new GetPhysiciansRequest(LoginActivity.this);
-            spiceManager.execute(req, new PullContactsListener());
+            progress.setMessage("Registered device.");
+            GetPracticeUtcTimeZoneOffsetRequest req =
+                    new GetPracticeUtcTimeZoneOffsetRequest(practiceId, LoginActivity.this);
+            spiceManager.execute(req, new TimezoneOffsetListener());
+
+         //   GetPhysiciansRequest req = new GetPhysiciansRequest(LoginActivity.this);
+         //   spiceManager.execute(req, new PullContactsListener());
         }
     }
 
@@ -210,6 +230,9 @@ public class LoginActivity extends DefaultActivity {
             case ENABLE_PASSLOCK:
                 if (resultCode == RESULT_OK) {
                     Toast.makeText(LoginActivity.this, "Passcode successfully set.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, ProviderMenuActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
                 break;
             default:

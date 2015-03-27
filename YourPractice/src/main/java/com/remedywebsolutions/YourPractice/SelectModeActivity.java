@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 
+import org.wordpress.passcodelock.AppLockManager;
+
 
 public class SelectModeActivity extends DefaultActivity  implements View.OnClickListener {
 
@@ -32,12 +34,21 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         if(b.getId() == R.id.provider_mode_button)
         {
             Data.SetProviderAppMode(getApplicationContext());
-            Intent intent = new Intent(this, ProviderMenuActivity.class);
-            startActivity(intent);
-            finish();
+            if(Data.IsRegistered(getApplicationContext())) {
+                Intent intent = new Intent(this, ProviderMenuActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else
+            {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
         else
         {
+            AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
             Data.SetPatientAppMode(getApplicationContext());
             MainViewController.FireRootActivity(this);
             finish();

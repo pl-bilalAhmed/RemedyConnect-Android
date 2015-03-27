@@ -19,4 +19,5 @@ public class SecureCallMessage {
     public String message;
     public Integer callTypeId;
     public Boolean urgent;
+    public Integer callID;
 }

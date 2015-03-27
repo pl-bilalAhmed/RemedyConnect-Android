@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
@@ -42,11 +43,27 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
         progress.setMax(100);
         progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 
-        Button startSearchByName = (Button)this.findViewById(R.id.practiceSearchStartByName);
-        Button startSearchByLocation = (Button)this.findViewById(R.id.practiceSearchStartByLocation);
+      //  Button startSearchByName = (Button)this.findViewById(R.id.practiceSearchStartByName);
+     //   Button startSearchByLocation = (Button)this.findViewById(R.id.practiceSearchStartByLocation);
+        SearchView searchView = (SearchView)this.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
-        startSearchByName.setOnClickListener(this);
-        startSearchByLocation.setOnClickListener(this);
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                startFetchingByName(s);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+
+
+     //   startSearchByName.setOnClickListener(this);
+     //   startSearchByLocation.setOnClickListener(this);
     }
 
     @Override
@@ -58,20 +75,21 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     }
 
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.practiceSearchStartByName:
-                startFetchingByName();
-                break;
-            case R.id.practiceSearchStartByLocation:
-                startFetchingByLocation();
-                break;
-        }
+
+      //  startFetchingByName();
+      //  switch(v.getId()){
+       //     case R.id.practiceSearchStartByName:
+        //        startFetchingByName();
+         //       break;
+        //   case R.id.practiceSearchStartByLocation:
+           //     startFetchingByLocation();
+            //    break;
+      //  }
     }
 
-    public void startFetchingByName() {
-        EditText practiceNameView = (EditText)this.findViewById(R.id.practiceSearchEdit);
-        assert practiceNameView.getText() != null;
-        String practiceName = practiceNameView.getText().toString();
+    public void startFetchingByName(String search) {
+
+        String practiceName = search;
         Intent intent = new Intent(this, RootDownloadService.class);
         intent.putExtra("receiver", new DownloadReceiver(new Handler()));
         intent.putExtra("practiceName", practiceName);

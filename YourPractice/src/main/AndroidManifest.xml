@@ -41,7 +41,12 @@ package="com.remedywebsolutions.YourPractice">
     <activity android:name=".MainMenuActivity" />
     <activity android:name=".SelectModeActivity" />
     <activity android:name=".ProviderMenuActivity" />
-    <activity android:name=".SecureCallListActivity" />
+    <activity android:name=".SecureCallListActivity" >
+        <intent-filter>
+            <action android:name="com.remedywebsolutions.YourPractice.NOTIFICATIONPRESSED"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+        </intent-filter>
+        </activity>
     <activity
         android:name="com.remedywebsolutions.YourPractice.SplashActivity"
         android:label="@string/title_activity_main"
@@ -98,10 +103,7 @@ package="com.remedywebsolutions.YourPractice">
 
     <activity android:name=".LoginActivity"/>
     <activity android:name=".MyAccountActivity">
-        <intent-filter>
-            <action android:name="com.remedywebsolutions.YourPractice.NOTIFICATIONPRESSED"/>
-            <category android:name="android.intent.category.DEFAULT"/>
-        </intent-filter>
+
     </activity>
     <activity android:name=".MessageListActivity"/>
     <activity android:name=".MessageThreadsActivity"/>

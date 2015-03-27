@@ -40,6 +40,31 @@ public final class Data {
     }
 
     @SuppressWarnings("FinalStaticMethod")
+    public static final Boolean IsRegistered(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+
+        return settings.contains("registered");
+    }
+
+    @SuppressWarnings("FinalStaticMethod")
+       public static final void SetRegistered(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("registered", "true");
+        editor.commit();
+    }
+
+    @SuppressWarnings("FinalStaticMethod")
+    public static final void ClearRegistered(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.remove("registered");
+        editor.commit();
+    }
+
+    @SuppressWarnings("FinalStaticMethod")
     public static final Boolean AppModeSelected(Context context) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
 
