@@ -1,10 +1,12 @@
 package com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs;
 
+import java.io.Serializable;
+
 /**
  * Created by ksciacca on 3/20/2015.
  */
 
-public class SecureCallMessage {
+public class SecureCallMessage implements Serializable{
 
     public String callerFirstName;
     public String callerLastName;

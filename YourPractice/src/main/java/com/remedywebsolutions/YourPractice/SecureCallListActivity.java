@@ -32,6 +32,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetInAppNotific
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetProviderCallsRequest;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,12 +62,14 @@ public class SecureCallListActivity extends DefaultActivity {
 
         messageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent displayActivity = new Intent(SecureCallListActivity.this, MessageDisplayActivity.class);
-
+            Intent displayActivity = new Intent(SecureCallListActivity.this, DisplaySecureMessageActivity.class);
+            displayActivity.putExtra("call",responses.get(position));
             startActivityForResult(displayActivity, position);
             }
         });
     }
+
+
 
     @Override
     protected void onStart() {

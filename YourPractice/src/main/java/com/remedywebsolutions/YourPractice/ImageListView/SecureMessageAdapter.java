@@ -45,7 +45,8 @@ public class SecureMessageAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-    
+
+
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi=convertView;
         if(convertView==null) {
@@ -53,15 +54,19 @@ public class SecureMessageAdapter extends BaseAdapter {
         }
 
         TextView patient = (TextView)vi.findViewById(R.id.patient); // title (patient)
-        TextView dob = (TextView)vi.findViewById(R.id.dob); // dob name
+   //     TextView dob = (TextView)vi.findViewById(R.id.dob); // dob name
         TextView date = (TextView)vi.findViewById(R.id.messageDate); // message date
         TextView message = (TextView)vi.findViewById(R.id.message); // message
-        TextView phone = (TextView)vi.findViewById(R.id.Phone); // phone
+    //    TextView phone = (TextView)vi.findViewById(R.id.Phone); // phone
         ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
 
 
         SecureCallMessage secureMessage  = data.get(position);
         if (secureMessage.wasOpened ) {
+            vi.setBackgroundResource(R.color.list_row_selected);
+        }
+        else
+        {
             vi.setBackgroundResource(R.color.light_gray);
         }
 
@@ -72,11 +77,20 @@ public class SecureMessageAdapter extends BaseAdapter {
         {
             name = secureMessage.callerTitle + " " + name;
         }
-        patient.setText(name);
-        dob.setText("DOB:" + secureMessage.patientDob);
+        patient.setText(name + " - " + Integer.toString(secureMessage.callID));
+      //  dob.setText(Integer.toString(secureMessage.callID));
         date.setText(secureMessage.messageDate);
         message.setText(secureMessage.message);
-        phone.setText(secureMessage.phone);
+
+
+
+        java.text.MessageFormat phoneMsgFmt=new java.text.MessageFormat("({0})-{1}-{2}");
+        //suposing a grouping of 3-3-4
+        String[] phoneNumArr={secureMessage.phone.substring(0, 3),
+                secureMessage.phone.substring(3,6),
+                secureMessage.phone.substring(6)};
+
+     //   phone.setText(phoneMsgFmt.format(phoneNumArr));
         switch (secureMessage.callTypeId)
         {
             case CallTypes.patientToDoctor:

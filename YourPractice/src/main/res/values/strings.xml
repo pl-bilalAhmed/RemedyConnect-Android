@@ -77,4 +77,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_display_secure_message">DisplaySecureMessageActivity</string>
 </resources>

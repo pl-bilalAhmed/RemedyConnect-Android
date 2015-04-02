@@ -60,6 +60,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
         <activity android:name=".DefaultActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".SelectModeActivity" />
@@ -182,6 +184,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".DisplaySecureMessageActivity"
+            android:label="@string/title_activity_display_secure_message"
+            android:parentActivityName=".DefaultActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.remedywebsolutions.YourPractice.DefaultActivity" />
         </activity>
     </application>
 

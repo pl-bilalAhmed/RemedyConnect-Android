@@ -21,7 +21,7 @@ public class PushIOBroadCastReceiver extends BroadcastReceiver {
         String alert = intent.getStringExtra("alert");
         Toast.makeText(context, alert, Toast.LENGTH_LONG).show();
 
-        Intent notificatIntent = new Intent(context.getApplicationContext(), ProviderMenuActivity.class);
+        Intent notificatIntent = new Intent(context.getApplicationContext(), NotificationActivity.class);
         notificatIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         context.getApplicationContext().startActivity(notificatIntent);

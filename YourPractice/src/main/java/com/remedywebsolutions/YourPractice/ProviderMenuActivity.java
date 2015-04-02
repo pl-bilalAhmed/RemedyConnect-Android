@@ -1,5 +1,7 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,18 +11,24 @@ import android.widget.LinearLayout;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.SubMenu;
+import com.octo.android.robospice.SpiceManager;
+import com.octo.android.robospice.UncachedSpiceService;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 import com.readystatesoftware.viewbadger.BadgeView;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.GetProviderCallsResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.GetProviderUnreadCallsResponse;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetProviderCallsRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetProviderUnreadCallsRequest;
 import com.remedywebsolutions.YourPractice.parser.MainParser;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class ProviderMenuActivity extends DefaultActivity implements View.OnClickListener {
+public class ProviderMenuActivity extends DefaultActivity implements View.OnClickListener , RequestListener<GetProviderUnreadCallsResponse>{
     ArrayList<Button> menuButtons;
-    ArrayList<String> menuButtonTexts;
-    ArrayList<String> feeds;
-    ArrayList<String> externalLinks;
-    Integer NUMBER_OF_BUTTONS = 6;
-
+    BadgeView badge;
+    private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         reportPhase("Main menu");
@@ -33,7 +41,8 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
             getSupportActionBar().setHomeButtonEnabled(false);
         }
         menuButtons = new ArrayList<Button>();
-
+        View target =  findViewById(R.id.imageView2);
+        badge = new BadgeView(this, target);
         menuButtons.add((Button) this.findViewById(R.id.menuButton3));
         menuButtons.add((Button) this.findViewById(R.id.menuButton4));
 
@@ -59,14 +68,13 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
 
     @Override
     protected void onStart() {
-
+        spiceManager.start(this);
         if(Data.IsRegistered(getApplicationContext())) {
-            View target =  findViewById(R.id.imageView2);
-            BadgeView badge = new BadgeView(this, target);
-            badge.setText("12");
-            badge.setTextSize(16);
-            badge.setBadgeMargin(20);
-            badge.show();
+            GetProviderUnreadCallsRequest cntReq = new GetProviderUnreadCallsRequest(this);
+            spiceManager.execute(cntReq,  this);
+
+            //   updateNumberOfInboxItems(inbox.size());
+            progress.dismiss();
         }
         else
         {
@@ -77,6 +85,12 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
 
         super.onStart();
 
+    }
+
+    @Override
+    protected void onStop() {
+        spiceManager.shouldStop();
+        super.onStop();
     }
 
     void onClickFireActivity(Integer index) {
@@ -97,6 +111,45 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
 
                 break;
 
+        }
+    }
+
+
+        @Override
+        public void onRequestFailure(SpiceException e) {
+            progress.dismiss();
+            reloginSpiceFailureHandler(e);
+        }
+
+        @Override
+        public void onRequestSuccess(GetProviderUnreadCallsResponse inboxItemsResponse) {
+            if(inboxItemsResponse.successfull) {
+
+                badge.setText(Integer.toString(inboxItemsResponse.count));
+                badge.setTextSize(16);
+                badge.setBadgeMargin(20);
+                badge.show();
+
+            }
+        }
+
+
+    private void reloginSpiceFailureHandler(SpiceException e) {
+        spiceManager.cancelAllRequests();
+        if (e.getCause() instanceof IOException) {
+            // We should have an authentication failure here, so re-login the user...
+            new AlertDialog.Builder(ProviderMenuActivity.this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Your session has expired")
+                    .setMessage("You will need to log in again. Please OK to proceed.")
+                    .setPositiveButton("OK", new AlertDialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent loginIntent = new Intent(ProviderMenuActivity.this, LoginActivity.class);
+                            startActivity(loginIntent);
+                        }
+                    })
+                    .show();
         }
     }
 }

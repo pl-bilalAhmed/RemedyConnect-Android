@@ -76,6 +76,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
     public void onClick(View v) {
 
+        startFetchingByLocation();
       //  startFetchingByName();
       //  switch(v.getId()){
        //     case R.id.practiceSearchStartByName:

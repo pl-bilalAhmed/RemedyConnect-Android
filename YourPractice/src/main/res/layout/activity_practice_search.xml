@@ -38,7 +38,9 @@
         android:accessibilityLiveRegion="assertive"
         android:baselineAligned="false"
         android:showDividers="beginning|middle|end"
-        android:textAlignment="textStart">
+        android:textAlignment="textStart"
+        android:gravity="bottom"
+        android:id="@+id/linearLayout">
 
         <SearchView
             android:layout_width="fill_parent"
@@ -54,6 +56,19 @@
             android:iconifiedByDefault="false"
             android:gravity="right" />
         </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Search by current location"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp"
+        android:clickable="true"
+        android:textColor="#ffffffff"
+        android:onClick="onClick" />
 
 
 </RelativeLayout>
