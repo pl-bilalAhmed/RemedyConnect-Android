@@ -37,8 +37,9 @@ public class NotificationActivity extends DefaultActivity {
     {
         super.onStart();
         String alert = getIntent().getStringExtra("alert");
-        int indexof = alert.indexOf(":");
+        int indexof = alert.lastIndexOf(":");
         String callId = alert.substring(indexof +2);
+        alert = alert.substring(0,indexof+1);
         int cid = Integer.parseInt(callId);
         displayNotification(cid);
         new AlertDialog.Builder(NotificationActivity.this)
@@ -73,8 +74,8 @@ public class NotificationActivity extends DefaultActivity {
         mBuilder.setContentTitle(alert);
         mBuilder.setContentText(alert);
         mBuilder.setTicker(alert);
-        mBuilder.setSmallIcon(R.drawable.p2d);
-      
+        mBuilder.setSmallIcon(R.drawable.rcdiamond);
+
 
         // Increase notification number every time a new notification arrives //
         mBuilder.setNumber(callid);
