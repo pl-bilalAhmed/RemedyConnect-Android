@@ -62,12 +62,16 @@ public class SecureMessageAdapter extends BaseAdapter {
 
 
         SecureCallMessage secureMessage  = data.get(position);
+        ImageView dot_image=(ImageView)vi.findViewById(R.id.dot_image);
         if (secureMessage.wasOpened ) {
-            vi.setBackgroundResource(R.color.list_row_selected);
+
+            dot_image.setVisibility(View.INVISIBLE);
+        //    vi.setBackgroundResource(R.color.list_row_selected);
         }
         else
         {
-            vi.setBackgroundResource(R.color.light_gray);
+            dot_image.setVisibility(View.VISIBLE);
+         //   vi.setBackgroundResource(R.color.light_gray);
         }
 
         

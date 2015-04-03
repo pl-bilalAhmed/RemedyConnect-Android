@@ -23,7 +23,14 @@
             android:layout_marginTop="15dp" />
         
 	</LinearLayout>
-    
+    <ImageView
+        android:id="@+id/dot_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dot"
+        android:layout_alignTop="@+id/patient"
+        android:layout_toRightOf="@+id/patient"
+        android:layout_marginLeft="5dp" />
 	<!-- Patient Name-->
     <TextView
         android:id="@+id/patient"
@@ -90,11 +97,11 @@
          android:layout_alignParentTop="false"
          android:layout_toRightOf="@+id/thumbnail"
          android:layout_below="@+id/patient"
-         android:layout_marginTop="15dp"
+         android:layout_marginTop="5dp"
          android:textIsSelectable="false"
          android:linksClickable="false"
          android:clickable="false"
-         android:focusable="false"/>
+         android:focusable="false" />
     <!-- Rightend Arrow -->
      <ImageView android:layout_width="wrap_content"
      	android:layout_height="wrap_content"

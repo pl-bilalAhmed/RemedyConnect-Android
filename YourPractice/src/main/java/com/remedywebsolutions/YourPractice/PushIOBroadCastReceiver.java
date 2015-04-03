@@ -23,11 +23,12 @@ public class PushIOBroadCastReceiver extends BroadcastReceiver {
 
         Intent notificatIntent = new Intent(context.getApplicationContext(), NotificationActivity.class);
         notificatIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+        notificatIntent.putExtra("alert",alert);
         context.getApplicationContext().startActivity(notificatIntent);
 
         Bundle extras = getResultExtras(true);
         extras.putInt(PushIOManager.PUSH_STATUS, PushIOManager.PUSH_HANDLED_IN_APP);
+
         setResultExtras(extras);
         this.abortBroadcast();
 
