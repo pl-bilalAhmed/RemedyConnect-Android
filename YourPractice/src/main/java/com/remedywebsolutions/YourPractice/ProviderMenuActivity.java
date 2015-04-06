@@ -41,7 +41,7 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
             getSupportActionBar().setHomeButtonEnabled(false);
         }
         menuButtons = new ArrayList<Button>();
-        View target =  findViewById(R.id.imageView2);
+        View target =  findViewById(R.id.menuButton3);
         badge = new BadgeView(this, target);
         menuButtons.add((Button) this.findViewById(R.id.menuButton3));
         menuButtons.add((Button) this.findViewById(R.id.menuButton4));
@@ -124,11 +124,12 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
         @Override
         public void onRequestSuccess(GetProviderUnreadCallsResponse inboxItemsResponse) {
             if(inboxItemsResponse.successfull) {
-
-                badge.setText(Integer.toString(inboxItemsResponse.count));
-                badge.setTextSize(16);
-                badge.setBadgeMargin(20);
-                badge.show();
+                if(inboxItemsResponse.count > 0) {
+                    badge.setText(Integer.toString(inboxItemsResponse.count));
+                    badge.setTextSize(16);
+                    badge.setBadgeMargin(20);
+                    badge.show();
+                }
 
             }
         }

@@ -9,8 +9,8 @@
         android:id="@+id/mainMenuBackground"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
         android:src="@drawable/background_texture"
         android:scaleType="centerCrop"
         android:contentDescription="@string/menu_background"/>
@@ -30,43 +30,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/midButtonRow"
-        android:layout_alignTop="@+id/bottomButtonRow">
+
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
         <Button
             style="@style/MainMenuButton"
-            android:layout_width="0dp"
+            android:layout_width="275dp"
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
             android:id="@+id/menuButton3"
             android:layout_margin="10dp"
-            android:text="@string/MyMessages" />
+            android:text="@string/MyMessages"
+            android:layout_gravity="center_horizontal" />
 
         <Button
             style="@style/MainMenuButton"
-            android:layout_width="0dp"
+            android:layout_width="275dp"
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
             android:id="@+id/menuButton4"
             android:layout_margin="10dp"
-            android:text="@string/Admin" />
+            android:text="@string/Admin"
+            android:layout_gravity="center_horizontal|top" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:id="@+id/bottomButtonRow"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:layout_marginBottom="75dp">
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
 
 
 </RelativeLayout>

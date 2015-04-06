@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,6 +64,9 @@ public class DisplaySecureMessageActivity extends DefaultActivity implements Req
             MarkCallAsOpenedRequest cntReq = new MarkCallAsOpenedRequest(this, call.callID);
             spiceManager.execute(cntReq, this);
         }
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(ns);
+        nMgr.cancel(call.callID);
 
     }
 

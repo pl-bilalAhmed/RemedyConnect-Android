@@ -41,7 +41,7 @@ public class NotificationActivity extends DefaultActivity {
         String callId = alert.substring(indexof +2);
         alert = alert.substring(0,indexof+1);
         int cid = Integer.parseInt(callId);
-        displayNotification(cid);
+        displayNotification(cid,alert);
         new AlertDialog.Builder(NotificationActivity.this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(alert)
@@ -63,14 +63,14 @@ public class NotificationActivity extends DefaultActivity {
        // startActivity(intent);
     }
 
-    protected void displayNotification(int callid) {
+    protected void displayNotification(int callid,String alert) {
         Log.i("Start", "notification");
 
         // Invoking the default notification service //
         NotificationCompat.Builder  mBuilder =
                 new NotificationCompat.Builder(this);
         mBuilder.setAutoCancel(true);
-        String alert = getIntent().getStringExtra("alert");
+
         mBuilder.setContentTitle(alert);
         mBuilder.setContentText(alert);
         mBuilder.setTicker(alert);

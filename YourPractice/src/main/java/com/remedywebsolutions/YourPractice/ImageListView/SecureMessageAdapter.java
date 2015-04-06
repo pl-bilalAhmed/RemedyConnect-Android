@@ -81,7 +81,7 @@ public class SecureMessageAdapter extends BaseAdapter {
         {
             name = secureMessage.callerTitle + " " + name;
         }
-        patient.setText(name + " - " + Integer.toString(secureMessage.callID));
+        patient.setText(name );
       //  dob.setText(Integer.toString(secureMessage.callID));
         date.setText(secureMessage.messageDate);
         message.setText(secureMessage.message);
