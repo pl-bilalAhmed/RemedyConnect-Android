@@ -55,6 +55,7 @@
     <string name="yourMessage">Your message</string>
     <string name="sendYourMessage">Send message</string>
     <string name="loginMessage">Enter Your Provider Login:</string>
+    <string name="forgotpasswordMessage">Forgot password?</string>
     <string name="loginTextContent">Please enter your RemedyOnCall Admin Username and Password below. This log in will last 6 hours.</string>
     <string name="login">Login</string>
     <string name="ProviderSelection">Change application mode</string>

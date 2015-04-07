@@ -106,8 +106,8 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
                 startActivity(intent);
                 break;
             case R.id.menuButton4:
-                onClickFireActivity(3);
-                MainViewController.FireBrowser(this, "https://admin.remedyoncall.com");
+
+                MainViewController.FireBrowser(this, Data.ADMIN_URL);
 
                 break;
 

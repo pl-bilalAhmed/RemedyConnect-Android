@@ -14,6 +14,9 @@ public final class Data {
     public static final String mProviderMode = "provider";
     public static final String mPatientMode = "patient";
 
+   // public static final String ADMIN_URL = "https://admin.remedyoncall.com";
+    public static final String ADMIN_URL = "webteleservicestest.remedyconnect.com";
+
     @SuppressWarnings("FinalStaticMethod")
     public static final boolean isDataAvailable(Context context) {
         boolean data_available = true;

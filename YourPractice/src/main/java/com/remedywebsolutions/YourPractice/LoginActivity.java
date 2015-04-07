@@ -4,11 +4,14 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.MenuItem;
@@ -30,7 +33,13 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 
 import org.wordpress.passcodelock.PasscodeManagePasswordActivity;
 
-public class LoginActivity extends DefaultActivity {
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.List;
+
+public class LoginActivity extends DefaultActivity implements View.OnClickListener {
     private String username;
     private int physicianId, practiceId;
     private LoggedInDataStorage dataStorage;
@@ -77,13 +86,17 @@ public class LoginActivity extends DefaultActivity {
         Skin.applyActivityBackground(this);
         usernameEditor = (EditText) findViewById(R.id.userName);
         passwordEditor = (EditText) findViewById(R.id.password);
-
+        TextView forgotBtn = (TextView) findViewById(R.id.forgotPaswsord);
         progress = new ProgressDialog(this);
         progress.setCancelable(false);
         progress.setCanceledOnTouchOutside(false);
         progress.setIndeterminate(true);
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
+
+
+
+        forgotBtn.setOnClickListener(this);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +112,31 @@ public class LoginActivity extends DefaultActivity {
             }
         });
         dataStorage = new LoggedInDataStorage(LoginActivity.this);
+    }
+    public void onClick(View v)
+    {
+        assert usernameEditor.getText() != null;
+
+        username = usernameEditor.getText().toString();
+        Uri.Builder uriBuilder = new Uri.Builder();
+        uriBuilder.scheme("https");
+        uriBuilder.authority(Data.ADMIN_URL);
+        uriBuilder.appendPath("Mobile/Providers/Default.aspx");
+
+        try {
+            uriBuilder.appendQueryParameter("username",username);
+            Uri uri =  uriBuilder.build();
+
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+            this.startActivity(browserIntent);
+        }
+
+        catch (Exception e) {
+            System.out.println("URI Syntax Error: " + e.getMessage());
+
+
+        }
+
     }
 
     private final class LoginRequestListener implements RequestListener<LoginResponse> {
