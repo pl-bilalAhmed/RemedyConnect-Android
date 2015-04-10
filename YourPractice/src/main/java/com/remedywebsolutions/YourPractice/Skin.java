@@ -151,6 +151,23 @@ public class Skin {
         }
     }
 
+    public static void applyMenuButtonStyle(Activity mainMenuActivity,Button button) {
+        String filePath = getSkinDirectoryPath(mainMenuActivity) + "/button.9.png";
+        File buttonFile = new File(filePath);
+        Typeface typeface = Typeface.createFromAsset(mainMenuActivity.getAssets(), "fonts/OpenSans-CondLight.ttf");
+        if (buttonFile.exists()) {
+            Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
+            NinePatchDrawable np = NinePatchBitmapFactory.createNinePatchWithCapInsets(mainMenuActivity.getResources(),
+                    bitmapBg, 16, 16, bitmapBg.getHeight()-16, bitmapBg.getWidth()-16, null);
+
+            button.setTypeface(typeface);
+            Skin.setBackgroundOf(button, np);
+
+
+
+
+        }
+    }
     public static void applyProviderMenuButtons(Activity mainMenuActivity) {
         String filePath = getSkinDirectoryPath(mainMenuActivity) + "/button.9.png";
         File buttonFile = new File(filePath);

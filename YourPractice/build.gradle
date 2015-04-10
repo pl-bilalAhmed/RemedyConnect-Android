@@ -25,6 +25,15 @@ android {
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+
+
+    }
+    android.buildTypes.all { buildType ->
+
+        buildConfigField "String", "PASSWORD_PREFERENCE_KEY", "\"medsecurepin\""
+        buildConfigField "String", "PASSWORD_SALT", "\"medsecurepinfoo123\""
+        buildConfigField "String", "PASSWORD_ENC_SECRET", "\"medsecurepin5-maggio-2012\""
+
     }
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'

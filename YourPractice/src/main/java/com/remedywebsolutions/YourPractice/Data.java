@@ -41,7 +41,13 @@ public final class Data {
         editor.putString("mode", mPatientMode);
         editor.commit();
     }
-
+    @SuppressWarnings("FinalStaticMethod")
+    public static final void ClearAppMode(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.remove("mode");
+        editor.commit();
+    }
     @SuppressWarnings("FinalStaticMethod")
     public static final Boolean IsRegistered(Context context) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);

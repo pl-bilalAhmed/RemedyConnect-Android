@@ -246,10 +246,18 @@ public class DefaultActivity extends SherlockActivity {
                 startDownload(feedRoot, designPack);
                 return true;
             case R.id.menu_choose_practice:
+                Data.ClearAppMode(getApplicationContext());
                 intent = new Intent(this, PracticeSearchActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_provider_mode:
+                LoggedInDataStorage store = new LoggedInDataStorage(DefaultActivity.this);
+                store.logOut();
+
+                // Reset passcode lock
+                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+                invalidateOptionsMenu();
+                Data.ClearRegistered(getApplicationContext());
                 intent = new Intent(this, SelectModeActivity.class);
                 startActivity(intent);
                 return true;
@@ -262,7 +270,7 @@ public class DefaultActivity extends SherlockActivity {
                 storage.logOut();
                 Toast.makeText(DefaultActivity.this, "You've been logged out.", Toast.LENGTH_LONG).show();
                 // Reset passcode lock
-                AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
                 invalidateOptionsMenu();
                 Data.ClearRegistered(getApplicationContext());
                 intent = new Intent(this, LoginActivity.class);

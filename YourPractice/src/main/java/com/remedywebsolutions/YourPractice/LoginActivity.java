@@ -234,7 +234,7 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent passcodeIntent = new Intent(LoginActivity.this, PasscodeManagePasswordActivity.class);
+                            Intent passcodeIntent = new Intent(LoginActivity.this, com.remedywebsolutions.YourPractice.passcode.PasscodeManagePasswordActivity.class);
                             passcodeIntent.putExtra("type", ENABLE_PASSLOCK);
                             startActivityForResult(passcodeIntent, ENABLE_PASSLOCK);
                         }

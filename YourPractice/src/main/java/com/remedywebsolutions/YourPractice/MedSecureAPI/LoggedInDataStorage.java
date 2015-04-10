@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.remedywebsolutions.YourPractice.Data;
+
 import java.util.HashMap;
 
 /**
@@ -30,6 +32,7 @@ public class LoggedInDataStorage {
     public void logOut() {
         SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
         sp.edit().clear().commit();
+
     }
 
     public void StoreDataOnLogin(int physicianID, int practiceID, String token) {

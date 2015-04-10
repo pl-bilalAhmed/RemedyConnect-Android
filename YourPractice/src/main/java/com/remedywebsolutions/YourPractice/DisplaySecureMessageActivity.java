@@ -41,7 +41,7 @@ public class DisplaySecureMessageActivity extends DefaultActivity implements Req
 
    //     Skin.applyMainMenuBackground(this);
 
-        Skin.applyThemeLogo(this, true);
+        Skin.applyThemeLogo(this, false);
         TextView message = (TextView) findViewById(R.id.call);
         call = (SecureCallMessage)getIntent().getSerializableExtra("call");
         message.setText(call.message);

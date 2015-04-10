@@ -62,7 +62,9 @@
             </intent-filter>
         </activity>
 
-
+        <activity android:name="com.remedywebsolutions.YourPractice.passcode.PasscodePreferencesActivity" />
+        <activity android:name="com.remedywebsolutions.YourPractice.passcode.PasscodeUnlockActivity" />
+        <activity android:name="com.remedywebsolutions.YourPractice.passcode.PasscodeManagePasswordActivity" />
         <activity android:name=".DefaultActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".SelectModeActivity" />

@@ -33,28 +33,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/ModetextView"
-        android:id="@+id/midButtonRow">
+        android:id="@+id/midButtonRow"
+        android:layout_marginBottom="70dp"
+        android:orientation="vertical">
 
         <Button
             style="@style/MainMenuButton"
-            android:layout_width="0dp"
-            android:layout_height="109dp"
+            android:layout_width="275dp"
+            android:layout_height="50dp"
             android:layout_weight="0.5"
             android:id="@+id/provider_mode_button"
             android:layout_margin="10dp"
             android:text="@string/button_provide_staff_text"
-            android:textColor="#ff2a8ac7" />
+            android:textColor="#ffffffff"
+            android:layout_gravity="center_horizontal" />
 
         <Button
             style="@style/MainMenuButton"
-            android:layout_width="0dp"
-            android:layout_height="109dp"
+            android:layout_width="275dp"
+            android:layout_height="50dp"
             android:layout_weight="0.5"
             android:id="@+id/patient_mode_button"
             android:layout_margin="10dp"
-            android:textColor="#ff2a8ac7"
-            android:text="@string/button_patient_gardian_text" />
+            android:textColor="#ffffffff"
+            android:text="@string/button_patient_gardian_text"
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 
@@ -64,11 +67,25 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/practice_select_practice_mode_text"
         android:id="@+id/ModetextView"
-        android:layout_centerVertical="true"
         android:gravity="center"
 
         android:textColor="#ffffffff"
-       />
 
+        android:layout_above="@+id/midButtonRow"
+        android:layout_marginLeft="55dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/practice_return_toSearch"
+        android:id="@+id/return_to_Search"
+        android:gravity="center"
+
+        android:textColor="#ffffffff"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:layout_alignBottom="@+id/mainMenuBackground"
+        android:clickable="true" />
 </RelativeLayout>

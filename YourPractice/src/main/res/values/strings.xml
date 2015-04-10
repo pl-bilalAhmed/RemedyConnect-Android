@@ -16,7 +16,8 @@
     <string name="title_select_practice_mode">Select your application mode</string>
     <string name="button_provide_staff_text">PROVIDER / STAFF</string>
     <string name="button_patient_gardian_text">PATIENT / GUARDIAN</string>
-    <string name="practice_select_practice_mode_text">Tell us whether you are a Provider or Patient of this office.</string>
+    <string name="practice_select_practice_mode_text">I am a ...</string>
+    <string name="practice_return_toSearch">Return To Search</string>
     <string name="practice_search_description">Welcome! Your are about to download information that your primary care provider has approved. Please ensure that you have a working Internet connection before starting the search. \nThis information is only intended for registered patients of this organization. Please choose the practice where you, or your family member, is a registered patient.\nTo select your practice, type and search. If you would like to search for the nearest practice, start a location-based search below.</string>
     <string name="practiceSearchEditHint">Enter Your Practice\'s Name</string>
     <string name="practiceSearchStartByNameText">Search by name</string>
@@ -54,9 +55,9 @@
     <string name="subject">Subject</string>
     <string name="yourMessage">Your message</string>
     <string name="sendYourMessage">Send message</string>
-    <string name="loginMessage">Enter Your Provider Login:</string>
+    <string name="loginMessage">This login will last 6 hours</string>
     <string name="forgotpasswordMessage">Forgot password?</string>
-    <string name="loginTextContent">Please enter your RemedyOnCall Admin Username and Password below. This log in will last 6 hours.</string>
+    <string name="loginTextContent">Please enter your RemedyOnCall Admin Username and Password below.</string>
     <string name="login">Login</string>
     <string name="ProviderSelection">Change application mode</string>
     <string name="selectRecipientPrompt">Please select a recipient</string>

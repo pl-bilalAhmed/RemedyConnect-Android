@@ -19,12 +19,24 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         Skin.applyThemeLogo(this, true);
         setTitle(R.string.title_select_practice);
 
-        View b1 = this.findViewById(R.id.provider_mode_button);
+        Button b1 = (Button)this.findViewById(R.id.provider_mode_button);
+        Skin.applyMenuButtonStyle(this,b1);
         b1.setOnClickListener(this);
 
-        View b2 = this.findViewById(R.id.patient_mode_button);
+        Button b2 = (Button)this.findViewById(R.id.patient_mode_button);
+        Skin.applyMenuButtonStyle(this,b2);
         b2.setOnClickListener(this);
 
+        View search = this.findViewById(R.id.return_to_Search);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Data.ClearAppMode(getApplicationContext());
+                Intent intent = new Intent(getApplicationContext(), PracticeSearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -48,7 +60,7 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         }
         else
         {
-            AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
             Data.SetPatientAppMode(getApplicationContext());
             MainViewController.FireRootActivity(this);
             finish();

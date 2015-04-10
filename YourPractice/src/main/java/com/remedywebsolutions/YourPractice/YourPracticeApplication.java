@@ -22,7 +22,7 @@ public class YourPracticeApplication extends Application {
         // Switch stacking notifications off.
         pushIOManager.setNotificationsStacked(false);
 
-        AppLockManager.getInstance().enableDefaultAppLockIfAvailable(this);
+        com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().enableDefaultAppLockIfAvailable(this);
 
 
     }

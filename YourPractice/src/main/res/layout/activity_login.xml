@@ -33,14 +33,7 @@
         android:layout_marginRight="10dp" />
 
 
-    <TextView
-        android:layout_width="316dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/loginMessage"
-        android:id="@+id/textView"
-        android:textColor="#ffffffff"
-        android:layout_marginLeft="33dp" />
+
 
     <EditText
         android:layout_width="fill_parent"
@@ -87,4 +80,15 @@
         android:layout_marginLeft="33dp"
         android:layout_marginTop="15dp"
         android:clickable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/loginMessage"
+        android:id="@+id/loginTime"
+        android:textColor="#ffffffff"
+        android:layout_marginTop="45dp"
+        android:gravity="fill_horizontal|center_horizontal"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>
