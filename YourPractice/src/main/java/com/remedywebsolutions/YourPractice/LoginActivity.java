@@ -30,6 +30,7 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRe
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPracticeUtcTimeZoneOffsetRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
+import com.remedywebsolutions.YourPractice.passcode.AppLockManager;
 
 import org.wordpress.passcodelock.PasscodeManagePasswordActivity;
 
@@ -227,19 +228,32 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
 
             Toast.makeText(LoginActivity.this, "You've been logged in.", Toast.LENGTH_SHORT).show();
 
-            new AlertDialog.Builder(LoginActivity.this)
-                    .setIcon(android.R.drawable.ic_dialog_info)
-                    .setTitle("Set up a passcode")
-                    .setMessage("For safety reasons, setting up a 4-digit passcode is necessary.\n\nPlease press OK to proceed.")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent passcodeIntent = new Intent(LoginActivity.this, com.remedywebsolutions.YourPractice.passcode.PasscodeManagePasswordActivity.class);
-                            passcodeIntent.putExtra("type", ENABLE_PASSLOCK);
-                            startActivityForResult(passcodeIntent, ENABLE_PASSLOCK);
-                        }
-                    })
-                    .show();
+            if(AppLockManager.getInstance().isAppLockFeatureEnabled())
+            {
+                Intent intent = new Intent(LoginActivity.this, ProviderMenuActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Intent intent = new Intent(LoginActivity.this, CreatePinActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+
+          //  new AlertDialog.Builder(LoginActivity.this)
+           //         .setIcon(android.R.drawable.ic_dialog_info)
+             //       .setTitle("Set up a passcode")
+              //      .setMessage("For safety reasons, setting up a 4-digit passcode is necessary.\n\nPlease press OK to proceed.")
+              //      .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+             //           @Override
+                //        public void onClick(DialogInterface dialogInterface, int i) {
+                //            Intent passcodeIntent = new Intent(LoginActivity.this, com.remedywebsolutions.YourPractice.passcode.PasscodeManagePasswordActivity.class);
+                //            passcodeIntent.putExtra("type", ENABLE_PASSLOCK);
+                 //           startActivityForResult(passcodeIntent, ENABLE_PASSLOCK);
+                 //       }
+                //    })
+                 //   .show();
         }
     }
 

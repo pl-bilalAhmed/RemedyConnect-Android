@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff2a8ac7"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="fill_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/logo"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/roc_logo"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pinlineone"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/createPinTextView"
+        android:textColor="#ffffffff"
+        android:layout_weight="0.06"
+        android:layout_centerVertical="true"
+        android:gravity="center|left"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pinlinetwo"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/createPinLinetwoTextView"
+        android:textColor="#ffffffff"
+        android:layout_weight="0.06"
+        android:layout_centerVertical="true"
+        android:gravity="center|left"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="10dp" />
+    <Button
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/createpin"
+        android:id="@+id/buttonCreatePin"
+        android:textColor="#ff2a8ac7"
+        android:background="#ffffffff"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp" />
+
+</LinearLayout>

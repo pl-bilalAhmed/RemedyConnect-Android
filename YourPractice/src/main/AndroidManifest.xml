@@ -61,10 +61,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.remedywebsolutions.YourPractice.passcode.PasscodePreferencesActivity" />
-        <activity android:name="com.remedywebsolutions.YourPractice.passcode.PasscodeUnlockActivity" />
-        <activity android:name="com.remedywebsolutions.YourPractice.passcode.PasscodeManagePasswordActivity" />
+        <activity android:name=".passcode.PasscodePreferencesActivity" />
+        <activity android:name=".passcode.PasscodeUnlockActivity" />
+        <activity android:name=".passcode.PasscodeManagePasswordActivity" />
         <activity android:name=".DefaultActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".SelectModeActivity" />
@@ -195,6 +194,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.remedywebsolutions.YourPractice.DefaultActivity" />
+        </activity>
+        <activity
+            android:name=".CreatePinActivity"
+            android:label="@string/title_activity_create_pin" >
         </activity>
     </application>
 
