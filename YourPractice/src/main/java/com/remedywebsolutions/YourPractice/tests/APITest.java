@@ -254,7 +254,7 @@ public class APITest extends ActivityInstrumentationTestCase2<LoginActivity> {
         practiceID = loginResponse.getPracticeID();
         physicianID = loginResponse.getPhysicianID();
         String token = loginResponse.getToken();
-        dataStorage.StoreDataOnLogin(physicianID, practiceID, token);
+        dataStorage.StoreDataOnLogin(physicianID, practiceID, token,"zoltan");
         InsertPhysicianMobileDeviceRequest registerReq =
                 new InsertPhysicianMobileDeviceRequest(physicianID, practiceID,
                                                         "zoltan", loginActivity);

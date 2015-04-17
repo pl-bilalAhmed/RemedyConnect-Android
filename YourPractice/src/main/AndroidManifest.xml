@@ -68,6 +68,8 @@
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".SelectModeActivity" />
         <activity android:name=".ProviderMenuActivity" />
+        <activity android:name=".LogoutActivity" />
+
         <activity android:name=".SecureCallListActivity" >
             <intent-filter>
                 <action android:name="com.remedywebsolutions.YourPractice.NOTIFICATIONPRESSED" />

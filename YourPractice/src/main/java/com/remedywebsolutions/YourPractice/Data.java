@@ -34,6 +34,16 @@ public final class Data {
         editor.putString("mode", mProviderMode);
         editor.commit();
     }
+
+
+    @SuppressWarnings("FinalStaticMethod")
+    public static final boolean IsPinSet(Context context) {
+        if (com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+            return com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().isPasswordLocked();
+        }
+     return false;
+    }
+
     @SuppressWarnings("FinalStaticMethod")
     public static final void SetPatientAppMode(Context context) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);

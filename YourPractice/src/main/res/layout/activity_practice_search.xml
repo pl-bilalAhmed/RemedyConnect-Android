@@ -58,17 +58,24 @@
         </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Search by current location"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/linearLayout"
+        android:id="@+id/SearchByLoc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="82dp"
         android:clickable="true"
         android:textColor="#ffffffff"
-        android:onClick="onClick" />
+        android:onClick="onClick"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_below="@+id/practiceSearchText"
+        android:textAlignment="gravity"
+        android:gravity="center_horizontal" />
+
 
 
 </RelativeLayout>

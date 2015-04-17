@@ -1,5 +1,6 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.pushio.manager.PushIOManager;
@@ -24,6 +25,12 @@ public class YourPracticeApplication extends Application {
 
         com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().enableDefaultAppLockIfAvailable(this);
 
+        if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().forcePasswordLock();
+        }
 
     }
-}
+
+
+
+    }

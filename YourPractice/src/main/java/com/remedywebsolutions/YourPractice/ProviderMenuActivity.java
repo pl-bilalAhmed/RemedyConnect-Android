@@ -1,8 +1,10 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -53,6 +55,8 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
 
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
@@ -65,6 +69,8 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @Override
     protected void onStart() {
@@ -107,7 +113,13 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
                 break;
             case R.id.menuButton4:
 
-                MainViewController.FireBrowser(this, Data.ADMIN_URL);
+                Uri.Builder uriBuilder = new Uri.Builder();
+                uriBuilder.scheme("https");
+                uriBuilder.authority(Data.ADMIN_URL);
+                Uri uri =  uriBuilder.build();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+                this.startActivity(browserIntent);
+             //   MainViewController.FireBrowser(this, Data.ADMIN_URL);
 
                 break;
 

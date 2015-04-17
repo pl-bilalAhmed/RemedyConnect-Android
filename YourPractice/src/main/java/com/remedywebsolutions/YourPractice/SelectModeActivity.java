@@ -60,7 +60,7 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         }
         else
         {
-            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().setCurrentAppLock(null);
             Data.SetPatientAppMode(getApplicationContext());
             MainViewController.FireRootActivity(this);
             finish();

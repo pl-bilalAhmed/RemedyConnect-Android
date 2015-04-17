@@ -154,7 +154,7 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
             if (token != null) {
                 Data.SetRegistered(getApplicationContext());
                 progress.setMessage("Logged in, storing data...");
-                dataStorage.StoreDataOnLogin(physicianId, practiceId, token);
+                dataStorage.StoreDataOnLogin(physicianId, practiceId, token,username);
                 progress.setMessage("Logged in. Registering device...");
                 InsertPhysicianMobileDeviceRequest req =
                         new InsertPhysicianMobileDeviceRequest(physicianId,
@@ -228,13 +228,17 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
 
             Toast.makeText(LoginActivity.this, "You've been logged in.", Toast.LENGTH_SHORT).show();
 
-            if(AppLockManager.getInstance().isAppLockFeatureEnabled())
+            if(Data.IsPinSet(getApplicationContext()))
             {
+
                 Intent intent = new Intent(LoginActivity.this, ProviderMenuActivity.class);
                 startActivity(intent);
                 finish();
             }
             else {
+                if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+                    com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().forcePasswordLock();
+                }
                 Intent intent = new Intent(LoginActivity.this, CreatePinActivity.class);
                 startActivity(intent);
                 finish();

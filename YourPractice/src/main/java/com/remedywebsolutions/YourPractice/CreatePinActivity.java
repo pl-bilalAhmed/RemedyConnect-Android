@@ -48,6 +48,7 @@ public class CreatePinActivity extends DefaultActivity implements View.OnClickLi
             case ENABLE_PASSLOCK:
                 if (resultCode == RESULT_OK) {
                     Toast.makeText(CreatePinActivity.this, "Passcode successfully set.", Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(this, ProviderMenuActivity.class);
                     startActivity(intent);
                     finish();

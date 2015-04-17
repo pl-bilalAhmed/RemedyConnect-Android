@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,11 +21,12 @@ import com.actionbarsherlock.view.Menu;
 import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
 import com.remedywebsolutions.YourPractice.downloader.RootDownloadService;
 import com.remedywebsolutions.YourPractice.parser.MainParser;
+import com.remedywebsolutions.YourPractice.passcode.AppLockManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PracticeSearchActivity extends DefaultActivity implements OnClickListener {
+public class PracticeSearchActivity extends DefaultActivity implements OnClickListener,View.OnTouchListener {
     ProgressDialog progress;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,9 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
 
      //   startSearchByName.setOnClickListener(this);
-     //   startSearchByLocation.setOnClickListener(this);
+        View locSearch = this.findViewById(R.id.SearchByLoc);
+        locSearch.setOnClickListener(this);
+        locSearch.setOnTouchListener(this);
     }
 
     @Override
@@ -89,7 +93,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     }
 
     public void startFetchingByName(String search) {
-
+        AppLockManager.getInstance().setCurrentAppLock(null);
         String practiceName = search;
         Intent intent = new Intent(this, RootDownloadService.class);
         intent.putExtra("receiver", new DownloadReceiver(new Handler()));
@@ -132,6 +136,12 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
         startService(intent);
     }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        startFetchingByLocation();
+        return false;
+    }
+
     private class DownloadReceiver extends ResultReceiver {
         public DownloadReceiver(Handler handler) {
             super(handler);
@@ -139,28 +149,34 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-            super.onReceiveResult(resultCode, resultData);
-            if (resultCode == DownloadStatusCodes.NETWORK_AVAILABLE) {
-                progress.show();
-            }
-            if (resultCode == DownloadStatusCodes.UPDATE_PROGRESS) {
-                int status = resultData.getInt("progress");
-                progress.setProgress(status);
-            }
-            if (resultCode == DownloadStatusCodes.DOWNLOAD_FINISHED) {
-                progress.dismiss();
-                startParsingPractices();
-                setResult(Activity.RESULT_OK);
-            }
-            if (resultCode == DownloadStatusCodes.DOWNLOAD_FAILED) {
-                progress.dismiss();
-                assert getApplicationContext() != null;
-                Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
-                setResult(Activity.RESULT_FIRST_USER);
-            }
+            try {
+                super.onReceiveResult(resultCode, resultData);
+                if (resultCode == DownloadStatusCodes.NETWORK_AVAILABLE) {
+                    progress.show();
+                }
+                if (resultCode == DownloadStatusCodes.UPDATE_PROGRESS) {
+                    int status = resultData.getInt("progress");
+                    progress.setProgress(status);
+                }
+                if (resultCode == DownloadStatusCodes.DOWNLOAD_FINISHED) {
+                    progress.dismiss();
+                    startParsingPractices();
+                    setResult(Activity.RESULT_OK);
+                }
+                if (resultCode == DownloadStatusCodes.DOWNLOAD_FAILED) {
+                    progress.dismiss();
+                    assert getApplicationContext() != null;
+                    Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
+                    setResult(Activity.RESULT_FIRST_USER);
+                }
 
-            if (resultCode == DownloadStatusCodes.SWITCH_TO_DETERMINATE) {
-                progress.setIndeterminate(false);
+                if (resultCode == DownloadStatusCodes.SWITCH_TO_DETERMINATE) {
+                    progress.setIndeterminate(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
             }
         }
     }

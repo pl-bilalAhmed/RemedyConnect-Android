@@ -51,7 +51,7 @@ public class PasscodeManagePasswordActivity extends com.remedywebsolutions.YourP
                 } else {
                     if( passLock.equals(unverifiedPasscode)) {
                         setResult(RESULT_OK);
-                        com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(passLock);
+
                         finish();
                     } else {
                         unverifiedPasscode = null;

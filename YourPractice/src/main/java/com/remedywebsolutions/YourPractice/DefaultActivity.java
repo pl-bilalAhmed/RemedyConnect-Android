@@ -84,10 +84,13 @@ public class DefaultActivity extends SherlockActivity {
         downloadSummary = new DownloadTaskStatusSummary();
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
         this.invalidateOptionsMenu();
+
     }
 
     @Override
@@ -266,14 +269,19 @@ public class DefaultActivity extends SherlockActivity {
                 startActivity(intent);
                 return true;
             case R.id.menu_logout:
-                LoggedInDataStorage storage = new LoggedInDataStorage(DefaultActivity.this);
-                storage.logOut();
-                Toast.makeText(DefaultActivity.this, "You've been logged out.", Toast.LENGTH_LONG).show();
+
+              //  LoggedInDataStorage storage = new LoggedInDataStorage(DefaultActivity.this);
+              //  String un = storage.RetrieveData().get("username").toString();
+
+               // storage.logOut();
+
+
+            //    Toast.makeText(DefaultActivity.this, "You've been logged out.", Toast.LENGTH_LONG).show();
                 // Reset passcode lock
-                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+              //  com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
                 invalidateOptionsMenu();
                 Data.ClearRegistered(getApplicationContext());
-                intent = new Intent(this, LoginActivity.class);
+                intent = new Intent(this, LogoutActivity.class);
                 startActivity(intent);
                 finish();
                 return true;

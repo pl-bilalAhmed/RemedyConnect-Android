@@ -35,12 +35,13 @@ public class LoggedInDataStorage {
 
     }
 
-    public void StoreDataOnLogin(int physicianID, int practiceID, String token) {
+    public void StoreDataOnLogin(int physicianID, int practiceID, String token,String userName) {
         SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("physicianID", physicianID);
         editor.putInt("practiceID", practiceID);
         editor.putString("token", token);
+        editor.putString("username", userName);
         editor.commit();
     }
 
@@ -87,7 +88,7 @@ public class LoggedInDataStorage {
         String token = sp.getString("token", "");
         String name = sp.getString("name", "");
         String physicians = sp.getString("physicians", "");
-
+        String username = sp.getString("username", "");
         HashMap<String, String> userData = new HashMap<String, String>(7);
         userData.put("physicianID", Integer.toString(physicianID));
         userData.put("practiceID", Integer.toString(practiceID));
@@ -96,6 +97,7 @@ public class LoggedInDataStorage {
         userData.put("name", name);
         userData.put("physicians", physicians);
         userData.put("timezoneOffset", Integer.toString(timezoneOffset));
+        userData.put("username", username);
         return userData;
     }
 
