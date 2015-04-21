@@ -51,7 +51,7 @@ public class PasscodeManagePasswordActivity extends com.remedywebsolutions.YourP
                 } else {
                     if( passLock.equals(unverifiedPasscode)) {
                         setResult(RESULT_OK);
-
+                        com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(passLock);
                         finish();
                     } else {
                         unverifiedPasscode = null;
@@ -63,7 +63,7 @@ public class PasscodeManagePasswordActivity extends com.remedywebsolutions.YourP
                 
             case PasscodePreferencesActivity.CHANGE_PASSWORD:
                 //verify old password
-                if( AppLockManager.getInstance().getCurrentAppLock().verifyPassword(passLock) ) {
+                if(   com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().verifyPassword(passLock) ) {
                     topMessage.setText(R.string.passcode_enter_passcode);
                     type = PasscodePreferencesActivity.ENABLE_PASSLOCK;
                 } else {
