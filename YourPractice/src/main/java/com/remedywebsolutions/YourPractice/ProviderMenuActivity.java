@@ -1,6 +1,5 @@
 package com.remedywebsolutions.YourPractice;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,21 +7,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
-import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.SubMenu;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.readystatesoftware.viewbadger.BadgeView;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.GetProviderCallsResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.GetProviderUnreadCallsResponse;
-import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetProviderCallsRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetProviderUnreadCallsRequest;
-import com.remedywebsolutions.YourPractice.parser.MainParser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -154,7 +147,7 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
             new AlertDialog.Builder(ProviderMenuActivity.this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle("Your session has expired")
-                    .setMessage("You will need to log in again. Please OK to proceed.")
+                    .setMessage("You will need to log in again. Please press OK to proceed.")
                     .setPositiveButton("OK", new AlertDialog.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

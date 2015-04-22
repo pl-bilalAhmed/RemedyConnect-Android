@@ -38,9 +38,10 @@
         android:accessibilityLiveRegion="assertive"
         android:baselineAligned="false"
         android:showDividers="beginning|middle|end"
-        android:textAlignment="textStart"
+
         android:gravity="bottom"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        >
 
         <SearchView
             android:layout_width="fill_parent"
@@ -57,25 +58,73 @@
             android:gravity="right" />
         </LinearLayout>
 
-    <TextView
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Search by current location"
-        android:id="@+id/SearchByLoc"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
-        android:clickable="true"
-        android:textColor="#ffffffff"
-        android:onClick="onClick"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_below="@+id/practiceSearchText"
-        android:textAlignment="gravity"
-        android:gravity="center_horizontal" />
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentBottom="true"
+      >
 
+
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:id="@+id/imageView2"
+
+            android:bottomRightRadius="10dp"
+            android:bottomLeftRadius="10dp"
+            android:topLeftRadius="10dp"
+            android:topRightRadius="10dp"
+            android:background="@drawable/button"
+            android:onClick="onClick"
+            android:src="@drawable/searchimg"
+            android:clickable="true"
+            android:cropToPadding="false"
+            android:scaleType="fitStart"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="25dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Can&apos;t Find Your Practice?"
+            android:id="@+id/SearchByLocCant"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:textSize="18dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+
+            android:textAlignment="gravity"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="45dp" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Search by current location"
+            android:id="@+id/SearchByLoc"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:textColor="#ff070fff"
+            android:onClick="onClick"
+            android:textSize="20dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+
+            android:textAlignment="gravity"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="45dp"
+            android:layout_marginLeft="45dp" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>
