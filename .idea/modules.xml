@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Android.iml" filepath="$PROJECT_DIR$/Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/YourPractice/YourPractice.iml" filepath="$PROJECT_DIR$/YourPractice/YourPractice.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library-passcode/library-passcode.iml" filepath="$PROJECT_DIR$/library-passcode/library-passcode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gradle/gradle.iml" filepath="$PROJECT_DIR$/gradle/gradle.iml" />
     </modules>
   </component>
 </project>

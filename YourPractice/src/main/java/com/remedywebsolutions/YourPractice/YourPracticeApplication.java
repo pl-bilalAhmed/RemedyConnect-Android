@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.pushio.manager.PushIOManager;
+import com.remedywebsolutions.YourPractice.passcode.DefaultAppLock;
 
 import org.wordpress.passcodelock.AppLockManager;
 
@@ -22,6 +23,7 @@ public class YourPracticeApplication extends Application {
 
         // Switch stacking notifications off.
         pushIOManager.setNotificationsStacked(false);
+
 
         com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().enableDefaultAppLockIfAvailable(this);
 

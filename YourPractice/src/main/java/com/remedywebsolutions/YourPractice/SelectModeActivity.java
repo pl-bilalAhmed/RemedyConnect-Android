@@ -45,6 +45,8 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         Button b = (Button)v;
         if(b.getId() == R.id.provider_mode_button)
         {
+            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().enableDefaultAppLockIfAvailable(getApplication());
+
             Data.SetProviderAppMode(getApplicationContext());
             if(Data.IsRegistered(getApplicationContext())) {
                 Intent intent = new Intent(this, ProviderMenuActivity.class);

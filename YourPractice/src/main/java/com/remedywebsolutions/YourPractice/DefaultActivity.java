@@ -101,6 +101,20 @@ public class DefaultActivity extends SherlockActivity {
     }
 
     @Override
+    protected void onPause()
+    {
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+
+    }
+
+    @Override
     protected void onStop()
     {
         super.onStop();
@@ -258,7 +272,9 @@ public class DefaultActivity extends SherlockActivity {
                 store.logOut();
 
                 // Reset passcode lock
-                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+                if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+                    com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+                }
                 invalidateOptionsMenu();
                 Data.ClearRegistered(getApplicationContext());
                 intent = new Intent(this, SelectModeActivity.class);
