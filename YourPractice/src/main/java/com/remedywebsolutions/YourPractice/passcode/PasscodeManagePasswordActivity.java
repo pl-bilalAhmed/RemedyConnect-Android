@@ -3,6 +3,8 @@ package com.remedywebsolutions.YourPractice.passcode;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
+
 import org.wordpress.passcodelock.*;
 import org.wordpress.passcodelock.AppLockManager;
 
@@ -53,6 +55,9 @@ public class PasscodeManagePasswordActivity extends com.remedywebsolutions.YourP
                         setResult(RESULT_OK);
 
                         com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(passLock);
+                        LoggedInDataStorage dataStorage = new LoggedInDataStorage(PasscodeManagePasswordActivity.this);
+
+                        com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setOneTimeTimeout(dataStorage.GetPinTimeout());
                         finish();
                     } else {
                         unverifiedPasscode = null;

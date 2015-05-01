@@ -23,11 +23,13 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.pushio.manager.PushIOManager;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.GetProviderPinTimeoutResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.LoginResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.Physician;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.PhysiciansResponse;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPhysiciansRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetPracticeUtcTimeZoneOffsetRequest;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetProviderPinTimeoutRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.InsertPhysicianMobileDeviceRequest;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.LoginRequest;
 import com.remedywebsolutions.YourPractice.passcode.AppLockManager;
@@ -155,14 +157,11 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
                 Data.SetRegistered(getApplicationContext());
                 progress.setMessage("Logged in, storing data...");
                 dataStorage.StoreDataOnLogin(physicianId, practiceId, token,username);
-                progress.setMessage("Logged in. Registering device...");
-                InsertPhysicianMobileDeviceRequest req =
-                        new InsertPhysicianMobileDeviceRequest(physicianId,
-                                practiceId,
-                                                                username,
-                                                                LoginActivity.this);
 
-                spiceManager.execute(req, new RegisterDeviceListener());
+                GetProviderPinTimeoutRequest req =
+                        new GetProviderPinTimeoutRequest(LoginActivity.this);
+
+                spiceManager.execute(req, new GetPinTimeoutRequestListener());
             }
             else {
                 progress.dismiss();
@@ -176,6 +175,37 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
         }
     }
 
+    private final class GetPinTimeoutRequestListener implements RequestListener<GetProviderPinTimeoutResponse> {
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+            defaultSpiceFailureHandler(spiceException);
+        }
+
+        @Override
+        public void onRequestSuccess(GetProviderPinTimeoutResponse response) {
+            int timeOut = response.pinTimeoutSeconds;
+
+            if (timeOut <= 0) {
+                timeOut = 60;
+            }
+
+            Data.SetRegistered(getApplicationContext());
+            progress.setMessage("getting preference data...");
+            dataStorage.StorePinTimeout(timeOut);
+            AppLockManager.getInstance().getCurrentAppLock().DEFAULT_TIMEOUT = timeOut;
+            AppLockManager.getInstance().getCurrentAppLock().EXTENDED_TIMEOUT = timeOut;
+
+            InsertPhysicianMobileDeviceRequest req =
+                    new InsertPhysicianMobileDeviceRequest(physicianId,
+                            practiceId,
+                            username,
+                            LoginActivity.this);
+
+            spiceManager.execute(req, new RegisterDeviceListener());
+
+
+        }
+    }
     private final class RegisterDeviceListener implements RequestListener<String> {
         @Override
         public void onRequestFailure(SpiceException spiceException) {

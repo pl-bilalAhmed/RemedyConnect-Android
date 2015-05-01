@@ -24,7 +24,7 @@ public class DefaultAppLock extends com.remedywebsolutions.YourPractice.passcode
     private Application currentApp; //Keep a reference to the app that invoked the locker
     private SharedPreferences settings;
     private Date lostFocusDate;
-
+    private boolean showingUnlock = false;
     //Add back-compatibility
     private static final String OLD_PASSWORD_SALT = "sadasauidhsuyeuihdahdiauhs";
     private static final String OLD_APP_LOCK_PASSWORD_PREF_KEY = "wp_app_lock_password_key";
@@ -76,6 +76,7 @@ public class DefaultAppLock extends com.remedywebsolutions.YourPractice.passcode
 
         if( password.equalsIgnoreCase(storedPassword) ) {
             lostFocusDate = new Date();
+            showingUnlock = false;
             return true;
         } else {
             return false;
@@ -147,7 +148,7 @@ public class DefaultAppLock extends com.remedywebsolutions.YourPractice.passcode
         return encryptedPwd;
     }
 
-    private boolean mustShowUnlockSceen() {
+    public boolean mustShowUnlockSceen() {
 
         if( isPasswordLocked() == false)
             return false;
@@ -195,8 +196,11 @@ public class DefaultAppLock extends com.remedywebsolutions.YourPractice.passcode
         if(mustShowUnlockSceen()) {
             //uhhh ohhh!
             Intent i = new Intent(arg0.getApplicationContext(), PasscodeUnlockActivity.class);
+
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
             arg0.getApplication().startActivity(i);
+            showingUnlock = true;
             return;
         }
 

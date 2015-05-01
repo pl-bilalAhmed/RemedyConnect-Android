@@ -7,6 +7,6 @@ import java.util.ArrayList;
  */
 public class GetProviderPinTimeoutResponse extends BaseResponse {
 
-    public int ProviderPinTimeoutResponse;
+    public int pinTimeoutSeconds;
 
 }

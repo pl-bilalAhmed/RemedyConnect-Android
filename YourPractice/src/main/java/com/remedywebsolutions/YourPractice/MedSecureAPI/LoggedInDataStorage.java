@@ -45,6 +45,21 @@ public class LoggedInDataStorage {
         editor.commit();
     }
 
+    public void StorePinTimeout(int timeout) {
+        SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("pinTimeout", timeout);
+        editor.commit();
+    }
+    public int GetPinTimeout() {
+        SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
+        int to = sp.getInt("pinTimeout", 0);
+        if(to <=0)
+        {
+            return 60;
+        }
+        return to;
+    }
     public void StorePhysicians(String physiciansJSON) {
         SharedPreferences sp = context.getSharedPreferences(prefKey, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();

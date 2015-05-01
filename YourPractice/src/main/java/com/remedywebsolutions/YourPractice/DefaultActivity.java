@@ -43,6 +43,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -56,11 +57,12 @@ public class DefaultActivity extends SherlockActivity {
     ProgressDialog progress;
     ExecutorService threadPoolExecutor;
     DownloadTaskStatusSummary downloadSummary;
-
+    private Handler handler = new Handler();
     static int SIZE_OF_THREAD_POOL = 6;
     static int DOWNLOAD_BUFFER_SIZE = 8192;
     static int CONNECTION_TIMEOUT = 5000;
 
+    private static Date lastActivityDate;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,14 +92,45 @@ public class DefaultActivity extends SherlockActivity {
     protected void onResume() {
         super.onResume();
         this.invalidateOptionsMenu();
-
+        int to = com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().EXTENDED_TIMEOUT;
+        handler.postDelayed(runnable, to);
+    }
+    private void checkForIdle()
+    {
+        Date now = new Date();
+        long now_ms = now.getTime();
+        int secondsPassed = (int) (now_ms - lastActivityDate.getTime())/(1000);
+        secondsPassed = Math.abs(secondsPassed);
+        int to = com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().EXTENDED_TIMEOUT;
+        if(secondsPassed > to)
+        {
+            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().mustShowUnlockSceen();
+            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().onActivityResumed(this);
+            lastActivityDate =  new Date();
+        }
+        else
+        {
+            handler.postDelayed(runnable, to + 5);
+        }
     }
 
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+                checkForIdle();
+            }
+
+        }
+    };
     @Override
     protected void onStart()
     {
         super.onStart();
         FlurryAgent.onStartSession(this, "G8V8NZ5BZ6BBJHF48B5W");
+        lastActivityDate =  new Date();
+        LoggedInDataStorage store = new LoggedInDataStorage(DefaultActivity.this);
+        handler.postDelayed(runnable, 15000);
     }
 
     @Override

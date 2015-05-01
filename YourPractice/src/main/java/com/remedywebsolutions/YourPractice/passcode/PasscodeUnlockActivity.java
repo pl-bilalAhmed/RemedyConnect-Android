@@ -19,6 +19,13 @@ public class PasscodeUnlockActivity extends com.remedywebsolutions.YourPractice.
     }
 
     @Override
+    protected void onPause()
+    {
+        super.onPause();
+        finish();
+    }
+
+    @Override
     public void onBackPressed() {
         com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().forcePasswordLock();
         Intent i = new Intent();

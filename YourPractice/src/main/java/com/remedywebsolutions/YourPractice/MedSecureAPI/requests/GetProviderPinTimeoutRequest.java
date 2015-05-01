@@ -28,10 +28,10 @@ public class GetProviderPinTimeoutRequest extends SpiceRequest<GetProviderPinTim
         String practiceID = userData.get("practiceID");
 
         MedSecureConnection msc = new MedSecureConnection(context);
-        msc.buildBaseURI("Communication", "GetCallsByProvider", "GET");
-
-        msc.addParameter("PhysicianID", physicianID);
+        msc.buildBaseURI("Physician", "GetPhysiciansPinTimeout", "GET");
         msc.addParameter("PracticeID", practiceID);
+        msc.addParameter("PhysicianID", physicianID);
+
         HttpURLConnection connection = msc.initConnection(true);
         String response = MedSecureConnection.getStringResult(connection);
         connection.disconnect();
