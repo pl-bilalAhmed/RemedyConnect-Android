@@ -1,5 +1,6 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,16 @@ public class CreatePinActivity extends DefaultActivity implements View.OnClickLi
         setContentView(R.layout.activity_create_pin);
         Button button = (android.widget.Button) findViewById(R.id.buttonCreatePin);
         button.setOnClickListener(this);
+        ActionBar actionBar = getActionBar();
+
+        try {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 
 

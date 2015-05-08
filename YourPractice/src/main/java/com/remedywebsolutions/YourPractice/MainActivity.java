@@ -13,6 +13,8 @@ public class MainActivity extends DefaultActivity {
 
         PushIOManager mPushIOManager = PushIOManager.getInstance(this);
         mPushIOManager.ensureRegistration();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
     }
 
     public void checkDownloadedData() {

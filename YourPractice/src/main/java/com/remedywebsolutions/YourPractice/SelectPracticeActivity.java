@@ -1,5 +1,6 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +23,8 @@ public class SelectPracticeActivity extends DefaultActivity {
         Skin.applyActivityBackground(this);
         setTitle(R.string.title_select_practice);
         menu = (ListView) findViewById(R.id.menu);
+        ActionBar actionBar = getActionBar();
+
 
         menuContents = new ArrayList<Map<String, String>>();
         menuAdapter = new SimpleAdapter(this,

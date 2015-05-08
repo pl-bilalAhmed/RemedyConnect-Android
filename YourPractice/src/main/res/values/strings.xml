@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="enteryourpin">Enter your PIN</string>
     <string name="app_name">YourPractice</string>
     <string name="title_activity_main">YourPractice</string>
     <string name="update">Update Your Practice Info</string>
@@ -24,7 +24,7 @@
     <string name="practiceSearchStartByLocationText">Search by location</string>
     <string name="about">About</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
-
+    <string name="searching_locations">Searching practice location information, please wait&#8230;</string>
     <string name="downloading">Downloading practice information, please wait&#8230;</string>
     <string name="download_failed">Failed to download data. Please ensure that your Internet connection is working and try again.</string>
     <string name="extracting_design">Extracting design, please wait&#8230;</string>
@@ -60,7 +60,7 @@
     <string name="loginTextContent">Please enter your RemedyOnCall Admin Username and Password below.</string>
     <string name="login">Login</string>
     <string name="createpin">CREATE YOUR PIN</string>
-    <string name="pinlineone">This is your first time accessing Remedy Connect\'s mobil app.</string>
+    <string name="pinlineone">This is your first time accessing RemedyConnect\'s mobile app.</string>
     <string name="pinlinetwo">In order to maintain the confidentiality of your patients, you are required to setup a 4 digit PIN.</string>
     <string name="ProviderSelection">Change application mode</string>
     <string name="selectRecipientPrompt">Please select a recipient</string>

@@ -48,7 +48,7 @@ public class PasscodeManagePasswordActivity extends com.remedywebsolutions.YourP
                 
             case PasscodePreferencesActivity.ENABLE_PASSLOCK:
                 if( unverifiedPasscode == null ) {
-                    ((TextView) findViewById(R.id.top_message)).setText(R.string.passcode_re_enter_passcode);
+                    ((TextView) findViewById(R.id.top_message)).setText("Re-Enter you PIN");
                     unverifiedPasscode = passLock;
                 } else {
                     if( passLock.equals(unverifiedPasscode)) {
@@ -61,7 +61,7 @@ public class PasscodeManagePasswordActivity extends com.remedywebsolutions.YourP
                         finish();
                     } else {
                         unverifiedPasscode = null;
-                        topMessage.setText(R.string.passcode_enter_passcode);
+                        topMessage.setText("Enter you PIN");
                         showPasswordError();
                     }
                 }
@@ -70,7 +70,7 @@ public class PasscodeManagePasswordActivity extends com.remedywebsolutions.YourP
             case PasscodePreferencesActivity.CHANGE_PASSWORD:
                 //verify old password
                 if(   com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().verifyPassword(passLock) ) {
-                    topMessage.setText(R.string.passcode_enter_passcode);
+                    topMessage.setText("Enter you PIN");
                     type = PasscodePreferencesActivity.ENABLE_PASSLOCK;
                 } else {
                     showPasswordError();

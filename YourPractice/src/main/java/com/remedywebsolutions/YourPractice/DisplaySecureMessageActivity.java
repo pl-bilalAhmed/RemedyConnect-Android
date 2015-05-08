@@ -74,10 +74,7 @@ public class DisplaySecureMessageActivity extends DefaultActivity implements Req
 
     @Override
     public void onRequestSuccess(BaseResponse inboxItemsResponse) {
-        if(inboxItemsResponse.successfull) {
 
-
-        }
     }
 
 

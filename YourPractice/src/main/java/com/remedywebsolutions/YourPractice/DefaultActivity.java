@@ -110,7 +110,7 @@ public class DefaultActivity extends SherlockActivity {
         }
         else
         {
-            handler.postDelayed(runnable, to + 5);
+            handler.postDelayed(runnable, to *1000 + 5000);
         }
     }
 
@@ -130,7 +130,8 @@ public class DefaultActivity extends SherlockActivity {
         FlurryAgent.onStartSession(this, "G8V8NZ5BZ6BBJHF48B5W");
         lastActivityDate =  new Date();
         LoggedInDataStorage store = new LoggedInDataStorage(DefaultActivity.this);
-        handler.postDelayed(runnable, 15000);
+
+        handler.postDelayed(runnable, store.GetPinTimeout() * 1000);
     }
 
     @Override
@@ -297,12 +298,21 @@ public class DefaultActivity extends SherlockActivity {
                 return true;
             case R.id.menu_choose_practice:
                 Data.ClearAppMode(getApplicationContext());
+                LoggedInDataStorage store = new LoggedInDataStorage(DefaultActivity.this);
+                store.logOut();
+
+                // Reset passcode lock
+                if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+                    com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+                }
+                invalidateOptionsMenu();
+                Data.ClearRegistered(getApplicationContext());
                 intent = new Intent(this, PracticeSearchActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_provider_mode:
-                LoggedInDataStorage store = new LoggedInDataStorage(DefaultActivity.this);
-                store.logOut();
+                LoggedInDataStorage store1 = new LoggedInDataStorage(DefaultActivity.this);
+                store1.logOut();
 
                 // Reset passcode lock
                 if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {

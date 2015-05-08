@@ -1,5 +1,6 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +29,9 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         reportPhase("Main menu");
         setContentView(R.layout.activity_provider_menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
+
         Skin.applyMainMenuBackground(this);
         Skin.applyProviderMenuButtons(this);
         Skin.applyThemeLogo(this, true);

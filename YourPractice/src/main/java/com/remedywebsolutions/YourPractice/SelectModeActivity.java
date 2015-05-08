@@ -56,6 +56,7 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
             else
             {
                 Intent intent = new Intent(this, LoginActivity.class);
+                intent.putExtra("fromMode",true);
                 startActivity(intent);
                 finish();
             }

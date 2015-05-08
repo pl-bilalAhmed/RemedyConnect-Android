@@ -1,5 +1,6 @@
 package com.remedywebsolutions.YourPractice;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -68,7 +69,8 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent;
+
+
         switch (item.getItemId()) {
             case R.id.home:
             case android.R.id.home:
@@ -76,11 +78,15 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
                 //  this.onBackPressed();
                 return true;
         }
+
+
+
         return super.onOptionsItemSelected(item);
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         reportPhase("Login");
         setContentView(R.layout.activity_login);
         setTitle(getString(R.string.login));
@@ -96,7 +102,8 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
         progress.setIndeterminate(true);
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
 
 
         forgotBtn.setOnClickListener(this);
@@ -192,7 +199,7 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
             Data.SetRegistered(getApplicationContext());
             progress.setMessage("getting preference data...");
             dataStorage.StorePinTimeout(timeOut);
-            AppLockManager.getInstance().getCurrentAppLock().DEFAULT_TIMEOUT = timeOut;
+         //   AppLockManager.getInstance().getCurrentAppLock().DEFAULT_TIMEOUT = timeOut;
             AppLockManager.getInstance().getCurrentAppLock().EXTENDED_TIMEOUT = timeOut;
 
             InsertPhysicianMobileDeviceRequest req =

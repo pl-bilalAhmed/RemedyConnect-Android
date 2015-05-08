@@ -35,9 +35,12 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
         setContentView(R.layout.activity_practice_search);
         Skin.applyActivityBackground(this);
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
         progress = new ProgressDialog(this);
-        progress.setMessage(getString(R.string.downloading));
+
+        progress.setMessage(getString(R.string.searching_locations));
+
         progress.setCancelable(false);
         progress.setCanceledOnTouchOutside(false);
         progress.setIndeterminate(true);
@@ -66,7 +69,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
      //   startSearchByName.setOnClickListener(this);
         View locSearch = this.findViewById(R.id.SearchByLoc);
-        locSearch.setOnClickListener(this);
+      //  locSearch.setOnClickListener(this);
         locSearch.setOnTouchListener(this);
     }
 
@@ -102,6 +105,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     }
 
     public void startFetchingByLocation() {
+        progress.show();
         // Acquire a reference to the system Location Manager
         final LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -111,6 +115,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                 // Called when a new location is found by the network location provider.
                 gotLocation(location);
                 locationManager.removeUpdates(this);
+                progress.dismiss();
             }
             public void onStatusChanged(String provider, int status, Bundle extras) {}
             public void onProviderEnabled(String provider) {}
@@ -152,6 +157,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
             try {
                 super.onReceiveResult(resultCode, resultData);
                 if (resultCode == DownloadStatusCodes.NETWORK_AVAILABLE) {
+                    progress.setMessage(getString(R.string.downloading));
                     progress.show();
                 }
                 if (resultCode == DownloadStatusCodes.UPDATE_PROGRESS) {
