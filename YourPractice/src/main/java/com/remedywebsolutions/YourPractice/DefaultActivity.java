@@ -61,7 +61,7 @@ public class DefaultActivity extends SherlockActivity {
     static int SIZE_OF_THREAD_POOL = 6;
     static int DOWNLOAD_BUFFER_SIZE = 8192;
     static int CONNECTION_TIMEOUT = 5000;
-
+    private static boolean paused = false;
     private static Date lastActivityDate;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,26 +91,26 @@ public class DefaultActivity extends SherlockActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        paused = false;
         this.invalidateOptionsMenu();
         int to = com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().EXTENDED_TIMEOUT;
         handler.postDelayed(runnable, to);
     }
     private void checkForIdle()
     {
-        Date now = new Date();
-        long now_ms = now.getTime();
-        int secondsPassed = (int) (now_ms - lastActivityDate.getTime())/(1000);
-        secondsPassed = Math.abs(secondsPassed);
-        int to = com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().EXTENDED_TIMEOUT;
-        if(secondsPassed > to)
-        {
-            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().mustShowUnlockSceen();
-            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().onActivityResumed(this);
-            lastActivityDate =  new Date();
-        }
-        else
-        {
-            handler.postDelayed(runnable, to *1000 + 5000);
+        if(!paused) {
+            Date now = new Date();
+            long now_ms = now.getTime();
+            int secondsPassed = (int) (now_ms - lastActivityDate.getTime()) / (1000);
+            secondsPassed = Math.abs(secondsPassed);
+            int to = com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().EXTENDED_TIMEOUT;
+            if (secondsPassed > to) {
+                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().mustShowUnlockSceen();
+                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().onActivityResumed(this);
+                lastActivityDate = new Date();
+            } else {
+                handler.postDelayed(runnable, to * 1000 + 5000);
+            }
         }
     }
 
@@ -130,14 +130,16 @@ public class DefaultActivity extends SherlockActivity {
         FlurryAgent.onStartSession(this, "G8V8NZ5BZ6BBJHF48B5W");
         lastActivityDate =  new Date();
         LoggedInDataStorage store = new LoggedInDataStorage(DefaultActivity.this);
-
+        paused = false;
         handler.postDelayed(runnable, store.GetPinTimeout() * 1000);
+
     }
 
     @Override
     protected void onPause()
     {
         super.onPause();
+        paused = true;
 
     }
 
@@ -145,6 +147,7 @@ public class DefaultActivity extends SherlockActivity {
     protected void onRestart()
     {
         super.onRestart();
+        paused = false;
 
     }
 

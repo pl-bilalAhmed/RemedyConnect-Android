@@ -69,7 +69,6 @@
         <activity android:name=".SelectModeActivity" />
         <activity android:name=".ProviderMenuActivity" />
         <activity android:name=".LogoutActivity" />
-
         <activity android:name=".SecureCallListActivity" >
             <intent-filter>
                 <action android:name="com.remedywebsolutions.YourPractice.NOTIFICATIONPRESSED" />
@@ -200,6 +199,10 @@
         <activity
             android:name=".CreatePinActivity"
             android:label="@string/title_activity_create_pin" >
+        </activity>
+        <activity
+            android:name=".MaskedCallActivity"
+            android:label="@string/title_activity_masked_call" >
         </activity>
     </application>
 

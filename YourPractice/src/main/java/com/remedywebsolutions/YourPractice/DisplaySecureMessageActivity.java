@@ -43,6 +43,7 @@ public class DisplaySecureMessageActivity extends DefaultActivity implements Req
                 call.phone.substring(6)};
 
         phone.setText(phoneMsgFmt.format(phoneNumArr));
+        super.setTitle("Secure Message");
     }
 
     @Override

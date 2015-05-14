@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/lobackground"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/logo1"
+        android:layout_width="fill_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/logo"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lo_roc_logo"
+        android:layout_marginTop="5dp" />
+</LinearLayout>

@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff2a8ac7"
+    android:background="@drawable/lobackground"
     android:weightSum="1">
 
     <ImageView
@@ -16,7 +16,7 @@
         android:contentDescription="@string/logo"
         android:padding="5dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/roc_logo"
+        android:src="@drawable/lo_roc_logo"
         android:layout_marginTop="5dp" />
 
     <TextView
@@ -46,14 +46,16 @@
         android:layout_marginRight="10dp" />
     <Button
 
-        android:layout_width="fill_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/createpin"
         android:id="@+id/buttonCreatePin"
-        android:textColor="#ff2a8ac7"
-        android:background="#ffffffff"
+        android:textColor="#ffffffff"
+        android:background="@drawable/lobutton"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold" />
 
 </LinearLayout>

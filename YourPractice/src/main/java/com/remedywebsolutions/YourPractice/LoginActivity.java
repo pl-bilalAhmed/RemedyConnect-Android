@@ -115,10 +115,33 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
                 assert passwordEditor.getText() != null;
                 username = usernameEditor.getText().toString();
                 String password = passwordEditor.getText().toString();
-                LoginRequest req = new LoginRequest(username, password, LoginActivity.this);
-                progress.setMessage("Logging in...");
-                progress.show();
-                spiceManager.execute(req, new LoginRequestListener());
+                if(username.length() == 0)
+                {
+                    new AlertDialog.Builder(LoginActivity.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle("Enter your user name")
+                            .setMessage("Username cannot be blank.")
+                            .setPositiveButton("OK", null)
+                            .show();
+                    usernameEditor.requestFocus();
+
+                }
+                else if(password.length() == 0) {
+
+                    new AlertDialog.Builder(LoginActivity.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle("Enter your password")
+                            .setMessage("Password cannot be blank.")
+                            .setPositiveButton("OK", null)
+                            .show();
+                    passwordEditor.requestFocus();
+                }
+                else {
+                    LoginRequest req = new LoginRequest(username, password, LoginActivity.this);
+                    progress.setMessage("Logging in...");
+                    progress.show();
+                    spiceManager.execute(req, new LoginRequestListener());
+                }
             }
         });
         dataStorage = new LoggedInDataStorage(LoginActivity.this);
