@@ -11,4 +11,5 @@ public class DownloadStatusCodes {
     public static final int EXTRACTING_FAILED = 8;
     public static final int EXTRACTING_FINISHED = 9;
     public static final int NEW_DOWNLOAD = 10;
+    public static final int SSL_PROBLEM = 11;
 }

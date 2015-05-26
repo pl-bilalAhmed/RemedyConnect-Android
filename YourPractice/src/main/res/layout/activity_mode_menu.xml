@@ -36,7 +36,16 @@
         android:id="@+id/midButtonRow"
         android:layout_marginBottom="70dp"
         android:orientation="vertical">
-
+        <Button
+            style="@style/MainMenuButton"
+            android:layout_width="275dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:id="@+id/patient_mode_button"
+            android:layout_margin="10dp"
+            android:textColor="#ffffffff"
+            android:text="@string/button_patient_gardian_text"
+            android:layout_gravity="center_horizontal" />
         <Button
             style="@style/MainMenuButton"
             android:layout_width="275dp"
@@ -48,16 +57,7 @@
             android:textColor="#ffffffff"
             android:layout_gravity="center_horizontal" />
 
-        <Button
-            style="@style/MainMenuButton"
-            android:layout_width="275dp"
-            android:layout_height="50dp"
-            android:layout_weight="0.5"
-            android:id="@+id/patient_mode_button"
-            android:layout_margin="10dp"
-            android:textColor="#ffffffff"
-            android:text="@string/button_patient_gardian_text"
-            android:layout_gravity="center_horizontal" />
+
 
     </LinearLayout>
 

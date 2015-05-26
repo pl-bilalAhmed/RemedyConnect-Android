@@ -74,9 +74,16 @@ public class RootDownloadService extends AbstractDownloadService {
                 }
                 resultData.putInt("progress", 100);
                 receiver.send(DownloadStatusCodes.DOWNLOAD_FINISHED, resultData);
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 resultData.putInt("progress", 0);
-                receiver.send(DownloadStatusCodes.DOWNLOAD_FAILED, resultData);
+                if(e.getCause().getMessage().contains("Could not validate certificate"))
+                {
+                    receiver.send(DownloadStatusCodes.SSL_PROBLEM, resultData);
+                }
+                else {
+                    receiver.send(DownloadStatusCodes.DOWNLOAD_FAILED, resultData);
+                }
             }
         }
         this.stopSelf();

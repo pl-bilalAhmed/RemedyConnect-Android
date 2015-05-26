@@ -175,7 +175,12 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                     Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
                     setResult(Activity.RESULT_FIRST_USER);
                 }
-
+                if (resultCode == DownloadStatusCodes.SSL_PROBLEM) {
+                    progress.dismiss();
+                    assert getApplicationContext() != null;
+                    Toast.makeText(getApplicationContext(), R.string.downloadssl_failed, Toast.LENGTH_LONG).show();
+                    setResult(Activity.RESULT_FIRST_USER);
+                }
                 if (resultCode == DownloadStatusCodes.SWITCH_TO_DETERMINATE) {
                     progress.setIndeterminate(false);
                 }
