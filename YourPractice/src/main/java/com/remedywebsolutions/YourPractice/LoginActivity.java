@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,6 +60,7 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
 
         spiceManager.start(this);
         super.onStart();
+
     }
 
     @Override
@@ -69,18 +71,15 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
         switch (item.getItemId()) {
-            case R.id.home:
             case android.R.id.home:
-                // In this app, we can just simple force the Up button to behave the same way as the Back.
-                //  this.onBackPressed();
+            case R.id.home:
+
+                Intent intent = new Intent(this, SelectModeActivity.class);
+                startActivity(intent);
+                finish();
                 return true;
         }
-
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -102,8 +101,8 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
         progress.setIndeterminate(true);
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setHomeButtonEnabled(false);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+       // getSupportActionBar().setHomeButtonEnabled(false);
 
 
         forgotBtn.setOnClickListener(this);
@@ -146,6 +145,19 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
         });
         dataStorage = new LoggedInDataStorage(LoginActivity.this);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        boolean result =  super.onCreateOptionsMenu(menu);
+        setHomeVisibility(false);
+        MenuItem li_item = abMenu.findItem(R.id.menu_login);
+        MenuItem lo_item = abMenu.findItem(R.id.menu_logout);
+        li_item.setVisible(false);
+
+        lo_item.setVisible(false);
+        return result;
+    }
+
     public void onClick(View v)
     {
         assert usernameEditor.getText() != null;
