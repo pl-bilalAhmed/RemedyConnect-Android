@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.remedywebsolutions.YourPractice.LoginActivity;
+import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.ProviderMenuActivity;
 import com.remedywebsolutions.YourPractice.R;
 
@@ -63,9 +64,11 @@ public class PasscodeUnlockActivity extends com.remedywebsolutions.YourPractice.
             com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().NumberOfFailures++;
             if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().NumberOfFailures > 2)
             {
+                LoggedInDataStorage st = new LoggedInDataStorage(getApplicationContext());
+                st.logOut();
                 showPasswordMaxError();
                 Intent loginIntent = new Intent(PasscodeUnlockActivity.this, LoginActivity.class);
-                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().disable();
+                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
                 startActivity(loginIntent);
             }
 

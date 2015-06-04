@@ -63,7 +63,12 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         Button b = (Button)v;
         if(b.getId() == R.id.provider_mode_button)
         {
-            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().enableDefaultAppLockIfAvailable(getApplication());
+            if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().enable();
+            }
+            else {
+                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().enableDefaultAppLockIfAvailable(getApplication());
+            }
 
             Data.SetProviderAppMode(getApplicationContext());
             if(Data.IsRegistered(getApplicationContext())) {
@@ -81,7 +86,10 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         }
         else
         {
-            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().setCurrentAppLock(null);
+            if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().disable();
+            }
+           // com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().setCurrentAppLock(null);
             Data.SetPatientAppMode(getApplicationContext());
             MainViewController.FireRootActivity(this);
             finish();

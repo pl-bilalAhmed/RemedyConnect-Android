@@ -25,6 +25,7 @@ public class DefaultAppLock extends com.remedywebsolutions.YourPractice.passcode
     private SharedPreferences settings;
     private Date lostFocusDate;
     private boolean showingUnlock = false;
+    private boolean disabled = false;
     //Add back-compatibility
     private static final String OLD_PASSWORD_SALT = "sadasauidhsuyeuihdahdiauhs";
     private static final String OLD_APP_LOCK_PASSWORD_PREF_KEY = "wp_app_lock_password_key";
@@ -37,6 +38,7 @@ public class DefaultAppLock extends com.remedywebsolutions.YourPractice.passcode
     }
 
     public void enable(){
+        disabled = false;
     	if (android.os.Build.VERSION.SDK_INT < 14)
     		return;
 
@@ -48,6 +50,7 @@ public class DefaultAppLock extends com.remedywebsolutions.YourPractice.passcode
     }
 
     public void disable( ){
+        disabled = true;
     	if (android.os.Build.VERSION.SDK_INT < 14)
     		return;
 
@@ -150,7 +153,8 @@ public class DefaultAppLock extends com.remedywebsolutions.YourPractice.passcode
 
     public boolean mustShowUnlockSceen() {
 
-        if( isPasswordLocked() == false)
+
+        if( isPasswordLocked() == false || disabled)
             return false;
 
         if( lostFocusDate == null )

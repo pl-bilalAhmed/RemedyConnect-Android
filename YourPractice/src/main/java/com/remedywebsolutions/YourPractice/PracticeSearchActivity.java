@@ -25,9 +25,11 @@ import com.remedywebsolutions.YourPractice.passcode.AppLockManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.Semaphore;
 
 public class PracticeSearchActivity extends DefaultActivity implements OnClickListener,View.OnTouchListener {
     ProgressDialog progress;
+    private Semaphore buttonSemaphore = new Semaphore(1);
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +85,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
     public void onClick(View v) {
 
-        startFetchingByLocation();
+   //     startFetchingByLocation();
       //  startFetchingByName();
       //  switch(v.getId()){
        //     case R.id.practiceSearchStartByName:
@@ -105,6 +107,9 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     }
 
     public void startFetchingByLocation() {
+
+
+
         progress.show();
         // Acquire a reference to the system Location Manager
         final LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -143,7 +148,10 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        startFetchingByLocation();
+
+        if(buttonSemaphore.tryAcquire()) {
+            startFetchingByLocation();
+        }
         return false;
     }
 
@@ -168,6 +176,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                     progress.dismiss();
                     startParsingPractices();
                     setResult(Activity.RESULT_OK);
+                    buttonSemaphore.release();
                 }
                 if (resultCode == DownloadStatusCodes.DOWNLOAD_FAILED) {
                     progress.dismiss();

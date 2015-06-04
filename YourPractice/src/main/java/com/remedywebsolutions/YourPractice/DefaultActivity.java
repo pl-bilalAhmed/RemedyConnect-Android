@@ -318,9 +318,9 @@ public class DefaultActivity extends SherlockActivity {
                 store1.logOut();
 
                 // Reset passcode lock
-                if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
-                    com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
-                }
+              //  if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+                //    com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+              //  }
                 invalidateOptionsMenu();
                 Data.ClearRegistered(getApplicationContext());
                 intent = new Intent(this, SelectModeActivity.class);

@@ -3,7 +3,7 @@ package com.remedywebsolutions.YourPractice.passcode;
 import android.app.Application;
 
 public abstract class AbstractAppLock implements Application.ActivityLifecycleCallbacks {
-    public static int DEFAULT_TIMEOUT = 10; //2 seconds
+    public static int DEFAULT_TIMEOUT = 2; //2 seconds
     public static int EXTENDED_TIMEOUT = 60; //60 seconds
     public int NumberOfFailures = 0 ;
     protected int lockTimeOut = DEFAULT_TIMEOUT;

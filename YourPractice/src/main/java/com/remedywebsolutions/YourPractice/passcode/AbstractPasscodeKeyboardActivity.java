@@ -33,7 +33,7 @@ public abstract class AbstractPasscodeKeyboardActivity extends Activity {
         setContentView(R.layout.app_passcode_keyboard);
         
         topMessage = (TextView) findViewById(R.id.top_message);
-        
+        topMessage.setText("Enter your PIN");
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String message = extras.getString("message");

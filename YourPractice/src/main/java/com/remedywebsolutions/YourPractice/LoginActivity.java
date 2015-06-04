@@ -58,6 +58,9 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
     @Override
     protected void onStart() {
 
+        if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().disable();
+        }
         spiceManager.start(this);
         super.onStart();
 
@@ -299,10 +302,9 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
             progress.dismiss();
 
             Toast.makeText(LoginActivity.this, "You've been logged in.", Toast.LENGTH_SHORT).show();
-
             if(Data.IsPinSet(getApplicationContext()))
             {
-
+                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().enable();
                 Intent intent = new Intent(LoginActivity.this, ProviderMenuActivity.class);
                 startActivity(intent);
                 finish();
