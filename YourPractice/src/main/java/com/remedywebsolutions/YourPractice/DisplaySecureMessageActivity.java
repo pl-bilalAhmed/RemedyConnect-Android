@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -58,6 +60,17 @@ public class DisplaySecureMessageActivity extends DefaultActivity implements Req
         NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(ns);
         nMgr.cancel(call.callID);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        boolean result =  super.onCreateOptionsMenu(menu);
+        setHomeVisibility(false);
+        MenuItem li_item = abMenu.findItem(R.id.menu_login);
+        li_item.setVisible(false);
+        MenuItem mode_item = abMenu.findItem(R.id.menu_provider_mode);
+        mode_item.setTitle(R.string.Patient_mode);
+        return result;
     }
 
     @Override

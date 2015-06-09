@@ -52,6 +52,9 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
             }
             ++index;
         }
+        if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+        }
         LinearLayout l = (LinearLayout) this.findViewById(R.id.bottomButtonRow);
         hideWrapperLayoutIfNecessary(l);
         l = (LinearLayout) this.findViewById(R.id.midButtonRow);
@@ -90,6 +93,9 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
                 }
             }
         }
+        MenuItem mode_item = abMenu.findItem(R.id.menu_provider_mode);
+
+        mode_item.setTitle(R.string.Provider_mode);
         setHomeVisibility(false);
         return result;
     }

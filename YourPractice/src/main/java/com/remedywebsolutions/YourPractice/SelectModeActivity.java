@@ -63,6 +63,7 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         Button b = (Button)v;
         if(b.getId() == R.id.provider_mode_button)
         {
+
             if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
                 com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().enable();
             }
@@ -86,6 +87,8 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         }
         else
         {
+            MenuItem cm_item = abMenu.findItem(R.id.menu_provider_mode);
+            cm_item.setTitle("Provider/Staff");
             if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
                 com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().disable();
             }

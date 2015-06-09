@@ -155,8 +155,9 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
         setHomeVisibility(false);
         MenuItem li_item = abMenu.findItem(R.id.menu_login);
         MenuItem lo_item = abMenu.findItem(R.id.menu_logout);
+        MenuItem cm_item = abMenu.findItem(R.id.menu_provider_mode);
         li_item.setVisible(false);
-
+        cm_item.setVisible(false);
         lo_item.setVisible(false);
         return result;
     }

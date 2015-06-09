@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.DateOperations;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.LoggedInDataStorage;
 import com.remedywebsolutions.YourPractice.MedSecureAPI.POJOs.InboxItem;
@@ -150,4 +152,7 @@ public class MessageListActivity extends DefaultActivity {
             messageListAdapter.notifyDataSetChanged();
         }
     }
+
+
+
 }
