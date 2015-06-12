@@ -137,6 +137,6 @@ public final class Data {
 
     @SuppressWarnings("FinalStaticMethod")
     public static final String SearchRootForPracticeLocation(Location location) {
-        return ROOT + "?lon=" + location.getLongitude() + "&lat=" + location.getLatitude() + "&rad=100";
+        return ROOT + "?lon=" + location.getLongitude() + "&lat=" + location.getLatitude();
     }
 }
