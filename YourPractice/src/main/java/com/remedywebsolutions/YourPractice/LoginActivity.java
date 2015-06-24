@@ -156,9 +156,12 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
         MenuItem li_item = abMenu.findItem(R.id.menu_login);
         MenuItem lo_item = abMenu.findItem(R.id.menu_logout);
         MenuItem cm_item = abMenu.findItem(R.id.menu_provider_mode);
+        MenuItem refresh_item = abMenu.findItem(R.id.menu_update);
+        refresh_item.setVisible(false);
         li_item.setVisible(false);
         cm_item.setVisible(false);
         lo_item.setVisible(false);
+
         return result;
     }
 
@@ -303,7 +306,8 @@ public class LoginActivity extends DefaultActivity implements View.OnClickListen
             progress.dismiss();
 
             Toast.makeText(LoginActivity.this, "You've been logged in.", Toast.LENGTH_SHORT).show();
-            if(Data.IsPinSet(getApplicationContext()))
+            if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null
+                    && com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().isPasswordLocked())
             {
                 com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().enable();
                 Intent intent = new Intent(LoginActivity.this, ProviderMenuActivity.class);

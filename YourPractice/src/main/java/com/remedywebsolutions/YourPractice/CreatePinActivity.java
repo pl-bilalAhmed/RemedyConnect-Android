@@ -31,6 +31,20 @@ public class CreatePinActivity extends DefaultActivity implements View.OnClickLi
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+        boolean result =  super.onCreateOptionsMenu(menu);
+        setHomeVisibility(false);
+
+        com.actionbarsherlock.view.MenuItem cm_item = abMenu.findItem(R.id.menu_provider_mode);
+        com.actionbarsherlock.view.MenuItem refresh_item = abMenu.findItem(R.id.menu_update);
+        refresh_item.setVisible(false);
+
+        cm_item.setTitle("Patient/Guardian");
+
+
+        return result;
+    }
 
     public void onClick(View v) {
 

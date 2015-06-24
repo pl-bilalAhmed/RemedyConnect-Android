@@ -52,9 +52,9 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
             }
             ++index;
         }
-        if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
-            com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
-        }
+       // if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+         //   com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+        //}
         LinearLayout l = (LinearLayout) this.findViewById(R.id.bottomButtonRow);
         hideWrapperLayoutIfNecessary(l);
         l = (LinearLayout) this.findViewById(R.id.midButtonRow);

@@ -90,6 +90,9 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
             spiceManager.execute(cntReq,  this);
 
             //   updateNumberOfInboxItems(inbox.size());
+            if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+                com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().enable();
+            }
             progress.dismiss();
         }
         else

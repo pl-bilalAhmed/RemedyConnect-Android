@@ -36,11 +36,14 @@ public class NotificationActivity extends DefaultActivity {
     public void onStart()
     {
         super.onStart();
+        int cid = 1;
         String alert = getIntent().getStringExtra("alert");
         int indexof = alert.lastIndexOf(":");
-        String callId = alert.substring(indexof +2);
-        alert = alert.substring(0,indexof+1);
-        int cid = Integer.parseInt(callId);
+        if(indexof > 0) {
+            String callId = alert.substring(indexof + 2);
+            alert = alert.substring(0, indexof + 1);
+            cid = Integer.parseInt(callId);
+        }
         displayNotification(cid,alert);
         new AlertDialog.Builder(NotificationActivity.this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
