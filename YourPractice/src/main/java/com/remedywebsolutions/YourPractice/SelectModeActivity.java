@@ -51,10 +51,12 @@ public class SelectModeActivity extends DefaultActivity  implements View.OnClick
         MenuItem li_item = abMenu.findItem(R.id.menu_login);
         MenuItem lo_item = abMenu.findItem(R.id.menu_logout);
         MenuItem mode_item = abMenu.findItem(R.id.menu_provider_mode);
+        MenuItem refresh_item = abMenu.findItem(R.id.menu_update);
 
         li_item.setVisible(false);
         lo_item.setVisible(false);
         mode_item.setVisible(false);
+        refresh_item.setVisible(false);
         return result;
     }
 

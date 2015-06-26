@@ -37,12 +37,20 @@ public class NotificationActivity extends DefaultActivity {
     {
         super.onStart();
         int cid = 1;
-        String alert = getIntent().getStringExtra("alert");
-        int indexof = alert.lastIndexOf(":");
-        if(indexof > 0) {
-            String callId = alert.substring(indexof + 2);
-            alert = alert.substring(0, indexof + 1);
-            cid = Integer.parseInt(callId);
+        String alert = "You received a secure message";
+
+        try {
+            alert = getIntent().getStringExtra("alert");
+            int indexof = alert.lastIndexOf(":");
+            if (indexof > 0) {
+                String callId = alert.substring(indexof + 2);
+                alert = alert.substring(0, indexof + 1);
+                cid = Integer.parseInt(callId);
+            }
+        }
+        catch(Exception ex)
+        {
+
         }
         displayNotification(cid,alert);
         new AlertDialog.Builder(NotificationActivity.this)
