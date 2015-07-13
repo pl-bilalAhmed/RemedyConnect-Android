@@ -5,8 +5,13 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.util.Linkify;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -39,13 +44,16 @@ public class DisplaySecureMessageActivity extends DefaultActivity implements Req
 
         TextView phone = (TextView) findViewById(R.id.clickablePhone);
         java.text.MessageFormat phoneMsgFmt=new java.text.MessageFormat("({0})-{1}-{2}");
+
         //suposing a grouping of 3-3-4
         String[] phoneNumArr={call.phone.substring(0, 3),
                 call.phone.substring(3,6),
                 call.phone.substring(6)};
 
+
+
         phone.setText(phoneMsgFmt.format(phoneNumArr));
-        super.setTitle("Secure Message");
+
     }
 
     @Override

@@ -123,6 +123,7 @@
             android:name=".PracticeSearchActivity"
             android:label="Search your practice"
             android:noHistory="true"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:parentActivityName=".MainActivity" >
         </activity>
         <activity

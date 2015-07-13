@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="blockmynumber">Block my number:</string>
     <string name="enteryourpin">Enter your PIN</string>
     <string name="legal">Legal</string>
     <string name="app_name">YourPractice</string>

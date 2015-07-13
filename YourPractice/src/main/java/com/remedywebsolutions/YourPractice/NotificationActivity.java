@@ -9,6 +9,9 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -17,8 +20,9 @@ import android.view.MenuItem;
 
 
 
-public class NotificationActivity extends DefaultActivity {
+public class NotificationActivity extends DefaultActivity implements DialogInterface.OnClickListener {
 
+    private int mcid = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,32 +50,40 @@ public class NotificationActivity extends DefaultActivity {
                 String callId = alert.substring(indexof + 2);
                 alert = alert.substring(0, indexof + 1);
                 cid = Integer.parseInt(callId);
+                mcid = cid;
             }
+
+
         }
         catch(Exception ex)
         {
 
         }
-        displayNotification(cid,alert);
-        new AlertDialog.Builder(NotificationActivity.this)
+        displayNotification(cid, alert);
+        AlertDialog al = new AlertDialog.Builder(NotificationActivity.this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(alert)
                 .setMessage(alert)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, close
-                        // current activity
-                        finish();
-                         Intent intent = new Intent(getApplicationContext(), SecureCallListActivity.class);
-                         startActivity(intent);
-                    }
-                })
+                .setPositiveButton("OK",this)
 
-            .show();
+                .show();
 
 
        // Intent intent = new Intent(this, SecureCallListActivity.class);
        // startActivity(intent);
+    }
+
+    public void onClick(DialogInterface dialog, int id) {
+        // if this button is clicked, close
+        // current activity
+        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(mcid);
+        Intent intent = new Intent(getApplicationContext(), SecureCallListActivity.class);
+        finish();
+        startActivity(intent);
+
+
+
     }
 
     protected void displayNotification(int callid,String alert) {
@@ -86,6 +98,11 @@ public class NotificationActivity extends DefaultActivity {
         mBuilder.setContentText(alert);
         mBuilder.setTicker(alert);
         mBuilder.setSmallIcon(R.drawable.rcdiamond);
+      //  Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        final String packageName = getApplicationContext().getPackageName();
+
+        Uri notification = Uri.parse("android.resource://" + packageName + "/" + R.raw.rocsound );
+        mBuilder.setSound(notification);
 
 
         // Increase notification number every time a new notification arrives //
