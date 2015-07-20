@@ -15,7 +15,7 @@ import java.util.HashMap;
  * All implementation details (endpoints, connection settings etc.) should be here.
  */
 public class MedSecureConnection  {
-    // static final String base = "https://api.remedyoncall.com/api/";
+   //  static final String base = "https://api.remedyoncall.com/api/";
     static final String base = "https://tsapitest.remedyconnect.com/api/";
 
     static final String api_key = "SSB3aWxsIG1ha2UgbXkgQVBJIHNlY3VyZQ==";
