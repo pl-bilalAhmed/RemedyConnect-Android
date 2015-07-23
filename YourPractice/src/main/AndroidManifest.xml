@@ -29,7 +29,8 @@
         <!-- Push.IO-related -->
         <receiver
             android:name="com.pushio.manager.PushIOBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND"
+            >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
@@ -70,11 +71,7 @@
         <activity android:name=".ProviderMenuActivity" />
         <activity android:name=".LogoutActivity" />
         <activity android:name=".SecureCallListActivity" >
-            <intent-filter>
-                <action android:name="com.remedywebsolutions.YourPractice.NOTIFICATIONPRESSED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SplashActivity"
@@ -178,16 +175,16 @@
         <activity
             android:name=".NotificationActivity"
             android:label="@string/title_activity_notification"
-            android:parentActivityName=".ProviderMenuActivity" >
+            android:parentActivityName=".ProviderMenuActivity"
+            >
+            <!--  <intent-filter>
+                  <action android:name="com.remedywebsolutions.YourPractice.NOTIFICATIONPRESSED" />
+                  <category android:name="android.intent.category.DEFAULT" />
+              </intent-filter>-->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.remedywebsolutions.YourPractice.ProviderMenuActivity" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".DisplaySecureMessageActivity"
