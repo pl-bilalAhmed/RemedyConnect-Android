@@ -26,7 +26,7 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_notification);
+        setContentView(R.layout.activity_notification);
 
         Skin.applyMainMenuBackground(this);
 
@@ -35,16 +35,18 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
     }
 
 
-
     @Override
     public void onStart()
     {
         super.onStart();
+        Log.i("Start", "notification is starting");
         int cid = 1;
         String alert = "You received a secure message";
-
+        Log.i("Start", "mcid is:"+ mcid );
+        boolean playsound = mcid <= 0;
         try {
             alert = getIntent().getStringExtra("alert");
+            Log.i("Start", "notification is alert is:"+ alert );
             int indexof = alert.lastIndexOf(":");
             if (indexof > 0) {
                 String callId = alert.substring(indexof + 2);
@@ -59,18 +61,13 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
         {
 
         }
-        displayNotification(cid, alert);
-        AlertDialog al = new AlertDialog.Builder(NotificationActivity.this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle(alert)
-                .setMessage(alert)
-                .setPositiveButton("OK",this)
 
-                .show();
+        displayNotification(cid, alert,playsound);
 
 
-       // Intent intent = new Intent(this, SecureCallListActivity.class);
-       // startActivity(intent);
+
+        // Intent intent = new Intent(this, SecureCallListActivity.class);
+        // startActivity(intent);
     }
 
     public void onClick(DialogInterface dialog, int id) {
@@ -86,7 +83,7 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
 
     }
 
-    protected void displayNotification(int callid,String alert) {
+    protected void displayNotification(int callid,String alert,boolean sound) {
         Log.i("Start", "notification");
 
         // Invoking the default notification service //
@@ -98,11 +95,13 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
         mBuilder.setContentText(alert);
         mBuilder.setTicker(alert);
         mBuilder.setSmallIcon(R.drawable.rcdiamond);
-      //  Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        //   Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         final String packageName = getApplicationContext().getPackageName();
 
-        Uri notification = Uri.parse("android.resource://" + packageName + "/" + R.raw.rocsound );
-        mBuilder.setSound(notification);
+        Uri notification = Uri.parse("android.resource://" + packageName + "/" + R.raw.rocsound);
+        if(sound) {
+            mBuilder.setSound(notification);
+        }
 
 
         // Increase notification number every time a new notification arrives //
@@ -124,15 +123,21 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
                 );
         mBuilder.setContentIntent(resultPendingIntent);
 
-        //  mBuilder.setOngoing(true);
+        mBuilder.setOngoing(true);
         Notification note = mBuilder.build();
-        note.defaults |= Notification.DEFAULT_VIBRATE;
-        note.defaults |= Notification.DEFAULT_SOUND;
+        //    note.defaults |= Notification.DEFAULT_VIBRATE;
+        //     note.defaults |= Notification.DEFAULT_SOUND;
 
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         // notificationID allows you to update the notification later on. //
-        mNotificationManager.notify(callid, mBuilder.build());
+        mNotificationManager.notify(callid, note);
+        AlertDialog al = new AlertDialog.Builder(NotificationActivity.this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(alert)
+                .setMessage(alert)
+                .setPositiveButton("OK",this)
+                .show();
 
     }
 
