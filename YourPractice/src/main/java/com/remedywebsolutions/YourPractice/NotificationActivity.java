@@ -9,6 +9,7 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -25,12 +26,19 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
     private int mcid = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if (Data.isDataAvailable(getApplicationContext())) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
 
         Skin.applyMainMenuBackground(this);
 
         Skin.applyThemeLogo(this, true);
+        }
+        else {
+           finish();
+        }
 
     }
 
@@ -61,10 +69,10 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
         {
 
         }
+        if (Data.isDataAvailable(getApplicationContext())) {
+            displayNotification(cid, alert, playsound);
 
-        displayNotification(cid, alert,playsound);
-
-
+        }
 
         // Intent intent = new Intent(this, SecureCallListActivity.class);
         // startActivity(intent);
@@ -95,12 +103,17 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
         mBuilder.setContentText(alert);
         mBuilder.setTicker(alert);
         mBuilder.setSmallIcon(R.drawable.rcdiamond);
+
         //   Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         final String packageName = getApplicationContext().getPackageName();
 
         Uri notification = Uri.parse("android.resource://" + packageName + "/" + R.raw.rocsound);
-        if(sound) {
+        if (sound) {
+            mBuilder.setVibrate(new long[] { 2000, 2000, 2000, 2000, 2000 });
             mBuilder.setSound(notification);
+            AudioManager mobilemode = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+            mobilemode.setStreamVolume (AudioManager.STREAM_NOTIFICATION,mobilemode.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION),0);
+
         }
 
 

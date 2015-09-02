@@ -19,12 +19,14 @@ public class PushIOBroadCastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         String alert = intent.getStringExtra("alert");
-        Toast.makeText(context, alert, Toast.LENGTH_LONG).show();
+        if(alert != null) {
+            Toast.makeText(context, alert, Toast.LENGTH_LONG).show();
 
-        Intent notificatIntent = new Intent(context.getApplicationContext(), NotificationActivity.class);
-        notificatIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        notificatIntent.putExtra("alert",alert);
-        context.getApplicationContext().startActivity(notificatIntent);
+            Intent notificatIntent = new Intent(context.getApplicationContext(), NotificationActivity.class);
+            notificatIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            notificatIntent.putExtra("alert", alert);
+            context.getApplicationContext().startActivity(notificatIntent);
+        }
 
         Bundle extras = getResultExtras(true);
         extras.putInt(PushIOManager.PUSH_STATUS, PushIOManager.PUSH_HANDLED_IN_APP);

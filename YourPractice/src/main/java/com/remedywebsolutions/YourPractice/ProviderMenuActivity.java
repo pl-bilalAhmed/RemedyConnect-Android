@@ -6,12 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.octo.android.robospice.SpiceManager;
+import com.octo.android.robospice.SpiceService;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -22,9 +24,11 @@ import com.remedywebsolutions.YourPractice.MedSecureAPI.requests.GetProviderUnre
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ProviderMenuActivity extends DefaultActivity implements View.OnClickListener , RequestListener<GetProviderUnreadCallsResponse>{
+public class ProviderMenuActivity extends DefaultActivity implements View.OnClickListener {
     ArrayList<Button> menuButtons;
     BadgeView badge;
+    Boolean started = false;
+
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +53,7 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
         for (Button button : menuButtons) {
             button.setOnClickListener(this);
         }
-
+        loadCount();
 
     }
 
@@ -80,20 +84,37 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
         return super.onOptionsItemSelected(item);
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadCount();
+    }
 
     @Override
     protected void onStart() {
         spiceManager.start(this);
+        super.onStart();
+
+        loadCount();
+    }
+
+    protected void loadCount()
+    {
         if(Data.IsRegistered(getApplicationContext())) {
+
             GetProviderUnreadCallsRequest cntReq = new GetProviderUnreadCallsRequest(this);
-            spiceManager.execute(cntReq,  this);
+            int cnt = spiceManager.getRequestToLaunchCount();
+
+            spiceManager.execute(cntReq, new UnreadCallsListener());
+
+            started = true;
+
 
             //   updateNumberOfInboxItems(inbox.size());
             if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
                 com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().enable();
             }
-            progress.dismiss();
+
         }
         else
         {
@@ -102,10 +123,7 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
             finish();
         }
 
-        super.onStart();
-
     }
-
     @Override
     protected void onStop() {
         spiceManager.shouldStop();
@@ -139,28 +157,39 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
         }
     }
 
-
+    private final class UnreadCallsListener implements RequestListener<GetProviderUnreadCallsResponse> {
         @Override
         public void onRequestFailure(SpiceException e) {
+            Log.w("requesting count", "failure:" + e.getMessage());
+            started = false;
             progress.dismiss();
             reloginSpiceFailureHandler(e);
         }
 
         @Override
         public void onRequestSuccess(GetProviderUnreadCallsResponse inboxItemsResponse) {
-            if(inboxItemsResponse.successfull) {
-                if(inboxItemsResponse.count > 0) {
+            started = false;
+            Log.w("requesting count", "success:" + inboxItemsResponse.count);
+            if (inboxItemsResponse.successfull) {
+                if (inboxItemsResponse.count > 0) {
                     badge.setText(Integer.toString(inboxItemsResponse.count));
                     badge.setTextSize(16);
                     badge.setBadgeMargin(20);
                     badge.show();
                 }
+                else
+                {
+                    badge.hide();
+                }
 
             }
         }
+    }
+
 
 
     private void reloginSpiceFailureHandler(SpiceException e) {
+        started = false;
         spiceManager.cancelAllRequests();
         if (e.getCause() instanceof IOException) {
             // We should have an authentication failure here, so re-login the user...

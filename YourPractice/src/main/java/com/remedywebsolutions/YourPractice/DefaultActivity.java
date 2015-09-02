@@ -61,7 +61,7 @@ public class DefaultActivity extends SherlockActivity {
     static int SIZE_OF_THREAD_POOL = 6;
     static int DOWNLOAD_BUFFER_SIZE = 8192;
     static int CONNECTION_TIMEOUT = 5000;
-    private static boolean paused = false;
+    protected static boolean paused = false;
     private static Date lastActivityDate;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,7 +94,7 @@ public class DefaultActivity extends SherlockActivity {
         paused = false;
         this.invalidateOptionsMenu();
         int to = com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().EXTENDED_TIMEOUT;
-        handler.postDelayed(runnable, to);
+        handler.postDelayed(runnable, to * 1000 + 5000);
     }
     private void checkForIdle()
     {
@@ -131,7 +131,8 @@ public class DefaultActivity extends SherlockActivity {
         lastActivityDate =  new Date();
         LoggedInDataStorage store = new LoggedInDataStorage(DefaultActivity.this);
         paused = false;
-        handler.postDelayed(runnable, store.GetPinTimeout() * 1000);
+        int to = store.GetPinTimeout();
+        handler.postDelayed(runnable, to * 1000);
 
     }
 
@@ -173,7 +174,7 @@ public class DefaultActivity extends SherlockActivity {
                 progress.dismiss();
                 taskToRun.run();
             }
-        }, 1000);
+        }, 10000);
     }
 
     public void setProgressMessageWaitAndDismiss(String message, boolean shouldGoBackAfter) {
