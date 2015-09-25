@@ -103,11 +103,10 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
         mBuilder.setContentText(alert);
         mBuilder.setTicker(alert);
         mBuilder.setSmallIcon(R.drawable.rcdiamond);
-
-        //   Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         final String packageName = getApplicationContext().getPackageName();
 
-        Uri notification = Uri.parse("android.resource://" + packageName + "/" + R.raw.rocsound);
+     //   Uri notification = Uri.parse("android.resource://" + packageName + "/" + R.raw.rocsound);
         if (sound) {
             mBuilder.setVibrate(new long[] { 2000, 2000, 2000, 2000, 2000 });
             mBuilder.setSound(notification);
