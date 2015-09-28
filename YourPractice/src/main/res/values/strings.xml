@@ -60,7 +60,7 @@
     <string name="subject">Subject</string>
     <string name="yourMessage">Your message</string>
     <string name="sendYourMessage">Send message</string>
-    <string name="loginMessage">This login will last 6 hours</string>
+    <string name="loginMessage">After a period of time you will be prompted to login again (Default is 12 Hours)</string>
     <string name="forgotpasswordMessage">Forgot password?</string>
     <string name="loginTextContent">Please enter your RemedyOnCall Admin Username and Password below.</string>
     <string name="login">Login</string>

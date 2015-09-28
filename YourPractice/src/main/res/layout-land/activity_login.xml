@@ -118,9 +118,9 @@
         android:text="@string/loginMessage"
         android:id="@+id/loginTime"
         android:textColor="#ffffffff"
-        android:gravity="fill_horizontal|center_horizontal"
+        android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
-        android:textSize="20dp"
+        android:textSize="16dp"
 
         android:textStyle="bold" />
 
