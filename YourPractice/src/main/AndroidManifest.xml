@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.remedywebsolutions.YourPractice"   android:versionCode="43"
-    android:versionName="2.1">
+    package="com.remedywebsolutions.YourPractice"   android:versionCode="44"
+    android:versionName="2.1.1">
 
     <uses-permission android:name="com.remedywebsolutions.YourPractice.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />

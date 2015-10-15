@@ -1,10 +1,14 @@
 package com.remedywebsolutions.YourPractice.downloader;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.widget.Toast;
+
 import com.remedywebsolutions.YourPractice.Data;
+import com.remedywebsolutions.YourPractice.R;
 
 import java.io.*;
 import java.net.URL;
@@ -74,14 +78,20 @@ public class RootDownloadService extends AbstractDownloadService {
                 }
                 resultData.putInt("progress", 100);
                 receiver.send(DownloadStatusCodes.DOWNLOAD_FINISHED, resultData);
+
             }
             catch (IOException e) {
                 resultData.putInt("progress", 0);
-                if(e.getCause().getMessage().contains("Could not validate certificate"))
-                {
-                    receiver.send(DownloadStatusCodes.SSL_PROBLEM, resultData);
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                try {
+                    if (e.getMessage().contains("Could not validate certificate")) {
+                        receiver.send(DownloadStatusCodes.SSL_PROBLEM, resultData);
+                    } else {
+                        receiver.send(DownloadStatusCodes.DOWNLOAD_FAILED, resultData);
+                    }
                 }
-                else {
+                catch(Exception ex)
+                {
                     receiver.send(DownloadStatusCodes.DOWNLOAD_FAILED, resultData);
                 }
             }
