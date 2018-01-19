@@ -2,7 +2,9 @@ package com.remedywebsolutions.YourPractice;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.actionbarsherlock.app.SherlockActivity;
+import com.remedywebsolutions.YourPractice.utility.Util;
 
 public class SplashActivity extends SherlockActivity {
     static final int SPLASH_SLEEP = 500;
@@ -30,5 +32,11 @@ public class SplashActivity extends SherlockActivity {
             }
         };
         splashThread.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Util.onAppForeground(getApplicationContext());
     }
 }

@@ -17,6 +17,5 @@ public class TermsActivity extends DefaultActivity {
         suppressTitle();
         setTitle(R.string.terms_and_conditions);
         display.loadUrl("file:///android_asset/terms_and_conditions.html");
-
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.SubMenu;
@@ -46,14 +47,13 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
         for (Button button : menuButtons) {
             if (menuButtonTexts.size() > index) {
                 button.setText(menuButtonTexts.get(index));
-            }
-            else {
+            } else {
                 button.setVisibility(View.INVISIBLE);
             }
             ++index;
         }
-       // if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
-         //   com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+        // if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+        //   com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
         //}
         LinearLayout l = (LinearLayout) this.findViewById(R.id.bottomButtonRow);
         hideWrapperLayoutIfNecessary(l);
@@ -61,7 +61,12 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
         hideWrapperLayoutIfNecessary(l);
         l = (LinearLayout) this.findViewById(R.id.topButtonRow);
         hideWrapperLayoutIfNecessary(l);
+        if (Data.shouldRefreshData(getApplicationContext())) {
+            updateData();
+        }
+
     }
+
 
     public void hideWrapperLayoutIfNecessary(LinearLayout linearLayout) {
         int childCount = linearLayout.getChildCount();
@@ -83,7 +88,7 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
     public boolean onCreateOptionsMenu(Menu menu) {
         // We have to do this first, because the DefaultActivity will inflate the menu in:
         boolean result = super.onCreateOptionsMenu(menu);
-        MenuItem more  = menu.findItem(R.id.more);
+        MenuItem more = menu.findItem(R.id.more);
         if (more != null) {
             SubMenu subMenu = more.getSubMenu();
             if (menuButtonTexts.size() > NUMBER_OF_BUTTONS) {
@@ -110,6 +115,7 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
         return super.onOptionsItemSelected(item);
     }
 
+
     void onClickFireActivity(Integer index) {
         if (feeds.get(index).length() > 0) {
             String localPath = MainParser.subFeedURLToLocal(
@@ -118,8 +124,9 @@ public class MainMenuActivity extends DefaultActivity implements View.OnClickLis
             MainViewController.FireActivity(this,
                     localPath,
                     menuButtonTexts.get(index), 0);
-        }
-        else {
+
+        } else {
+            //    showLog("onCLiCkFireActivity: URL  External link = " + externalLinks.get(index));
             if (externalLinks.get(index).length() > 0) {
                 MainViewController.FireBrowser(this, externalLinks.get(index));
             }

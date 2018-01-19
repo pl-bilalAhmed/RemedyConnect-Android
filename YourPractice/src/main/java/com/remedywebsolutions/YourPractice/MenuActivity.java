@@ -10,7 +10,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.remedywebsolutions.YourPractice.parser.MainParser;
+import com.remedywebsolutions.YourPractice.utility.Util;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class MenuActivity extends DefaultActivity {
         super.onCreate(savedInstanceState);
         reportPhase("Menu");
         setContentView(R.layout.activity_menu);
+        Util.onAppForeground(getApplicationContext()); // App fresh start Don't check again for background time
         menu = (ListView) findViewById(R.id.menu);
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.default_header_listitem, menu, false);
@@ -31,30 +34,28 @@ public class MenuActivity extends DefaultActivity {
             View v = header.getChildAt(i);
             assert v != null;
             if (v.getId() == R.id.titleTextView) {
-                ((TextView)v).setTypeface(Skin.menuHeaderFont(this));
+                ((TextView) v).setTypeface(Skin.menuHeaderFont(this));
             }
         }
 
         menu.addHeaderView(header, null, false);
-        //menu.addFooterView(footer, null, false);
 
         // Let's use a modified ArrayAdapter so we can use a custom font on the list
         menuadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, new ArrayList<String>()) {
             public View getView(int pos, View convertView, android.view.ViewGroup parent) {
                 View v = convertView;
                 if (v == null) {
-                    LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     v = vi.inflate(android.R.layout.simple_list_item_1, parent, false);
                 }
                 assert v != null;
-                TextView tv = (TextView)v.findViewById(android.R.id.text1);
+                TextView tv = (TextView) v.findViewById(android.R.id.text1);
                 tv.setText(this.getItem(pos));
                 tv.setTypeface(Skin.menuFont(getApplicationContext()));
                 return v;
             }
         };
         menu.setAdapter(menuadapter);
-
         Skin.applyThemeLogo(this);
         Skin.applyActivityBackground(this);
 
@@ -65,6 +66,15 @@ public class MenuActivity extends DefaultActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
         }
+        initTest();
+    }
+
+
+    private void initTest() {
+//        MainViewController.FireActivity(this,
+//                "Welcome",
+//                "Title", 0);
+
     }
 
     protected void setupMenu() {
@@ -75,10 +85,11 @@ public class MenuActivity extends DefaultActivity {
             for (String s : menuitems) {
                 menuadapter.add(s);
             }
+
             menu.setOnItemClickListener(new OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    int MENU_ITEMS_SHIFT = -1;
 
+                    int MENU_ITEMS_SHIFT = -1;
                     ArrayList<String> feeds = extras.getStringArrayList("feeds");
                     assert feeds != null;
                     ArrayList<String> externalLinks = extras.getStringArrayList("externalLinks");
@@ -87,11 +98,11 @@ public class MenuActivity extends DefaultActivity {
                         String localPath = MainParser.subFeedURLToLocal(
                                 feed,
                                 Data.GetFeedRoot(view.getContext()));
+                        showLog("MenuActivity: Item Pressed : LocalPath/ParsePoint =  " + localPath);
                         MainViewController.FireActivity(view.getContext(),
                                 localPath,
                                 menuadapter.getItem(position + MENU_ITEMS_SHIFT), 0); // -1 everywhere because of the header element
-                    }
-                    else {
+                    } else {
                         assert externalLinks != null;
                         if (externalLinks.get(position + MENU_ITEMS_SHIFT) != null) {
                             MainViewController.FireBrowser(view.getContext(),

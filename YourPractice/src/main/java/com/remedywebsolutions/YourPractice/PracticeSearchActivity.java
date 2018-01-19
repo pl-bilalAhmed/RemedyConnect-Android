@@ -13,10 +13,9 @@ import android.os.ResultReceiver;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
+
 import com.actionbarsherlock.view.Menu;
 import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
 import com.remedywebsolutions.YourPractice.downloader.RootDownloadService;
@@ -27,12 +26,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.Semaphore;
 
-public class PracticeSearchActivity extends DefaultActivity implements OnClickListener,View.OnTouchListener {
+public class PracticeSearchActivity extends DefaultActivity implements OnClickListener, View.OnTouchListener {
     ProgressDialog progress;
     private Semaphore buttonSemaphore = new Semaphore(1);
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // showLog("PracticeSearchActivity");
         reportPhase("Practice search");
         setContentView(R.layout.activity_practice_search);
         Skin.applyActivityBackground(this);
@@ -42,7 +42,6 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
         progress = new ProgressDialog(this);
 
         progress.setMessage(getString(R.string.searching_locations));
-
         progress.setCancelable(false);
         progress.setCanceledOnTouchOutside(false);
         progress.setIndeterminate(true);
@@ -50,10 +49,10 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
         progress.setMax(100);
         progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 
-      //  Button startSearchByName = (Button)this.findViewById(R.id.practiceSearchStartByName);
-     //   Button startSearchByLocation = (Button)this.findViewById(R.id.practiceSearchStartByLocation);
-        SearchView searchView = (SearchView)this.findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+        //  Button startSearchByName = (Button)this.findViewById(R.id.practiceSearchStartByName);
+        //   Button startSearchByLocation = (Button)this.findViewById(R.id.practiceSearchStartByLocation);
+        SearchView searchView = (SearchView) this.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -68,16 +67,15 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
             }
         });
 
-
-     //   startSearchByName.setOnClickListener(this);
+        //   startSearchByName.setOnClickListener(this);
         View locSearch = this.findViewById(R.id.SearchByLoc);
-      //  locSearch.setOnClickListener(this);
+        //  locSearch.setOnClickListener(this);
         locSearch.setOnTouchListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        boolean result =  super.onCreateOptionsMenu(menu);
+        boolean result = super.onCreateOptionsMenu(menu);
         setHomeVisibility(false);
         disableOptionsMenu();
         return result;
@@ -85,16 +83,16 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
     public void onClick(View v) {
 
-   //     startFetchingByLocation();
-      //  startFetchingByName();
-      //  switch(v.getId()){
-       //     case R.id.practiceSearchStartByName:
+        //     startFetchingByLocation();
+        //  startFetchingByName();
+        //  switch(v.getId()){
+        //     case R.id.practiceSearchStartByName:
         //        startFetchingByName();
-         //       break;
+        //       break;
         //   case R.id.practiceSearchStartByLocation:
-           //     startFetchingByLocation();
-            //    break;
-      //  }
+        //     startFetchingByLocation();
+        //    break;
+        //  }
     }
 
     public void startFetchingByName(String search) {
@@ -109,11 +107,9 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     public void startFetchingByLocation() {
 
 
-
         progress.show();
         // Acquire a reference to the system Location Manager
         final LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
         // Define a listener that responds to location updates
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
@@ -122,9 +118,15 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                 locationManager.removeUpdates(this);
                 progress.dismiss();
             }
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
-            public void onProviderEnabled(String provider) {}
-            public void onProviderDisabled(String provider) {}
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            public void onProviderEnabled(String provider) {
+            }
+
+            public void onProviderDisabled(String provider) {
+            }
         };
 
         // Register the listener with the Location Manager to receive location updates
@@ -149,7 +151,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
-        if(buttonSemaphore.tryAcquire()) {
+        if (buttonSemaphore.tryAcquire()) {
             startFetchingByLocation();
         }
         return false;
@@ -193,9 +195,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                 if (resultCode == DownloadStatusCodes.SWITCH_TO_DETERMINATE) {
                     progress.setIndeterminate(false);
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Toast.makeText(getApplicationContext(), R.string.download_failed, Toast.LENGTH_LONG).show();
             }
         }
@@ -203,6 +203,7 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
 
     protected void startParsingPractices() {
         assert this.getFilesDir() != null;
+        // showLog("StartParsingPractices");
         MainParser parser = new MainParser(this.getFilesDir().getAbsolutePath() + "/root.xml");
         if (parser.isRoot()) {
             ArrayList<HashMap<String, String>> practices = parser.getRootPractices();
@@ -210,14 +211,12 @@ public class PracticeSearchActivity extends DefaultActivity implements OnClickLi
                 Intent intent = new Intent(PracticeSearchActivity.this, SelectPracticeActivity.class);
                 intent.putExtra("practices", practices);
                 startActivity(intent);
-            }
-            else {
+            } else {
                 assert getApplicationContext() != null;
                 Toast.makeText(getApplicationContext(), getString(R.string.couldnt_find_practice_near_location),
                         Toast.LENGTH_LONG).show();
             }
-        }
-        else {
+        } else {
             assert getApplicationContext() != null;
             Toast.makeText(getApplicationContext(), getString(R.string.couldnt_find_practice_near_location),
                     Toast.LENGTH_LONG).show();

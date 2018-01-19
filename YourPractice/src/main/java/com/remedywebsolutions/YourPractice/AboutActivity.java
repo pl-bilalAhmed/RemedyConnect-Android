@@ -1,7 +1,6 @@
 package com.remedywebsolutions.YourPractice;
 
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebView;
 
 

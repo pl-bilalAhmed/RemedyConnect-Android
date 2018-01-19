@@ -10,6 +10,7 @@ public class PageActivity extends DefaultActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         reportPhase("Page");
+        showLog("Page Opened With Web");
         setContentView(R.layout.activity_page);
         display = (WebView) findViewById(R.id.pageWebView);
         Skin.applyViewBackground(this, display);
@@ -21,5 +22,8 @@ public class PageActivity extends DefaultActivity {
         html = MarkupGenerator.wrapHTMLWithStyle(html);
         display.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "utf-8", null);
     }
+
+
+
 
 }

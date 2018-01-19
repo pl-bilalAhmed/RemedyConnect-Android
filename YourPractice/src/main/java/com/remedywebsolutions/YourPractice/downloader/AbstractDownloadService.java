@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -13,6 +14,7 @@ public abstract class AbstractDownloadService extends IntentService {
     public AbstractDownloadService() {
         super("AbstractDownloadService");
     }
+
     public AbstractDownloadService(String name) {
         super(name);
     }
@@ -25,6 +27,7 @@ public abstract class AbstractDownloadService extends IntentService {
             if (filesDir != null) {
                 String directoryPath = filesDir.getAbsolutePath() + "/";
                 File directory = new File(directoryPath);
+                showLog("Direction Path = " + directoryPath);
                 //noinspection ResultOfMethodCallIgnored
                 directory.mkdir();
                 return directoryPath;
@@ -40,6 +43,16 @@ public abstract class AbstractDownloadService extends IntentService {
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+
+    public static final String TAG = "PentaDebug";
+    public static final boolean isBeta = true;
+
+    public static void showLog(String msg) {
+        if (isBeta) {
+            Log.i(TAG, msg);
+        }
     }
 
 }

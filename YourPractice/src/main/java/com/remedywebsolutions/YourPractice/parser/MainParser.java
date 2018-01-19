@@ -1,6 +1,8 @@
 package com.remedywebsolutions.YourPractice.parser;
 
 import android.text.TextUtils;
+import android.util.Log;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,7 +12,12 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Locale;
+import java.util.Set;
 
 public class MainParser {
     private Document doc;
@@ -19,13 +26,13 @@ public class MainParser {
         File XMLToParse = new File(XMLpath);
         try {
             doc = Jsoup.parse(XMLToParse, "UTF-8", "");
+            Log.i("Test321", "Doc = " + doc.toString());
         } catch (IOException e) {
             throw new ParserException("Parsing error!");
         }
     }
 
     // Utilities
-
     public ArrayList<String> Parse(String query) {
         ArrayList<String> result = new ArrayList<String>();
         for (Element element : doc.select(query)) {
@@ -33,6 +40,7 @@ public class MainParser {
         }
         return result;
     }
+
 
     public String ParseSingle(String query) {
         return doc.select(query).first().text();

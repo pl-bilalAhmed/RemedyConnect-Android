@@ -12,6 +12,7 @@ import android.graphics.drawable.NinePatchDrawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
@@ -41,19 +42,17 @@ public class Skin {
         File skinRootDirectory = new File(context.getFilesDir() + "/skin/");
         if (!skinRootDirectory.exists()) {
             return skinRootDirectory.getAbsolutePath();
-        }
-        else {
+        } else {
             File[] files = skinRootDirectory.listFiles(fileFilter);
             if (files.length > 0) {
                 return files[0].getAbsolutePath();
-            }
-            else {
+            } else {
                 return skinRootDirectory.getAbsolutePath();
             }
         }
     }
 
-    public static void extractDesignPack(Context context) throws ZipException{
+    public static void extractDesignPack(Context context) throws ZipException {
         ZipFile designPack = new ZipFile(context.getFilesDir() + "/skin/DesignPack.zip");
         if (designPack.isValidZipFile()) {
             designPack.extractAll(getSkinDirectoryPath(context));
@@ -61,7 +60,7 @@ public class Skin {
         File designPackFile = new File(context.getFilesDir() + "/skin/DesignPack.zip");
         //noinspection ResultOfMethodCallIgnored
         designPackFile.delete();
-   }
+    }
 
     public static void prepareSkinDirectory(Context context) {
         File skinFolder = new File(getSkinDirectoryPath(context));
@@ -103,8 +102,7 @@ public class Skin {
     public static String themeLogoFilename(Boolean forMainMenu) {
         if (forMainMenu) {
             return "/menulogo.png";
-        }
-        else {
+        } else {
             return "/logo.png";
         }
     }
@@ -145,29 +143,28 @@ public class Skin {
         if (buttonFile.exists()) {
             Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
             NinePatchDrawable np = NinePatchBitmapFactory.createNinePatchWithCapInsets(activity.getResources(),
-                    bitmapBg, 16, 16, bitmapBg.getHeight()-16, bitmapBg.getWidth()-16, null);
+                    bitmapBg, 16, 16, bitmapBg.getHeight() - 16, bitmapBg.getWidth() - 16, null);
             button.setTypeface(typeface);
             Skin.setBackgroundOf(button, np);
         }
     }
 
-    public static void applyMenuButtonStyle(Activity mainMenuActivity,Button button) {
+    public static void applyMenuButtonStyle(Activity mainMenuActivity, Button button) {
         String filePath = getSkinDirectoryPath(mainMenuActivity) + "/button.9.png";
         File buttonFile = new File(filePath);
         Typeface typeface = Typeface.createFromAsset(mainMenuActivity.getAssets(), "fonts/OpenSans-CondLight.ttf");
         if (buttonFile.exists()) {
             Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
             NinePatchDrawable np = NinePatchBitmapFactory.createNinePatchWithCapInsets(mainMenuActivity.getResources(),
-                    bitmapBg, 16, 16, bitmapBg.getHeight()-16, bitmapBg.getWidth()-16, null);
+                    bitmapBg, 16, 16, bitmapBg.getHeight() - 16, bitmapBg.getWidth() - 16, null);
 
             button.setTypeface(typeface);
             Skin.setBackgroundOf(button, np);
 
 
-
-
         }
     }
+
     public static void applyProviderMenuButtons(Activity mainMenuActivity) {
         String filePath = getSkinDirectoryPath(mainMenuActivity) + "/button.9.png";
         File buttonFile = new File(filePath);
@@ -175,7 +172,7 @@ public class Skin {
         if (buttonFile.exists()) {
             Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
             NinePatchDrawable np = NinePatchBitmapFactory.createNinePatchWithCapInsets(mainMenuActivity.getResources(),
-                    bitmapBg, 16, 16, bitmapBg.getHeight()-16, bitmapBg.getWidth()-16, null);
+                    bitmapBg, 16, 16, bitmapBg.getHeight() - 16, bitmapBg.getWidth() - 16, null);
             Button button = (Button) mainMenuActivity.findViewById(R.id.menuButton3);
             button.setTypeface(typeface);
             Skin.setBackgroundOf(button, np);
@@ -194,7 +191,7 @@ public class Skin {
         if (buttonFile.exists()) {
             Bitmap bitmapBg = BitmapFactory.decodeFile(filePath);
             NinePatchDrawable np = NinePatchBitmapFactory.createNinePatchWithCapInsets(mainMenuActivity.getResources(),
-                    bitmapBg, 16, 16, bitmapBg.getHeight()-16, bitmapBg.getWidth()-16, null);
+                    bitmapBg, 16, 16, bitmapBg.getHeight() - 16, bitmapBg.getWidth() - 16, null);
             Button button = (Button) mainMenuActivity.findViewById(R.id.menuButton1);
             button.setTypeface(typeface);
             Skin.setBackgroundOf(button, np);

@@ -1,6 +1,5 @@
 package com.remedywebsolutions.YourPractice;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.octo.android.robospice.SpiceManager;
-import com.octo.android.robospice.SpiceService;
 import com.octo.android.robospice.UncachedSpiceService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -32,6 +30,7 @@ public class ProviderMenuActivity extends DefaultActivity implements View.OnClic
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        showLog("ProviderMenuActivity...");
         reportPhase("Main menu");
         setContentView(R.layout.activity_provider_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);

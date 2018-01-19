@@ -1,18 +1,16 @@
 package com.remedywebsolutions.YourPractice;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 
-public class CreatePinActivity extends DefaultActivity implements View.OnClickListener{
+public class CreatePinActivity extends DefaultActivity implements View.OnClickListener {
     static final int ENABLE_PASSLOCK = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,16 +22,14 @@ public class CreatePinActivity extends DefaultActivity implements View.OnClickLi
         try {
             actionBar.setDisplayHomeAsUpEnabled(false);
 
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
 
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-        boolean result =  super.onCreateOptionsMenu(menu);
+        boolean result = super.onCreateOptionsMenu(menu);
         setHomeVisibility(false);
 
         com.actionbarsherlock.view.MenuItem cm_item = abMenu.findItem(R.id.menu_provider_mode);
@@ -47,7 +43,6 @@ public class CreatePinActivity extends DefaultActivity implements View.OnClickLi
     }
 
     public void onClick(View v) {
-
         Intent passcodeIntent = new Intent(CreatePinActivity.this, com.remedywebsolutions.YourPractice.passcode.PasscodeManagePasswordActivity.class);
         passcodeIntent.putExtra("type", ENABLE_PASSLOCK);
         startActivityForResult(passcodeIntent, ENABLE_PASSLOCK);

@@ -1,6 +1,5 @@
 package com.remedywebsolutions.YourPractice.downloader;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -8,16 +7,19 @@ import android.os.ResultReceiver;
 import android.widget.Toast;
 
 import com.remedywebsolutions.YourPractice.Data;
-import com.remedywebsolutions.YourPractice.R;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
 
-
 public class RootDownloadService extends AbstractDownloadService {
+
     public RootDownloadService() {
         super("RootDownloadService");
     }
@@ -38,9 +40,11 @@ public class RootDownloadService extends AbstractDownloadService {
 
             if (intent.getStringExtra("practiceName") != null) {
                 feeds.add(Data.SearchRootForPracticeName(intent.getStringExtra("practiceName")));
-            }
-            else if (intent.getParcelableExtra("location") != null) {
+                showLog("Practice Name = " + intent.getStringExtra("practiceName"));
+
+            } else if (intent.getParcelableExtra("location") != null) {
                 feeds.add(Data.SearchRootForPracticeLocation((Location) intent.getParcelableExtra("location")));
+                showLog("Search by Location : Location Name = " + intent.getParcelableExtra("location"));
             }
             try {
                 String dir = this.prepareDirectory();
@@ -49,7 +53,6 @@ public class RootDownloadService extends AbstractDownloadService {
 
                 resultData.putInt("progress", 0);
                 receiver.send(DownloadStatusCodes.SWITCH_TO_DETERMINATE, resultData);
-
                 while (!files.isEmpty()) {
                     URL url = new URL(feeds.get(0));
                     URLConnection connection = url.openConnection();
@@ -60,6 +63,7 @@ public class RootDownloadService extends AbstractDownloadService {
                     // download the file
                     InputStream input = new BufferedInputStream(url.openStream());
                     OutputStream output = new FileOutputStream(dir + files.get(0));
+                    showLog("File.get(0)  = " + files.get(0));
                     byte data[] = new byte[1024];
                     int count;
                     while ((count = input.read(data)) != -1) {
@@ -72,15 +76,14 @@ public class RootDownloadService extends AbstractDownloadService {
                     output.flush();
                     output.close();
                     input.close();
-
                     files.remove(0);
                     feeds.remove(0);
                 }
+                
                 resultData.putInt("progress", 100);
                 receiver.send(DownloadStatusCodes.DOWNLOAD_FINISHED, resultData);
 
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 resultData.putInt("progress", 0);
                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 try {
@@ -89,9 +92,7 @@ public class RootDownloadService extends AbstractDownloadService {
                     } else {
                         receiver.send(DownloadStatusCodes.DOWNLOAD_FAILED, resultData);
                     }
-                }
-                catch(Exception ex)
-                {
+                } catch (Exception ex) {
                     receiver.send(DownloadStatusCodes.DOWNLOAD_FAILED, resultData);
                 }
             }

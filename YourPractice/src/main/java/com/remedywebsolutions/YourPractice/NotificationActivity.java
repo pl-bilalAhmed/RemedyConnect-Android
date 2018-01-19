@@ -39,7 +39,7 @@ public class NotificationActivity extends DefaultActivity implements DialogInter
         else {
            finish();
         }
-
+        
     }
 
 

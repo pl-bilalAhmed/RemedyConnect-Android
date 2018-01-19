@@ -1,18 +1,17 @@
 package com.remedywebsolutions.YourPractice;
 
-import android.app.Activity;
 import android.app.Application;
 
+import com.jenzz.appstate.AppStateListener;
+import com.jenzz.appstate.AppStateMonitor;
 import com.pushio.manager.PushIOManager;
-import com.remedywebsolutions.YourPractice.passcode.DefaultAppLock;
-
-import org.wordpress.passcodelock.AppLockManager;
+import com.remedywebsolutions.YourPractice.utility.Util;
 
 public class YourPracticeApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        //    Log.i(MainActivity.TAG, "On Create of Application Called");
         // Instantiate the Push IO Manager:
         PushIOManager pushIOManager = PushIOManager.getInstance(this);
         assert pushIOManager != null;
@@ -27,12 +26,31 @@ public class YourPracticeApplication extends Application {
 
         com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().enableDefaultAppLockIfAvailable(this);
 
-        if( com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+        if (com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
             com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().forcePasswordLock();
         }
+        //App Fresh start
+        Data.setBackrgound(getApplicationContext(), false);
+        Data.setBackgroundTime(getApplicationContext(), 0);
+
+        AppStateMonitor appStateMonitor = AppStateMonitor.create(this);
+        appStateMonitor.addListener(new AppStateListener() {
+            @Override
+            public void onAppDidEnterForeground() {
+                //Set Time from here
+                //   Util.onAppForeground(get);
+                // Log.i(MainActivity.TAG, "App Foreground");
+            }
+
+            @Override
+            public void onAppDidEnterBackground() {
+                //   Log.i(MainActivity.TAG, "App going to background");
+                Util.onAppBackground(getApplicationContext());
+            }
+        });
+        appStateMonitor.start();
 
     }
 
 
-
-    }
+}

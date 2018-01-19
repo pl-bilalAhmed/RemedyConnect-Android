@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
 import com.actionbarsherlock.view.Menu;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class SelectPracticeActivity extends DefaultActivity {
     SimpleAdapter menuAdapter;
     ListView menu;
     ArrayList<Map<String, String>> menuContents;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         reportPhase("Select practice");
@@ -25,13 +27,12 @@ public class SelectPracticeActivity extends DefaultActivity {
         menu = (ListView) findViewById(R.id.menu);
         ActionBar actionBar = getActionBar();
 
-
         menuContents = new ArrayList<Map<String, String>>();
         menuAdapter = new SimpleAdapter(this,
                 menuContents,
                 android.R.layout.simple_list_item_2,
-                new String[] {"Practice", "Location" },
-                new int[] {android.R.id.text1, android.R.id.text2 });
+                new String[]{"Practice", "Location"},
+                new int[]{android.R.id.text1, android.R.id.text2});
 
         menu.setAdapter(menuAdapter);
         setupMenu();
@@ -39,7 +40,7 @@ public class SelectPracticeActivity extends DefaultActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        boolean result =  super.onCreateOptionsMenu(menu);
+        boolean result = super.onCreateOptionsMenu(menu);
         setHomeVisibility(false);
         disableOptionsMenu();
         return result;
@@ -47,7 +48,7 @@ public class SelectPracticeActivity extends DefaultActivity {
 
     protected void setupMenu() {
         @SuppressWarnings("unchecked")
-        ArrayList<HashMap<String, String>> practices = (ArrayList<HashMap<String, String>>)extras.getSerializable("practices");
+        ArrayList<HashMap<String, String>> practices = (ArrayList<HashMap<String, String>>) extras.getSerializable("practices");
         assert practices != null;
         for (HashMap<String, String> practice : practices) {
             Map<String, String> practiceMenuItem = new HashMap<String, String>(3);
@@ -58,9 +59,9 @@ public class SelectPracticeActivity extends DefaultActivity {
             menuContents.add(practiceMenuItem);
         }
         menuAdapter.notifyDataSetChanged();
-
         menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showLog("Clicked Feed = " + menuContents.get(position).get("Feed") + " Design pack = " + menuContents.get(position).get("desinPack"));
                 String feedRoot = menuContents.get(position).get("Feed");
                 String designPack = menuContents.get(position).get("designPack");
                 startDownload(feedRoot, designPack);

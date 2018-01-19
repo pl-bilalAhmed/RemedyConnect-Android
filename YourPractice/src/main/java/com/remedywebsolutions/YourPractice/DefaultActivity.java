@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.content.IntentCompat;
 import android.text.method.LinkMovementMethod;
@@ -28,6 +29,7 @@ import com.remedywebsolutions.YourPractice.downloader.DownloadStatusCodes;
 import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatus;
 import com.remedywebsolutions.YourPractice.downloader.DownloadTaskStatusSummary;
 import com.remedywebsolutions.YourPractice.parser.MainParser;
+import com.remedywebsolutions.YourPractice.utility.Util;
 
 import net.lingala.zip4j.exception.ZipException;
 
@@ -51,6 +53,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 
 public class DefaultActivity extends SherlockActivity {
+
     Menu abMenu;
     protected Bundle extras;
     protected Resources res;
@@ -63,6 +66,7 @@ public class DefaultActivity extends SherlockActivity {
     static int CONNECTION_TIMEOUT = 5000;
     protected static boolean paused = false;
     private static Date lastActivityDate;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,10 +86,8 @@ public class DefaultActivity extends SherlockActivity {
         progress.setProgress(0);
         progress.setMax(100);
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-
         downloadSummary = new DownloadTaskStatusSummary();
     }
-
 
 
     @Override
@@ -95,10 +97,28 @@ public class DefaultActivity extends SherlockActivity {
         this.invalidateOptionsMenu();
         int to = com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().EXTENDED_TIMEOUT;
         handler.postDelayed(runnable, to * 1000 + 5000);
+        // showLog("OnResume called");
+        if (Data.isBackground(getApplicationContext())) {
+            if (Data.isDataAvailable(getApplicationContext()) && Data.AppModeSelected(getApplicationContext()) && !Data.IsProviderMode(getApplicationContext())) {
+                //   showLog("App was in Background Requirement met");
+                if (Util.shouldUpdateData(getApplicationContext())) {
+                    //     showLog("Threshold Exceed - Yes Update records");
+                    updateData();
+                } else {
+                    //   showLog("Threshold didnt exceed : Don't update ");
+                }
+            } else {
+                //showLog("App was in Background Requirement didn't met");
+            }
+        } else {
+            //    showLog("App was not in background - Fresh start");
+        }
+        Util.onAppForeground(getApplicationContext());
     }
-    private void checkForIdle()
-    {
-        if(!paused) {
+
+
+    private void checkForIdle() {
+        if (!paused) {
             Date now = new Date();
             long now_ms = now.getTime();
             int secondsPassed = (int) (now_ms - lastActivityDate.getTime()) / (1000);
@@ -117,46 +137,42 @@ public class DefaultActivity extends SherlockActivity {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+            if (com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
                 checkForIdle();
             }
-
         }
     };
+
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
         FlurryAgent.onStartSession(this, "G8V8NZ5BZ6BBJHF48B5W");
-        lastActivityDate =  new Date();
+        lastActivityDate = new Date();
         LoggedInDataStorage store = new LoggedInDataStorage(DefaultActivity.this);
         paused = false;
         int to = store.GetPinTimeout();
         handler.postDelayed(runnable, to * 1000);
-
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
         paused = true;
 
     }
 
     @Override
-    protected void onRestart()
-    {
+    protected void onRestart() {
         super.onRestart();
         paused = false;
-
     }
 
+
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         super.onStop();
         FlurryAgent.onEndSession(this);
+        //showLog("onStop");
     }
 
     public void reportPhase(String phaseName) {
@@ -215,7 +231,7 @@ public class DefaultActivity extends SherlockActivity {
 
     /**
      * Sets up several menu item's visibility based on whether the user is logged in or not.
-     *
+     * <p>
      * This depends on the abMenu being set, so it should be called in
      * {@link com.remedywebsolutions.YourPractice.DefaultActivity#onCreateOptionsMenu(com.actionbarsherlock.view.Menu)}.
      *
@@ -224,7 +240,7 @@ public class DefaultActivity extends SherlockActivity {
     public void setMenuItemsVisibilityBasedOnLogin(boolean loggedIn) {
         MenuItem li_item = abMenu.findItem(R.id.menu_login);
         MenuItem lo_item = abMenu.findItem(R.id.menu_logout);
-        if(Data.IsProviderMode(getApplicationContext())) {
+        if (Data.IsProviderMode(getApplicationContext())) {
             if (loggedIn) {
 
                 li_item.setVisible(false);
@@ -234,9 +250,7 @@ public class DefaultActivity extends SherlockActivity {
                 //     item = abMenu.findItem(R.id.menu_my_account);
                 //   item.setVisible(false);
             }
-        }
-        else
-        {
+        } else {
             li_item.setVisible(false);
             lo_item.setVisible(false);
         }
@@ -244,7 +258,7 @@ public class DefaultActivity extends SherlockActivity {
 
     /**
      * Event for responding to options menu creation.
-     *
+     * <p>
      * Overrides default event to inflate our menu items into the given menu.
      *
      * @param menu Menu to inflate to.
@@ -265,7 +279,7 @@ public class DefaultActivity extends SherlockActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
@@ -275,38 +289,34 @@ public class DefaultActivity extends SherlockActivity {
                 this.onBackPressed();
                 return true;
             case R.id.home:
-                if(Data.IsProviderMode(getApplicationContext()))
-                {
+                if (Data.IsProviderMode(getApplicationContext())) {
                     intent = new Intent(this, ProviderMenuActivity.class);
                     startActivity(intent);
                     finish();
-                }
-                else {
+                } else {
                     MainViewController.FireRootActivity(this);
                     finish();
                 }
-               // MainViewController.FireRootActivity(this);
+                // MainViewController.FireRootActivity(this);
                 return true;
+
             case R.id.menu_about:
                 intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return true;
-        //    case R.id.menu_terms_and_conditions:
+            //    case R.id.menu_terms_and_conditions:
             //    intent = new Intent(this, TermsActivity.class);
             //    startActivity(intent);
             //    return true;
             case R.id.menu_update:
-                String feedRoot = Data.GetFeedRoot(this);
-                String designPack = Data.GetDesignPack(this);
-                startDownload(feedRoot, designPack);
+                updateData();
                 return true;
             case R.id.menu_choose_practice:
                 Data.ClearAppMode(getApplicationContext());
                 LoggedInDataStorage store = new LoggedInDataStorage(DefaultActivity.this);
                 store.logOut();
-
                 // Reset passcode lock
-                if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+                if (com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
                     com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
                 }
                 invalidateOptionsMenu();
@@ -319,9 +329,9 @@ public class DefaultActivity extends SherlockActivity {
                 store1.logOut();
 
                 // Reset passcode lock
-              //  if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
+                //  if(com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock() != null) {
                 //    com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
-              //  }
+                //  }
                 invalidateOptionsMenu();
                 Data.ClearRegistered(getApplicationContext());
                 intent = new Intent(this, SelectModeActivity.class);
@@ -333,32 +343,32 @@ public class DefaultActivity extends SherlockActivity {
                 return true;
             case R.id.menu_logout:
 
-              //  LoggedInDataStorage storage = new LoggedInDataStorage(DefaultActivity.this);
-              //  String un = storage.RetrieveData().get("username").toString();
+                //  LoggedInDataStorage storage = new LoggedInDataStorage(DefaultActivity.this);
+                //  String un = storage.RetrieveData().get("username").toString();
 
-               // storage.logOut();
+                // storage.logOut();
 
 
-            //    Toast.makeText(DefaultActivity.this, "You've been logged out.", Toast.LENGTH_LONG).show();
+                //    Toast.makeText(DefaultActivity.this, "You've been logged out.", Toast.LENGTH_LONG).show();
                 // Reset passcode lock
-              //  com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
+                //  com.remedywebsolutions.YourPractice.passcode.AppLockManager.getInstance().getCurrentAppLock().setPassword(null);
                 invalidateOptionsMenu();
                 Data.ClearRegistered(getApplicationContext());
                 intent = new Intent(this, LogoutActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
-         //   case R.id.menu_my_account:
+            //   case R.id.menu_my_account:
             //    intent = new Intent(this, MyAccountActivity.class);
             //    startActivity(intent);
-              //  return true;
+            //  return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     /**
      * Sets the title with the informations stored in the Bundle.
-     *
+     * <p>
      * WARNING! Fire this only after the header has been inflated or you will
      * get a nice NullPointerException.
      */
@@ -421,10 +431,9 @@ public class DefaultActivity extends SherlockActivity {
 
     /**
      * Deletes all previously downloaded files to prepare an update, for example.
-     *
+     * <p>
      * This simple solution was taken from: http://stackoverflow.com/a/5322390/238845 .
      * To be used successfully, using {@link #saveIndex()} and {@link #restoreIndex()} is necessary.
-     *
      */
     protected void deleteFiles() {
         assert getApplicationContext() != null;
@@ -445,7 +454,7 @@ public class DefaultActivity extends SherlockActivity {
 
     /**
      * Saves current index file into the cache dir to allow clearing data without any loss.
-     *
+     * <p>
      * Should be used with {@link #deleteFiles()} and {@link #restoreIndex()}.
      */
     protected void saveIndex() {
@@ -469,7 +478,7 @@ public class DefaultActivity extends SherlockActivity {
 
     /**
      * Restores current index file into the cache dir to allow clearing data without any loss.
-     *
+     * <p>
      * Should be used with {@link #deleteFiles()} and {@link #saveIndex()}.
      */
     protected void restoreIndex() {
@@ -493,6 +502,7 @@ public class DefaultActivity extends SherlockActivity {
 
     @SuppressWarnings("unchecked")
     public void startDownload(String feedRoot, String designPack) {
+        // showLog("****StartDownload()**** FeedRoot = " + feedRoot + " Design Pack = " + designPack);
         // Reset data storage.
         saveIndex();
         deleteFiles();
@@ -501,6 +511,11 @@ public class DefaultActivity extends SherlockActivity {
         // Store the selected feed endpoint's information.
         Data.SetFeedRoot(this, feedRoot);
         Data.SetDesignPack(this, designPack);
+
+
+        showLog("FeedRoot = " + feedRoot);
+        showLog("DesignPack = " + designPack);
+
 
         // Start up the Executor which will handle the multiple threads
         threadPoolExecutor = Executors.newFixedThreadPool(SIZE_OF_THREAD_POOL);
@@ -513,8 +528,7 @@ public class DefaultActivity extends SherlockActivity {
             DownloadTask download = new DownloadTask();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 download.executeOnExecutor(threadPoolExecutor, whatToDownload);
-            }
-            else {
+            } else {
                 download.execute(whatToDownload);
             }
             whatToDownload = new HashMap<String, String>(2);
@@ -523,8 +537,7 @@ public class DefaultActivity extends SherlockActivity {
             download = new DownloadTask();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 download.executeOnExecutor(threadPoolExecutor, whatToDownload);
-            }
-            else {
+            } else {
                 download.execute(whatToDownload);
             }
         } catch (RejectedExecutionException e) {
@@ -551,6 +564,7 @@ public class DefaultActivity extends SherlockActivity {
 
         @Override
         protected Void doInBackground(HashMap<String, String>... whatToDownload) {
+            showLog("*****DoinBackground*******");
             taskStatusIndex = downloadSummary.reservePlace();
             if (DefaultActivity.this.isOnline()) {
                 publishProgress(new DownloadTaskStatus(DownloadStatusCodes.NETWORK_AVAILABLE));
@@ -568,6 +582,7 @@ public class DefaultActivity extends SherlockActivity {
                     fileSize = connection.getContentLength();
                     InputStream urlStream = new BufferedInputStream(url.openStream());
                     OutputStream fileOutputStream = new FileOutputStream(dir + to);
+                    showLog("DownloadTask: Directory = " + dir + to);
                     byte downloadBuffer[] = new byte[DOWNLOAD_BUFFER_SIZE];
                     int downloadedSizeSum = 0;
                     while ((downloadedSize = urlStream.read(downloadBuffer)) != -1) {
@@ -597,8 +612,7 @@ public class DefaultActivity extends SherlockActivity {
                             }
                         }
                         publishProgress(new DownloadTaskStatus(DownloadStatusCodes.DOWNLOAD_FINISHED, downloadedSize, fileSize));
-                    }
-                    else {
+                    } else {
                         // We have a design pack, extract it
                         publishProgress(new DownloadTaskStatus(DownloadStatusCodes.EXTRACTING));
                         try {
@@ -611,8 +625,7 @@ public class DefaultActivity extends SherlockActivity {
                 } catch (IOException e) {
                     publishProgress(new DownloadTaskStatus(DownloadStatusCodes.DOWNLOAD_FAILED));
                 }
-            }
-            else {
+            } else {
                 publishProgress(new DownloadTaskStatus(DownloadStatusCodes.DOWNLOAD_FAILED));
             }
             return null;
@@ -639,8 +652,7 @@ public class DefaultActivity extends SherlockActivity {
                     try {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                             download.executeOnExecutor(threadPoolExecutor, status[0].getNewDownload());
-                        }
-                        else {
+                        } else {
                             download.execute(status[0].getNewDownload());
                         }
                     } catch (RejectedExecutionException e) {
@@ -664,6 +676,7 @@ public class DefaultActivity extends SherlockActivity {
                         setResult(Activity.RESULT_OK);
                         progress.setMessage("Download finished.");
                         Intent intent = new Intent(DefaultActivity.this, MainActivity.class);
+                        intent.putExtra(MainActivity.EXTRA_SHOULD_UPDATE, false);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
@@ -688,7 +701,6 @@ public class DefaultActivity extends SherlockActivity {
             if (directory.mkdir() || directory.isDirectory()) {
                 String skinPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/skin/";
                 File skinDir = new File(skinPath);
-                //noinspection ResultOfMethodCallIgnored
                 skinDir.mkdir();
             }
             return directoryPath;
@@ -704,12 +716,31 @@ public class DefaultActivity extends SherlockActivity {
 
     /**
      * Disable the passcode.
-     *
+     * <p>
      * This method is used by the API testing to avoid asking for passcode during the testing.
      */
     public void disablePasscode() {
         AbstractAppLock lock = AppLockManager.getInstance().getCurrentAppLock();
         lock.setPassword(null);
     }
+
+
+    protected void updateData() {
+        String feedRoot = Data.GetFeedRoot(this);
+        String designPack = Data.GetDesignPack(this);
+        startDownload(feedRoot, designPack);
+    }
+
+
+    public static final String TAG = "PentaDebug";
+    public static final boolean isBeta = true;
+
+    public static void showLog(String msg) {
+        if (isBeta) {
+            Log.i(TAG, msg);
+        }
+    }
+
+
 }
 
